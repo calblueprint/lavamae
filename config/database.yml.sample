@@ -1,0 +1,26 @@
+# Install PostgreSQL. Change username and password accordingly.
+
+default: &default
+  adapter: postgresql
+  encoding: utf8
+  username: JonChu
+  password: <your password>
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: lavamae_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: lavamae_test
+
+production:
+  <<: *default
+  database: lavamae_production
+  username:
+  password:
