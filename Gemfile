@@ -25,6 +25,7 @@ gem 'font-awesome-rails', '4.5.0'
 gem 'jquery-rails', '3.1.4'
 gem 'sass-rails', '5.0.6'
 gem 'uglifier', '2.7.2'
+gem 'sprockets', '3.6.3'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
