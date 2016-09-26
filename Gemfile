@@ -7,6 +7,9 @@ gem 'rails', '4.2.1'
 # React
 gem 'react-rails', '1.4.0'
 
+# Bootstrap Grid
+gem 'bootstrap-sass', '~> 3.3.6'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'pg_search', '1.0.5'
