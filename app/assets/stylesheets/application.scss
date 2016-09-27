@@ -14,7 +14,14 @@
  *= require_self
  */
 
- @import "bootstrap-sprockets";
- @import "bootstrap/variables";
- @import "bootstrap/mixins";
- @import "bootstrap/grid";
+@import "bootstrap-sprockets";
+@import "bootstrap/variables";
+@import "bootstrap/mixins";
+@import "bootstrap/grid";
+
+@import 'partials/variables';
+@import 'partials/fonts';
+@import 'partials/layouts';
+
+@import 'components/*';
+@import 'pages/*';
