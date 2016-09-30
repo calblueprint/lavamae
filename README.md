@@ -1,7 +1,6 @@
-== Lava Mae
-![Lava Mae logo](https://yt3.ggpht.com/-zv4zj4cB_jM/AAAAAAAAAAI/AAAAAAAAAAA/EN_IIJe7_Ug/s900-c-k-no-mo-rj-c0xffffff/photo.jpg)
+#Lava Mae
 **[Lava Mae](http://lavamae.org)**
-Lava Mae is a nonprofit organization founded in 2014 by Doniece Sandoval in San Francisco, CA.
+is a nonprofit organization founded in 2014 by Doniece Sandoval in San Francisco, CA.
 It’s an organization that gives those experiencing homelessness the opportunity to have access
 to mobile showers and toilets. The main goal of Lava Mae is to serve those who lack access to
 basic human rights, such as showers and sanitation.
