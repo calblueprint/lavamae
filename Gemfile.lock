@@ -337,7 +337,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   sprockets (= 3.6.3)
-  turbolinks
+  turbolinks (>= 2.4.0)
   uglifier (= 2.7.2)
 
 RUBY VERSION
