@@ -1,9 +1,9 @@
 #Developer Guide For Blueprint's Lava Mae app!
 ## Setup
-* [Web app Setup][/docs/setup.md]
+* [Web app Setup](/docs/setup.md)
 
 ## Style Guide
-Our Rails style guide can be found [here][https://github.com/calblueprint/style-guides/tree/master/rails].
+Our Rails style guide can be found [here](https://github.com/calblueprint/style-guides/tree/master/rails).
 
 ## Commit Process
 IMPORTANT: Make sure to set your git information. Instructions can be found [here](https://help.github.com/articles/setting-your-username-in-git/).
