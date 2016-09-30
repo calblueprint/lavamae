@@ -1,6 +1,7 @@
 Web Setup Instructions
 -------
 Install [Rails.](http://installrails.com/)
+
 1. Clone the Github repo `git clone https://github.com/calblueprint/lavamae.git`
 
 2. Install all appropriate gems `bundle install`
