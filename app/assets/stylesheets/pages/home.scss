@@ -1,4 +1,17 @@
 .landing {
-  background: linear-gradient(150deg, $blue-light-80 0%, $blue-light 40%, $blue-light-60 80%);
-  height: 720px;
+  background: linear-gradient(150deg, $blue-light-80 0%, $blue-light 40%, $blue-light-60 80%),
+  url("lavamae-hero.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+
+  .landing-title, .landing-text {
+    color: white;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
 }
