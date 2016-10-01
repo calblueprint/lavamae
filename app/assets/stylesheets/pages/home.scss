@@ -1,5 +1,5 @@
 .landing {
-  background: linear-gradient(150deg, $blue-light-80 0%, $blue-light 40%, $blue-light-60 80%),
+  background: linear-gradient(150deg, $blue-dark-80 0%, $blue-light-60 40%, $blue-light-40 80%),
   url("lavamae-hero.jpg");
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
@@ -8,10 +8,32 @@
   align-items: center;
   min-height: 100%;
 
-  .landing-title, .landing-text {
+  .landing-title, .landing-body {
     color: white;
     padding-top: 5px;
     padding-bottom: 5px;
   }
+}
 
+.preview {
+  height: 600px;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+
+  .preview-text {
+    float: right;
+  }
+
+  .preview-title, .preview-body {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
+.discussion-preview {
+  background: linear-gradient(130deg, rgba(white, 0.35) 40%, white 40%),
+  url("discussion_hero_placeholder.png");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
 }
