@@ -52,3 +52,9 @@ a img {
 article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
   display: block;
 }
+
+@media (min-width: 1200px) {
+    .container{
+        max-width: 960px;
+    }
+}
