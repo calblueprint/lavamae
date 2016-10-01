@@ -16,12 +16,12 @@
 }
 
 .preview {
-  height: 600px;
+  height: 400px;
   display: flex;
   align-items: center;
   min-height: 100%;
 
-  .preview-text {
+  .discussion-text {
     float: right;
   }
 
@@ -31,9 +31,16 @@
   }
 }
 
-.discussion-preview {
-  background: linear-gradient(130deg, rgba(white, 0.35) 40%, white 40%),
-  url("discussion_hero_placeholder.png");
-  background-repeat: no-repeat, no-repeat;
-  background-size: cover, cover;
-}
+// .discussion-preview {
+//   background: linear-gradient(155deg, rgba(white, 0.5) 40%, white 40%),
+//   url("discussion_hero_placeholder.png");
+//   background-repeat: no-repeat, no-repeat;
+//   background-size: cover, cover;
+// }
+//
+// .map-preview {
+//   background: linear-gradient(155deg, $blue-light 60%, rgba(white, 0.5) 60%),
+//   url("map_hero_placeholder.png");
+//   background-repeat: no-repeat, no-repeat;
+//   background-size: cover, cover;
+// }
