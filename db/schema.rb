@@ -27,4 +27,13 @@ ActiveRecord::Schema.define(version: 20161002193731) do
     t.datetime "updated_at",  null: false
   end
 
+  create_table "responses", force: :cascade do |t|
+    t.text     "content"
+    t.integer  "score"
+    t.integer  "discussion_id"
+    t.boolean  "is_admin"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
 end
