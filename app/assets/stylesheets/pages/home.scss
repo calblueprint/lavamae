@@ -1,0 +1,44 @@
+.landing {
+  background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
+  url("lavamae-hero.jpg");
+  background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  height: 600px;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+  // text-align: center;
+
+  .landing-title, .landing-body {
+    color: white;
+    padding-top: 5px;
+  }
+
+  .landing-body {
+    padding-bottom: 10px;
+  }
+}
+
+.preview {
+  padding: 100px 0;
+  display: flex;
+  align-items: center;
+  min-height: 100%;
+
+  .discussion-text {
+    float: right;
+  }
+
+  .preview-title, .preview-body {
+    padding-top: 5px;
+  }
+
+  .preview-body {
+    padding-bottom: 10px;
+  }
+}
+
+// Overriding global nav blue background
+.nav {
+  background: transparent;
+}

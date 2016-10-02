@@ -1,1 +1,91 @@
-Home page
+<section class="landing">
+  <div class="container landing-text-container">
+    <div class="row">
+      <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <h1 class="landing-title">
+          Lava Mae Reach
+        </h1>
+        <h4 class="landing-body">
+          Lava Mae Reach is a tool for anyone to learn more about how Lava Mae works,
+          how it's revolutionizing access to basic sanitation, and even how to start Lava Mae
+          projects in untapped areas.
+        </h4>
+        <a href="http://lavamae.org/" target="_blank">
+          <button class="btn btn-blue">What's Lava Mae?</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="preview discussion-preview">
+  <div class="container discussion-container">
+    <div class="row">
+      <img class="preview-hero col-xs-12 col-md-5" src="/assets/discussion_hero_placeholder.png" />
+      <div class="col-xs-12 col-md-6 col-md-offset-1 discussion-text">
+        <h2 class="preview-title">
+          Discussion Threads
+        </h2>
+        <h4 class="preview-body">
+          Connect with others around the globe through discussion threads. Ask
+          questions, answer questions, and meet others.
+        </h4>
+        <a href="/">
+          <button class="btn btn-blue">Join the Conversation</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="preview map-preview">
+  <div class="container map-container">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 map-text">
+        <h2 class="preview-title">
+          Interactive Map
+        </h2>
+        <h4 class="preview-body">
+          Discover Lava Mae projects all around the world and read stories about
+          other individuals and organizations revolutionizing global sanitation.
+        </h4>
+        <a href="/">
+          <button class="btn btn-blue">See the Map</button>
+        </a>
+      </div>
+      <img class="preview-hero col-xs-12 col-md-5 col-md-offset-1" src="/assets/map_hero_placeholder.png" />
+    </div>
+  </div>
+</section>
+
+<section class="preview stories-preview">
+  <div class="container stories-container">
+    <div class="row">
+      <img class="preview-hero col-xs-12 col-md-5" src="/assets/stories_hero_placeholder.png" />
+      <div class="col-xs-12 col-md-6 col-md-offset-1 stories-text">
+        <h2 class="preview-title">
+          Success Stories
+        </h2>
+        <h4 class="preview-body">
+          Read stories of other people around the world and their journey starting their
+          own Lava Mae project in their local community.
+        </h4>
+        <a href="/">
+          <button class="btn btn-blue">Read Stories</button>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV BAR COLOR CHANGE JS -->
+<script>
+$(document).scroll(function(){
+    if($(this).scrollTop() > 535)
+    {
+       $('.nav').css({"background":"#16ACE6"});
+    } else {
+       $('.nav').css({"background":"transparent"});
+    }
+});
+</script>

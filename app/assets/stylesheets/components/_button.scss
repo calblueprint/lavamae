@@ -1,7 +1,6 @@
-.button {
+.btn {
   font-family: $font-stack;
-  background: transparent;
-  border: 1px solid transparent;
+  cursor: pointer;
   border-radius: 2px;
   color: white;
   display: inline-block;
@@ -21,5 +20,21 @@
   &:active {
     box-shadow: none;
     opacity: 0.8;
+  }
+}
+
+.btn-transparent {
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.btn-blue {
+  background: $blue-light;
+  border: 1px solid $blue-light;
+
+  &:hover {
+    background: $blue-dark;
+    border: 1px solid $blue-dark;
+    box-shadow: 0 2px 8px $black-20;
   }
 }
