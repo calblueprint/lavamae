@@ -1,5 +1,5 @@
 .landing {
-  background: linear-gradient(150deg, $blue-dark-80 0%, $blue-light-60 40%, $blue-light-40 80%),
+  background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
   url("lavamae-hero.jpg");
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
@@ -11,7 +11,10 @@
   .landing-title, .landing-body {
     color: white;
     padding-top: 5px;
-    padding-bottom: 5px;
+  }
+
+  .landing-body {
+    padding-bottom: 10px;
   }
 }
 
@@ -27,20 +30,15 @@
 
   .preview-title, .preview-body {
     padding-top: 5px;
-    padding-bottom: 5px;
+  }
+
+  .preview-body {
+    padding-bottom: 10px;
   }
 }
 
-// .discussion-preview {
-//   background: linear-gradient(155deg, rgba(white, 0.5) 40%, white 40%),
-//   url("discussion_hero_bg.png");
-//   background-repeat: no-repeat, no-repeat;
-//   background-size: cover, cover;
-// }
-//
-// .map-preview {
-//   background: linear-gradient(155deg, $blue-light 60%, rgba(white, 0.5) 60%),
-//   url("map_hero_bg.png");
-//   background-repeat: no-repeat, no-repeat;
-//   background-size: cover, cover;
-// }
+@media (min-width: 1200px) {
+    .container{
+        max-width: 960px;
+    }
+}
