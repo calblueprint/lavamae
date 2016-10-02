@@ -1,0 +1,32 @@
+.nav {
+  background: transparent;
+  padding: 15px 0;
+  position: fixed;
+  width: 100%;
+  transition: 500ms;
+  z-index: 5;
+
+  .container {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+  }
+
+  .logo {
+    background-image: image_url('lavamae-logo.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+    height: 50px;
+    width: 35px;
+  }
+
+  .nav-items-container {
+    margin-left: auto;
+  }
+
+  .nav-item {
+    color: white;
+    display: inline-block;
+  }
+}
