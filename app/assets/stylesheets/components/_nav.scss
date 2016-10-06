@@ -1,5 +1,4 @@
-.nav {
-  background: $blue-light;
+.nav, .nav-home {
   padding: 15px 0;
   position: fixed;
   width: 100%;
@@ -29,4 +28,13 @@
     color: white;
     display: inline-block;
   }
+}
+
+// Overriding global nav blue background
+.nav {
+  background: $blue-light;
+}
+
+.nav-home {
+  background: transparent;
 }

@@ -1,0 +1,21 @@
+.discussion-item {
+  background: $blue-light-20;
+  cursor: pointer;
+  color: $blue-dark;
+  height: 120px;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  padding: 15px;
+  transition: 300ms;
+
+  &:hover {
+    background: $blue-light;
+    color: white;
+  }
+
+  &:focus {
+    border: 2px solid $blue-light;
+    outline: none;
+  }
+
+}
