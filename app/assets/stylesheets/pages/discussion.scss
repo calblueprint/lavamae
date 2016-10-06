@@ -1,3 +1,38 @@
-.nav {
-  background: $blue-light;
+.discussion-container {
+  padding: 40px 0;
+
+  .discussion-search {
+    padding-bottom: 20px;
+
+    .discussion-search-input {
+      background: white;
+      border: 2px solid $blue-light-40;
+      border-radius: 2px;
+      padding: 10px;
+      outline: none;
+      width: 100%;
+      font-family: inherit;
+      font-size: 14px;
+      transition: 300ms;
+
+      &:focus {
+        border: 2px solid $blue-light-80;
+      }
+    }
+
+    .discussion-search-submit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      opacity: 0;
+    }
+  }
+
+  .discussion-item-container {
+    border-radius: 2px;
+  }
+
+  .question-selected-container {
+    padding: 20px 40px;
+  }
 }

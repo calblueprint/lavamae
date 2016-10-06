@@ -1,13 +1,31 @@
-<div class="nav">
-  <div class="container">
-    <a href="/" class="logo"></a>
-    <ul class="nav-items-container">
-      <li class="nav-item">
-        <button class="btn btn-transparent">Sign Up</button>
-      </li>
-      <li class="nav-item">
-        <button class="btn btn-transparent">Log In</button>
-      </li>
-    </ul>
+<!-- IF on home page, make nav transparent -->
+<% if current_page?(root_path) %>
+  <div class="nav-home">
+    <div class="container">
+      <a href="/" class="logo"></a>
+      <ul class="nav-items-container">
+        <li class="nav-item">
+          <button class="btn btn-transparent">Sign Up</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-transparent">Log In</button>
+        </li>
+      </ul>
+    </div>
   </div>
-</div>
+  <!-- ELSE make nav blue -->
+  <% else %>
+  <div class="nav">
+    <div class="container">
+      <a href="/" class="logo"></a>
+      <ul class="nav-items-container">
+        <li class="nav-item">
+          <button class="btn btn-transparent">Sign Up</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-transparent">Log In</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+<% end %>
