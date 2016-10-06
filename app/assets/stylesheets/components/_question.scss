@@ -7,9 +7,12 @@
   font-size: 14px;
 }
 
-.user-container {
+.user-action {
   padding: 10px;
-  
+}
+
+.user-container {
+
   .user-picture {
     width: 40px;
     height: 40px;
@@ -26,9 +29,29 @@
     }
   }
 
-  .user-name {
+  .name-date {
     display: inline-block;
-    font-size: 14px;
-    padding-left: 10px;
+    padding-left: 5px;
+    vertical-align: middle;
   }
+
+  .user-name {
+    font-size: 14px;
+  }
+}
+
+.upvote-button {
+  color: $blue-light;
+  padding-right: 5px;
+  transition: 300ms;
+  cursor: pointer;
+
+  &:hover {
+    color: $blue-dark;
+  }
+}
+
+.upvote-count {
+  color: $blue-dark;
+  font-size: 14px;
 }
