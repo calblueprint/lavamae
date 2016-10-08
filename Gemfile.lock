@@ -221,6 +221,8 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    react-bootstrap-rails (0.30.2)
+      rails (>= 3.1)
     react-rails (1.4.0)
       babel-transpiler (>= 0.7.0)
       coffee-script-source (~> 1.8)
@@ -335,6 +337,7 @@ DEPENDENCIES
   quiet_assets
   rails (= 4.2.1)
   rails_12factor
+  react-bootstrap-rails (= 0.30.2)
   react-rails (= 1.4.0)
   rspec-rails
   rubocop
