@@ -1,0 +1,6 @@
+<div> This is Response #<%= response.id %> </div>
+<div>
+	<%= response.content %>
+</div>
+
+<%= button_to 'Delete Response', discussion_response_path(response.discussion_id, response), method: :delete %>

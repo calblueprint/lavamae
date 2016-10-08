@@ -1,9 +1,4 @@
-<br>
-<br>
-<br>
-<br>
-<br>
-<%= form_for :response, url: responses_path do |f| %>
+<%= form_for :response, url: discussion_responses_path(params[:id]) do |f| %>
 	<p>
 		<%= f.label :content %><br>
 		<%= f.text_area :content %>
