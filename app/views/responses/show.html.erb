@@ -1,8 +1,0 @@
-<h2> This is Response #<%= @response.id %> </h2>
-<div>
-	<%= @response.content %>
-</div>
-
-<b>Action:</b></br>
-<%= button_to 'Delete Response', response_path(@response), method: :delete %>
-<%= link_to 'Back to response list', responses_path %>
