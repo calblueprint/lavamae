@@ -21,10 +21,6 @@ class DiscussionsController < ApplicationController
   	@discussion = Discussion.new
   end
 
-  def show
-  	# called in before_action
-  end
-
   def edit
   	# same concept as new/create
   end
