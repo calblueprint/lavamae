@@ -1,0 +1,17 @@
+<p> This is a discussion html thingy </p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<% @discussions.each do |d| %>
+	<div>
+		<%= link_to d.title, discussion_path(d) %>
+	</div>
+	<div>
+		<% d.content %>
+	</div>
+<% end %>
+
+<%= link_to "Create Discussion", new_discussion_path %>

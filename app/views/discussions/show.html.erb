@@ -1,0 +1,18 @@
+<h2> This is Discussion #<%= @discussion.id %> </h2>
+<div>
+	<%= @discussion.content %>
+</div>
+
+<b>Action:</b></br>
+<%= button_to 'Delete Discussion', discussion_path(@discussion), method: :delete %>
+<%= link_to 'Back to discussion list', discussions_path %>
+
+
+<h3>Add a response:</h3>
+	<%= render 'responses/form' %>
+</br>
+
+<h3>Responses:</h3>
+<div >
+  <%= render show_responses %>
+</div>
