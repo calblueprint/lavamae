@@ -6,7 +6,7 @@
 
     .discussion-search-input {
       background: white;
-      border: 2px solid $blue-light-40;
+      border: 1px solid $grey;
       border-radius: 2px;
       padding: 10px;
       outline: none;
@@ -16,7 +16,7 @@
       transition: 300ms;
 
       &:focus {
-        border: 2px solid $blue-light-80;
+        border: 1px solid $blue-light;
       }
     }
 
@@ -39,4 +39,9 @@
   .question-selected-container {
     padding: 20px 40px;
   }
+}
+
+.answer-form-header {
+  color: $blue-light;
+  padding-bottom: 5px;
 }
