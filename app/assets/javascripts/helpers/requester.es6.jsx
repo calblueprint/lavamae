@@ -19,15 +19,13 @@ class Requester {
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
+                // TODO: handle this error
                 console.log("ERROR");
-                console.log(error);
-                console.log(status);
             }
         }));
     }
 
     post(endpoint, data, success, extraFields = {}) {
-        console.log("requester achieved");
         this._attemptAjax(endpoint, 'POST', data, extraFields, success,
             this._postErrorHandler);
     }

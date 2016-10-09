@@ -29,8 +29,8 @@ class LoginModal extends React.Component {
   }
 
   _success(msg) {
+    // TODO: Add toastr message
     this._closeModal();
-    console.log("HERE");
     window.location = "/";
   }
 
