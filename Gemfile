@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 ruby '2.2.5'
 
 # Rails
@@ -38,7 +38,7 @@ gem 'uglifier', '2.7.2'
 gem 'sprockets', '3.6.3'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', ">= 2.4.0"
+# gem 'turbolinks', ">= 2.4.0"
 
 group :development, :test do
   gem 'awesome_print'

@@ -13,14 +13,14 @@
             <%= button_to "Sign Up", new_user_registration_path, :class => "btn btn-transparent", :method => :get %>
           </li>
           <li class="nav-item">
-            <%= button_to "Log In", new_user_session_path, :class => "btn btn-transparent", :method => :get %>
+            <%= react_component('LoginModal') %>
           </li>
         <%end%>
       </ul>
     </div>
   </div>
 
-  <!-- ELSE make nav blue -->
+<!-- ELSE make nav blue -->
 <% else %>
   <div class="nav">
     <div class="container">
@@ -35,7 +35,7 @@
             <%= button_to "Sign Up", new_user_registration_path, :class => "btn btn-transparent", :method => :get %>
           </li>
           <li class="nav-item">
-            <%= button_to "Log In", new_user_session_path, :class => "btn btn-transparent", :method => :get %>
+            <%= react_component('LoginModal') %>
           </li>
         <%end%>
       </ul>
