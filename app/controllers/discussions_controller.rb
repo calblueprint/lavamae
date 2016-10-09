@@ -1,9 +1,14 @@
 class DiscussionsController < ApplicationController
 
-  before_action :get_discussion, only: [:show, :edit, :update, :destroy]
+  before_action :get_discussion, only: [:edit, :update, :destroy]
 
   def index
     @discussions = Discussion.all
+    if params[:discussion_id]
+      @discussion = Discussion.find(params[:discussion_id])
+    else
+      @discussion = Discussion.first
+    end
   end
 
   def create
@@ -19,10 +24,6 @@ class DiscussionsController < ApplicationController
     # nothing here
   end
 
-  def show 
-    # work done in get_discussion
-  end
-
   def edit
   end
 
@@ -33,12 +34,6 @@ class DiscussionsController < ApplicationController
     @discussion.destroy
     redirect_to discussions_path
   end
-
-  def show_responses
-    # coms = Comment.where("family_id = ?", @family.id).order(:created_at).reverse
-    @discussion.responses
-  end
-  helper_method :show_responses
 
   private
     def discussion_params

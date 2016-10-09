@@ -3,14 +3,30 @@
 <br>
 <br>
 <br>
-<br>
-<br>
 <% @discussions.each do |d| %>
 	<div>
-		<%= link_to d.title, discussion_path(d) %>
+		<%= link_to d.title, discussions_path(discussion_id: d.id) %>
 	</div>
 	<div>
 		<% d.content %>
+	</div>
+<% end %>
+
+<% if @discussion %>
+	<h2> This is Discussion #<%= @discussion.id %> </h2>
+	<div>
+		Title: <%= @discussion.title %>
+	</div>
+	<div>
+		Content: <%= @discussion.content %>
+	</div>
+
+	<h3>Add a response:</h3>
+		<%= render 'responses/form' %>
+
+	<h3>Responses:</h3>
+	<div >
+	  <%= render @discussion.responses %>
 	</div>
 <% end %>
 
