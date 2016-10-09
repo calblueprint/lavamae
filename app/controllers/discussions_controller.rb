@@ -1,9 +1,14 @@
 class DiscussionsController < ApplicationController
 
-  before_action :get_discussion, only: [:show, :edit, :update, :destroy]
+  before_action :get_discussion, only: [:edit, :update, :destroy]
 
   def index
   	@discussion = Discussion.all.sort_by &:created_at
+    if params[:discussion_id]
+      @discussion = Discussion.find(params[:discussion_id])
+    else
+      @discussion = Discussion.first
+    end
   end
 
   def create

@@ -1,6 +1,6 @@
 class ResponsesController < ApplicationController
 
-  before_action :get_response, only: [:show, :edit, :update, :destroy]
+  before_action :get_response, only: [:edit, :update, :destroy]
   before_action :get_discussion, only: [:create, :destroy]
 
   def create

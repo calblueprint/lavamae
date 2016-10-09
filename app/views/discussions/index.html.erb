@@ -10,3 +10,23 @@
 <% end %>
 <br><br><br>
 <%= link_to "Create New Discussion", new_discussion_path %>
+
+<% if @discussion %>
+	<h2> This is Discussion #<%= @discussion.id %> </h2>
+	<div>
+		Title: <%= @discussion.title %>
+	</div>
+	<div>
+		Content: <%= @discussion.content %>
+	</div>
+
+	<h3>Add a response:</h3>
+		<%= render 'responses/form' %>
+
+	<h3>Responses:</h3>
+	<div >
+	  <%= render @discussion.responses %>
+	</div>
+<% end %>
+
+<%= link_to "Create Discussion", new_discussion_path %>
