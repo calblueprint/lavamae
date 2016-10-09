@@ -1,5 +1,5 @@
 .discussion-container {
-  padding: 40px auto;
+  padding: 40px 0;
 
   .discussion-search {
     padding-bottom: 20px;
@@ -39,10 +39,4 @@
   .question-selected-container {
     padding: 20px 40px;
   }
-
-}
-
-.answer-form-header {
-  color: $blue-light;
-  padding-bottom: 5px;
 }

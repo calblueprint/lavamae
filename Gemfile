@@ -14,6 +14,9 @@ gem 'react-bootstrap-rails', '0.30.2'
 # FontAwesome Sass
 gem 'font-awesome-sass', '~> 4.6.2'
 
+# FontAwesome Sass
+gem 'font-awesome-sass', '~> 4.6.2'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'pg_search', '1.0.5'
