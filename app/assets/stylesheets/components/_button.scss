@@ -22,6 +22,10 @@
 .btn-transparent {
   background: transparent;
   border: 1px solid transparent;
+
+  &:hover {
+    box-shadow: 0 2px 8px $black-20;
+  }
 }
 
 .btn-blue {
@@ -31,15 +35,6 @@
   &:hover {
     background: $blue-dark;
     border: 1px solid $blue-dark;
-  }
-}
-
-.btn-outline {
-  background: transparent;
-  color: $blue-light;
-  border: 1px solid $blue-light;
-
-  &:hover {
-    background: $blue-light-20;
+    box-shadow: 0 2px 8px $black-20;
   }
 }
