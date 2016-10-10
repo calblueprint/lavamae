@@ -1,0 +1,42 @@
+.discussion-container {
+  padding: 40px 0;
+
+  .discussion-search {
+    padding-bottom: 20px;
+
+    .discussion-search-input {
+      background: white;
+      border: 1px solid $grey;
+      border-radius: 2px;
+      padding: 10px;
+      outline: none;
+      width: 100%;
+      font-family: inherit;
+      font-size: 14px;
+      transition: 300ms;
+
+      &:focus {
+        border: 1px solid $blue-light;
+      }
+    }
+
+    .discussion-search-submit {
+      position: absolute;
+      top: 0;
+      right: 0;
+      opacity: 0;
+    }
+  }
+
+  .discussion-item-container {
+    border-radius: 2px;
+
+    .discussion-item-description {
+      font-size: 12px;
+    }
+  }
+
+  .question-selected-container {
+    padding: 20px 40px;
+  }
+}
