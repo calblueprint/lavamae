@@ -69,8 +69,8 @@ class LoginModal extends React.Component {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <button type="button" onClick={this._closeModal}>Close</button>
-              <button type="submit">Log In</button>
+              <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
+              <button className="btn btn-blue modal-btn" type="submit">Log In</button>
             </Modal.Footer>
           </form>
         </Modal>
@@ -78,4 +78,3 @@ class LoginModal extends React.Component {
     );
   }
 }
-

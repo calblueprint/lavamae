@@ -11,11 +11,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   transition: 500ms;
-
-  &:hover {
-    box-shadow: 0 2px 8px $black-20;
-    text-decoration: none;
-  }
+  text-decoration: none;
 
   &:active {
     box-shadow: none;
@@ -35,6 +31,15 @@
   &:hover {
     background: $blue-dark;
     border: 1px solid $blue-dark;
-    box-shadow: 0 2px 8px $black-20;
+  }
+}
+
+.btn-outline {
+  background: transparent;
+  color: $blue-light;
+  border: 1px solid $blue-light;
+
+  &:hover {
+    background: $blue-light-20;
   }
 }
