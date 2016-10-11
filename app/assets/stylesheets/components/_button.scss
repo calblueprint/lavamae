@@ -38,3 +38,13 @@
     box-shadow: 0 2px 8px $black-20;
   }
 }
+
+.btn-outline {
+  background: transparent;
+  color: $blue-light;
+  border: 1px solid $blue-light;
+
+  &:hover {
+    background: $blue-light-20;
+  }
+}

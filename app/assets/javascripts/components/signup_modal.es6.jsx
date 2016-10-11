@@ -1,6 +1,6 @@
 var Modal = ReactBootstrap.Modal;
 
-class LoginModal extends React.Component {
+class SignupModal extends React.Component {
 
   constructor(props) {
     super(props);
@@ -48,14 +48,14 @@ class LoginModal extends React.Component {
   render () {
     return (
       <div>
-        <button className="btn btn-transparent" onClick={this._openModal}>Log In</button>
+        <button className="btn btn-transparent" onClick={this._openModal}>Sign Up</button>
         <Modal
           className="modal"
           show={this.state.showModal}
           onHide={this._closeModal}
         >
           <Modal.Header>
-            <Modal.Title>Log In</Modal.Title>
+            <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
           <form onSubmit={this._handleLogin}>
             <Modal.Body>
@@ -64,13 +64,17 @@ class LoginModal extends React.Component {
                 <input id="email-input" type="email" name="email" onChange={this._handleChange} />
               </div>
               <div className="input-field">
-                <label htmlFor="password-input">Password</label>
+                <label htmlFor="password-input">Password (8 characters minimum)</label>
+                <input id="password-input" type="password" name="password" onChange={this._handleChange} />
+              </div>
+              <div className="input-field">
+                <label htmlFor="password-input">Password Confirmation</label>
                 <input id="password-input" type="password" name="password" onChange={this._handleChange} />
               </div>
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-              <button className="btn btn-blue modal-btn" type="submit">Log In</button>
+              <button className="btn btn-blue modal-btn" type="submit">Sign Up</button>
             </Modal.Footer>
           </form>
         </Modal>
