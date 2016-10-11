@@ -20,6 +20,9 @@ class Requester {
             },
             error: (xhr, status, error) => {
                 // TODO: handle this error
+                console.log(xhr);
+                console.log(status);
+                console.log(error);
                 console.log("ERROR");
             }
         }));

@@ -42,7 +42,7 @@ class SignupModal extends React.Component {
         password: this.state.password,
       }
     };
-    APIRequester.post("/users/sign_in", loginFields, this._success);
+    APIRequester.post("/users", loginFields, this._success);
   }
 
   render () {
