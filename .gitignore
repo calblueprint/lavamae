@@ -7,6 +7,9 @@
 # Ignore bundler config.
 /.bundle
 
+# Ignore DS_Store
+/.DS_Store
+
 # Ignore database.yml
 config/database.yml
 
