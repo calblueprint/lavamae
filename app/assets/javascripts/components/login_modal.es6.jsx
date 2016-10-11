@@ -9,6 +9,7 @@ class LoginModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleLogin = this._handleLogin.bind(this);
     this._success = this._success.bind(this);
+    this._error = this._error.bind(this);
     this.state = {
       showModal: false,
       email: "",
@@ -29,9 +30,15 @@ class LoginModal extends React.Component {
   }
 
   _success(msg) {
-    // TODO: Add toastr message
     this._closeModal();
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.success("Log-in successful!");
     window.location = "/";
+  }
+
+  _error(msg) {
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.error(msg);
   }
 
   _handleLogin(e) {

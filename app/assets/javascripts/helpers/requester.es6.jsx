@@ -19,11 +19,8 @@ class Requester {
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
-                // TODO: handle this error
-                console.log(xhr);
-                console.log(status);
-                console.log(error);
-                console.log("ERROR");
+                toastr.options.positionClass = 'toast-bottom-right';
+                toastr.error(xhr.responseText);
             }
         }));
     }

@@ -29,8 +29,9 @@ class SignupModal extends React.Component {
   }
 
   _success(msg) {
-    // TODO: Add toastr message
     this._closeModal();
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.success("Sign-up successful!");
     window.location = "/";
   }
 
