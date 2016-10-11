@@ -1,6 +1,6 @@
 var Modal = ReactBootstrap.Modal;
 
-class LoginModal extends React.Component {
+class SignupModal extends React.Component {
 
   constructor(props) {
     super(props);
@@ -9,7 +9,6 @@ class LoginModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleLogin = this._handleLogin.bind(this);
     this._success = this._success.bind(this);
-    this._error = this._error.bind(this);
     this.state = {
       showModal: false,
       email: "",
@@ -32,13 +31,8 @@ class LoginModal extends React.Component {
   _success(msg) {
     this._closeModal();
     toastr.options.positionClass = 'toast-bottom-right';
-    toastr.success("Log-in successful!");
+    toastr.success("Sign-up successful!");
     window.location = "/";
-  }
-
-  _error(msg) {
-    toastr.options.positionClass = 'toast-bottom-right';
-    toastr.error(msg);
   }
 
   _handleLogin(e) {
@@ -49,16 +43,16 @@ class LoginModal extends React.Component {
         password: this.state.password,
       }
     };
-    APIRequester.post("/users/sign_in", loginFields, this._success);
+    APIRequester.post("/users", loginFields, this._success);
   }
 
   render () {
     return (
       <div>
-        <button className="btn btn-transparent" onClick={this._openModal}>Log In</button>
+        <button className="btn btn-transparent" onClick={this._openModal}>Sign Up</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
-            <Modal.Title>Log In</Modal.Title>
+            <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
           <form onSubmit={this._handleLogin}>
             <Modal.Body>
@@ -67,13 +61,17 @@ class LoginModal extends React.Component {
                 <input id="email-input" type="email" name="email" onChange={this._handleChange} />
               </div>
               <div className="input-field">
-                <label htmlFor="password-input">Password</label>
+                <label htmlFor="password-input">Password (8 characters minimum)</label>
+                <input id="password-input" type="password" name="password" onChange={this._handleChange} />
+              </div>
+              <div className="input-field">
+                <label htmlFor="password-input">Password Confirmation</label>
                 <input id="password-input" type="password" name="password" onChange={this._handleChange} />
               </div>
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-              <button className="btn btn-blue modal-btn" type="submit">Log In</button>
+              <button className="btn btn-blue modal-btn" type="submit">Sign Up</button>
             </Modal.Footer>
           </form>
         </Modal>

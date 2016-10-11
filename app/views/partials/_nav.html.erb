@@ -5,32 +5,39 @@
       <a href="/" class="logo"></a>
       <ul class="nav-items-container">
         <%if user_signed_in? %>
-        <li class="nav-item">
-          <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent", :method => :delete %>
-        </li>
-      <%else%>
-        <li class="nav-item">
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent", :method => :delete %>
+          </li>
+        <%else%>
+          <li class="nav-item">
           <%= button_to "Sign Up", new_user_registration_path, :class => "btn btn-transparent", :method => :get %>
-        </li>
-        <li class="nav-item">
-          <%= react_component('LoginModal') %>
-        </li>
-      <%end%>
+          </li>
+          <li class="nav-item">
+            <%= react_component('LoginModal') %>
+          </li>
+        <%end%>
       </ul>
     </div>
   </div>
-  <!-- ELSE make nav blue -->
-  <% else %>
+
+<!-- ELSE make nav blue -->
+<% else %>
   <div class="nav">
     <div class="container">
       <a href="/" class="logo"></a>
       <ul class="nav-items-container">
-        <li class="nav-item">
-          <button class="btn btn-transparent">Sign Up</button>
-        </li>
-        <li class="nav-item">
-          <button class="btn btn-transparent">Log In</button>
-        </li>
+        <%if user_signed_in? %>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent", :method => :delete %>
+          </li>
+        <%else%>
+          <li class="nav-item">
+            <%= react_component('SignupModal') %>
+          </li>
+          <li class="nav-item">
+            <%= react_component('LoginModal') %>
+          </li>
+        <%end%>
       </ul>
     </div>
   </div>

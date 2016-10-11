@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_self
+ *= require toastr
  */
 
 @import "bootstrap-sprockets";
@@ -23,6 +24,7 @@
 
 @import 'partials/variables';
 @import 'partials/fonts';
+@import 'partials/mixins';
 @import 'partials/layouts';
 @import 'partials/reset';
 

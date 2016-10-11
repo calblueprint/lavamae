@@ -1,4 +1,32 @@
+input {
+  @include appearance(none);
+  box-sizing: border-box;
+  width: 100%;
+  padding: 8px;
+  outline: none;
+  border: 1px solid $grey;
+  border-radius: 2px;
+  font-family: inherit;
+  font-size: 14px;
+
+  &:focus {
+    border: 1px solid $blue-light;
+  }
+}
+
+.input-field {
+  margin-top: 10px;
+}
+
+label {
+  font-family: inherit;
+  margin-top: 10px;
+  font-weight: 600;
+  color: $grey;
+}
+
 textarea {
+  @include appearance(none);
   box-sizing: border-box;
   width: 100%;
   height: 100px;
