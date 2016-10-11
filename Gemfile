@@ -14,9 +14,6 @@ gem 'react-bootstrap-rails', '0.30.2'
 # FontAwesome Sass
 gem 'font-awesome-sass', '~> 4.6.2'
 
-# FontAwesome Sass
-gem 'font-awesome-sass', '~> 4.6.2'
-
 # Use postgresql as the database for Active Record
 gem 'pg'
 gem 'pg_search', '1.0.5'
@@ -36,9 +33,7 @@ gem 'jquery-rails', '3.1.4'
 gem 'sass-rails', '5.0.6'
 gem 'uglifier', '2.7.2'
 gem 'sprockets', '3.6.3'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', ">= 2.4.0"
+gem 'toastr-rails'
 
 group :development, :test do
   gem 'awesome_print'
