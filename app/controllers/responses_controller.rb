@@ -7,14 +7,14 @@ class ResponsesController < ApplicationController
     response = Response.new(response_params)
     response.discussion_id = @discussion.id
     if response.save
-      redirect_to discussion_path(@discussion)
+      redirect_to discussions_path(discussion_id: @discussion.id)
     else
       redirect_to root_path
     end
   end
 
   def new
-    # nothing here
+
   end
 
   def edit
@@ -27,7 +27,7 @@ class ResponsesController < ApplicationController
 
   def destroy
     @response.destroy
-    redirect_to discussion_path(@discussion)
+    redirect_to discussions_path(discussion_id: @discussion.id)
   end
 
   private
