@@ -21,7 +21,7 @@ class DiscussionsController < ApplicationController
   end
 
   def new
-    # nothing here
+
   end
 
   def edit
