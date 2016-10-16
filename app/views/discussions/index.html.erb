@@ -1,33 +1,64 @@
-<p> This is a discussion html thingy </p>
-<br>
-<br>
-<br>
-<br>
-<% @discussions.each do |d| %>
-	<div>
-		<%= link_to d.title, discussions_path(discussion_id: d.id) %>
-	</div>
-	<div>
-		<% d.content %>
-	</div>
-<% end %>
-
-<% if @discussion %>
-	<h2> This is Discussion #<%= @discussion.id %> </h2>
-	<div>
-		Title: <%= @discussion.title %>
-	</div>
-	<div>
-		Content: <%= @discussion.content %>
-	</div>
-
-	<h3>Add a response:</h3>
-		<%= render 'responses/form' %>
-
-	<h3>Responses:</h3>
-	<div >
-	  <%= render @discussion.responses %>
-	</div>
-<% end %>
+<section class="discussion">
+  <div class="container discussion-container">
+    <div class="discussion-search row">
+      <form>
+        <input class="discussion-search-input" placeholder="Search discussion threads..."
+        type="search" name="search">
+        <input class="discussion-search-submit" type="submit" />
+        <span class="discussion-search-icon"></span>
+      </form>
+    </div>
+    <div class="row">
+      <div class="discussion-item-container col-xs-12 col-md-4">
+      	<% @discussions.each do |d| %>
+	        <div tabindex="4" class="discussion-item row">
+	          <h4 class="discussion-item-question">
+				<%= link_to d.title, discussions_path(discussion_id: d.id) %>
+	          </h4>
+	          <p class="discussion-item-description">
+				<%= d.content %>
+	          </p>
+	        </div>
+		<% end %>
+      </div>
+      <div class="question-selected-container col-xs-12 col-md-8">
+        <div class="question-container row">
+          <h2 class="question-title">
+            <%= @discussion.title %>
+          </h2>
+          <p class="question-description">
+            <%= @discussion.content %>
+          </p>
+        </div>
+        <div class="user-action row">
+          <div class="action-container pull-left">
+            <i class="upvote-button fa fa-angle-up fa-lg"></i>
+            <span class="upvote-count">24 Upvotes</span>
+          </div>
+          <div class="user-container pull-right">
+            <div class="user-picture">
+              <a href=""><img src="/assets/grace.jpg" /></a>
+            </div>
+            <div class="name-date">
+              <a href=""><div class="user-name">Grace Noh</div></a>
+              <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
+            </div>
+          </div>
+        </div>
+        <div class="answer-form-container row">
+          <h4 class="answer-form-header">Post a Reply</h4>
+          <%= render 'responses/form' %>
+        </div>
+        <% @discussion.responses.each do |r| %>
+	        <%= render r %>
+	        <% if !r.equal?(@discussion.responses.last) %> 
+    	        <hr class="row"/>
+	        <% end %>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <%= link_to "Create Discussion", new_discussion_path %>

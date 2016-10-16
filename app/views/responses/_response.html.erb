@@ -1,6 +1,17 @@
-<div> This is Response #<%= response.id %> </div>
-<div>
-	<%= response.content %>
+<div class="answer-container row">
+  <div class="answer-text pull-left">
+  	<%= response.content %>
+  </div>
+  <div class="user-container pull-right">
+    <div class="user-picture">
+      <a href=""><img src="/assets/grace.jpg" /></a>
+    </div>
+    <div class="name-date">
+      <a href=""><div class="user-name">Grace Noh</div></a>
+      <div class="date"><%= time_ago_in_words(response.created_at) %> ago</div>
+    </div>
+  </div>
 </div>
 
+<%= link_to 'Edit Response', edit_discussion_response_path(response.discussion_id, response) %>
 <%= button_to 'Delete Response', discussion_response_path(response.discussion_id, response), method: :delete %>
