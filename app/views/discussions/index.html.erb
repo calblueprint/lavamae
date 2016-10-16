@@ -1,13 +1,22 @@
 
 <% @discussion.each do |d| %>
-	<h3>
-		<%= link_to d.title, discussion_path(d) %>
-	</h3>
-	<div>
-		<%= d.content %>
-	</div>
-	<br>
 
+
+<%= link_to(discussion_path(d)) do%>
+    <h3>
+      <%= d.title %>
+    </h3>
+    <div>
+      <%= d.content %>
+    </div>
+  <br><br>
+  <% end %>
 <% end %>
+
 <br><br><br>
 <%= link_to "Create New Discussion", new_discussion_path %>
+
+
+
+
+
