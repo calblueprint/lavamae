@@ -1,7 +1,7 @@
 class ResponsesController < ApplicationController
 
   before_action :get_response, only: [:edit, :update, :destroy]
-  before_action :get_discussion, only: [:create, :destroy]
+  before_action :get_discussion, only: [:edit, :update, :create, :destroy]
 
   def create
     response = Response.new(response_params)
@@ -22,7 +22,12 @@ class ResponsesController < ApplicationController
   end
 
   def update
-  
+    @response.update_attributes(response_params)
+    if @response.save
+      redirect_to discussions_path(discussion_id: @discussion.id)
+    else
+      redirect_to root_path
+    end
   end
 
   def destroy
