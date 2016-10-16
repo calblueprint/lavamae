@@ -29,6 +29,8 @@
           <p class="question-description">
             <%= @discussion.content %>
           </p>
+		  <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
+		  <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete %>
         </div>
         <div class="user-action row">
           <div class="action-container pull-left">
@@ -49,7 +51,7 @@
           <h4 class="answer-form-header">Post a Reply</h4>
           <%= render 'responses/form' %>
         </div>
-        <% @discussion.responses.each do |r| %>
+        <% @responses.each do |r| %>
 	        <%= render r %>
 	        <% if !r.equal?(@discussion.responses.last) %> 
     	        <hr class="row"/>

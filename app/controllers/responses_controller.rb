@@ -22,12 +22,8 @@ class ResponsesController < ApplicationController
   end
 
   def update
-    @response.update_attributes(response_params)
-    if @response.save
-      redirect_to discussions_path(discussion_id: @discussion.id)
-    else
-      redirect_to root_path
-    end
+    @response.update(response_params)
+    redirect_to discussions_path(discussion_id: @discussion.id)
   end
 
   def destroy

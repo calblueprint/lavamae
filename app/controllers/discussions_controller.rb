@@ -3,12 +3,13 @@ class DiscussionsController < ApplicationController
   before_action :get_discussion, only: [:edit, :update, :destroy]
 
   def index
-  	@discussion = Discussion.all.sort_by &:created_at
+  	@discussions = Discussion.all.sort_by &:created_at
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
     else
       @discussion = Discussion.first
     end
+    @responses = @discussion.responses.sort_by &:created_at
   end
 
   def create
@@ -27,7 +28,7 @@ class DiscussionsController < ApplicationController
 
   def update
   	@discussion.update(discussion_params)
-  	redirect_to discussions_path
+  	redirect_to discussions_path(discussion_id: @discussion.id)
   end
 
   def destroy
