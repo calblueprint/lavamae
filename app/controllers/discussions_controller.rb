@@ -9,11 +9,14 @@ class DiscussionsController < ApplicationController
     else
       @discussion = Discussion.first
     end
-    @responses = @discussion.responses.sort_by &:created_at
+    unless @discussion.nil?
+      @responses = @discussion.responses.sort_by &:created_at
+    end
   end
 
   def create
   	discussion = Discussion.new(discussion_params)
+    discussion.score = 0
   	discussion.save
   	redirect_to discussions_path
   end
