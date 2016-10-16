@@ -21,6 +21,7 @@ class DiscussionsController < ApplicationController
   end
 
   def new
+<<<<<<< HEAD
 
   end
 
@@ -30,6 +31,15 @@ class DiscussionsController < ApplicationController
 
   def update
     
+=======
+    # nothing here
+  end
+
+  def edit
+  end
+
+  def update
+>>>>>>> 0539fb958fb683de263e8165f1981303645bc61f
   end
 
   def destroy
