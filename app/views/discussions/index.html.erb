@@ -1,13 +1,32 @@
+<section class="discussion">
+  <div class="container discussion-container">
+    <div class="discussion-search row">
+      <form>
+        <input class="discussion-search-input" placeholder="Search discussion threads..."
+        type="search" name="search">
+        <input class="discussion-search-submit" type="submit" />
+        <span class="discussion-search-icon"></span>
+      </form>
+    </div>
+    <div class="row">
+      <div class="discussion-item-container col-xs-12 col-md-4">
+      	<% @discussions.each do |d| %>
+	        <div tabindex="4" class="discussion-item row">
+	          <h4 class="discussion-item-question">
+				<%= link_to d.title, discussions_path(discussion_id: d.id) %>
+	          </h4>
+	          <p class="discussion-item-description">
+				<%= d.content %>
+	          </p>
+	        </div>
+		<% end %>
+      </div>
+      <% if @discussion %>
+	      <%= render @discussion %>
+      <% end %>
+      </div>
+    </div>
+  </div>
+</section>
 
-<% @discussion.each do |d| %>
-	<h3>
-		<%= link_to d.title, discussion_path(d) %>
-	</h3>
-	<div>
-		<%= d.content %>
-	</div>
-	<br>
-
-<% end %>
-<br><br><br>
-<%= link_to "Create New Discussion", new_discussion_path %>
+<%= link_to "Create Discussion", new_discussion_path %>
