@@ -21,43 +21,9 @@
 	        </div>
 		<% end %>
       </div>
-      <div class="question-selected-container col-xs-12 col-md-8">
-        <div class="question-container row">
-          <h2 class="question-title">
-            <%= @discussion.title %>
-          </h2>
-          <p class="question-description">
-            <%= @discussion.content %>
-          </p>
-		  <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
-		  <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete %>
-        </div>
-        <div class="user-action row">
-          <div class="action-container pull-left">
-            <i class="upvote-button fa fa-angle-up fa-lg"></i>
-            <span class="upvote-count">24 Upvotes</span>
-          </div>
-          <div class="user-container pull-right">
-            <div class="user-picture">
-              <a href=""><img src="/assets/grace.jpg" /></a>
-            </div>
-            <div class="name-date">
-              <a href=""><div class="user-name">Grace Noh</div></a>
-              <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
-            </div>
-          </div>
-        </div>
-        <div class="answer-form-container row">
-          <h4 class="answer-form-header">Post a Reply</h4>
-          <%= render 'responses/form' %>
-        </div>
-        <% @responses.each do |r| %>
-	        <%= render r %>
-	        <% if !r.equal?(@discussion.responses.last) %> 
-    	        <hr class="row"/>
-	        <% end %>
-        <% end %>
-        </div>
+      <% if @discussion %>
+	      <%= render @discussion %>
+      <% end %>
       </div>
     </div>
   </div>
