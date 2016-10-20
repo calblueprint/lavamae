@@ -164,7 +164,8 @@ class RegistrationModal extends React.Component {
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.map_checked}
-                    onChange={this._handleCheckboxChange} />
+                    onChange={this._handleCheckboxChange}
+                    className="input-checkbox"/>
                 </label>
               </div>
 
