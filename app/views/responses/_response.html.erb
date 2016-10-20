@@ -13,5 +13,7 @@
   </div>
 </div>
 
-<%= link_to 'Edit Response', edit_discussion_response_path(response.discussion_id, response) %>
-<%= button_to 'Delete Response', discussion_response_path(response.discussion_id, response), method: :delete %>
+<% if current_user and current_user == response.user %>
+  <%= link_to 'Edit Response', edit_discussion_response_path(response.discussion_id, response) %>
+  <%= button_to 'Delete Response', discussion_response_path(response.discussion_id, response), method: :delete %>
+<% end %>
