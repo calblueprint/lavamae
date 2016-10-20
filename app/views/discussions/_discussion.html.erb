@@ -1,13 +1,9 @@
 <div class="discussion-selected-container col-xs-12 col-md-8">
   <div class="row">
-    <h2 class="discussion-title">
-      <%= @discussion.title %>
-    </h2>
-    <p class="discussion-description wordwrap">
-      <%= @discussion.content %>
-    </p>
+    <h2 class="discussion-title"><%= @discussion.title %></h2>
+    <p class="discussion-description wordwrap"><%= @discussion.content %></p>
   <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
-  <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete %>
+  <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete, class: 'btn-blue btn' %>
   </div>
   <div class="user-action row">
     <div class="action-container pull-left">
