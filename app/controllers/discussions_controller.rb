@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
   before_action :get_discussion, only: [:edit, :update, :destroy]
 
   def index
-  	@discussions = Discussion.all.sort_by &:created_at
+  	@discussions = Discussion.all.order('created_at DESC')
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
     else
@@ -17,6 +17,7 @@ class DiscussionsController < ApplicationController
   def create
   	discussion = Discussion.new(discussion_params)
     discussion.score = 0
+    discussion.user_id = current_user.id
   	discussion.save
   	redirect_to discussions_path
   end
