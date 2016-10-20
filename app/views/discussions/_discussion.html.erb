@@ -1,9 +1,9 @@
-<div class="question-selected-container col-xs-12 col-md-8">
-  <div class="question-container row">
-    <h2 class="question-title">
+<div class="discussion-selected-container col-xs-12 col-md-8">
+  <div class="row">
+    <h2 class="discussion-title">
       <%= @discussion.title %>
     </h2>
-    <p class="question-description">
+    <p class="discussion-description wordwrap">
       <%= @discussion.content %>
     </p>
   <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
@@ -29,10 +29,10 @@
     <h4 class="answer-form-header">Post a Reply</h4>
     <%= render 'responses/form' %>
   </div>
-  
+
   <% @responses.each do |r| %>
     <%= render r %>
-    <% if !r.equal?(@discussion.responses.last) %> 
+    <% if !r.equal?(@discussion.responses.last) %>
         <hr class="row"/>
     <% end %>
   <% end %>
