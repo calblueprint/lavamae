@@ -27,8 +27,9 @@
           <%= render @discussion %>
       <% end %>
       </div>
+      <% if current_user %>
+        <%= link_to "Create Discussion", new_discussion_path %>
+      <% end %>
     </div>
   </div>
 </section>
-
-<%= link_to "Create Discussion", new_discussion_path %>
