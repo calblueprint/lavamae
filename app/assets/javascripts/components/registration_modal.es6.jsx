@@ -9,6 +9,7 @@ class RegistrationModal extends React.Component {
     this._validateFields = this._validateFields.bind(this);
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
+    this._toLogin = this._toLogin.bind(this);
     this._attemptRegistration = this._attemptRegistration.bind(this);
     this._renderInput = this._renderInput.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
@@ -87,6 +88,10 @@ class RegistrationModal extends React.Component {
     toastr.error(msg);
   }
 
+  _toLogin() {
+    window.location = "/users/sign_in";
+  }
+
   _attemptRegistration(e) {
     this._validateFields();
     if (this.state.valid) {
@@ -137,7 +142,6 @@ class RegistrationModal extends React.Component {
     return (
       <div>
         <div>
-          <span className="fa fa-angle-left back"></span>
           <h1>New Account</h1>
           </div>
             <form>
@@ -172,7 +176,7 @@ class RegistrationModal extends React.Component {
                 onClick={this._attemptRegistration} />
             </form>
           <div>
-          <a>Already have an account?</a>
+          <a onClick={this._toLogin} >Already have an account?</a>
         </div>
       </div>
     );
