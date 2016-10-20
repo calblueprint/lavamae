@@ -15,6 +15,13 @@
             <div tabindex="4" class="discussion-item row">
               <h4 class="discussion-item-title">
                 <%= d.title %>
+                <div class = "discussion-item-date">
+                <% if d.created_at > Time.now.beginning_of_day %>
+                    <%= time_ago_in_words(d.created_at) %> ago
+                <% else %>
+                    <%= d.created_at.strftime("%b %d, %Y") %> # Jun 29, 2012
+                <% end %>
+                </div>
               </h4>
               <p class="discussion-item-description">
               <%= d.content %>
