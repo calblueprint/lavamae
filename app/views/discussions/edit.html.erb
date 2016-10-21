@@ -1,18 +1,16 @@
 <section class="discussion">
-<%= form_for @discussion, url: discussion_path(@discussion), method: :put do |d| %>
+  <%= form_for @discussion, url: discussion_path(@discussion), method: :put do |d| %>
 
-<div>
-	<%= d.label :title %>
-	<br>
-	<%= d.text_field :title, value: @discussion.title %>
-</div>
+  <div>
+  	<%= d.label :title %>
+  	<%= d.text_field :title, value: @discussion.title %>
+  </div>
 
-<p>
-	<%= d.label :body %>
-	<br>
-	<%= d.text_area :content, value: @discussion.content%>
-</p>
+  <p>
+  	<%= d.label :body %>
+  	<%= d.text_area :content, value: @discussion.content%>
+  </p>
 
-<%= d.submit "Confirm Update"%>
-<% end %>
+  <%= d.submit "Confirm Update"%>
+  <% end %>
 </section>

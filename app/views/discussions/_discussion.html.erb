@@ -2,9 +2,12 @@
   <div class="row">
     <h2 class="discussion-title"><%= @discussion.title %></h2>
     <p class="discussion-description wordwrap"><%= @discussion.content %></p>
-  <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
-  <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete, class: 'btn-blue btn' %>
+    <% if current_user and current_user == discussion.user %>
+      <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
+      <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete, class: 'btn-blue btn' %>
+    <% end %>
   </div>
+
   <div class="user-action row">
     <div class="action-container pull-left">
       <i class="upvote-button fa fa-angle-up fa-lg"></i>
@@ -22,8 +25,13 @@
   </div>
 
   <div class="answer-form-container row">
-    <h4 class="answer-form-header">Post a Reply</h4>
-    <%= render 'responses/form' %>
+    <% if current_user %>
+      <h4 class="answer-form-header">Post a Reply</h4>
+      <%= render 'responses/form' %>
+    <% else %>
+      <h4 class="answer-form-header">Want to Add a Discussion or Response?</h4>
+      <button class="btn btn-blue">Register</button>
+    <% end %>
   </div>
 
   <% @responses.each do |r| %>

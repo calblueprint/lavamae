@@ -1,17 +1,17 @@
 <section class="discussion">
-<%= form_for @discussion, url: discussions_path do |f| %>
-	<!-- <head> New Discussion Form</head> -->
+  <%= form_for @discussion, url: discussions_path do |f| %>
+  	<!-- <head> New Discussion Form</head> -->
 
-<%= f.label :title %>
-<br>
-<%= f.text_field :title %>
-
-<p>
-  <%= f.label :body %>
+  <%= f.label :title %>
   <br>
-  <%= f.text_area :content %>
-</p>
+  <%= f.text_field :title %>
 
-<%= f.submit %>
-<% end %>
+  <p>
+    <%= f.label :body %>
+    <br>
+    <%= f.text_area :content %>
+  </p>
+
+  <%= f.submit %>
+  <% end %>
 </section>

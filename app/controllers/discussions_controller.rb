@@ -3,11 +3,11 @@ class DiscussionsController < ApplicationController
   before_action :get_discussion, only: [:edit, :update, :destroy]
 
   def index
-  	@discussions = Discussion.all.sort_by &:created_at
+  	@discussions = Discussion.all.order('created_at DESC')
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
     else
-      @discussion = Discussion.first
+      @discussion = Discussion.last
     end
     unless @discussion.nil?
       @responses = @discussion.responses.sort_by &:created_at
@@ -17,6 +17,7 @@ class DiscussionsController < ApplicationController
   def create
   	discussion = Discussion.new(discussion_params)
     discussion.score = 0
+    discussion.user_id = current_user.id
   	discussion.save
   	redirect_to discussions_path
   end
@@ -26,7 +27,7 @@ class DiscussionsController < ApplicationController
   end
 
   def edit
-  	# same concept as new/create
+
   end
 
   def update
@@ -35,14 +36,13 @@ class DiscussionsController < ApplicationController
   end
 
   def destroy
-  	#called in before_action
   	@discussion.destroy
   	redirect_to discussions_path
   end
 
   private
   	def discussion_params
-  		params.require(:discussion).permit(:title, :content)  # return {content: "stuff", title: "stuff"}
+  		params.require(:discussion).permit(:title, :content)
   	end
 
   	def get_discussion

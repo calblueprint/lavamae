@@ -6,6 +6,7 @@ class ResponsesController < ApplicationController
   def create
     response = Response.new(response_params)
     response.discussion_id = @discussion.id
+    response.user_id = current_user.id
     if response.save
       redirect_to discussions_path(discussion_id: @discussion.id)
     else
