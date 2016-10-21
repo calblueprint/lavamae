@@ -9,11 +9,25 @@
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent", :method => :delete %>
           </li>
         <%else%>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Discussions</button>
+            </li>
+          <% end %>
           <li class="nav-item">
-          <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent", :method => :get %>
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
           <li class="nav-item">
             <%= react_component('LoginModal') %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent", :method => :get %>
           </li>
         <%end%>
       </ul>
@@ -31,11 +45,25 @@
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent", :method => :delete %>
           </li>
         <%else%>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+            </li>
+          <% end %>
           <li class="nav-item">
-            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent", :method => :get %>
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
           <li class="nav-item">
             <%= react_component('LoginModal') %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent", :method => :get %>
           </li>
         <%end%>
       </ul>

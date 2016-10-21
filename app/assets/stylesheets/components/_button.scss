@@ -5,7 +5,7 @@
   color: white;
   display: inline-block;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   outline: none;
   padding: 8px 20px;
   text-transform: uppercase;
@@ -52,4 +52,28 @@
   &:hover {
     background: $blue-light-20;
   }
+}
+
+.btn-signup {
+  background: white;
+  color: $blue-light;
+}
+
+.btn-login {
+  border: 1px solid white;
+  margin-right: 10px;
+}
+
+.btn-nav {
+  font-size: 12px;
+  padding: 8px 15px;
+
+   &:hover {
+     box-shadow: none;
+   }
+}
+
+.btn-nav-selected {
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.2);
 }
