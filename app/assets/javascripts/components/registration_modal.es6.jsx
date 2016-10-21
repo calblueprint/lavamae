@@ -6,16 +6,13 @@ class RegistrationModal extends React.Component {
   constructor(props) {
     super(props);
     this._handleChange = this._handleChange.bind(this);
-    this._validateFields = this._validateFields.bind(this);
     this._success = this._success.bind(this);
-    this._error = this._error.bind(this);
     this._toLogin = this._toLogin.bind(this);
     this._attemptRegistration = this._attemptRegistration.bind(this);
     this._renderInput = this._renderInput.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
     this.state = {
-      valid: true,
       map_checked: false,
       countries: this.props.countries || [],
       country: this.props.countries[0] || "",
@@ -26,66 +23,10 @@ class RegistrationModal extends React.Component {
     this.setState({ [$(e.target).attr("name")] : $(e.target).val() });
   }
 
-  _validateFields() {
-    if (!this.state.first_name) {
-      this._error("First name can't be blank");
-      this.state.valid = false;
-    }
-
-    if (!this.state.last_name) {
-      this._error("Last name can't be blank");
-      this.state.valid = false;
-    }
-
-    if (!this.state.email) {
-      this._error("Email can't be blank");
-      this.state.valid = false;
-    } else {
-      var parts = this.state.email.split("@");
-      if (parts.length == 1) {
-        this._error("Email is invalid. Missing an '@'.");
-        this.state.valid = false;
-      } else if (parts.length > 2) {
-        this._error("Email is invalid.");
-        this.state.valid = false;
-      } else if ((parts[0].length == 0) || (parts[1].length == 0)) {
-        this._error("Email is incomplete");
-        this.state.valid = false;
-      }
-    }
-
-    if (!this.state.password) {
-      this._error("Password can't be blank");
-      this.state.valid = false;
-    } else if (this.state.password.length < 8) {
-      this._error("Password is too short (minimum is 8 characters)");
-      this.state.valid = false;
-    } else if (this.state.password != this.state.password_confirmation) {
-      this._error("Password confirmation doesn't match password");
-      this.state.valid = false;
-    }
-
-    if (this.state.map_checked) {
-      if(!this.state.city) {
-        this._error("City can't be blank. Needed to place pin on map.");
-        this.state.valid = false;
-      }
-      if (!this.state.country) {
-        this._error("Country can't be blank. Needed to place pin on map.");
-        this.state.valid = false;
-      }
-    }
-  }
-
   _success(msg) {
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Sign up successful!");
     window.location = "/";
-  }
-
-  _error(msg) {
-    toastr.options.positionClass = 'toast-bottom-right';
-    toastr.error(msg);
   }
 
   _toLogin() {
@@ -93,25 +34,20 @@ class RegistrationModal extends React.Component {
   }
 
   _attemptRegistration(e) {
-    this._validateFields();
-    if (this.state.valid) {
-      const signupFields = {
-        user: {
-          first_name: this.state.first_name,
-          last_name: this.state.last_name,
-          organization: this.state.organization,
-          city: this.state.city,
-          country: this.state.country,
-          on_map: this.state.map_checked,
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation,
-        }
-      };
-      APIRequester.post("/users", signupFields, this._success);
-    } else {
-      this.state.valid = true;
-    }
+    const signupFields = {
+      user: {
+        first_name: this.state.first_name,
+        last_name: this.state.last_name,
+        organization: this.state.organization,
+        city: this.state.city,
+        country: this.state.country,
+        on_map: this.state.map_checked,
+        email: this.state.email,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation,
+      }
+    };
+    APIRequester.post("/sign_up", signupFields, this._success);
   }
 
   _renderInput(name, label, type, placeholder) {
