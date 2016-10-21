@@ -27,7 +27,7 @@ class DiscussionsController < ApplicationController
   end
 
   def edit
-  	# same concept as new/create
+
   end
 
   def update
@@ -36,14 +36,13 @@ class DiscussionsController < ApplicationController
   end
 
   def destroy
-  	#called in before_action
   	@discussion.destroy
   	redirect_to discussions_path
   end
 
   private
   	def discussion_params
-  		params.require(:discussion).permit(:title, :content)  # return {content: "stuff", title: "stuff"}
+  		params.require(:discussion).permit(:title, :content)
   	end
 
   	def get_discussion
