@@ -17,7 +17,10 @@
     border: 2px solid $blue-light;
     outline: none;
   }
+    .discussion-item-title {
+        overflow: hidden;
 
+    }
   .discussion-item-description {
     overflow: hidden;
     display: -webkit-box;

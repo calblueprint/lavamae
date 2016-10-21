@@ -7,7 +7,7 @@ class DiscussionsController < ApplicationController
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
     else
-      @discussion = Discussion.first
+      @discussion = Discussion.last
     end
     unless @discussion.nil?
       @responses = @discussion.responses.sort_by &:created_at
