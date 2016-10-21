@@ -22,7 +22,6 @@ class Requester {
             error: (xhr, status, error) => {
                 toastr.options.positionClass = 'toast-bottom-right';
                 onError(xhr, status, error);
-                // toastr.error(xhr.responseText);
             }
         }));
     }
