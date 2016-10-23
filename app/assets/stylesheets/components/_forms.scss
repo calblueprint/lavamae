@@ -18,6 +18,10 @@ input {
   margin-top: 10px;
 }
 
+.input-checkbox {
+  @include appearance(checkbox);
+}
+
 label {
   font-family: inherit;
   margin-top: 10px;
@@ -42,3 +46,4 @@ textarea {
     border: 1px solid $blue-light;
   }
 }
+

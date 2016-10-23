@@ -2,6 +2,7 @@ class Requester {
 
     _postErrorHandler(xhr, status, error) {
        JSON.parse(xhr.responseText).errors.forEach((error) => {
+            toastr.options.positionClass = 'toast-bottom-right';
             toastr.error(error);
         });
     }
@@ -19,8 +20,12 @@ class Requester {
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
-                toastr.options.positionClass = 'toast-bottom-right';
-                toastr.error(xhr.responseText);
+                if (xhr.responseJSON) {
+                    onError(xhr, status, error);
+                } else {
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.error(xhr.responseText);
+                }
             }
         }));
     }

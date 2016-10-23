@@ -10,7 +10,7 @@
           </li>
         <%else%>
           <li class="nav-item">
-            <%= react_component('SignupModal') %>
+          <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent", :method => :get %>
           </li>
           <li class="nav-item">
             <%= react_component('LoginModal') %>
@@ -32,7 +32,7 @@
           </li>
         <%else%>
           <li class="nav-item">
-            <%= react_component('SignupModal') %>
+            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent", :method => :get %>
           </li>
           <li class="nav-item">
             <%= react_component('LoginModal') %>

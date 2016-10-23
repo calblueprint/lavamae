@@ -19,6 +19,7 @@ gem 'pg'
 gem 'pg_search', '1.0.5'
 
 # Core
+gem 'city-state'
 gem 'cancancan', '1.15.0'
 gem 'active_model_serializers', '0.9.4'
 gem 'devise', '3.5.2'

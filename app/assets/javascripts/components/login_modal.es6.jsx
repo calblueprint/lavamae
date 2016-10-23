@@ -10,6 +10,7 @@ class LoginModal extends React.Component {
     this._handleLogin = this._handleLogin.bind(this);
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
+    this._handleSignUp = this._handleSignUp.bind(this);
     this.state = {
       showModal: false,
       email: "",
@@ -52,15 +53,15 @@ class LoginModal extends React.Component {
     APIRequester.post("/users/sign_in", loginFields, this._success);
   }
 
+  _handleSignUp(e) {
+    window.location = "/sign_up";
+  }
+
   render () {
     return (
       <div>
         <button className="btn btn-transparent" onClick={this._openModal}>Log In</button>
-        <Modal
-          className="modal"
-          show={this.state.showModal}
-          onHide={this._closeModal}
-        >
+        <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Log In</Modal.Title>
           </Modal.Header>
@@ -76,6 +77,7 @@ class LoginModal extends React.Component {
               </div>
             </Modal.Body>
             <Modal.Footer>
+              <button className="btn btn-blue" type="button" onClick={this._handleSignUp}>Sign Up</button>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
               <button className="btn btn-blue modal-btn" type="submit">Log In</button>
             </Modal.Footer>
