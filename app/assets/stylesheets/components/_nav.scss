@@ -38,3 +38,52 @@
 .nav-home {
   background: transparent;
 }
+
+// Mobile Menu
+
+.mobile {
+  display: none;
+  position: fixed;
+  width: 100%;
+  top: 0;
+
+  div {
+    display: none;
+  }
+
+  button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    border: 0;
+    text-indent: 200%;
+    overflow: hidden;
+    background: rgba(255,255,255,.8) url(http://i.imgur.com/vKRaKDX.png) center no-repeat;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    background-size: 80%;
+    width: 30px;
+    height: 30px;
+    outline: none;
+    transition: all 400ms ease;
+
+    &.expanded {
+      transform: rotate(90deg);
+      background-color: transparent;
+      border: 0;
+    }
+  }
+  
+  li {
+    display: block;
+  }
+}
+
+@media (max-width: 800px) {
+  .mobile {
+    display: block;
+  }
+  .desktop {
+    display: none;
+  }
+}

@@ -1,12 +1,26 @@
 <!-- IF on home page, make nav transparent -->
 <% if current_page?(root_path) %>
-  <div class="nav-home">
+  <div class="nav-home desktop">
     <div class="container">
       <a href="/" class="logo"></a>
       <ul class="nav-items-container">
         <%if user_signed_in? %>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Discussions</button>
+            </li>
+          <% end %>
           <li class="nav-item">
-            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent", :method => :delete %>
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
         <%else%>
           <%= link_to discussions_path do %>
@@ -33,6 +47,57 @@
       </ul>
     </div>
   </div>
+  <!-- MOBILE NAV -->
+  <div class="nav-home mobile">
+    <div class="container">
+      <a href="/" class="logo"></a>
+      <ul class="nav-items-container">
+        <button>Toggle</button>
+        <div>
+        <%if user_signed_in? %>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Discussions</button>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
+          </li>
+        <%else%>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Discussions</button>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+          <li class="nav-item">
+            <%= react_component('LoginModal') %>
+          </li>
+          <li class="nav-item">
+            <%= react_component('SignupModal') %>
+          </li>
+        <%end%>
+        </div>
+      </ul>
+    </div>
+  </div>
 
 <!-- ELSE make nav blue -->
 <% else %>
@@ -41,8 +106,22 @@
       <a href="/" class="logo"></a>
       <ul class="nav-items-container">
         <%if user_signed_in? %>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+            </li>
+          <% end %>
           <li class="nav-item">
-            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent", :method => :delete %>
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
         <%else%>
           <%= link_to discussions_path do %>
@@ -70,3 +149,9 @@
     </div>
   </div>
 <% end %>
+<!-- MOBILE NAV JS -->
+<script>
+  $('button').click(function() {
+    $(this).toggleClass('expanded').siblings('div').slideToggle();
+  });
+</script>
