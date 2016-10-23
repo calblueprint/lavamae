@@ -20,7 +20,6 @@ class Requester {
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
-                toastr.options.positionClass = 'toast-bottom-right';
                 onError(xhr, status, error);
             }
         }));

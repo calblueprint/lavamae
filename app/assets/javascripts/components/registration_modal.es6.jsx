@@ -7,6 +7,7 @@ class RegistrationModal extends React.Component {
     super(props);
     this._handleChange = this._handleChange.bind(this);
     this._success = this._success.bind(this);
+    this._error = this._error.bind(this);
     this._toLogin = this._toLogin.bind(this);
     this._attemptRegistration = this._attemptRegistration.bind(this);
     this._renderInput = this._renderInput.bind(this);
@@ -29,11 +30,20 @@ class RegistrationModal extends React.Component {
     window.location = "/";
   }
 
+  _error(msg) {
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.error(msg);
+  }
+
   _toLogin() {
     window.location = "/users/sign_in";
   }
 
   _attemptRegistration(e) {
+    if (this.state.map_checked && !this.state.city) {
+      this._error("City can't be blank");
+    }
+
     const signupFields = {
       user: {
         first_name: this.state.first_name,
