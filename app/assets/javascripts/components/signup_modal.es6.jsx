@@ -49,7 +49,7 @@ class SignupModal extends React.Component {
   render () {
     return (
       <div>
-        <button className="btn btn-transparent btn-signup" onClick={this._openModal}>Sign Up</button>
+        <button className="btn btn-transparent" onClick={this._openModal}>Sign Up</button>
         <Modal
           className="modal"
           show={this.state.showModal}

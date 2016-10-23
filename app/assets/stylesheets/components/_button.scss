@@ -39,11 +39,6 @@
   }
 }
 
-.btn-forum-login {
-  padding: 0px;
-  border: 0px;
-}
-
 .btn-outline {
   background: transparent;
   color: $blue-light;
@@ -54,26 +49,30 @@
   }
 }
 
-.btn-signup {
-  background: white;
-  color: $blue-light;
-  margin-left: 10px;
+.btn-nav {
+  font-size: 12px;
+}
+
+.btn-nav-selected {
+  background: $white-20;
+  font-weight: 700;
 }
 
 .btn-login {
   border: 1px solid white;
 }
 
-.btn-nav {
-  font-size: 12px;
-  padding: 8px 15px;
+.btn-signup {
+  background: white;
+  color: $blue-light;
+  margin-left: 10px;
+  border: 1px solid white;
 
-   &:hover {
-     box-shadow: none;
-   }
+  &:focus {
+    border: 1px solid white;
+  }
 }
 
-.btn-nav-selected {
-  font-weight: 700;
-  background: rgba(255, 255, 255, 0.2);
+.btn-forum-login {
+  background: $blue-light;
 }
