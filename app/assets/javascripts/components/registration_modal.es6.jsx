@@ -91,15 +91,15 @@ class RegistrationModal extends React.Component {
           <div className="row">
           <h3>Create an Account</h3>
             <form>
-              { this._renderInput("first_name", "First Name", "text", "Baby") }
-              { this._renderInput("last_name", "Last Name", "text", "Panda") }
-              { this._renderInput("email", "Email", "text", "panda@lavabae.org") }
-              { this._renderInput("password", "Password", "password", "") }
-              { this._renderInput("password_confirmation", "Confirm Password", "password", "") }
-              { this._renderInput("organization", "Organization", "text", "lavabae++") }
-              { this._renderInput("city", "City", "text", "Berkeley") }
+              <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "Baby") }</div>
+              <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Panda") }</div>
+              <div className="input-field">{ this._renderInput("email", "Email", "text", "panda@lavabae.org") }</div>
+              <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
+              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
+              <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
+              <div className="input-field">{ this._renderInput("city", "City", "text", "Berkeley") }</div>
 
-              <div>
+              <div className="input-field">
                 <label>
                   Country:
                   <select name="country" defaultValue="None" onChange={this._handleSelect} >
@@ -108,7 +108,7 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
 
-              <div>
+              <div className="input-field">
                 <label>
                   Appear on map:
                   <input type="checkbox"
