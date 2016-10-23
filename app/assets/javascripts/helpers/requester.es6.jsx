@@ -20,7 +20,12 @@ class Requester {
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
-                onError(xhr, status, error);
+                if (xhr.responseJSON) {
+                    onError(xhr, status, error);
+                } else {
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.error(xhr.responseText);
+                }
             }
         }));
     }

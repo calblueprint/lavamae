@@ -30,7 +30,7 @@
       <%= render 'responses/form' %>
     <% else %>
       <h4 class="answer-form-header">Want to Add a Discussion or Response?</h4>
-      <button class="btn btn-blue">Register</button>
+      <div class="btn btn-blue btn-forum-login"><%= react_component('LoginModal') %></div>
     <% end %>
   </div>
 
