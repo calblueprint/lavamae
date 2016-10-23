@@ -5,7 +5,7 @@
   color: white;
   display: inline-block;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
   outline: none;
   padding: 8px 20px;
   text-transform: uppercase;
@@ -39,11 +39,6 @@
   }
 }
 
-.btn-forum-login {
-  padding: 0px;
-  border: 0px;
-}
-
 .btn-outline {
   background: transparent;
   color: $blue-light;
@@ -52,4 +47,36 @@
   &:hover {
     background: $blue-light-20;
   }
+}
+
+.btn-nav {
+  font-size: 12px;
+}
+
+.btn-nav-selected {
+  background: $white-20;
+  font-weight: 700;
+}
+
+.btn-login {
+  border: 1px solid white;
+
+  &:focus {
+    border: 1px solid white;
+  }
+}
+
+.btn-signup {
+  background: white;
+  color: $blue-light;
+  margin-left: 10px;
+  border: 1px solid white;
+
+  &:focus {
+    border: 1px solid white;
+  }
+}
+
+.btn-forum-login {
+  background: $blue-light;
 }

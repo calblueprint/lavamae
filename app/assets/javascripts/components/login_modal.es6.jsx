@@ -1,3 +1,7 @@
+/**
+* @props style - button style
+*/
+
 var Modal = ReactBootstrap.Modal;
 
 class LoginModal extends React.Component {
@@ -14,7 +18,8 @@ class LoginModal extends React.Component {
     this.state = {
       showModal: false,
       email: "",
-      password: ""
+      password: "",
+      btnStyle: this.props.style
     };
   }
 
@@ -60,7 +65,7 @@ class LoginModal extends React.Component {
   render () {
     return (
       <div>
-        <button className="btn btn-transparent" onClick={this._openModal}>Log In</button>
+        <button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Log In</Modal.Title>
@@ -77,7 +82,7 @@ class LoginModal extends React.Component {
               </div>
             </Modal.Body>
             <Modal.Footer>
-              <button className="btn btn-blue" type="button" onClick={this._handleSignUp}>Sign Up</button>
+              <button className="btn btn-blue pull-left" type="button" onClick={this._handleSignUp}>Sign Up</button>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
               <button className="btn btn-blue modal-btn" type="submit">Log In</button>
             </Modal.Footer>
@@ -87,3 +92,7 @@ class LoginModal extends React.Component {
     );
   }
 }
+
+LoginModal.propTypes = {
+  style: React.PropTypes.string.isRequired
+};
