@@ -94,5 +94,5 @@ class LoginModal extends React.Component {
 }
 
 LoginModal.propTypes = {
-  style: React.PropTypes.string.isRequired,
+  style: React.PropTypes.string.isRequired
 };
