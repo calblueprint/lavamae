@@ -86,10 +86,10 @@ class RegistrationModal extends React.Component {
         });
 
     return (
-      <div>
-        <div>
-          <h1>New Account</h1>
-          </div>
+      <section className="signup">
+        <div className="container signup-container">
+          <div className="row">
+          <h3>Create an Account</h3>
             <form>
               { this._renderInput("first_name", "First Name", "text", "Baby") }
               { this._renderInput("last_name", "Last Name", "text", "Panda") }
@@ -119,13 +119,15 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
 
-              <input name="submit" type="button" value="Create Account"
+              <input className="btn btn-blue" name="submit" type="button" value="Create Account"
                 onClick={this._attemptRegistration} />
             </form>
           <div>
           <a onClick={this._toLogin} >Already have an account?</a>
+          </div>
         </div>
       </div>
+      </section>
     );
   }
 }
