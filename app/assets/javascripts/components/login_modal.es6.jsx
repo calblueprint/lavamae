@@ -1,5 +1,6 @@
 /**
 * @props style - button style
+* @prop redirect - pathname of page to redirect to after login
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -39,7 +40,7 @@ class LoginModal extends React.Component {
     this._closeModal();
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Log-in successful!");
-    window.location = "/";
+    window.location = this.props.redirect;
   }
 
   _error(msg) {
@@ -94,5 +95,6 @@ class LoginModal extends React.Component {
 }
 
 LoginModal.propTypes = {
-  style: React.PropTypes.string.isRequired
+  style: React.PropTypes.string.isRequired,
+  redirect:  React.PropTypes.string.isRequired
 };
