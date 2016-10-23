@@ -60,6 +60,10 @@
 
 .btn-login {
   border: 1px solid white;
+
+  &:focus {
+    border: 1px solid white;
+  }
 }
 
 .btn-signup {
