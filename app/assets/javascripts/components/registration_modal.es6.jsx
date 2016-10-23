@@ -129,3 +129,7 @@ class RegistrationModal extends React.Component {
     );
   }
 }
+
+RegistrationModal.propTypes = {
+    countries: React.PropTypes.array.isRequired
+};

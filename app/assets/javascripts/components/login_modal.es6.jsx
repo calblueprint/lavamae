@@ -39,7 +39,7 @@ class LoginModal extends React.Component {
     this._closeModal();
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Log-in successful!");
-    window.location = "/";
+    window.location = location.pathname;
   }
 
   _error(msg) {
