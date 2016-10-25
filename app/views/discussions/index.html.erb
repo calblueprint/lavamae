@@ -3,7 +3,7 @@
     <div class="discussion-header row">
       <h3 class="pull-left">DISCUSSIONS</h3>
       <% if current_user %>
-        <%= button_to "Create Discussion", new_discussion_path, class: 'btn btn-blue pull-right' %>
+        <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
       <% end %>
     </div>
     <div class="discussion-search row">
