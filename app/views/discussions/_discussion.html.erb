@@ -14,12 +14,12 @@
       <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
     </div>
     <div class="user-container pull-right">
-      <div class="user-picture">
-        <a href=""><img src="/assets/grace.jpg" /></a>
-      </div>
       <div class="name-date">
         <a href=""><div class="user-name">Grace Noh</div></a>
         <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
+      </div>
+      <div class="user-picture">
+        <a href=""><img src="/assets/grace.jpg" /></a>
       </div>
     </div>
   </div>

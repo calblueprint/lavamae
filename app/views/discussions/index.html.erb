@@ -1,5 +1,11 @@
 <section class="discussion">
   <div class="container discussion-container">
+    <div class="discussion-header row">
+      <h3 class="pull-left">DISCUSSIONS</h3>
+      <% if current_user %>
+        <%= button_to "Create Discussion", new_discussion_path, class: 'btn btn-blue pull-right' %>
+      <% end %>
+    </div>
     <div class="discussion-search row">
       <form>
         <input class="discussion-search-input" placeholder="Search discussion threads..."
@@ -34,9 +40,6 @@
           <%= render @discussion %>
       <% end %>
       </div>
-      <% if current_user %>
-        <%= link_to "Create Discussion", new_discussion_path %>
-      <% end %>
     </div>
   </div>
 </section>
