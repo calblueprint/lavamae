@@ -69,6 +69,14 @@
   }
 }
 
+.btn-destroy {
+  color: $red;
+
+  &:hover {
+    background: $red-20;
+  }
+}
+
 .btn-nav {
   font-size: 12px;
 }

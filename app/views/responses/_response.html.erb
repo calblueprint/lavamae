@@ -13,9 +13,11 @@
   </div>
 </div>
 
-<% if current_user and current_user == response.user %>
-  <%= button_to 'Edit', edit_discussion_response_path(response.discussion_id, response),
-  class: 'btn btn-action btn-sm pull-left' %>
-  <%= button_to 'Delete', discussion_response_path(response.discussion_id, response),
-  method: :delete, class: 'btn btn-action btn-sm pull-left' %>
-<% end %>
+<div class="response-actions row">
+  <% if current_user and current_user == response.user %>
+    <%= button_to 'Delete', discussion_response_path(response.discussion_id, response),
+    method: :delete, class: 'btn btn-action btn-sm btn-destroy pull-right' %>
+    <%= button_to 'Edit', edit_discussion_response_path(response.discussion_id, response),
+    class: 'btn btn-action btn-sm pull-right' %>
+  <% end %>
+</div>
