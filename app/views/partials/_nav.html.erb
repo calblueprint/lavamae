@@ -16,9 +16,11 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Map</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
@@ -34,9 +36,11 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Map</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
@@ -66,9 +70,11 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Map</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
@@ -84,9 +90,11 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Map</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
