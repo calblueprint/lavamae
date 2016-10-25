@@ -1,0 +1,29 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<%= link_to "New Document", new_document_path, class: "btn btn-primary" %>
+<br />
+<br />
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Download Link</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @documents.each do |document| %>
+      <tr>
+        <td><%= document.title %></td>
+        <td><%= document.description %></td>
+        <td><%= link_to "Download Document", document.attachment_url %></td>
+        <td><%= button_to "Delete",  document, method: :delete, class: "btn btn-danger", confirm: "Are you sure that you wish to delete #{document.title}?" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
