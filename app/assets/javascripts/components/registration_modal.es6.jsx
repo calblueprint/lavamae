@@ -63,7 +63,7 @@ class RegistrationModal extends React.Component {
   _renderInput(name, label, type, placeholder) {
     return (
       <div>
-        <label htmlFor={name}>{label}:</label>
+        <label htmlFor={name}>{label}</label>
         <input onChange={this._handleChange} name={name}
           type={type} placeholder={placeholder} />
       </div>
@@ -101,7 +101,7 @@ class RegistrationModal extends React.Component {
 
               <div className="input-field">
                 <label>
-                  Country:
+                  Country
                   <select name="country" defaultValue="None" onChange={this._handleSelect} >
                     {countryOptions}
                   </select>
@@ -109,21 +109,21 @@ class RegistrationModal extends React.Component {
               </div>
 
               <div className="input-field">
-                <label>
-                  Appear on map:
+                <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.map_checked}
                     onChange={this._handleCheckboxChange}
                     className="input-checkbox"/>
+                  <div className="control__indicator"></div>
                 </label>
               </div>
 
-              <input className="btn btn-blue" name="submit" type="button" value="Create Account"
-                onClick={this._attemptRegistration} />
+              <button className="btn btn-blue" name="submit" type="button"
+                onClick={this._attemptRegistration}>Create Account</button>
             </form>
-          <div>
-          <a onClick={this._toLogin} >Already have an account?</a>
+          <div className="login-link">
+            <a onClick={this._toLogin} >Already have an account?</a>
           </div>
         </div>
       </div>
