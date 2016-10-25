@@ -13,4 +13,6 @@ Rails.application.routes.draw do
   resources :discussions do
     resources :responses
   end
+
+  resources :documents, only: [:index, :new, :create, :destroy]
 end

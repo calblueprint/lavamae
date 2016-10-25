@@ -19,9 +19,11 @@
               <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
@@ -45,6 +47,7 @@
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
+<<<<<<< HEAD
           <li class="nav-item">
             <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
           </li>
@@ -106,6 +109,13 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
+=======
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
+>>>>>>> added basic document uploading
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
@@ -134,6 +144,7 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
+<<<<<<< HEAD
           <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav
@@ -143,6 +154,16 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
+=======
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
+>>>>>>> added basic document uploading
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
@@ -155,6 +176,7 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
+<<<<<<< HEAD
           <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav
@@ -164,6 +186,16 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
+=======
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <%= link_to documents_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
+>>>>>>> added basic document uploading
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
