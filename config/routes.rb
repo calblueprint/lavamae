@@ -14,6 +14,5 @@ Rails.application.routes.draw do
     resources :responses
   end
 
-  resources :resources
-  resources :resource_topics
+  resources :documents, only: [:index, :new, :create, :destroy]
 end

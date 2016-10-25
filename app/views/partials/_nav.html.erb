@@ -16,10 +16,10 @@
           </li>
           <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
+                <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <%= link_to resource_topics_path do %>
+          <%= link_to documents_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Resources</button>
             </li>
@@ -105,10 +105,7 @@
               <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
-          <%= link_to resource_topics_path do %>
+          <%= link_to documents_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Resources</button>
             </li>
@@ -147,7 +144,7 @@
               <%= 'btn-nav-selected' if current_page?(static_map_path) %>">Map</button>
             </li>
           <% end %>
-          <%= link_to resource_topics_path do %>
+          <%= link_to documents_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Resources</button>
             </li>
@@ -170,7 +167,7 @@
               <%= 'btn-nav-selected' if current_page?(static_map_path) %>">Map</button>
             </li>
           <% end %>
-          <%= link_to resource_topics_path do %>
+          <%= link_to documents_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Resources</button>
             </li>
