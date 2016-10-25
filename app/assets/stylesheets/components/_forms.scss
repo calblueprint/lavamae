@@ -18,10 +18,6 @@ input {
   margin-top: 10px;
 }
 
-.input-checkbox {
-  @include appearance(checkbox);
-}
-
 label {
   font-family: inherit;
   margin-top: 10px;
@@ -47,3 +43,84 @@ textarea {
   }
 }
 
+select {
+  @include appearance(none);
+  box-sizing: border-box;
+  display: block;
+  border: 1px solid $grey;
+  border-radius: 2px;
+  background: white;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 8px;
+
+  &:focus, &:active {
+    outline: none;
+    border: 1px solid $blue-light;
+  }
+}
+
+select::after {
+  font-family: FontAwesome;
+  content: "\f0d7";
+  color: $grey;
+  display: inline-block;
+  position: absolute;
+}
+
+// Controlling Checkbox Styling
+.control {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  padding-top: 3px;
+  margin: 15px 0;
+  cursor: pointer;
+  -webkit-user-select: none;  /* Disable Text Selection Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;      /* IE 10+ */
+  user-select: none;          /* Likely future */
+}
+.control input {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+.control__indicator {
+  position: absolute;
+  top: 2px;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background: white;
+  border: 2px solid $grey;
+  border-radius: 2px;
+}
+
+.control:hover input ~ .control__indicator,
+.control input:focus ~ .control__indicator {
+  border: 2px solid $blue-light;
+}
+.control input:checked ~ .control__indicator, .control:hover input:not([disabled]):checked ~ .control__indicator,
+.control input:checked:focus ~ .control__indicator {
+  background: $blue-light;
+  border: 2px solid $blue-light;
+}
+
+.control__indicator:after {
+  content: '';
+  position: absolute;
+  display: none;
+}
+.control input:checked ~ .control__indicator:after {
+  display: block;
+}
+.control--checkbox .control__indicator:after {
+  left: 7px;
+  top: 2px;
+  width: 3px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}

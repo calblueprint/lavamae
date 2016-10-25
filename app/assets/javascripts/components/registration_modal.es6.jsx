@@ -63,7 +63,7 @@ class RegistrationModal extends React.Component {
   _renderInput(name, label, type, placeholder) {
     return (
       <div>
-        <label htmlFor={name}>{label}:</label>
+        <label htmlFor={name}>{label}</label>
         <input onChange={this._handleChange} name={name}
           type={type} placeholder={placeholder} />
       </div>
@@ -86,46 +86,48 @@ class RegistrationModal extends React.Component {
         });
 
     return (
-      <div>
-        <div>
-          <h1>New Account</h1>
-          </div>
+      <section className="signup">
+        <div className="container signup-container">
+          <div className="row">
+          <h3>Create an Account</h3>
             <form>
-              { this._renderInput("first_name", "First Name", "text", "Baby") }
-              { this._renderInput("last_name", "Last Name", "text", "Panda") }
-              { this._renderInput("email", "Email", "text", "panda@lavabae.org") }
-              { this._renderInput("password", "Password", "password", "") }
-              { this._renderInput("password_confirmation", "Confirm Password", "password", "") }
-              { this._renderInput("organization", "Organization", "text", "lavabae++") }
-              { this._renderInput("city", "City", "text", "Berkeley") }
+              <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "Baby") }</div>
+              <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Panda") }</div>
+              <div className="input-field">{ this._renderInput("email", "Email", "text", "panda@lavabae.org") }</div>
+              <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
+              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
+              <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
+              <div className="input-field">{ this._renderInput("city", "City", "text", "Berkeley") }</div>
 
-              <div>
+              <div className="input-field">
                 <label>
-                  Country:
+                  Country
                   <select name="country" defaultValue="None" onChange={this._handleSelect} >
                     {countryOptions}
                   </select>
                 </label>
               </div>
 
-              <div>
-                <label>
-                  Appear on map:
+              <div className="input-field">
+                <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.map_checked}
                     onChange={this._handleCheckboxChange}
                     className="input-checkbox"/>
+                  <div className="control__indicator"></div>
                 </label>
               </div>
 
-              <input name="submit" type="button" value="Create Account"
-                onClick={this._attemptRegistration} />
+              <button className="btn btn-blue" name="submit" type="button"
+                onClick={this._attemptRegistration}>Create Account</button>
             </form>
-          <div>
-          <a onClick={this._toLogin} >Already have an account?</a>
+          <div className="login-link">
+            <a onClick={this._toLogin} >Already have an account?</a>
+          </div>
         </div>
       </div>
+      </section>
     );
   }
 }
