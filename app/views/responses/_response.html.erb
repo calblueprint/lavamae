@@ -1,20 +1,23 @@
-<div class="answer-container row">
-  <div class="answer-text pull-left wordwrap">
+<div class="response-container row">
+  <div class="response-text pull-left wordwrap">
   	<%= response.content %>
   </div>
   <div class="user-container pull-right">
-    <div class="user-picture">
-      <a href=""><img src="/assets/grace.jpg" /></a>
-    </div>
     <div class="name-date">
       <a href=""><div class="user-name">Grace Noh</div></a>
       <div class="date"><%= time_ago_in_words(response.created_at) %> ago</div>
     </div>
+    <div class="user-picture">
+      <a href=""><img src="/assets/grace.jpg" /></a>
+    </div>
   </div>
 </div>
 
-<% if current_user and current_user == response.user %>
-  <%= link_to 'Edit Response', edit_discussion_response_path(response.discussion_id, response) %>
-  <%= button_to 'Delete Response', discussion_response_path(response.discussion_id, response), method: :delete %>
-<% end %>
-
+<div class="response-actions row">
+  <% if current_user and current_user == response.user %>
+    <%= button_to 'Delete', discussion_response_path(response.discussion_id, response),
+    method: :delete, class: 'btn btn-action btn-sm btn-destroy pull-right' %>
+    <%= button_to 'Edit', edit_discussion_response_path(response.discussion_id, response),
+    method: :get, class: 'btn btn-action btn-sm pull-right' %>
+  <% end %>
+</div>

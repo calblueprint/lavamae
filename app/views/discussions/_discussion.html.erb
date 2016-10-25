@@ -3,8 +3,10 @@
     <h2 class="discussion-title"><%= @discussion.title %></h2>
     <p class="discussion-description wordwrap"><%= @discussion.content %></p>
     <% if current_user and current_user == discussion.user %>
-      <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
-      <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete, class: 'btn-blue btn' %>
+      <%= button_to "Delete", discussion_path(@discussion),
+      method: :delete, class: 'btn btn-action btn-sm btn-destroy pull-right' %>
+      <%= button_to "Edit", edit_discussion_path(@discussion),
+      method: :get, class: 'btn btn-action btn-sm pull-right' %>
     <% end %>
   </div>
 
@@ -14,22 +16,22 @@
       <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
     </div>
     <div class="user-container pull-right">
-      <div class="user-picture">
-        <a href=""><img src="/assets/grace.jpg" /></a>
-      </div>
       <div class="name-date">
         <a href=""><div class="user-name">Grace Noh</div></a>
         <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
       </div>
+      <div class="user-picture">
+        <a href=""><img src="/assets/grace.jpg" /></a>
+      </div>
     </div>
   </div>
 
-  <div class="answer-form-container row">
+  <div class="response-form-container row">
     <% if current_user %>
-      <h4 class="answer-form-header">Post a Reply</h4>
+      <h4 class="response-form-header">Post a Reply</h4>
       <%= render 'responses/form' %>
     <% else %>
-      <h4 class="answer-form-header">Want to Add a Discussion or Response?</h4>
+      <h4 class="response-form-header">Want to Add a Discussion or Response?</h4>
       <%= react_component('LoginModal', style: "btn btn-transparent btn-forum-login") %>
     <% end %>
   </div>

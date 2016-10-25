@@ -12,11 +12,17 @@
   letter-spacing: 1px;
   transition: 500ms;
   text-decoration: none;
+  width: auto;
 
   &:active {
     box-shadow: none;
     opacity: 0.8;
   }
+}
+
+.btn-sm {
+  font-size: 10px;
+  padding: 6px 12px;
 }
 
 .btn-transparent {
@@ -46,6 +52,28 @@
 
   &:hover {
     background: $blue-light-20;
+  }
+}
+
+.btn-action {
+  background: transparent;
+  color: $blue-light;
+  border: none;
+
+  &:hover {
+    background: $blue-light-20;
+  }
+
+  &:focus {
+    border: none;
+  }
+}
+
+.btn-destroy {
+  color: $red;
+
+  &:hover {
+    background: $red-20;
   }
 }
 
