@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     post '/sign_up' => 'registrations#create'
   end
 
+  resources :users, only: [:show, :update]
+
   resources :discussions do
     resources :responses
   end
