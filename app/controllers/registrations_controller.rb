@@ -11,7 +11,11 @@ class RegistrationsController < Devise::RegistrationsController
       render_json_message(:ok, message: 'Account created!', to: root_path)
     else
       clean_up_passwords resource
-      render_json_message(:forbidden, errors: resource.errors.full_messages)
+      if resource.on_map && !resource.city
+        render_json_message(:forbidden, errors: resource.errors.full_messages + ["City can't be blank"])
+      else
+        render_json_message(:forbidden, errors: resource.errors.full_messages)
+      end
     end
   end
 

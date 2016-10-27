@@ -40,10 +40,6 @@ class RegistrationModal extends React.Component {
   }
 
   _attemptRegistration(e) {
-    if (this.state.map_checked && !this.state.city) {
-      this._error("City can't be blank");
-    }
-
     const signupFields = {
       user: {
         first_name: this.state.first_name,
