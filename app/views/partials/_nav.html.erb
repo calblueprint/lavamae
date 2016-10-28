@@ -48,6 +48,63 @@
     </div>
   </div>
 
+<% elsif current_page?(discussions_path)%>
+  <div class="nav">
+    <div class="container-lg">
+      <a href="/" class="logo"></a>
+      <div class="discussion-search">
+        <form>
+          <input class="discussion-search-input" placeholder="Search discussion threads..."
+          type="search" name="search">
+          <input class="discussion-search-submit" type="submit" />
+          <span class="discussion-search-icon"></span>
+        </form>
+      </div>
+      <ul class="nav-items-container">
+        <%if user_signed_in? %>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
+          </li>
+        <%else%>
+          <%= link_to discussions_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+            </li>
+          <% end %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Stories</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+          <li class="nav-item">
+            <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+
 <!-- ELSE make nav blue -->
 <% else %>
   <div class="nav">

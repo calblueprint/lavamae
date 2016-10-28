@@ -1,20 +1,11 @@
 <section class="discussion">
-  <div class="container discussion-container">
     <div class="discussion-header row">
-      <h3 class="pull-left">DISCUSSIONS</h3>
       <% if current_user %>
         <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
       <% end %>
     </div>
-    <div class="discussion-search row">
-      <form>
-        <input class="discussion-search-input" placeholder="Search discussion threads..."
-        type="search" name="search">
-        <input class="discussion-search-submit" type="submit" />
-        <span class="discussion-search-icon"></span>
-      </form>
-    </div>
-    <div class="row">
+  <div class="container-lg">
+    <div class="discussion-container row">
       <div class="discussion-item-container col-xs-12 col-md-4">
         <% @discussions.each do |d| %>
           <%= link_to discussions_path(discussion_id: d.id) do %>

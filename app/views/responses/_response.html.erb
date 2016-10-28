@@ -13,6 +13,10 @@
   </div>
 </div>
 
+<div class="action-container pull-left">
+  <i class="upvote-button fa fa-angle-up fa-lg"></i>
+  <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
+</div>
 <div class="response-actions row">
   <% if current_user and current_user == response.user %>
     <%= button_to 'Delete', discussion_response_path(response.discussion_id, response),
