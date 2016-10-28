@@ -52,15 +52,11 @@
   <div class="nav">
     <div class="container-lg">
       <a href="/" class="logo"></a>
-      <div class="discussion-search">
-        <form>
-          <input class="discussion-search-input" placeholder="Search discussion threads..."
-          type="search" name="search">
-          <input class="discussion-search-submit" type="submit" />
-          <span class="discussion-search-icon"></span>
-        </form>
-      </div>
-      <ul class="nav-items-container">
+      <form class="discussion-search">
+        <input class="discussion-search-input" placeholder="Search discussion threads..."
+        type="search" name="search">
+      </form>
+      <ul class="nav-items-container pull-right">
         <%if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">

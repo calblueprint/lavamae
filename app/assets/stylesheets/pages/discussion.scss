@@ -4,11 +4,22 @@
 }
 
 .discussion-header {
+  color: $blue-light;
   padding: 10px 25px;
+  position: relative;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  min-height: 60px;
+}
+
+.form-group {
+  display: inline;
 }
 
 .discussion-search {
-  width: 600px;
+  flex: 1;
+  padding-right: 20px;
 
   .discussion-search-input {
     background: white;
@@ -60,4 +71,61 @@
   height: 100%;
   box-sizing: border-box;
   overflow: scroll;
+}
+
+.discussion-tag-container {
+  flex: 1;
+}
+
+.discussion-tag {
+  font-family: $font-stack;
+  cursor: pointer;
+  border: 2px solid $blue-light;
+  border-radius: 2px;
+  color: $blue-light;
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  outline: none;
+  padding: 7px 15px 5px 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.75px;
+  transition: 500ms;
+  text-decoration: none;
+  width: auto;
+  background: transparent;
+  margin-left: 5px;
+
+  &:hover, &:active, &:focus {
+    background: $blue-light;
+    color: white;
+  }
+}
+
+.discussion-favorite {
+  font-family: $font-stack;
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  color: $blue-light;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  outline: none;
+  padding: 8px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 500ms;
+  text-decoration: none;
+  width: auto;
+  background: transparent;
+  margin-right: 10px;
+
+  &:hover, &:active, &:focus {
+    background: $blue-light-20;
+  }
+
+  &:active, &:focus {
+    font-weight: 700;
+  }
 }

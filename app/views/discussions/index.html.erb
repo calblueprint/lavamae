@@ -1,6 +1,18 @@
 <section class="discussion">
     <div class="discussion-header row">
+      <div class="discussion-tag-container pull-left">
+        <i class="fa fa-tags fa-lg"></i>
+        <button class="discussion-tag">Starting up</button>
+        <button class="discussion-tag">Funding</button>
+        <button class="discussion-tag">Volunteering</button>
+        <button class="discussion-tag">Partnering</button>
+        <button class="discussion-tag">Learn More</button>
+      </div>
       <% if current_user %>
+        <button class="discussion-favorite">
+          <i class="fa fa-star-o fa-lg"></i>
+          Favorites
+        </button>
         <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
       <% end %>
     </div>
@@ -12,7 +24,11 @@
             <div tabindex="4" class="discussion-item row">
               <h4 class="discussion-item-title">
                 <%= d.title %>
-                <div class = "discussion-item-date">
+                <span class="change-icon">
+                  <i class="fa fa-star-o pull-right"></i>
+                  <i class="fa fa-star pull-right"></i>
+                </span>
+                <div class = "discussion-item-date pull-right">
                   <% if d.created_at > Time.now.beginning_of_day %>
                       <%= time_ago_in_words(d.created_at) %> ago
                   <% else %>
