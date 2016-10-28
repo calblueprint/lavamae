@@ -17,6 +17,13 @@ class Requester {
             type: type,
             data: data,
             success: (msg) => {
+                if (msg.message) {
+                    toastr.options.positionClass = 'toast-bottom-right';
+                    toastr.success(msg.message)
+                }
+                if (msg.to) {
+                    window.location.href = msg.to
+                }
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {

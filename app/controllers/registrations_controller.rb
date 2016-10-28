@@ -8,7 +8,7 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     if resource.save
       sign_in(resource_name, resource)
-      render_json_message(:ok, message: 'Account created!', to: root_path)
+      render_json_message(:ok, message: 'Account created!', to: user_path(resource.id))
     else
       clean_up_passwords resource
       render_json_message(:forbidden, errors: resource.errors.full_messages)
