@@ -38,7 +38,7 @@
 
   <% @responses.each do |r| %>
     <%= render r %>
-    <% if !r.equal?(@discussion.responses.last) %>
+    <% if !r.equal?(@responses.last) %>
         <hr class="row"/>
     <% end %>
   <% end %>

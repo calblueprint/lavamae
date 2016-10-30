@@ -1,7 +1,10 @@
 <div class="response-container row">
   <div class="response-text pull-left wordwrap">
   	<%= response.content %>
+    <i class="upvote-button fa fa-angle-up fa-lg"></i>
+    <span class="upvote-count"><%= response.score %> Upvotes</span>
   </div>
+
   <div class="user-container pull-right">
     <div class="name-date">
       <a href=""><div class="user-name">Grace Noh</div></a>

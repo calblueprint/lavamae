@@ -10,7 +10,7 @@ class DiscussionsController < ApplicationController
       @discussion = Discussion.last
     end
     unless @discussion.nil?
-      @responses = @discussion.responses.sort_by &:created_at
+      @responses = @discussion.responses.sort_by{|r| [r.score, r.created_at]}.reverse
     end
   end
 
