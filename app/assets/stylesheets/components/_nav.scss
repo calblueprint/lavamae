@@ -4,6 +4,7 @@
   width: 100%;
   transition: 300ms;
   z-index: 5;
+  color: white;
 
   .container, .container-lg {
     display: flex;
@@ -24,11 +25,6 @@
   .nav-items-container {
     margin-left: auto;
   }
-
-  .nav-item {
-    color: white;
-    display: inline-block;
-  }
 }
 
 // Overriding global nav blue background
@@ -41,6 +37,37 @@
 }
 
 //smartphones, iPhone, portrait 480x320 phones
-@media (min-width:320px) {
-  
+.hamburger {
+  margin-left: auto;
+  padding-right: 10px;
+}
+
+@media screen and (min-width:320px) {
+  .mobile {
+    display: none;
+  }
+
+  .mobile-hidden {
+    display: block;
+  }
+
+  .nav-item {
+    display: block;
+    text-align: right;
+  }
+}
+
+@media screen and (min-width:960px) {
+  .mobile {
+    display: inherit;
+  }
+
+  .mobile-hidden {
+    display: none;
+  }
+
+  .nav-item {
+    display: inline-block;
+  }
+
 }
