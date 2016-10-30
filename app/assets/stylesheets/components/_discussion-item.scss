@@ -1,20 +1,16 @@
 .discussion-item {
-  background: $blue-light-20;
+  background: $blue-sky;
   cursor: pointer;
   color: $blue-dark;
   height: 120px;
   border: 2px solid transparent;
-  border-radius: 2px;
+  border-bottom: 2px solid $blue-light;
   padding: 15px;
   transition: 300ms;
 
-  &:hover {
+  &:hover, &:active, &:focus {
     background: $blue-light;
     color: white;
-  }
-
-  &:focus {
-    border: 2px solid $blue-light;
     outline: none;
   }
 
