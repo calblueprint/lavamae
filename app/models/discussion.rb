@@ -4,9 +4,9 @@ class Discussion < ActiveRecord::Base
 
   def self.search(search)
     if search
-      find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+      where('title LIKE ? or content LIKE ?', "%#{search}%", "%#{search}%")
     else
-      find(:all)
+      self.all
     end
   end
 end
