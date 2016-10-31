@@ -10,6 +10,11 @@
       <form>
         <input class="discussion-search-input" placeholder="Search discussion threads..."
         type="search" name="search">
+
+        <% if @discussion %>
+        <input type="hidden" name="discussion_id" value=<%= @discussion.id%>>
+        <% end %>
+
         <input class="discussion-search-submit" type="submit" />
         <span class="discussion-search-icon"></span>
       </form>
