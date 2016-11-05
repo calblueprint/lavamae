@@ -54,7 +54,11 @@
       <a href="/" class="logo"></a>
       <form class="discussion-search">
         <input class="discussion-search-input" placeholder="Search discussion threads..."
-        type="search" name="search">
+        type="search" name="search" value=<%= params[:search]%>>
+
+        <% if @discussion %>
+        <input type="hidden" name="discussion_id" value=<%= @discussion.id%>>
+        <% end %>
       </form>
       <ul class="nav-items-container pull-right">
         <%if user_signed_in? %>
