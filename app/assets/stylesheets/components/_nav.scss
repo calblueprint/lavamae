@@ -40,34 +40,51 @@
 .hamburger {
   margin-left: auto;
   padding-right: 10px;
+  display: none;
 }
 
-@media screen and (min-width:320px) {
-  .mobile {
-    display: none;
-  }
-
-  .mobile-hidden {
-    display: block;
-  }
-
-  .nav-item {
-    display: block;
+@media screen and (max-width:425px) {
+  .nav-items-container {
+    position: absolute;
+    right: -500px;
+    top: 80px;
     text-align: right;
+    width: 100vw;
+    display: block;
+    background: $blue-light-80;
+    transition: 500ms;
+    height: 100vh;
+
+    .nav-item {
+      width: 100vw;
+      border-bottom: 1px solid $white-20;
+    }
+  }
+
+  .hamburger {
+    display: inherit;
+    float: right;
+  }
+}
+
+@media screen and (max-width:425px) {
+  .nav-items-container {
+    &.responsive {
+      right: 0;
+    }
+
+    .nav-item {
+      padding: 7px;
+
+      .btn-signup, .btn-login {
+        margin-right: 20px;
+      }
+    }
   }
 }
 
 @media screen and (min-width:960px) {
-  .mobile {
-    display: inherit;
-  }
-
-  .mobile-hidden {
-    display: none;
-  }
-
   .nav-item {
     display: inline-block;
   }
-
 }

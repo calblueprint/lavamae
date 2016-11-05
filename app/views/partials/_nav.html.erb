@@ -3,8 +3,8 @@
   <div class="nav-home">
     <div class="container">
       <a href="/" class="logo"></a>
-      <i class="hamburger mobile-hidden fa fa-bars fa-2x"></i>
-      <ul class="nav-items-container mobile">
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container" id="topNav">
         <% if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
@@ -45,52 +45,6 @@
             <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
           </li>
         <%end%>
-      </ul>
-      <!-- MOBILE -->
-      <br /><br
-      <ul class="nav-items-container-mobile mobile-hidden">
-        <% if user_signed_in? %>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
-          <li class="nav-item">
-            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
-          </li>
-        <%else%>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
-          <li class="nav-item">
-            <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
-          </li>
-          <li class="nav-item">
-            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
-          </li>
-        <%end%>
-      </ul>
-
       </ul>
     </div>
   </div>
@@ -105,7 +59,8 @@
         <input class="discussion-search-input" placeholder="Search discussion threads..."
         type="search" name="search">
       </form>
-      <ul class="nav-items-container pull-right">
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container pull-right" id="topNav">
         <%if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
@@ -155,7 +110,8 @@
   <div class="nav">
     <div class="container">
       <a href="/" class="logo"></a>
-      <ul class="nav-items-container">
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container" id="topNav">
         <%if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
@@ -204,6 +160,11 @@
 <!-- HAMBURGER MENU JS -->
 <script>
 function mobileMenu() {
-  
+  var x = document.getElementById("topNav");
+  if (x.className === "nav-items-container") {
+      x.className += " responsive";
+  } else {
+      x.className = "nav-items-container";
+  }
 }
 </script>
