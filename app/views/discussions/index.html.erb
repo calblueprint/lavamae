@@ -17,6 +17,19 @@
       <% end %>
     </div>
   <div class="container-lg">
+    <div class="discussion-search row">
+      <form>
+        <input class="discussion-search-input" placeholder="Search discussion threads..."
+        type="search" name="search" value=<%= params[:search]%>>
+
+        <% if @discussion %>
+        <input type="hidden" name="discussion_id" value=<%= @discussion.id%>>
+        <% end %>
+
+        <input class="discussion-search-submit" type="submit" />
+        <span class="discussion-search-icon"></span>
+      </form>
+    </div>
     <div class="discussion-container row">
       <div class="discussion-item-container col-xs-12 col-md-4">
         <% @discussions.each do |d| %>
