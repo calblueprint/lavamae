@@ -9,9 +9,7 @@ Rails.application.routes.draw do
     post '/sign_up' => 'registrations#create'
   end
 
-  resources :users, only: [:show, :update] do
-    get '/edit' => 'users#edit'
-  end
+  resources :users, only: [:show, :update]
 
   resources :discussions do
     resources :responses
