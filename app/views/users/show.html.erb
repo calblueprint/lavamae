@@ -1,8 +1,4 @@
-<div class="user-profile">
-  <h1>User Profile</h1>
-  <h1>User Profile</h1>
-  <h1>User Profile</h1>
-  <h1>User Profile</h1>
+<div class="user-profile col-xs-12 col-md-4">
   <div class="user-info">
     <div>
       Name:
@@ -23,9 +19,7 @@
       <%= @user.country %>
     </div>
     </div>
-      <% if current_user and current_user == @user %>
-        <%= link_to "EDIT PROFILE", user_edit_path(@user.id) %>
-      <% end %>
+      <%= react_component('EditProfileModal', style: "btn btn-login", user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
     </div>
   </div>
 </div>
