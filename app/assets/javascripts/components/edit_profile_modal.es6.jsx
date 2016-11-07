@@ -85,7 +85,7 @@ class EditProfileModal extends React.Component {
   render () {
     const countryOptions = this.state.countries.map((country) => {
       return (
-        <option value={country}>{country}</option>
+        <option key={country} value={country}>{country}</option>
       );
     });
 
