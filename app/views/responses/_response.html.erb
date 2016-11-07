@@ -7,7 +7,9 @@
       <a href=""><img src="/assets/grace.jpg" /></a>
     </div>
     <div class="name-date">
-      <a href=""><div class="user-name">Grace Noh</div></a>
+      <a href=""><div class="user-name">
+        <%= response.user.first_name%>  <%= response.user.last_name%>
+      </div></a>
       <div class="date"><%= time_ago_in_words(response.created_at) %> ago</div>
     </div>
   </div>

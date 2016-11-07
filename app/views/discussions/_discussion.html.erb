@@ -1,10 +1,12 @@
 <div class="discussion-selected-container col-xs-12 col-md-8">
   <div class="row">
-    <h2 class="discussion-title"><%= @discussion.title %></h2>
-    <p class="discussion-description wordwrap"><%= @discussion.content %></p>
+
     <% if current_user and current_user == discussion.user %>
-      <%= link_to "Edit Discussion", edit_discussion_path(@discussion) %>
-      <%= button_to "Delete Discussion", discussion_path(@discussion), method: :delete, class: 'btn-blue btn' %>
+      <%= react_component "DiscussionForm", { discussion: @discussion } %>
+      <%= react_component "DeleteModal", {discussion: @discussion} %>
+    <% else %>
+        <h2 class="discussion-title"><%= @discussion.title %></h2>
+        <p class="discussion-description wordwrap"><%= @discussion.content %></p>
     <% end %>
   </div>
 
@@ -18,8 +20,16 @@
         <a href=""><img src="/assets/grace.jpg" /></a>
       </div>
       <div class="name-date">
-        <a href=""><div class="user-name">Grace Noh</div></a>
-        <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
+        <a href="">
+          <div class="user-name">
+            <%= discussion.user.first_name%>  <%= discussion.user.last_name%>
+          </div>
+        </a>
+        <div class="date">
+          <p><%= discussion.user.city%>,<%discussion.user.country%></p>
+
+          <%= time_ago_in_words(@discussion.created_at) %> ago
+        </div>
       </div>
     </div>
   </div>
@@ -30,7 +40,9 @@
       <%= render 'responses/form' %>
     <% else %>
       <h4 class="answer-form-header">Want to Add a Discussion or Response?</h4>
-      <div class="btn btn-blue btn-forum-login"><%= react_component('LoginModal') %></div>
+      <div class="btn btn-blue btn-forum-login">
+        <%= react_component('LoginModal') %>
+      </div>
     <% end %>
   </div>
 
