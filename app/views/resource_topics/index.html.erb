@@ -1,0 +1,27 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<%= link_to "New Document", new_resource_path %>
+<%= link_to "New Module", new_resource_topic_path %>
+<br />
+<br />
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Module</th>
+      <th>Number of Resources</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resource_topics.each do |r| %>
+      <tr>
+        <td><%= link_to r.name, resource_topic_path(id: r.id) %></td>
+        <td><%= r.resources.length %></td>
+        <td><%= button_to "Delete",  r, method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure that you wish to delete #{r.name}?"} %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
