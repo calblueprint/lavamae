@@ -1,0 +1,29 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h><%= @resource_topic.name %></h>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>Download Link</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <td><%= resource.title %></td>
+        <td><%= resource.description %></td>
+        <td><%= link_to "Download Document", resource.attachment_url, :target => "_blank" %></td>
+        <td><%= button_to "Delete",  resource, method: :delete, class: "btn btn-danger", data: {confirm: "Are you sure that you wish to delete #{resource.title}?"} %></td>
+        <td><%= link_to "Edit", edit_resource_path(resource) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Back", resource_topics_path %>
