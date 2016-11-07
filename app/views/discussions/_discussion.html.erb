@@ -3,7 +3,7 @@
 
     <% if current_user and current_user == discussion.user %>
       <%= react_component "DiscussionForm", { discussion: @discussion } %>
-      <%= react_component "DeleteModal", {discussion: @discussion} %>
+      <%= react_component "DeleteDiscussionModal", {discussion: @discussion} %>
     <% else %>
         <h2 class="discussion-title"><%= @discussion.title %></h2>
         <p class="discussion-description wordwrap"><%= @discussion.content %></p>
@@ -23,7 +23,7 @@
           </div>
         </a>
         <div class="date">
-          <p><%= discussion.user.city%>,<%discussion.user.country%></p>
+          <p><%= discussion.user.city%>, USA</p>
 
           <%= time_ago_in_words(@discussion.created_at) %> ago
         </div>

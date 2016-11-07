@@ -20,9 +20,15 @@ class DiscussionForm extends React.Component {
 
   _cancelEdit(e) {
     e.preventDefault()
+    // this.props.discussion.title: this.state.title,
+    // this.props.discussion.content: this.state.content,
     this.setState({ title: this.props.discussion.title })
     this.setState({ content: this.props.discussion.content })
     this.setState({ show_form: false })
+  }
+
+  _enableForm() {
+    this.setState({ show_form: true })
   }
 
   _handleChange(e) {
@@ -33,11 +39,6 @@ class DiscussionForm extends React.Component {
     this.setState({ title: this.state.title })
     this.setState({ content: this.state.content })
     this.setState({ show_form: false })
-
-  }
-
-  _enableForm() {
-    this.setState({ show_form: true })
   }
 
   _saveForm(e) {

@@ -19,13 +19,14 @@ class ResponsesController < ApplicationController
   end
 
   def edit
-  
+
   end
 
   def update
     @response.update(response_params)
-    redirect_to discussions_path(discussion_id: @discussion.id)
-  end
+    respond_to do |format|
+      format.json { render json: @response.to_json }
+    end  end
 
   def destroy
     @response.destroy
