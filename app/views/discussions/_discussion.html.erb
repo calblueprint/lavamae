@@ -1,12 +1,12 @@
 <div class="discussion-selected-container col-xs-12 col-md-8">
   <div class="row">
-    <h2 class="discussion-title"><%= @discussion.title %></h2>
-    <p class="discussion-description wordwrap"><%= @discussion.content %></p>
+
     <% if current_user and current_user == discussion.user %>
-      <%= button_to "Delete", discussion_path(@discussion),
-      method: :delete, class: 'btn btn-action btn-sm btn-destroy pull-right' %>
-      <%= button_to "Edit", edit_discussion_path(@discussion),
-      method: :get, class: 'btn btn-action btn-sm pull-right' %>
+      <%= react_component "DiscussionForm", { discussion: @discussion } %>
+      <%= react_component "DeleteModal", {discussion: @discussion} %>
+    <% else %>
+        <h2 class="discussion-title"><%= @discussion.title %></h2>
+        <p class="discussion-description wordwrap"><%= @discussion.content %></p>
     <% end %>
   </div>
 
@@ -17,8 +17,16 @@
     </div>
     <div class="user-container pull-right">
       <div class="name-date">
-        <a href=""><div class="user-name">Grace Noh</div></a>
-        <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
+        <a href="">
+          <div class="user-name">
+            <%= discussion.user.first_name%>  <%= discussion.user.last_name%>
+          </div>
+        </a>
+        <div class="date">
+          <p><%= discussion.user.city%>,<%discussion.user.country%></p>
+
+          <%= time_ago_in_words(@discussion.created_at) %> ago
+        </div>
       </div>
       <div class="user-picture">
         <a href=""><img src="/assets/grace.jpg" /></a>
