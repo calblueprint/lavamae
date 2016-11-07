@@ -1,12 +1,8 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
-<<<<<<< HEAD
   protect_from_forgery with: :null_session, if: Proc.new {|c| c.request.format.json? }
-=======
-  protect_from_forgery with: :exception
   helper_method :toast
->>>>>>> added in resource_topic model and creation of resources with resource_topics
 
   def render_json_message(status, options = {})
     render json: {
