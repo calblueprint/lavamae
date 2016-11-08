@@ -84,7 +84,7 @@ class RegistrationModal extends React.Component {
     return (
       <section className="signup">
         <div className="container signup-container">
-          <div className="row">
+          <div className="signup-row">
           <h3>Create an Account</h3>
             <form>
               <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "Baby") }</div>

@@ -3,8 +3,9 @@
   <div class="nav-home">
     <div class="container">
       <a href="/" class="logo"></a>
-      <ul class="nav-items-container">
-        <%if user_signed_in? %>
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container" id="topNav">
+        <% if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Discussions</button>
@@ -48,6 +49,8 @@
     </div>
   </div>
 
+
+<!-- Special discussion navbar -->
 <% elsif current_page?(discussions_path)%>
   <div class="nav">
     <div class="container-lg">
@@ -56,7 +59,8 @@
         <input class="discussion-search-input" placeholder="Search discussion threads..."
         type="search" name="search">
       </form>
-      <ul class="nav-items-container pull-right">
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container pull-right" id="topNav">
         <%if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
@@ -106,7 +110,8 @@
   <div class="nav">
     <div class="container">
       <a href="/" class="logo"></a>
-      <ul class="nav-items-container">
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container" id="topNav">
         <%if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
@@ -151,3 +156,15 @@
     </div>
   </div>
 <% end %>
+
+<!-- HAMBURGER MENU JS -->
+<script>
+function mobileMenu() {
+  var x = document.getElementById("topNav");
+  if (x.className === "nav-items-container") {
+      x.className += " responsive";
+  } else {
+      x.className = "nav-items-container";
+  }
+}
+</script>
