@@ -18,9 +18,11 @@
       <%= @user.city %>,
       <%= @user.country %>
     </div>
-    </div>
-      <%= react_component('EditProfileModal', style: "btn btn-login", user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
-    </div>
-    <%= link_to "Change your password", edit_user_password_path %><br />
+    <%if current_user.id == @user.id %>
+      </div>
+        <%= react_component('EditProfileModal', style: "btn btn-login", user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
+      </div>
+      <%= link_to "Change Password", password_update_path %><br />
+    <% end %>
   </div>
 </div>
