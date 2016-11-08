@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :first_name, :last_name, :password_confirmation, presence: true
   has_many :discussions
+  has_and_belongs_to_many :favorite_discussions, :class_name => "Discussion", :foreign_key => "favorite_discussion_id"
   has_many :responses
 
   def full_name

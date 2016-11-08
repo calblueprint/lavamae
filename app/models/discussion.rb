@@ -1,6 +1,7 @@
 class Discussion < ActiveRecord::Base
   has_many :responses, :dependent => :destroy
-  belongs_to :user
+  belongs_to :user, :class_name => "User"
+  has_and_belongs_to_many :favorited_users, :class_name => "User", :foreign_key => "favorited_user_id"
 
   def self.search(search)
     if search
