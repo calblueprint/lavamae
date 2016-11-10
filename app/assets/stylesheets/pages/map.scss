@@ -67,15 +67,21 @@
 
 .story-preview {
   display: flex;
+  flex-wrap: wrap;
   padding-top: 15px;
 
  .story-thumb {
-   flex: 1;
-   max-height: 100px;
+   max-height: 90px;
  }
 
  .story-preview-text {
+   flex: 1;
    padding-left: 15px;
    font-size: 12px;
+   overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 5;
+   -webkit-box-orient: vertical;
  }
+
 }
