@@ -135,16 +135,84 @@
   }
 }
 
+.discussions-menu {
+  padding: 10px;
+  display: none;
+  cursor: pointer;
+  float: left;
+  border-radius: 2px;
+}
+
 @media screen and (max-width:630px) {
   .discussion-tag-container {
+    position: absolute;
+    z-index: 3;
+    left: -1000px;
+    top: 140px;
+    overflow-x: auto;
     width: 100vw;
-  }
-
-  .discussion-tag {
-    margin-bottom: 5px;
+    display: inline-block;
+    white-space: nowrap;
+    transition: 500ms;
+    padding: 10px 15px;
+    background: white;
   }
 
   .discussion-header {
-    flex-wrap: wrap;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .discussion-tag {
+    padding: 5px 10px;
+    font-size: 8px;
+  }
+
+  .discussion-item-container {
+    position: absolute;
+    z-index: 3;
+    left: -1000px;
+    top: 184px;
+    width: 100vw;
+    display: block;
+    transition: 500ms;
+    height: 100vh;
+  }
+
+  .tag-menu,.discussions-menu {
+    display: inherit;
+    float: right;
+  }
+
+  .favorites-text {
+    display: none;
+  }
+
+  .discussion-favorite {
+    padding: 10px;
+    margin-right: auto;
+
+    &:hover, &:active, &:focus {
+      background: transparent;
+    }
+  }
+
+  .create-discussion {
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+}
+
+@media screen and (max-width:630px) {
+  .discussion-tag-container {
+    &.responsive {
+      left: 0;
+    }
+  }
+
+  .discussion-item-container {
+    &.responsive {
+      left: 0;
+    }
   }
 }
