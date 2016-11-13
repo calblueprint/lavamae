@@ -1,27 +1,25 @@
-<section class="discussion">
-    <div class="discussion-header row">
-      <div class="discussion-tag-container pull-left">
-        <i class="fa fa-tags fa-lg"></i>
-        <button class="discussion-tag">Starting up</button>
-        <button class="discussion-tag">Funding</button>
-        <button class="discussion-tag">Volunteering</button>
-        <button class="discussion-tag">Partnering</button>
-        <button class="discussion-tag">Learn More</button>
+    <div class="discussion-container">
+      <div class="discussion-header">
+        <div class="discussion-tag-container">
+          <i class="fa fa-tags fa-lg"></i>
+          <button class="discussion-tag">Starting up</button>
+          <button class="discussion-tag">Funding</button>
+          <button class="discussion-tag">Volunteering</button>
+          <button class="discussion-tag">Partnering</button>
+          <button class="discussion-tag">Learn More</button>
+        </div>
+        <% if current_user %>
+          <button class="discussion-favorite">
+            <i class="fa fa-star-o fa-lg"></i>
+            Favorites
+          </button>
+          <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
+        <% end %>
       </div>
-      <% if current_user %>
-        <button class="discussion-favorite">
-          <i class="fa fa-star-o fa-lg"></i>
-          Favorites
-        </button>
-        <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
-      <% end %>
-    </div>
-  <div class="container-lg">
-    <div class="discussion-container row">
-      <div class="discussion-item-container col-xs-12 col-md-4">
+      <div class="discussion-item-container">
         <% @discussions.each do |d| %>
           <%= link_to discussions_path(discussion_id: d.id) do %>
-            <div tabindex="4" class="discussion-item row">
+            <div tabindex="4" class="discussion-item">
               <h4 class="discussion-item-title">
                 <%= d.title %>
                 <span class="change-icon">
@@ -48,5 +46,3 @@
       <% end %>
       </div>
     </div>
-  </div>
-</section>
