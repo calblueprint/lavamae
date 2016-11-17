@@ -40,16 +40,6 @@ class ChangePasswordModal extends React.Component {
   }
 
     render() {
-        var old_password = <div></div>;
-          old_password = (
-            <fieldset>
-              <label>Current password</label>
-              <input type="password" ref="old_password"
-                name="old_password"
-                onChange={this._handleChange} />
-            </fieldset>
-          );
-
         return (
             <div>
               <button className={this.state.btnStyle} onClick={this._openModal}>Change Password</button>
@@ -59,7 +49,12 @@ class ChangePasswordModal extends React.Component {
                 </Modal.Header>
                 <form onSubmit={this._attemptPasswordUpdate}>
                   <Modal.Body>
-                    {old_password}
+                    <fieldset>
+                        <label>Current password</label>
+                        <input type="password" ref="old_password"
+                            name="old_password"
+                            onChange={this._handleChange} />
+                    </fieldset>
                     <fieldset>
                         <label>New password</label>
                         <input type="password" ref="new_password"

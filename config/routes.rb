@@ -9,7 +9,6 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/sign_up' => 'registrations#new'
     post '/sign_up' => 'registrations#create'
-    get '/password_update' => 'registrations#password_update', :as => :password_update
   end
 
   resources :users, only: [:show, :update]

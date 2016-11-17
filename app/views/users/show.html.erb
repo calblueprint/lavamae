@@ -22,7 +22,6 @@
       </div>
         <%= react_component('EditProfileModal', style: "btn btn-login", user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
         <%= react_component('ChangePasswordModal', model: :user, user_id: @user.id) %>
-        <%= link_to "Change Password", password_update_path %><br />
       </div>
     <% end %>
   </div>
