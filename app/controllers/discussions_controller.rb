@@ -3,14 +3,14 @@ class DiscussionsController < ApplicationController
   before_action :get_discussion, only: [:edit, :update, :destroy]
 
   def index
-  	@discussions = Discussion.all.order('created_at DESC')
+  	@discussions = Discussion.search(params[:search]).order('created_at DESC')
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
     else
       @discussion = Discussion.last
     end
     unless @discussion.nil?
-      @responses = @discussion.responses.sort_by &:created_at
+      @responses = @discussion.responses.sort_by{|r| [r.score, r.created_at]}.reverse
     end
   end
 

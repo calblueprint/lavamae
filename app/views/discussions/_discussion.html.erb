@@ -17,7 +17,7 @@
     </div>
     <div class="user-container pull-right">
       <div class="name-date">
-        <a href=""><div class="user-name">Grace Noh</div></a>
+        <a href=""><div class="user-name"><%= @discussion.user.full_name %></div></a>
         <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
       </div>
       <div class="user-picture">
@@ -38,7 +38,7 @@
 
   <% @responses.each do |r| %>
     <%= render r %>
-    <% if !r.equal?(@discussion.responses.last) %>
+    <% if !r.equal?(@responses.last) %>
         <hr class="row"/>
     <% end %>
   <% end %>
