@@ -4,54 +4,43 @@
 
 class DiscussionForm extends React.Component {
   constructor(props) {
-    super(props)
-    console.log(this.props.discussion.id)
-    this._cancelEdit = this._cancelEdit.bind(this)
-    this._handleChange = this._handleChange.bind(this)
-    this._successfulSave = this._successfulSave.bind(this)
-    this._enableForm = this._enableForm.bind(this)
-    this._saveForm = this._saveForm.bind(this)
+    super(props);
+    this._cancelEdit = this._cancelEdit.bind(this);
+    this._successfulSave = this._successfulSave.bind(this);
+    this._enableForm = this._enableForm.bind(this);
+    this._saveForm = this._saveForm.bind(this);
     this.state = {
       show_form: false,
       title: this.props.discussion.title,
       content: this.props.discussion.content,
-    }
+    };
   }
 
   _cancelEdit(e) {
-    e.preventDefault()
-    // this.props.discussion.title: this.state.title,
-    // this.props.discussion.content: this.state.content,
-    this.setState({ title: this.props.discussion.title })
-    this.setState({ content: this.props.discussion.content })
-    this.setState({ show_form: false })
+    e.preventDefault();
+    this.setState({ show_form: false });
   }
 
   _enableForm() {
-    this.setState({ show_form: true })
-  }
-
-  _handleChange(e) {
-    this.setState({ [$(e.target).attr("name")]: e.target.value });
+    this.setState({ show_form: true });
   }
 
   _successfulSave() {
-    this.setState({ title: this.state.title })
-    this.setState({ content: this.state.content })
-    this.setState({ show_form: false })
+    this.setState({ show_form: false });
   }
 
   _saveForm(e) {
-    e.preventDefault()
-    const discussionFields = {
-      discussion: {
-        title: this.state.title,
-        content: this.state.content,
-      }
-    };
-    console.log(this.state)
-    console.log(discussionFields)
-    APIRequester.put(`/discussions/${this.props.discussion.id}`, discussionFields, this._successfulSave);
+    e.preventDefault();
+    this.setState({ title: $("#discussion_title").val(),
+                    content: $("#discussion_content").val() }, () => {
+                      const discussionFields = {
+                        discussion: {
+                          title: this.state.title,
+                          content: this.state.content,
+                        }
+                      };
+                      APIRequester.put(`/discussions/${this.props.discussion.id}`, discussionFields, this._successfulSave);
+                    });
   }
 
   renderForm() {
@@ -62,12 +51,12 @@ class DiscussionForm extends React.Component {
 
         <label htmlFor="discussion_title">Title</label>
         <br/>
-        <input class="discussion-title" type="text" name="title" defaultValue={this.state.title} id="discussion_title" onChange = {this._handleChange} />
+        <input class="discussion-title" type="text" name="title" defaultValue={this.state.title} id="discussion_title" />
 
         <p>
           <label htmlFor="discussion_body">Body</label>
           <br/>
-          <textarea name="content" defaultValue={this.state.content} onChange = {this._handleChange} id="discussion_content">
+          <textarea name="content" defaultValue={this.state.content} id="discussion_content" >
              </textarea>
         </p>
       <button onClick={this._saveForm}>Save</button>
@@ -99,3 +88,7 @@ class DiscussionForm extends React.Component {
     return renderedContent;
   }
 }
+
+DiscussionForm.propTypes = {
+  discussion: React.PropTypes.object.isRequired
+};
