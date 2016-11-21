@@ -4,7 +4,7 @@
   </div>
   <div class="user-container pull-right">
     <div class="user-picture">
-      <a href=""><img src="/assets/grace.jpg" /></a>
+      <a href=""><%= image_tag response.user.profile_pic.url(:thumb) if response.user.profile_pic? %></a>
     </div>
     <div class="name-date">
       <a href=""><div class="user-name">Grace Noh</div></a>

@@ -13,10 +13,12 @@ class RegistrationModal extends React.Component {
     this._renderInput = this._renderInput.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
+    this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       map_checked: false,
       countries: this.props.countries || [],
       country: this.props.countries[0] || "",
+      profile_pic: ""
     };
   }
 
@@ -55,6 +57,7 @@ class RegistrationModal extends React.Component {
         email: this.state.email,
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
+        profile_pic: this.state.profile_pic,
       }
     };
     APIRequester.post("/sign_up", signupFields, this._success);
@@ -78,6 +81,18 @@ class RegistrationModal extends React.Component {
     this.setState({ country: e.target.value });
   }
 
+  _handleFileChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let attachment = e.target.files[0];
+    reader.onload = (file) => {
+      this.setState({
+        profile_pic: file.target.result,
+      });
+    }
+    reader.readAsDataURL(attachment);
+  }
+
   render() {
     const countryOptions = this.state.countries.map((country) => {
             return (
@@ -98,7 +113,6 @@ class RegistrationModal extends React.Component {
               { this._renderInput("password_confirmation", "Confirm Password", "password", "") }
               { this._renderInput("organization", "Organization", "text", "lavabae++") }
               { this._renderInput("city", "City", "text", "Berkeley") }
-
               <div>
                 <label>
                   Country:
@@ -117,6 +131,10 @@ class RegistrationModal extends React.Component {
                     onChange={this._handleCheckboxChange}
                     className="input-checkbox"/>
                 </label>
+              </div>
+              <div className="input-field">
+                <label htmlFor="file-input">Profile Picture</label>
+                <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
               </div>
 
               <input name="submit" type="button" value="Create Account"

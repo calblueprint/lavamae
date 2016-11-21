@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   validates :first_name, :last_name, :password_confirmation, presence: true
+  mount_base64_uploader :profile_pic, AvatarUploader
   has_many :discussions
   has_many :responses
 end
