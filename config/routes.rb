@@ -12,4 +12,7 @@ Rails.application.routes.draw do
   resources :discussions do
     resources :responses
   end
+
+  post '/favorite_discussion/:id', to: 'discussions#favorite'
+  delete '/favorite_discussion/:id', to: 'discussions#unfavorite'
 end

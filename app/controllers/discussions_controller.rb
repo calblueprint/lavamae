@@ -1,9 +1,12 @@
 class DiscussionsController < ApplicationController
 
-  before_action :get_discussion, only: [:edit, :update, :destroy]
+  before_action :get_discussion, only: [:edit, :update, :destroy, :favorite, :unfavorite]
 
   def index
   	@discussions = Discussion.search(params[:search]).order('created_at DESC')
+    if current_user
+      @favorite_discussions = current_user.favorite_discussions
+    end
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
     else
@@ -38,6 +41,20 @@ class DiscussionsController < ApplicationController
   def destroy
   	@discussion.destroy
   	redirect_to discussions_path
+  end
+
+  def favorite
+    if current_user
+      current_user.favorite_discussions << @discussion
+    end
+    redirect_to discussions_path(discussion_id: params[:discussion_id], search: params[:search])
+  end
+
+  def unfavorite
+    if current_user
+      current_user.favorite_discussions.delete(@discussion)
+    end
+    redirect_to discussions_path(discussion_id: params[:discussion_id], search: params[:search])
   end
 
   private

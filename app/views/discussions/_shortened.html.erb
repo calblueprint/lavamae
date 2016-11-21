@@ -1,0 +1,27 @@
+  <div tabindex="4" class="discussion-item row">
+    <h4 class="discussion-item-title">
+      <%= discussion.title %>
+      <% if current_user %>
+        <span class="change-icon favorite-discussion" 
+          data-id=<%=discussion.id.to_s%> 
+          data-fav=<%= @favorite_discussions.include?(discussion) %>>
+          <% if @favorite_discussions.include?(discussion) %>
+            <i class="fa fa-star pull-right" id=<%="star#{discussion.id}"%>></i>
+          <% else %>
+            <i class="fa fa-star-o pull-right" id=<%="star#{discussion.id}"%>></i>
+          <% end %>
+          <i class="fa fa-star pull-right"></i>
+        </span>
+      <% end %>
+      <div class = "discussion-item-date pull-right">
+        <% if discussion.created_at > Time.now.beginning_of_day %>
+            <%= time_ago_in_words(discussion.created_at) %> ago
+        <% else %>
+            <%= discussion.created_at.strftime("%b %d, %Y") %>
+        <% end %>
+      </div>
+    </h4>
+    <p class="discussion-item-description">
+      <%= discussion.content %>
+    </p>
+  </div>

@@ -19,28 +19,8 @@
   <div class="container-lg">
     <div class="discussion-container row">
       <div class="discussion-item-container col-xs-12 col-md-4">
-        <% @discussions.each do |d| %>
-          <%= link_to discussions_path(discussion_id: d.id) do %>
-            <div tabindex="4" class="discussion-item row">
-              <h4 class="discussion-item-title">
-                <%= d.title %>
-                <span class="change-icon">
-                  <i class="fa fa-star-o pull-right"></i>
-                  <i class="fa fa-star pull-right"></i>
-                </span>
-                <div class = "discussion-item-date pull-right">
-                  <% if d.created_at > Time.now.beginning_of_day %>
-                      <%= time_ago_in_words(d.created_at) %> ago
-                  <% else %>
-                      <%= d.created_at.strftime("%b %d, %Y") %>
-                  <% end %>
-                </div>
-              </h4>
-              <p class="discussion-item-description">
-                <%= d.content %>
-              </p>
-            </div>
-          <% end %>
+        <% @discussions.each do |discussion| %>
+          <%= render 'discussions/shortened', {discussion: discussion} %>
         <% end %>
       </div>
       <% if @discussion %>
@@ -50,3 +30,22 @@
     </div>
   </div>
 </section>
+
+
+<script>
+$('.favorite-discussion').click(function(){
+  var data_id = $(this).data("id");
+  var fav = $(this).data("fav");
+  var star_id = "star" + data_id
+  $(this).data('fav', !fav); 
+  if (!fav) {
+    document.getElementById(star_id).className = "fa fa-star pull-right"
+    $.ajax({url: '/favorite_discussion/' + data_id, type: 'POST' });
+  }
+  else {
+    document.getElementById(star_id).className = "fa fa-star-o pull-right"
+    $.ajax({url: '/favorite_discussion/' + data_id, type: 'DELETE' });
+  }
+});
+
+</script>
