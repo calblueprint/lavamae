@@ -13,10 +13,12 @@ class RegistrationModal extends React.Component {
     this._renderInput = this._renderInput.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
+    this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       map_checked: false,
       countries: this.props.countries || [],
       country: this.props.countries[0] || "",
+      profile_pic: ""
     };
   }
 
@@ -51,6 +53,7 @@ class RegistrationModal extends React.Component {
         email: this.state.email,
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
+        profile_pic: this.state.profile_pic,
       }
     };
     APIRequester.post("/sign_up", signupFields, this._success);
@@ -74,6 +77,18 @@ class RegistrationModal extends React.Component {
     this.setState({ country: e.target.value });
   }
 
+  _handleFileChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let attachment = e.target.files[0];
+    reader.onload = (file) => {
+      this.setState({
+        profile_pic: file.target.result,
+      });
+    }
+    reader.readAsDataURL(attachment);
+  }
+
   render() {
     const countryOptions = this.state.countries.map((country) => {
             return (
@@ -87,15 +102,14 @@ class RegistrationModal extends React.Component {
           <div className="signup-row">
           <h3>Create an Account</h3>
             <form>
-              <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "Baby") }</div>
-              <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Panda") }</div>
-              <div className="input-field">{ this._renderInput("email", "Email", "text", "panda@lavabae.org") }</div>
-              <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
-              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
-              <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
-              <div className="input-field">{ this._renderInput("city", "City", "text", "Berkeley") }</div>
-
-              <div className="input-field">
+              { this._renderInput("first_name", "First Name", "text", "Baby") }
+              { this._renderInput("last_name", "Last Name", "text", "Panda") }
+              { this._renderInput("email", "Email", "text", "panda@lavabae.org") }
+              { this._renderInput("password", "Password", "password", "") }
+              { this._renderInput("password_confirmation", "Confirm Password", "password", "") }
+              { this._renderInput("organization", "Organization", "text", "lavabae++") }
+              { this._renderInput("city", "City", "text", "Berkeley") }
+              <div>
                 <label>
                   Country
                   <select name="country" defaultValue="None" onChange={this._handleSelect} >
@@ -113,6 +127,10 @@ class RegistrationModal extends React.Component {
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>
+              </div>
+              <div className="input-field">
+                <label htmlFor="file-input">Profile Picture</label>
+                <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
               </div>
 
               <button className="btn btn-blue" name="submit" type="button"
