@@ -16,15 +16,12 @@
       <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
     </div>
     <div class="user-container pull-right">
-      <div class="user-picture">
-        <a href=""><%= image_tag @discussion.user.profile_pic.url(:thumb) if @discussion.user.profile_pic? %></a>
-      </div>
       <div class="name-date">
         <a href=""><div class="user-name"><%= @discussion.user.full_name %></div></a>
         <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
       </div>
       <div class="user-picture">
-        <a href=""><%= image_tag("grace.jpg") %></a>
+        <a href=""><%= image_tag @discussion.user.profile_pic.url(:thumb) if @discussion.user.profile_pic? %></a>
       </div>
     </div>
   </div>
