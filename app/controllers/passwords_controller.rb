@@ -20,10 +20,48 @@ class PasswordsController < ApplicationController
     end
   end
 
+   def request_reset
+    email = request_reset_params[:email]
+    user = User.find_by_email(email)
+    if !user.nil? && user.send_reset_password_instructions
+      LavamaeMailer.reset_password_email(@user).deliver_now
+      render_json_message(:ok)
+      return
+    end
+    render_json_message(:internal_server_error, errors: ["An unknown error occurred."])
+  end
+
+  def reset
+    password_errors = accumulate_password_errors
+    unless password_errors.blank?
+      render_json_message(:forbidden, errors: password_errors)
+      return
+    end
+
+    resource = User.reset_password_by_token reset_params
+
+    if !resource.errors.messages.blank?
+      errors = resource.errors.messages[:reset_password_token].map do |error|
+        "Reset token " + error
+      end
+      render_json_message(:forbidden, errors: errors)
+    else
+      render_json_message(:ok, message: "Password successfully reset.", to: user_path(user.id))
+    end
+  end
+
   private
 
   def update_params
     params.permit(:old_password, :password, :password_confirmation)
+  end
+
+  def request_reset_params
+    params.permit(:email)
+  end
+
+  def reset_params
+    params.permit(:password, :password_confirmation, :reset_password_token)
   end
 
   def accumulate_password_errors
