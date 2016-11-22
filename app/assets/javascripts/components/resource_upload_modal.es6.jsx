@@ -1,6 +1,7 @@
 class ResourceUploadModal extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
     this._handleChange = this._handleChange.bind(this);
@@ -77,7 +78,7 @@ class ResourceUploadModal extends React.Component {
       });
     return (
       <div>
-        <button onClick={this._openModal}>Upload Resource</button>
+        <button overStyle={{background: 'blue'}} onClick={this._openModal}>Upload Resource</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Upload New Resource</Modal.Title>
