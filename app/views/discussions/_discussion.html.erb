@@ -1,12 +1,12 @@
 <div class="discussion-selected-container col-xs-12 col-md-8">
   <div class="row">
-    <h2 class="discussion-title"><%= @discussion.title %></h2>
-    <p class="discussion-description wordwrap"><%= @discussion.content %></p>
+
     <% if current_user and current_user == discussion.user %>
-      <%= button_to "Delete", discussion_path(@discussion),
-      method: :delete, class: 'btn btn-action btn-sm btn-destroy pull-right' %>
-      <%= button_to "Edit", edit_discussion_path(@discussion),
-      method: :get, class: 'btn btn-action btn-sm pull-right' %>
+      <%= react_component "DiscussionForm", { discussion: @discussion } %>
+      <%= react_component "DeleteDiscussionModal", {discussion: @discussion} %>
+    <% else %>
+        <h2 class="discussion-title"><%= @discussion.title %></h2>
+        <p class="discussion-description wordwrap"><%= @discussion.content %></p>
     <% end %>
   </div>
 
@@ -33,6 +33,7 @@
     <% else %>
       <h4 class="response-form-header">Want to Add a Discussion or Response?</h4>
       <%= react_component('LoginModal', style: "btn btn-transparent btn-forum-login") %>
+
     <% end %>
   </div>
 
