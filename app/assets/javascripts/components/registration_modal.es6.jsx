@@ -18,7 +18,8 @@ class RegistrationModal extends React.Component {
       map_checked: false,
       countries: this.props.countries || [],
       country: this.props.countries[0] || "",
-      profile_pic: ""
+      profile_pic: "",
+      imagePreviewUrl: "",
     };
   }
 
@@ -84,6 +85,7 @@ class RegistrationModal extends React.Component {
     reader.onload = (file) => {
       this.setState({
         profile_pic: file.target.result,
+        imagePreviewUrl: reader.result,
       });
     }
     reader.readAsDataURL(attachment);
@@ -95,6 +97,14 @@ class RegistrationModal extends React.Component {
                 <option key={country}>{country}</option>
             );
         });
+
+    let imagePreviewUrl = this.state.imagePreviewUrl;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
 
     return (
       <section className="signup">
@@ -132,7 +142,9 @@ class RegistrationModal extends React.Component {
                 <label htmlFor="file-input">Profile Picture</label>
                 <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
               </div>
-
+              <div className="imgPreview">
+                {$imagePreview}
+              </div>
               <button className="btn btn-blue" name="submit" type="button"
                 onClick={this._attemptRegistration}>Create Account</button>
             </form>
