@@ -58,6 +58,12 @@ section {
   background-color: $blue-light-20;
 }
 
+.container, .container-lg {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+}
+
 .container-lg{
   margin-right: auto;
   margin-left: auto;
