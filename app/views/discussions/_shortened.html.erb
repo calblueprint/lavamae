@@ -1,3 +1,4 @@
+<%= link_to discussions_path(discussion_id: discussion.id) do %>
   <div tabindex="4" class="discussion-item row">
     <h4 class="discussion-item-title">
       <%= discussion.title %>
@@ -25,3 +26,4 @@
       <%= discussion.content %>
     </p>
   </div>
+<% end %>
