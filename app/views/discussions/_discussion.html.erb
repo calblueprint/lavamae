@@ -19,7 +19,13 @@
       </div>
       <div class="name-date">
         <a href=""><div class="user-name">Grace Noh</div></a>
-        <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
+        <div class="date">
+          <% if @discussion.created_at > Time.now.beginning_of_day %>
+              <%= time_ago_in_words(d.created_at) %> ago
+          <% else %>
+              <%= @discussion.created_at.strftime("%b %d, %Y") %>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
