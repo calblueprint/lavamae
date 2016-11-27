@@ -20,7 +20,7 @@ class PasswordsController < ApplicationController
     end
   end
 
-   def request_reset
+  def request_reset
     email = request_reset_params[:email]
     user = User.find_by_email(email)
     if !user.nil? && user.send_reset_password_instructions
@@ -45,7 +45,7 @@ class PasswordsController < ApplicationController
       end
       render_json_message(:forbidden, errors: errors)
     else
-      render_json_message(:ok, message: "Password successfully reset.", to: user_path(user.id))
+      render_json_message(:ok, message: "Password successfully reset.", to: root_path)
     end
   end
 

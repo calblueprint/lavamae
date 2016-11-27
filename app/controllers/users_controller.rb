@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_user_password_url
+    `/passwords/update`
+  end
+
   private
 
   def update_params

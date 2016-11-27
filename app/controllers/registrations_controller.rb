@@ -19,6 +19,10 @@ class RegistrationsController < Devise::RegistrationsController
     end
   end
 
+  def password_reset
+    @token = params[:reset_password_token]
+  end
+
   protected
 
   def configure_permitted_parameters

@@ -1,7 +1,7 @@
 /**
-* @prop model - the type of model this user has (admin or teacher)
 * @prop user_id - the id of the user
 * @prop reset_token - the password reset token if this form is in reset mode
+* @prop show_modal - if true, start with modal open
 */
 class ChangePasswordModal extends React.Component {
   constructor(props) {
@@ -13,16 +13,17 @@ class ChangePasswordModal extends React.Component {
     this.state = {
       old_password: "",
       password: "",
-      password_confirmation: ""
+      password_confirmation: "",
+      show_modal: this.props.show_modal || false
     };
   }
 
   _openModal() {
-    this.setState({ showModal: true });
+    this.setState({ show_modal: true });
   }
 
   _closeModal() {
-    this.setState({ showModal: false });
+    this.setState({ show_modal: false });
   }
 
   _handleChange(e) {
@@ -30,14 +31,21 @@ class ChangePasswordModal extends React.Component {
   }
 
   _attemptPasswordUpdate(e) {
-    const passwordData = {
-      old_password: this.state.old_password,
-      password: this.state.password,
-      password_confirmation: this.state.password_confirmation,
-      model: this.props.model
-    };
-    console.log(passwordData);
-    APIRequester.put(`/passwords/${this.props.user_id}`, passwordData, (msg) => {} );
+    if (this.props.reset_token == null) {
+      const passwordUpdateData = {
+        old_password: this.state.old_password,
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation,
+      };
+      APIRequester.put(`/passwords/${this.props.user_id}`, passwordUpdateData, (msg) => {} );
+    } else {
+      const passwordResetData = {
+        password: this.state.password,
+        password_confirmation: this.state.password_confirmation,
+        reset_password_token  : this.props.reset_token,
+      };
+      APIRequester.post(`/passwords/reset`, passwordResetData, (msg) => {} );
+    }
   }
 
   render() {
@@ -56,7 +64,7 @@ class ChangePasswordModal extends React.Component {
     return (
       <div>
         <button className={this.state.btnStyle} onClick={this._openModal}>Change Password</button>
-        <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
+        <Modal className="modal" show={this.state.show_modal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Change Password</Modal.Title>
           </Modal.Header>
@@ -88,7 +96,7 @@ class ChangePasswordModal extends React.Component {
 }
 
 ChangePasswordModal.propTypes = {
-  model       : React.PropTypes.string,
   user_id     : React.PropTypes.number,
-  reset_token : React.PropTypes.string
+  reset_token : React.PropTypes.string,
+  show_modal  : React.PropTypes.bool
 };
