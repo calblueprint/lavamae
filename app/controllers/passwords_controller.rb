@@ -24,7 +24,6 @@ class PasswordsController < ApplicationController
     email = request_reset_params[:email]
     user = User.find_by_email(email)
     if !user.nil? && user.send_reset_password_instructions
-      LavamaeMailer.reset_password_email(@user).deliver_now
       render_json_message(:ok)
       return
     end

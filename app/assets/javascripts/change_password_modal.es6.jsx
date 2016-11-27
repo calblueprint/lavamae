@@ -1,6 +1,7 @@
 /**
 * @prop model - the type of model this user has (admin or teacher)
 * @prop user_id - the id of the user
+* @prop reset_token - the password reset token if this form is in reset mode
 */
 class ChangePasswordModal extends React.Component {
   constructor(props) {
@@ -39,47 +40,55 @@ class ChangePasswordModal extends React.Component {
     APIRequester.put(`/passwords/${this.props.user_id}`, passwordData, (msg) => {} );
   }
 
-    render() {
-        return (
-            <div>
-              <button className={this.state.btnStyle} onClick={this._openModal}>Change Password</button>
-              <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
-                <Modal.Header>
-                  <Modal.Title>Change Password</Modal.Title>
-                </Modal.Header>
-                <form onSubmit={this._attemptPasswordUpdate}>
-                  <Modal.Body>
-                    <fieldset>
-                        <label>Current password</label>
-                        <input type="password" ref="old_password"
-                            name="old_password"
-                            onChange={this._handleChange} />
-                    </fieldset>
-                    <fieldset>
-                        <label>New password</label>
-                        <input type="password" ref="new_password"
-                            name="password"
-                            onChange={this._handleChange} />
-                    </fieldset>
-                    <fieldset>
-                        <label>Confirm new password</label>
-                        <input type="password" ref="password_confirmation"
-                            name="password_confirmation"
-                            onChange={this._handleChange} />
-                    </fieldset>
-                  </Modal.Body>
-                  <Modal.Footer>
-                    <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
-                    <button className="btn btn-blue modal-btn" type="submit">Submit</button>
-                  </Modal.Footer>
-                </form>
-              </Modal>
-            </div>
-      )
+  render() {
+    var old_password = <div></div>;
+    if (this.props.reset_token == null) {
+      old_password = (
+        <fieldset className="input-container">
+          <label>Current password</label>
+          <input type="password" ref="old_password"
+            name="old_password"
+            onChange={this._handleChange} />
+        </fieldset>
+      );
     }
+
+    return (
+      <div>
+        <button className={this.state.btnStyle} onClick={this._openModal}>Change Password</button>
+        <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
+          <Modal.Header>
+            <Modal.Title>Change Password</Modal.Title>
+          </Modal.Header>
+          <form onSubmit={this._attemptPasswordUpdate}>
+            <Modal.Body>
+              {old_password}
+              <fieldset>
+                <label>New password</label>
+                <input type="password" ref="new_password"
+                  name="password"
+                  onChange={this._handleChange} />
+              </fieldset>
+              <fieldset>
+                <label>Confirm new password</label>
+                <input type="password" ref="password_confirmation"
+                  name="password_confirmation"
+                  onChange={this._handleChange} />
+              </fieldset>
+            </Modal.Body>
+            <Modal.Footer>
+              <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
+              <button className="btn btn-blue modal-btn" type="submit">Submit</button>
+            </Modal.Footer>
+          </form>
+        </Modal>
+      </div>
+    )
+  }
 }
 
 ChangePasswordModal.propTypes = {
-    model       : React.PropTypes.string,
-    user_id     : React.PropTypes.number,
+  model       : React.PropTypes.string,
+  user_id     : React.PropTypes.number,
+  reset_token : React.PropTypes.string
 };

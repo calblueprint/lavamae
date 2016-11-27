@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   devise_scope :user do
     get '/sign_up' => 'registrations#new'
     post '/sign_up' => 'registrations#create'
-    get '/users/password_reset' => 'registrations#password_reset', :as => 'edit_user_password'
+    get '/users/password_reset' => 'passwords#update', :as => 'edit_user_password'
   end
 
   resources :users, only: [:show, :update]

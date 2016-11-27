@@ -11,9 +11,11 @@ class LoginModal extends React.Component {
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
     this._showForgotPasswordModal = this._showForgotPasswordModal.bind(this);
+    this._attemptPasswordReset = this._attemptPasswordReset.bind(this);
     this._handleChange = this._handleChange.bind(this);
     this._handleLogin = this._handleLogin.bind(this);
-    this._success = this._success.bind(this);
+    this._successLogin = this._successLogin.bind(this);
+    this._successResetEmail = this._successResetEmail.bind(this);
     this._error = this._error.bind(this);
     this._handleSignUp = this._handleSignUp.bind(this);
     this._renderLoginModal = this._renderLoginModal.bind(this);
@@ -39,11 +41,25 @@ class LoginModal extends React.Component {
     this.setState({ forgotPasswordMode: true });
   }
 
+  _attemptPasswordReset(e) {
+    APIRequester.post(`/passwords/request_reset`,
+      { email : this.state.email },
+      this._successResetEmail
+    );
+  }
+
+  _successResetEmail(msg) {
+    this._closeModal();
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.success("Password reset email has been sent.");
+    window.location = location.pathname;
+  }
+
   _handleChange(e) {
     this.setState({ [$(e.target).attr("name")] : $(e.target).val() });
   }
 
-  _success(msg) {
+  _successLogin(msg) {
     this._closeModal();
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Log-in successful!");
@@ -63,7 +79,7 @@ class LoginModal extends React.Component {
         password: this.state.password,
       }
     };
-    APIRequester.post("/users/sign_in", loginFields, this._success);
+    APIRequester.post("/users/sign_in", loginFields, this._successLogin);
   }
 
   _handleSignUp(e) {
@@ -108,7 +124,7 @@ class LoginModal extends React.Component {
           <Modal.Header>
             <Modal.Title>Reset Your Password</Modal.Title>
           </Modal.Header>
-          <form>
+          <form onSubmit={this._attemptPasswordReset}>
             <Modal.Body>
               <div className="input-field">
                 <label htmlFor="email-input">Email Address</label>
