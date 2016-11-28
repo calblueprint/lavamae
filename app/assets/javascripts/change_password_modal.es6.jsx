@@ -31,6 +31,7 @@ class ChangePasswordModal extends React.Component {
   }
 
   _attemptPasswordUpdate(e) {
+    e.preventDefault();
     if (this.props.reset_token == null) {
       const passwordUpdateData = {
         old_password: this.state.old_password,
@@ -44,7 +45,7 @@ class ChangePasswordModal extends React.Component {
         password_confirmation: this.state.password_confirmation,
         reset_password_token  : this.props.reset_token,
       };
-      APIRequester.post(`/passwords/reset`, passwordResetData, (msg) => {} );
+      APIRequester.post("/passwords/reset", passwordResetData, (msg) => {} );
     }
   }
 
