@@ -1,0 +1,21 @@
+<br>
+<br>
+<br>
+<br>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+<div id='map' style='width: 1000px; height: 1000px; position: absolute;'></div>
+<script>
+  mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ubWNodSIsImEiOiJjaXRwaGh1cWowMXJtMnRtb3VpZ3UycW1zIn0.XyBxoEttJMIi96kJAhdJzA';
+
+  var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/mapbox/light-v9',
+      zoom: 1,
+      minZoom: 1,
+  });
+
+  map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+  }));
+</script>
