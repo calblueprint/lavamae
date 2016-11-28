@@ -1,4 +1,6 @@
-<section class="module">
+<%= react_component 'ResourcePage', {modules: @resource_topics} %>
+
+<!-- <section class="module">
   <div class="container module-container">
     <div class="module-search row">
       <form>
@@ -26,7 +28,6 @@
           <div class="cover-picture">
             <a href=""><img src="/assets/pug.jpg" /></a>
           </div>
-          <span class= >
             <h4 class="module-item-title">
               <%= d.name %>
               <div class = "module-item-description"> Manuals and blueprints for building your own buses. </div>
@@ -38,14 +39,13 @@
                 <% end %>
               </div>
             </h4>
-            </span>
           </div>
         </div>
         <% end %>
       <% end %>
     </div>
   </div>
-</section>
+</section> -->
 
 <br/>
 <br/>
@@ -53,7 +53,7 @@
 <br/>
 <br/>
 <br/>
-<%= react_component('ResourceUploadModal', class: 'btn-blue btn', modules: @resource_topics) %>
+<%= react_component('ResourceUploadModal', style: 'btn-blue btn', modules: @resource_topics) %>
 <%= link_to "New Module", new_resource_topic_path %> <!-- make this into react component modal -->
 <br />
 <br />

@@ -1,7 +1,7 @@
 class ResourceUploadModal extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
+    // console.log(this.props);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
     this._handleChange = this._handleChange.bind(this);

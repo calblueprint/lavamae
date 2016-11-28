@@ -1,0 +1,29 @@
+.module-item {
+  cursor: pointer;
+  height: 95px;
+  border: 1px solid #828282;
+  border-radius: 10px;
+  padding: 15px;
+  transition: 300ms;
+
+
+  &:hover {
+    border: 1.5px solid #828282;
+    box-shadow: 0px 2px 8px #828282;
+    color: white;
+  }
+
+  &:focus {
+    border: 1.5px solid #828282;
+    box-shadow: 0px 2px 8px #828282;
+    outline: none;
+  }
+
+  .module-item-description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+  }
+
+}
