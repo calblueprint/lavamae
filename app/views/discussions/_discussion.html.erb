@@ -21,7 +21,7 @@
         <a href=""><div class="user-name">Grace Noh</div></a>
         <div class="date">
           <% if @discussion.created_at > Time.now.beginning_of_day %>
-              <%= time_ago_in_words(d.created_at) %> ago
+              <%= time_ago_in_words(@discussion.created_at) %> ago
           <% else %>
               <%= @discussion.created_at.strftime("%b %d, %Y") %>
           <% end %>
@@ -42,6 +42,7 @@
 
   <% @responses.each do |r| %>
     <%= render r %>
+    <%= console.log()
     <% if !r.equal?(@discussion.responses.last) %>
         <hr class="row"/>
     <% end %>
