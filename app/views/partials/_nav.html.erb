@@ -59,6 +59,9 @@
         <% if @discussion %>
         <input type="hidden" name="discussion_id" value=<%= @discussion.id%>>
         <% end %>
+        <% if params[:fav] %>
+        <input type="hidden" name="fav" value=<%= params[:fav]%>>
+        <% end %>
       </form>
       <ul class="nav-items-container pull-right">
         <%if user_signed_in? %>

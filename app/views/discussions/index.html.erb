@@ -9,10 +9,12 @@
         <button class="discussion-tag">Learn More</button>
       </div>
       <% if current_user %>
+        <%= link_to discussions_path(discussion_id: @discussion.id, search: params[:search], fav: params[:fav].nil? ? true : nil) do %>
         <button class="discussion-favorite">
           <i class="fa fa-star-o fa-lg"></i>
           Favorites
         </button>
+        <% end %>
         <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
       <% end %>
     </div>

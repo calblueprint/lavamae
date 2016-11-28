@@ -3,15 +3,22 @@ class DiscussionsController < ApplicationController
   before_action :get_discussion, only: [:edit, :update, :destroy, :favorite, :unfavorite]
 
   def index
-  	@discussions = Discussion.search(params[:search]).order('created_at DESC')
+    @discussions = Discussion.all
     if current_user
       @favorite_discussions = current_user.favorite_discussions
+      if params[:fav]
+        @discussions = @favorite_discussions
+      end
     end
+
+  	@discussions = @discussions.search(params[:search]).order('created_at DESC')
+
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
     else
       @discussion = Discussion.last
     end
+    
     unless @discussion.nil?
       @responses = @discussion.responses.sort_by{|r| [r.score, r.created_at]}.reverse
     end
@@ -65,5 +72,8 @@ class DiscussionsController < ApplicationController
   	def get_discussion
   		@discussion = Discussion.find(params[:id])
   	end
+
+    def save_params
+    end
 
 end
