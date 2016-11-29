@@ -4,12 +4,7 @@
   width: 100%;
   transition: 300ms;
   z-index: 5;
-
-  .container, .container-lg {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-  }
+  color: white;
 
   .logo {
     background-image: image_url('lavamae-logo.svg');
@@ -26,7 +21,6 @@
   }
 
   .nav-item {
-    color: white;
     display: inline-block;
   }
 }
@@ -38,4 +32,57 @@
 
 .nav-home {
   background: transparent;
+}
+
+//smartphones, iPhone, portrait 480x320 phones
+.hamburger {
+  margin-left: auto;
+  padding-right: 10px;
+  display: none;
+}
+
+@media screen and (max-width:630px) {
+  .nav-items-container {
+    position: absolute;
+    right: -1000px;
+    top: 80px;
+    text-align: right;
+    width: 100vw;
+    display: block;
+    background: $blue-light-80;
+    transition: 500ms;
+    height: 100vh;
+
+    .nav-item {
+      width: 100vw;
+      border-bottom: 1px solid $white-20;
+    }
+  }
+
+  .hamburger {
+    display: inherit;
+    float: right;
+  }
+}
+
+@media screen and (max-width:630px) {
+  .nav-items-container {
+    &.responsive {
+      right: 0;
+    }
+
+    .nav-item {
+      padding: 7px;
+
+      .btn-signup, .btn-login {
+        margin-right: 20px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width:700px) {
+  .nav-item {
+    display: inline-block;
+  }
 }

@@ -9,7 +9,7 @@
         <button class="discussion-tag">Learn More</button>
       </div>
       <% if current_user %>
-        <%= link_to discussions_path(discussion_id: @discussion.id, search: params[:search], fav: params[:fav].nil? ? true : nil) do %>
+        <%= link_to discussions_path(discussion_id: params[:discussion_id], search: params[:search], fav: params[:fav].nil? ? true : nil) do %>
         <% if params[:fav] %>
           <button class="discussion-favorite selected">
         <% else %>

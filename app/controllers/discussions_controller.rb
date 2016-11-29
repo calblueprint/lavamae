@@ -42,7 +42,10 @@ class DiscussionsController < ApplicationController
 
   def update
   	@discussion.update(discussion_params)
-  	redirect_to discussions_path(discussion_id: @discussion.id)
+    respond_to do |format|
+      format.json { render json: @discussion.to_json }
+    end
+  	# redirect_to discussions_path(discussion_id: @discussion.id)
   end
 
   def destroy

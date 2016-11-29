@@ -3,8 +3,9 @@
   <div class="nav-home">
     <div class="container">
       <a href="/" class="logo"></a>
-      <ul class="nav-items-container">
-        <%if user_signed_in? %>
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container" id="topNav">
+        <% if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Discussions</button>
@@ -13,9 +14,11 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
+          <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Map</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
@@ -31,9 +34,11 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
+          <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Map</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
@@ -48,6 +53,8 @@
     </div>
   </div>
 
+
+<!-- Special discussion navbar -->
 <% elsif current_page?(discussions_path)%>
   <div class="nav">
     <div class="container-lg">
@@ -63,19 +70,22 @@
         <input type="hidden" name="fav" value=<%= params[:fav]%>>
         <% end %>
       </form>
-      <ul class="nav-items-container pull-right">
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container pull-right" id="topNav">
         <%if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+              <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
             </li>
           <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
+          <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Map</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
@@ -85,15 +95,17 @@
         <%else%>
           <%= link_to discussions_path do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+              <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
             </li>
           <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
+          <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Map</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
@@ -111,21 +123,26 @@
 <!-- ELSE make nav blue -->
 <% else %>
   <div class="nav">
-    <div class="container">
+    <div class="<%= 'container' unless current_page?(static_map_path) %>
+      <%= 'container-lg' if current_page?(static_map_path) %>">
       <a href="/" class="logo"></a>
-      <ul class="nav-items-container">
+      <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
+      <ul class="nav-items-container" id="topNav">
         <%if user_signed_in? %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+              <button class="btn btn-transparent btn-nav">Discussions</button>
             </li>
           <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
+          <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav
+              <%= 'btn-nav-selected' if current_page?(static_map_path) %>">Map</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
@@ -135,15 +152,18 @@
         <%else%>
           <%= link_to discussions_path do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav <%= 'btn-nav-selected' if current_page?(discussions_path) %>">Discussions</button>
+              <button class="btn btn-transparent btn-nav">Discussions</button>
             </li>
           <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Map</button>
-          </li>
+          <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav
+              <%= 'btn-nav-selected' if current_page?(static_map_path) %>">Map</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Resources</button>
           </li>
@@ -158,3 +178,15 @@
     </div>
   </div>
 <% end %>
+
+<!-- HAMBURGER MENU JS -->
+<script>
+function mobileMenu() {
+  var x = document.getElementById("topNav");
+  if (x.className === "nav-items-container") {
+      x.className += " responsive";
+  } else {
+      x.className = "nav-items-container";
+  }
+}
+</script>

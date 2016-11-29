@@ -1,6 +1,11 @@
 <div class="response-container row">
   <div class="response-text pull-left wordwrap">
-  	<%= response.content %>
+  	<% if current_user and current_user == response.user %>
+      <%= react_component "ResponseForm", {discussion: @discussion, response: response} %>
+      <%= react_component "DeleteResponseModal", {discussion: @discussion, response: response} %>
+     <% else %>
+      <%= response.content %>
+    <% end %>
     <i class="upvote-button fa fa-angle-up fa-lg"></i>
     <span class="upvote-count"><%= response.score %> Upvotes</span>
   </div>
@@ -11,7 +16,7 @@
       <div class="date"><%= time_ago_in_words(response.created_at) %> ago</div>
     </div>
     <div class="user-picture">
-      <a href=""><img src="/assets/grace.jpg" /></a>
+      <a href=""><%= image_tag("grace.jpg") %></a>
     </div>
   </div>
 </div>
@@ -22,8 +27,7 @@
 </div>
 <div class="response-actions row">
   <% if current_user and current_user == response.user %>
-    <%= button_to 'Delete', discussion_response_path(response.discussion_id, response),
-    method: :delete, class: 'btn btn-action btn-sm btn-destroy pull-right' %>
+
     <%= button_to 'Edit', edit_discussion_response_path(response.discussion_id, response),
     method: :get, class: 'btn btn-action btn-sm pull-right' %>
   <% end %>
