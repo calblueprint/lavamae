@@ -7,7 +7,6 @@
   display: flex;
   position: fixed;
   top: 80px;
-  z-index: 100;
   align-items: center;
   color: $blue-light;
   background-color: $blue-light-20;
@@ -165,6 +164,7 @@
   .discussion-header {
     padding-top: 0;
     padding-bottom: 0;
+    z-index: 4;
   }
 
   .discussion-tag {

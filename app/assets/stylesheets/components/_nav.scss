@@ -53,6 +53,7 @@
     background: $blue-light-80;
     transition: 500ms;
     height: 100vh;
+    z-index: 100;
 
     .nav-item {
       width: 100vw;
