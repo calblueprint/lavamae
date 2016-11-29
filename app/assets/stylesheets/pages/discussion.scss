@@ -5,12 +5,16 @@
 
 .discussion-header {
   display: flex;
+  position: fixed;
+  top: 80px;
+  z-index: 100;
   align-items: center;
   color: $blue-light;
   background-color: $blue-light-20;
   padding: 10px 15px;
   min-height: 60px;
   width: 100vw;
+  box-sizing: border-box;
 }
 
 .form-group {
@@ -49,13 +53,14 @@
   width: 100%;
   height: 100%;
   top: 0;
-  padding-top: 80px;
+  padding-top: 141px;
   box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 .discussion-item-container {
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
   width: 35vw;
 
   .discussion-item-description {
@@ -74,7 +79,7 @@
   background: white;
   height: 100%;
   box-sizing: border-box;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .discussion-tag-container {
@@ -147,13 +152,13 @@
     position: absolute;
     z-index: 3;
     left: -1000px;
-    top: 140px;
-    overflow-x: auto;
+    top: 0;
+    overflow: auto;
     width: 100vw;
     display: inline-block;
     white-space: nowrap;
     transition: 500ms;
-    padding: 10px 15px;
+    padding: 18px 15px;
     background: white;
   }
 
@@ -171,7 +176,7 @@
     position: absolute;
     z-index: 3;
     left: -1000px;
-    top: 184px;
+    top: 16px;
     width: 100vw;
     display: block;
     transition: 500ms;
