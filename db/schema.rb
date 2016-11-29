@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020204628) do
+ActiveRecord::Schema.define(version: 20161128083310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20161020204628) do
   end
 
   add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "place"
+    t.decimal  "lat",        precision: 10, scale: 6
+    t.decimal  "lng",        precision: 10, scale: 6
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
 
   create_table "responses", force: :cascade do |t|
     t.text     "content"
@@ -88,12 +96,13 @@ ActiveRecord::Schema.define(version: 20161020204628) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "email",                  default: "", null: false
-    t.string   "city"
-    t.string   "country"
+    t.integer  "location_id"
   end
 
+  add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "discussions", "users"
   add_foreign_key "responses", "users"
+  add_foreign_key "users", "locations"
 end
