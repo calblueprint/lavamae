@@ -10,7 +10,11 @@
       </div>
       <% if current_user %>
         <%= link_to discussions_path(discussion_id: @discussion.id, search: params[:search], fav: params[:fav].nil? ? true : nil) do %>
-        <button class="discussion-favorite">
+        <% if params[:fav] %>
+          <button class="discussion-favorite selected">
+        <% else %>
+          <button class="discussion-favorite">
+        <% end %>
           <i class="fa fa-star-o fa-lg"></i>
           Favorites
         </button>
@@ -49,5 +53,4 @@ $('.favorite-discussion').click(function(){
     $.ajax({url: '/favorite_discussion/' + data_id, type: 'DELETE' });
   }
 });
-
 </script>
