@@ -41,9 +41,11 @@
               <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to resource_topics_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>

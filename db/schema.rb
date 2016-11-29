@@ -41,6 +41,24 @@ ActiveRecord::Schema.define(version: 20161120235508) do
 
   add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
 
+  create_table "resource_topics", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "attachment"
+    t.integer  "resource_topic_id"
+  end
+
+  add_index "resources", ["user_id"], name: "index_resources_on_user_id", using: :btree
+
   create_table "responses", force: :cascade do |t|
     t.text     "content"
     t.integer  "score"
@@ -108,5 +126,6 @@ ActiveRecord::Schema.define(version: 20161120235508) do
 
   add_foreign_key "discussions", "users"
   add_foreign_key "documents", "users"
+  add_foreign_key "resources", "users"
   add_foreign_key "responses", "users"
 end

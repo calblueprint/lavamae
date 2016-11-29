@@ -25,5 +25,4 @@ class Discussion < ActiveRecord::Base
       self.all
     end
   end
-
 end
