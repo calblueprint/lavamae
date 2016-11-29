@@ -1,26 +1,28 @@
-<div class="user-profile col-xs-12 col-md-4">
+<div class="user-profile col-xs-12 col-md-5">
   <div class="user-info">
-    <div>
-      Name:
-      <%= @user.first_name %>
-      <%= @user.last_name %>
-    </div>
-    <div>
-      Email:
-      <%= @user.email %>
-    </div>
-    <div>
-      Organization:
-      <%= @user.organization %>
-    </div>
-    <div>
-      Location:
-      <%= @user.city %>,
-      <%= @user.country %>
+    <div class="row">
+      <div class="col-md-2 col-xs-5 user-profile-fields">
+        Name<br>
+        Email<br>
+        Organization<br>
+        Location<br>
+      </div>
+      <div class="col-md-3 col-xs-7 vertical-line">
+        <div>
+          <%= @user.first_name %>
+          <%= @user.last_name %>
+        </div>
+        <%= @user.email %><br>
+        <%= @user.organization %><br>
+        <div>
+          <%= @user.city %>,
+          <%= @user.country %>
+        </div>
+      </div>
     </div>
     <%if current_user.id == @user.id %>
-      </div>
-        <%= react_component('EditProfileModal', style: "btn btn-login", user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
+      <div class="row">
+        <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
         <%= react_component('ChangePasswordModal', user_id: @user.id) %>
       </div>
     <% end %>

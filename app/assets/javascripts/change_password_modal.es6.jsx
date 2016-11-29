@@ -64,7 +64,7 @@ class ChangePasswordModal extends React.Component {
 
     return (
       <div>
-        <button className={this.state.btnStyle} onClick={this._openModal}>Change Password</button>
+        <button className="btn btn-outline" onClick={this._openModal}>Change Password</button>
         <Modal className="modal" show={this.state.show_modal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Change Password</Modal.Title>

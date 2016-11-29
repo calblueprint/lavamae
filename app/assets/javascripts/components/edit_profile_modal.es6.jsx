@@ -1,5 +1,4 @@
 /**
-* @props style - button style
 * @props user_id - user's id
 * @props first_name - user's current first name
 * @props last_name - user's current last name
@@ -35,7 +34,6 @@ class EditProfileModal extends React.Component {
       country: this.props.country,
       countries: this.props.countries || [],
       on_map: this.props.on_map,
-      btnStyle: this.props.style
     };
   }
 
@@ -93,7 +91,7 @@ class EditProfileModal extends React.Component {
 
     return (
       <div>
-        <button className={this.state.btnStyle} onClick={this._openModal}>Edit</button>
+        <button className="btn btn-blue modal-btn" onClick={this._openModal}>Edit</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Account Information</Modal.Title>
@@ -156,7 +154,6 @@ class EditProfileModal extends React.Component {
 }
 
 EditProfileModal.propTypes = {
-  style        : React.PropTypes.string.isRequired,
   user_id      : React.PropTypes.number.isRequired,
   first_name   : React.PropTypes.string.isRequired,
   last_name    : React.PropTypes.string.isRequired,
