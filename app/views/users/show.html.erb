@@ -1,4 +1,4 @@
-<div class="user-profile col-xs-12 col-md-5">
+<div class="user-profile">
   <div class="user-info">
     <div class="row">
       <div class="col-md-2 col-xs-5 user-profile-fields">
@@ -22,8 +22,12 @@
     </div>
     <%if current_user.id == @user.id %>
       <div class="row">
-        <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
-        <%= react_component('ChangePasswordModal', user_id: @user.id) %>
+        <div class="col-md-2 col-xs-5">
+          <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, city: @user.city, country: @user.country, countries: CS.countries.values, on_map: @user.on_map) %>
+        </div>
+        <div class="col-md-3 col-xs-7">
+          <%= react_component('ChangePasswordModal', user_id: @user.id) %>
+        </div>
       </div>
     <% end %>
   </div>
