@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   resources :discussions do
     resources :responses
   end
+
+  resources :locations, :only =>[:create]
 end

@@ -13,10 +13,11 @@ class RegistrationModal extends React.Component {
     this._renderInput = this._renderInput.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
+    this._getLongitudeAndLatitude = this._getLongitudeAndLatitude.bind(this);
+    this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this.state = {
       map_checked: false,
-      countries: this.props.countries || [],
-      country: this.props.countries[0] || "",
+      location: "",
     };
   }
 
@@ -39,14 +40,14 @@ class RegistrationModal extends React.Component {
     window.location = "/users/sign_in";
   }
 
-  _attemptRegistration(e) {
+  _attemptRegistration(response) {
+    let loc_id = response.id;
     const signupFields = {
       user: {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         organization: this.state.organization,
-        city: this.state.city,
-        country: this.state.country,
+        location_id: loc_id,
         on_map: this.state.map_checked,
         email: this.state.email,
         password: this.state.password,
@@ -74,13 +75,34 @@ class RegistrationModal extends React.Component {
     this.setState({ country: e.target.value });
   }
 
-  render() {
-    const countryOptions = this.state.countries.map((country) => {
-            return (
-                <option key={country}>{country}</option>
-            );
-        });
+  _getLongitudeAndLatitude() {
+    this.setState({ location:  document.getElementById("my-address").value }, function () {
+      geocoder = new google.maps.Geocoder();
+      var address = this.state.location;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          const locationFields = {
+            location: {
+              place: this.state.location,
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng(),
+            }
+          };
+          APIRequester.post("/locations", locationFields, this._attemptRegistration);
+        }
+        else {
+          message = "Geocode was not successful for the following reason: " + status;
+          this._error(message);
+        }
+      }.bind(this));
+    });
+  }
 
+  _startSignUpProcess(e) {
+    this._getLongitudeAndLatitude();
+  }
+
+  render() {
     return (
       <section className="signup">
         <div className="container signup-container">
@@ -93,15 +115,11 @@ class RegistrationModal extends React.Component {
               <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
-              <div className="input-field">{ this._renderInput("city", "City", "text", "Berkeley") }</div>
-
               <div className="input-field">
-                <label>
-                  Country
-                  <select name="country" defaultValue="None" onChange={this._handleSelect} >
-                    {countryOptions}
-                  </select>
-                </label>
+                <div>
+                  <label htmlFor="location">Location</label>
+                  <input id="my-address" name="location" type="text" placeholder="Berkeley, CA, United States" />
+                </div>
               </div>
 
               <div className="input-field">
@@ -116,7 +134,7 @@ class RegistrationModal extends React.Component {
               </div>
 
               <button className="btn btn-blue" name="submit" type="button"
-                onClick={this._attemptRegistration}>Create Account</button>
+                onClick={this._startSignUpProcess}>Create Account</button>
             </form>
           <div className="login-link">
             <a onClick={this._toLogin} >Already have an account?</a>
