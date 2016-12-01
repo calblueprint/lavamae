@@ -103,11 +103,7 @@ class RegistrationModal extends React.Component {
 
   _startSignUpProcess(e) {
     if (this.state.map_checked) {
-      if (!this.state.organization || this.state.organization.length == 0) {
-        this._error("Please enter an organization name if you want to be on the map.");
-      } else {
-        this._getLongitudeAndLatitudeAndSignUp();
-      }
+      this._getLongitudeAndLatitudeAndSignUp();
     } else {
       this._attemptRegistration();
     }
