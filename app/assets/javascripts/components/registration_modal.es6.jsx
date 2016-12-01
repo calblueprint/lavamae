@@ -41,16 +41,16 @@ class RegistrationModal extends React.Component {
   }
 
   _attemptRegistration(response = null) {
-    var loc_id = null;
+    var locId = null;
     if (response) {
-      loc_id = response.id;
+      locId = response.id;
     }
     const signupFields = {
       user: {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         organization: this.state.organization,
-        location_id: loc_id,
+        location_id: locId,
         on_map: this.state.map_checked,
         email: this.state.email,
         password: this.state.password,
