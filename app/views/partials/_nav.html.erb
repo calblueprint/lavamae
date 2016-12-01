@@ -78,7 +78,7 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <%= link_to map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+          <%= link_to map_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Map</button>
             </li>
@@ -120,8 +120,8 @@
 <!-- ELSE make nav blue -->
 <% else %>
   <div class="nav">
-    <div class="<%= 'container' unless current_page?(static_map_path) %>
-      <%= 'container-lg' if current_page?(static_map_path) %>">
+    <div class="<%= 'container' unless current_page?(map_path) %>
+      <%= 'container-lg' if current_page?(map_path) %>">
       <a href="/" class="logo"></a>
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
       <ul class="nav-items-container" id="topNav">
@@ -137,7 +137,7 @@
           <%= link_to map_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav
-              <%= 'btn-nav-selected' if current_page?(static_map_path) %>">Map</button>
+              <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
             </li>
           <% end %>
           <li class="nav-item">
@@ -155,7 +155,7 @@
           <li class="nav-item">
             <button class="btn btn-transparent btn-nav">Stories</button>
           </li>
-          <%= link_to static_map_path do %> <!-- TEMPORARY: STATIC MAP VIEW -->
+          <%= link_to map_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav
               <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
