@@ -13,7 +13,7 @@ class RegistrationModal extends React.Component {
     this._renderInput = this._renderInput.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
-    this._getLongitudeAndLatitude = this._getLongitudeAndLatitude.bind(this);
+    this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this.state = {
       map_checked: false,
@@ -40,8 +40,11 @@ class RegistrationModal extends React.Component {
     window.location = "/users/sign_in";
   }
 
-  _attemptRegistration(response) {
-    let loc_id = response.id;
+  _attemptRegistration(response = null) {
+    var loc_id = null;
+    if (response) {
+      loc_id = response.id;
+    }
     const signupFields = {
       user: {
         first_name: this.state.first_name,
@@ -75,7 +78,7 @@ class RegistrationModal extends React.Component {
     this.setState({ country: e.target.value });
   }
 
-  _getLongitudeAndLatitude() {
+  _getLongitudeAndLatitudeAndSignUp() {
     this.setState({ location:  document.getElementById("my-address").value }, function () {
       geocoder = new google.maps.Geocoder();
       var address = this.state.location;
@@ -91,7 +94,7 @@ class RegistrationModal extends React.Component {
           APIRequester.post("/locations", locationFields, this._attemptRegistration);
         }
         else {
-          message = "Geocode was not successful for the following reason: " + status;
+          message = "Location invalid, please try again!";
           this._error(message);
         }
       }.bind(this));
@@ -99,7 +102,15 @@ class RegistrationModal extends React.Component {
   }
 
   _startSignUpProcess(e) {
-    this._getLongitudeAndLatitude();
+    if (this.state.map_checked) {
+      if (!this.state.organization || this.state.organization.length == 0) {
+        this._error("Please enter an organization name if you want to be on the map.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp();
+      }
+    } else {
+      this._attemptRegistration();
+    }
   }
 
   render() {
