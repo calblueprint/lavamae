@@ -1,21 +1,12 @@
 <div class="response-container row">
-  <div class="response-text pull-left wordwrap">
-  	<% if current_user and current_user == response.user %>
-      <%= react_component "ResponseForm", {discussion: @discussion, response: response} %>
-      <%= react_component "DeleteResponseModal", {discussion: @discussion, response: response} %>
-     <% else %>
-      <%= response.content %>
-    <% end %>
-  </div>
-
   <div class="user-container pull-right">
     <div class="name-date">
       <a href=""><div class="user-name"><%= response.user.full_name %></div></a>
       <div class="date"><%= time_ago_in_words(response.created_at) %> ago</div>
     </div>
     <div class="user-picture">
-      <% if @discussion.user.profile_pic? %>
-        <a href=""><%= image_tag @discussion.user.profile_pic.url(:thumb) %></a>
+      <% if response.user.profile_pic? %>
+        <a href=""><%= image_tag response.user.profile_pic.url(:thumb) %></a>
       <% else %>
         <a href=""><%= image_tag("default.png") %></a>
       <% end %>
