@@ -6,7 +6,7 @@
   <%= button_to "Join the Movement", root_path, :class => "btn btn-blue btn-join", :method  => :get %>
 </div>
 <script>
-  mapboxgl.accessToken = 'pk.eyJ1Ijoiam9ubWNodSIsImEiOiJjaXRwaGh1cWowMXJtMnRtb3VpZ3UycW1zIn0.XyBxoEttJMIi96kJAhdJzA';
+  mapboxgl.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
 
   var map = new mapboxgl.Map({
     container: 'map',
