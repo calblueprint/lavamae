@@ -27,7 +27,7 @@ class ResourcePage extends React.Component {
 
     return (
       <section className="module">
-        <div className="container module-container">
+        <div className="module-container">
           <div className="module-search row">
           <div className= "module-title"> Modules </div>
 
