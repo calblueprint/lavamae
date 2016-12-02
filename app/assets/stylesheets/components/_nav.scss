@@ -39,19 +39,21 @@
   margin-left: auto;
   padding-right: 10px;
   display: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width:630px) {
   .nav-items-container {
     position: absolute;
     right: -1000px;
-    top: 80px;
+    top: $nav-height;
     text-align: right;
     width: 100vw;
     display: block;
     background: $blue-light-80;
     transition: 500ms;
     height: 100vh;
+    z-index: 100;
 
     .nav-item {
       width: 100vw;

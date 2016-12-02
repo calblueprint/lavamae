@@ -21,16 +21,17 @@
       <% end %>
     </div>
   </div>
+
+  <div class="response-text">
+  	<% if current_user and current_user == response.user %>
+      <%= react_component "ResponseForm", {discussion: @discussion, response: response} %>
+     <% else %>
+      <%= response.content %>
+    <% end %>
+  </div>
 </div>
 
-<div class="action-container pull-left">
+<div class="action-container">
   <i class="upvote-button fa fa-angle-up fa-lg"></i>
   <span class="upvote-count"><%= response.score %> Upvotes</span>
-</div>
-<div class="response-actions row">
-  <% if current_user and current_user == response.user %>
-
-    <%= button_to 'Edit', edit_discussion_response_path(response.discussion_id, response),
-    method: :get, class: 'btn btn-action btn-sm pull-right' %>
-  <% end %>
 </div>

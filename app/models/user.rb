@@ -34,6 +34,7 @@ class User < ActiveRecord::Base
   mount_base64_uploader :profile_pic, AvatarUploader
   has_many :discussions
   has_many :responses
+  belongs_to :location
 
   def full_name
   	return first_name + " " + last_name
