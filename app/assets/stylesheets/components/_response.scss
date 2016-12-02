@@ -2,6 +2,30 @@
   padding: 15px 0;
 }
 
+.response-form-header {
+  padding-bottom: 15px;
+}
+
 .response-container {
-  padding: 15px 0;
+  padding: 15px;
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid $blue-light-20;
+  border-radius: 2px;
+}
+
+.responses-title {
+  margin-left: -15px;
+  padding-bottom: 15px;
+}
+
+.response-text {
+  flex: 1;
+  padding-right: 15px;
+}
+
+.upvote-container {
+  width: 100%;
+  text-align: right;
+  padding-top: 15px;
 }

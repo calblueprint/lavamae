@@ -95,8 +95,6 @@ class DiscussionForm extends React.Component {
   renderContent() {
     return (
       <div>
-        <h2 className="discussion-title">{this.state.title}</h2>
-        <p className="discussion-description wordwrap">{this.state.content}</p>
         <button className='btn btn-sm btn-action btn-destroy pull-right' onClick={this._openModal}>Delete</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
@@ -115,6 +113,8 @@ class DiscussionForm extends React.Component {
           </form>
         </Modal>
         <button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>
+        <h2 className="discussion-title">{this.state.title}</h2>
+        <p className="discussion-description wordwrap">{this.state.content}</p>
       </div>
     )
   }
