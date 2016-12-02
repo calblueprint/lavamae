@@ -4,9 +4,6 @@
 * @props last_name - user's current last name
 * @props email - user's current email
 * @props organization - user's current orgnization
-* @props city - user's current city
-* @props country - user's current country
-* @props countries - list of countries
 * @props on_map - true if user appears on map
 */
 
@@ -30,9 +27,6 @@ class EditProfileModal extends React.Component {
       last_name: this.props.last_name,
       email: this.props.email,
       organization: this.props.organization,
-      city: this.props.city,
-      country: this.props.country,
-      countries: this.props.countries || [],
       on_map: this.props.on_map,
     };
   }
@@ -73,22 +67,12 @@ class EditProfileModal extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       organization: this.state.organization,
-      city: this.state.city,
-      country: this.state.country,
       on_map: this.state.on_map,
     };
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
   }
 
   render () {
-    const countryOptions = this.state.countries.map((country) => {
-      if (country != "country_name") {
-        return (
-          <option key={country} value={country}>{country}</option>
-        );
-      }
-    });
-
     return (
       <div>
         <button className="btn btn-blue modal-btn" onClick={this._openModal}>Edit</button>
@@ -119,26 +103,13 @@ class EditProfileModal extends React.Component {
                        placeholder="Lava Bae" defaultValue={this.props.organization} />
               </div>
               <div className="input-field">
-                <label htmlFor="city">City</label>
-                <input id="city-input" type="city" name="city" onChange={this._handleChange}
-                       placeholder="Berkeley" defaultValue={this.props.city} />
-              </div>
-              <div>
-                <label>
-                  Country:
-                  <select name="country" value={this.state.country} onChange={this._handleSelect} >
-                    {countryOptions}
-                  </select>
-                </label>
-              </div>
-              <div>
-                <label>
-                  Appear on map:
+                <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.on_map}
                     onChange={this._handleCheckboxChange}
                     className="input-checkbox"/>
+                  <div className="control__indicator"></div>
                 </label>
               </div>
             </Modal.Body>
@@ -159,8 +130,5 @@ EditProfileModal.propTypes = {
   last_name    : React.PropTypes.string.isRequired,
   email        : React.PropTypes.string.isRequired,
   organization : React.PropTypes.string.isRequired,
-  city         : React.PropTypes.string.isRequired,
-  country      : React.PropTypes.string.isRequired,
-  countries    : React.PropTypes.array.isRequired,
   on_map       : React.PropTypes.bool.isRequired,
 };

@@ -14,8 +14,11 @@ class RegistrationModal extends React.Component {
     this._handleSelect = this._handleSelect.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
+    this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       map_checked: false,
+      profile_pic: "",
+      imagePreviewUrl: "",
       location: "",
     };
   }
@@ -48,6 +51,7 @@ class RegistrationModal extends React.Component {
         email: this.state.email,
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
+        profile_pic: this.state.profile_pic,
       }
     };
 
@@ -70,6 +74,19 @@ class RegistrationModal extends React.Component {
 
   _handleSelect(e) {
     this.setState({ country: e.target.value });
+  }
+
+  _handleFileChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let attachment = e.target.files[0];
+    reader.onload = (file) => {
+      this.setState({
+        profile_pic: file.target.result,
+        imagePreviewUrl: reader.result,
+      });
+    }
+    reader.readAsDataURL(attachment);
   }
 
   _getLongitudeAndLatitudeAndSignUp() {
@@ -97,13 +114,24 @@ class RegistrationModal extends React.Component {
 
   _startSignUpProcess(e) {
     if (this.state.map_checked) {
-      this._getLongitudeAndLatitudeAndSignUp();
+      if (!this.state.organization || this.state.organization.length == 0) {
+        this._error("Please enter an organization name if you want to be on the map.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp();
+      }
     } else {
       this._attemptRegistration();
     }
   }
 
   render() {
+    let imagePreviewUrl = this.state.imagePreviewUrl;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
     return (
       <section className="signup">
         <div className="container signup-container">
@@ -133,7 +161,13 @@ class RegistrationModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
-
+              <div className="input-field">
+                <label htmlFor="file-input">Profile Picture</label>
+                <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+              </div>
+              <div className="imgPreview">
+                {$imagePreview}
+              </div>
               <button className="btn btn-blue" name="submit" type="button"
                 onClick={this._startSignUpProcess}>Create Account</button>
             </form>

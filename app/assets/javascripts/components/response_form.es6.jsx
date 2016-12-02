@@ -82,9 +82,9 @@ class ResponseForm extends React.Component {
 
   renderContent() {
     return (
-      <div className="response-container">
+      <div>
         <p class="discussion-description row wordwrap"> {this.state.content} </p><br></br>
-        <div className="action-container">
+        <div className="action-container pull-left">
           <button className="btn btn-sm btn-action" onClick={this._enableForm}>Edit</button>
           <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
           <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >

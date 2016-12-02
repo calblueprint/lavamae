@@ -11,8 +11,8 @@ class RegistrationsController < Devise::RegistrationsController
       render_json_message(:ok, message: 'Account created!', to: user_path(resource.id))
     else
       clean_up_passwords resource
-      if resource.on_map && !resource.city
-        render_json_message(:forbidden, errors: resource.errors.full_messages + ["City can't be blank"])
+      if resource.on_map && !resource.location_id
+        render_json_message(:forbidden, errors: resource.errors.full_messages + ["Please choose a location."])
       else
         render_json_message(:forbidden, errors: resource.errors.full_messages)
       end
@@ -28,7 +28,7 @@ class RegistrationsController < Devise::RegistrationsController
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) do |u|
       u.permit(:first_name, :last_name, :organization, :location_id, :on_map,
-               :email, :password, :password_confirmation)
+               :email, :password, :password_confirmation, :profile_pic)
     end
   end
 
