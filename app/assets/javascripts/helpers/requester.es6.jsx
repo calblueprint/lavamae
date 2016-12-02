@@ -43,7 +43,7 @@ class Requester {
     }
 
     getJSON(endpoint, success, data = {}) {
-        this._attemptAjax(`${endpoint}.json`, 'GET', data,
+        this._attemptAjax(endpoint, 'GET', data,
             { dataType : 'json' }, success, this._getErrorHandler);
     }
 
