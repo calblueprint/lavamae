@@ -41,12 +41,6 @@ class ResourceTopicsController < ApplicationController
     end
   end
 
-  # def get_resources
-  #   @resource_topic = ResourceTopic.find(params[:id])
-  #   @resources = @resource_topic.resources
-  #   render json: @resources
-  # end
-
   private
   def resource_topic_params
     params.require(:resource_topic).permit(:name)
