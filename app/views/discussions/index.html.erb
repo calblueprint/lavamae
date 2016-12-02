@@ -1,52 +1,64 @@
-<section class="discussion">
-    <div class="discussion-header row">
-      <div class="discussion-tag-container pull-left">
-        <i class="fa fa-tags fa-lg"></i>
-        <button class="discussion-tag">Starting up</button>
-        <button class="discussion-tag">Funding</button>
-        <button class="discussion-tag">Volunteering</button>
-        <button class="discussion-tag">Partnering</button>
-        <button class="discussion-tag">Learn More</button>
-      </div>
-      <% if current_user %>
-        <button class="discussion-favorite">
-          <i class="fa fa-star-o fa-lg"></i>
-          Favorites
-        </button>
-        <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
-      <% end %>
+<div class="discussion-container">
+  <div class="discussion-header">
+    <i class="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
+    <div class="discussion-tag-container" id="tags">
+      <i class="fa fa-tags fa-lg"></i>
+      <button class="discussion-tag">Starting up</button>
+      <button class="discussion-tag">Funding</button>
+      <button class="discussion-tag">Volunteering</button>
+      <button class="discussion-tag">Partnering</button>
+      <button class="discussion-tag">Learn More</button>
     </div>
-  <div class="container-lg">
-    <div class="discussion-container row">
-      <div class="discussion-item-container col-xs-12 col-md-4">
-        <% @discussions.each do |d| %>
-          <%= link_to discussions_path(discussion_id: d.id) do %>
-            <div tabindex="4" class="discussion-item row">
-              <h4 class="discussion-item-title">
-                <%= d.title %>
-                <span class="change-icon">
-                  <i class="fa fa-star-o pull-right"></i>
-                  <i class="fa fa-star pull-right"></i>
-                </span>
-                <div class = "discussion-item-date pull-right">
-                  <% if d.created_at > Time.now.beginning_of_day %>
-                      <%= time_ago_in_words(d.created_at) %> ago
-                  <% else %>
-                      <%= d.created_at.strftime("%b %d, %Y") %>
-                  <% end %>
-                </div>
-              </h4>
-              <p class="discussion-item-description">
-                <%= d.content %>
-              </p>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <% if @discussion %>
-          <%= render @discussion %>
-      <% end %>
-      </div>
-    </div>
+    <% if current_user %>
+      <button class="discussion-favorite">
+        <i class="fa fa-star-o fa-lg"></i>
+        <span class="favorites-text">Favorites</span>
+      </button>
+      <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right create-discussion' %>
+    <% end %>
   </div>
-</section>
+  <div class="discussion-item-container" id="discussions">
+    <% @discussions.each do |d| %>
+      <%= link_to discussions_path(discussion_id: d.id) do %>
+        <div tabindex="4" class="discussion-item">
+          <h4 class="discussion-item-title">
+            <%= d.title %>
+            <span class="change-icon">
+              <i class="fa fa-star-o pull-right"></i>
+              <i class="fa fa-star pull-right"></i>
+            </span>
+            <div class = "discussion-item-date pull-right">
+              <% if d.created_at > Time.now.beginning_of_day %>
+                  <%= time_ago_in_words(d.created_at) %> ago
+              <% else %>
+                  <%= d.created_at.strftime("%b %d, %Y") %>
+              <% end %>
+            </div>
+          </h4>
+          <p class="discussion-item-description">
+            <%= d.content %>
+          </p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <% if @discussion %>
+      <%= render @discussion %>
+  <% end %>
+  </div>
+</div>
+
+<!-- DISCUSSIONS MOBILE MENU JS -->
+<script>
+function discussionsMenu() {
+  var x = document.getElementById("discussions");
+  var y = document.getElementById("tags");
+  if (x.className === "discussion-item-container" || y.className === "discussion-tag-container") {
+      x.className += " responsive";
+      y.className += " responsive";
+  } else {
+      x.className = "discussion-item-container";
+      y.className = "discussion-tag-container";
+  }
+}
+</script>

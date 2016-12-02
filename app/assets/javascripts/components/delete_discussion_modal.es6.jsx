@@ -47,7 +47,7 @@ class DeleteDiscussionModal extends React.Component {
   render () {
     return (
       <div>
-        <button className='btn-blue btn' onClick={this._openModal}>Delete</button>
+        <button className='btn btn-sm btn-action btn-destroy pull-right' onClick={this._openModal}>Delete</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Delete Discussion?</Modal.Title>

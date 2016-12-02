@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   get '/static_discussion', to: 'static_pages#discussion'
   get '/static_map', to: 'static_pages#map'
 
-  devise_for :users, skip: [:registrations, :passwords]
+  get '/map', to: 'maps#map'
+  devise_for :users, skip: [:registrations]
 
   devise_scope :user do
     get '/sign_up' => 'registrations#new'
@@ -21,4 +22,6 @@ Rails.application.routes.draw do
   resources :discussions do
     resources :responses
   end
+
+  resources :locations, :only =>[:create]
 end
