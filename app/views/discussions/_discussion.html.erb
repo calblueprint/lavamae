@@ -42,7 +42,6 @@
 
   <% @responses.each do |r| %>
     <%= render r %>
-    <%= console.log()
     <% if !r.equal?(@discussion.responses.last) %>
         <hr class="row"/>
     <% end %>

@@ -12,7 +12,7 @@
       <div class="discussion-item-container col-xs-12 col-md-4">
         <% @discussions.each do |d| %>
           <%= link_to discussions_path(discussion_id: d.id) do %>
-            <div tabindex="4" class="discussion-item row">
+            <div tabIndex="4" class="discussion-item row">
               <h4 class="discussion-item-title">
                 <%= d.title %>
                 <div class = "discussion-item-date">

@@ -78,7 +78,7 @@ class ResourceUploadModal extends React.Component {
       });
     return (
       <div>
-        <button overStyle={{background: 'blue'}} onClick={this._openModal}>Upload Resource</button>
+        <button className="btn btn-blue btn-nav" onClick={this._openModal}>Upload Resource</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Upload New Resource</Modal.Title>

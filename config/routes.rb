@@ -14,5 +14,7 @@ Rails.application.routes.draw do
   end
 
   resources :resources
-  resources :resource_topics
+  resources :resource_topics do
+    get '/resource_topics/:id', to: 'resource_topics#get_resources'
+  end
 end
