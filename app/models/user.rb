@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  validates :first_name, :last_name, :password_confirmation, presence: true
+  validates :first_name, :last_name, presence: true
   mount_base64_uploader :profile_pic, AvatarUploader
   has_many :discussions
   has_and_belongs_to_many :favorite_discussions, :class_name => "Discussion"

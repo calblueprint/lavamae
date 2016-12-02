@@ -8,15 +8,19 @@ class RegistrationsController < Devise::RegistrationsController
     build_resource(sign_up_params)
     if resource.save
       sign_in(resource_name, resource)
-      render_json_message(:ok, message: 'Account created!', to: root_path)
+      render_json_message(:ok, message: 'Account created!', to: user_path(resource.id))
     else
       clean_up_passwords resource
-      if resource.on_map && !resource.city
-        render_json_message(:forbidden, errors: resource.errors.full_messages + ["City can't be blank"])
+      if resource.on_map && !resource.location_id
+        render_json_message(:forbidden, errors: resource.errors.full_messages + ["Please choose a location."])
       else
         render_json_message(:forbidden, errors: resource.errors.full_messages)
       end
     end
+  end
+
+  def password_reset
+    @token = params[:reset_password_token]
   end
 
   protected

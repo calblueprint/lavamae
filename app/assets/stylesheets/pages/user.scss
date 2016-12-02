@@ -1,0 +1,33 @@
+.user-registration {
+  padding-top: 80px;
+}
+
+.vertical-line {
+  border-left: solid $blue-dark;
+  flex: 1;
+}
+
+.user-profile {
+  padding-top: 100px;
+  height: 600px;
+  background: $blue-light-20;
+}
+
+.user-info {
+  background: white;
+  height: 250px;
+  width: 350px;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  padding: 15px;
+}
+
+.user-flex {
+  display: flex;
+}
+
+.user-profile-fields {
+  color: $blue-dark;
+  font-weight: bold;
+  width: 100px;
+}

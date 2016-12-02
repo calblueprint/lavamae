@@ -6,7 +6,6 @@ class RegistrationModal extends React.Component {
   constructor(props) {
     super(props);
     this._handleChange = this._handleChange.bind(this);
-    this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this._toLogin = this._toLogin.bind(this);
     this._attemptRegistration = this._attemptRegistration.bind(this);
@@ -26,12 +25,6 @@ class RegistrationModal extends React.Component {
 
   _handleChange(e) {
     this.setState({ [$(e.target).attr("name")] : $(e.target).val() });
-  }
-
-  _success(msg) {
-    toastr.options.positionClass = 'toast-bottom-right';
-    toastr.success("Sign up successful!");
-    window.location = "/";
   }
 
   _error(msg) {
@@ -61,7 +54,8 @@ class RegistrationModal extends React.Component {
         profile_pic: this.state.profile_pic,
       }
     };
-    APIRequester.post("/sign_up", signupFields, this._success);
+
+    APIRequester.post("/sign_up", signupFields, (msg) => {});
   }
 
   _renderInput(name, label, type, placeholder) {
@@ -120,7 +114,11 @@ class RegistrationModal extends React.Component {
 
   _startSignUpProcess(e) {
     if (this.state.map_checked) {
-      this._getLongitudeAndLatitudeAndSignUp();
+      if (!this.state.organization || this.state.organization.length == 0) {
+        this._error("Please enter an organization name if you want to be on the map.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp();
+      }
     } else {
       this._attemptRegistration();
     }
