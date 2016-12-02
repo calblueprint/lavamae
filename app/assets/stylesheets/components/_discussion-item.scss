@@ -3,8 +3,8 @@
   cursor: pointer;
   color: $blue-dark;
   height: 120px;
-  border: 2px solid transparent;
-  border-bottom: 2px solid $blue-light;
+  border: 1px solid transparent;
+  border-bottom: 1px solid $blue-light;
   padding: 15px;
   transition: 300ms;
 
@@ -20,5 +20,4 @@
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
   }
-
 }

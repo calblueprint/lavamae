@@ -1,17 +1,25 @@
-<section class="discussion">
-  <%= form_for @discussion, url: discussions_path do |f| %>
-  	<!-- <head> New Discussion Form</head> -->
+<section class="create">
+  <div class="container signup-container">
+    <div class="signup-row">
+      <h3>Create a Discussion</h3>
+      <%= form_for @discussion, url: discussions_path do |f| %>
+        <!-- <head> New Discussion Form</head> -->
+      <div class="input-field">
+        <%= f.label :title %>
+        <br>
+        <%= f.text_field :title %>
+      </div>
 
-  <%= f.label :title %>
-  <br>
-  <%= f.text_field :title %>
-
-  <p>
-    <%= f.label :body %>
-    <br>
-    <%= f.text_area :content %>
-  </p>
-
-  <%= f.submit %>
-  <% end %>
+      <div class="input-field">
+        <p>
+          <%= f.label :body %>
+          <br>
+          <%= f.text_area :content %>
+        </p>
+      </div>
+      <br />
+      <%= f.submit 'create', class:"btn btn-blue" %>
+      <% end %>
+    </div>
+  </div>
 </section>

@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, presence: true
   has_many :discussions
   has_many :responses
+  belongs_to :location
 
   def full_name
   	return first_name + " " + last_name
