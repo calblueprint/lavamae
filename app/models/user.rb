@@ -33,6 +33,7 @@ class User < ActiveRecord::Base
   validates :first_name, :last_name, :password_confirmation, presence: true
   mount_base64_uploader :profile_pic, AvatarUploader
   has_many :discussions
+  has_and_belongs_to_many :favorite_discussions, :class_name => "Discussion"
   has_many :responses
   belongs_to :location
 

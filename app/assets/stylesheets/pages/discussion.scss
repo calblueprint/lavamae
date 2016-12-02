@@ -129,6 +129,10 @@
   background: transparent;
   margin-right: 10px;
 
+  &.selected {
+    background: $blue-light-20;
+  }
+
   &:hover, &:active, &:focus {
     background: $blue-light-20;
   }

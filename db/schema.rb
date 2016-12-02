@@ -30,6 +30,14 @@ ActiveRecord::Schema.define(version: 20161128083310) do
 
   add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
 
+  create_table "discussions_users", id: false, force: :cascade do |t|
+    t.integer "discussion_id"
+    t.integer "user_id"
+  end
+
+  add_index "discussions_users", ["discussion_id"], name: "index_discussions_users_on_discussion_id", using: :btree
+  add_index "discussions_users", ["user_id"], name: "index_discussions_users_on_user_id", using: :btree
+
   create_table "locations", force: :cascade do |t|
     t.string   "place"
     t.decimal  "lat",        precision: 10, scale: 6

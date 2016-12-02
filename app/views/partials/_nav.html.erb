@@ -70,6 +70,9 @@
         <% if @discussion %>
         <input type="hidden" name="discussion_id" value=<%= @discussion.id%>>
         <% end %>
+        <% if params[:fav] %>
+        <input type="hidden" name="fav" value=<%= params[:fav]%>>
+        <% end %>
       </form>
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
       <ul class="nav-items-container pull-right" id="topNav">
