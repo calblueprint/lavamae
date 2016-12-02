@@ -5,8 +5,6 @@
 class ResourcePage extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.modules);
-    // this._moduleClick = this._moduleClick.bind(this);
     this._renderModule = this._renderModule.bind(this);
 
   }
@@ -21,6 +19,7 @@ class ResourcePage extends React.Component {
   }
 
   _renderModules() {
+    console.log(this.props.modules);
     return this.props.modules.map((resource_topic) => this._renderModule(resource_topic));
   }
 
