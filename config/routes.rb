@@ -23,5 +23,4 @@ Rails.application.routes.draw do
   delete '/favorite_discussion/:id', to: 'discussions#unfavorite'
   get '/static_discussion', to: 'static_pages#discussion'
   get '/static_map', to: 'static_pages#map'
-
 end
