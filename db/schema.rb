@@ -38,17 +38,6 @@ ActiveRecord::Schema.define(version: 20161128083310) do
   add_index "discussions_users", ["discussion_id"], name: "index_discussions_users_on_discussion_id", using: :btree
   add_index "discussions_users", ["user_id"], name: "index_discussions_users_on_user_id", using: :btree
 
-  create_table "documents", force: :cascade do |t|
-    t.string   "title"
-    t.integer  "user_id"
-    t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "attachment"
-  end
-
-  add_index "documents", ["user_id"], name: "index_documents_on_user_id", using: :btree
-
   create_table "locations", force: :cascade do |t|
     t.string   "place"
     t.decimal  "lat",        precision: 10, scale: 6
@@ -133,15 +122,15 @@ ActiveRecord::Schema.define(version: 20161128083310) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "email",                  default: "", null: false
-    t.string   "profile_pic"
     t.integer  "location_id"
+    t.string   "profile_pic"
   end
 
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "discussions", "users"
-  add_foreign_key "documents", "users"
+  add_foreign_key "resources", "users"
   add_foreign_key "responses", "users"
   add_foreign_key "users", "locations"
 end
