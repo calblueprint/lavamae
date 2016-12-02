@@ -116,11 +116,52 @@ select::after {
   display: block;
 }
 .control--checkbox .control__indicator:after {
-  left: 7px;
-  top: 2px;
+  left: 5px;
+  top: 1px;
   width: 3px;
   height: 9px;
   border: solid #fff;
   border-width: 0 3px 3px 0;
   transform: rotate(45deg);
+}
+
+.inputfile {
+  width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+label.file-label {
+  font-family: $font-stack;
+  cursor: pointer;
+  border-radius: 2px;
+  display: inline-block;
+  font-size: 10px;
+  padding: 6px 12px;
+  font-weight: 600;
+  outline: none;
+  margin-top: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: 500ms;
+  text-decoration: none;
+  width: auto;
+  background: transparent;
+  color: $blue-light;
+  border: 1px solid $blue-light;
+
+
+  &:hover {
+    background: $blue-light-10;
+    border: 1px solid $blue-dark;
+    box-shadow: 0 2px 8px $black-20;
+  }
+
+  &:active {
+    box-shadow: none;
+    opacity: 0.8;
+  }
 }

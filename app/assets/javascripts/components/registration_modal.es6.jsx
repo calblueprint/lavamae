@@ -128,9 +128,9 @@ class RegistrationModal extends React.Component {
     let imagePreviewUrl = this.state.imagePreviewUrl;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
+      $imagePreview = (<img className="profile-preview" src={imagePreviewUrl} />);
     } else {
-      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+      $imagePreview = (<div className="previewText">Please select an image for preview</div>);
     }
     return (
       <section className="signup">
@@ -162,11 +162,12 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label htmlFor="file-input">Profile Picture</label>
-                <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
-              </div>
-              <div className="imgPreview">
-                {$imagePreview}
+                <label class>Profile Picture</label><br></br>
+                <label className="file-label" htmlFor="file-input">Choose a File</label>
+                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+                  <div className="imgPreview">
+                    {$imagePreview}
+                  </div>
               </div>
               <button className="btn btn-blue" name="submit" type="button"
                 onClick={this._startSignUpProcess}>Create Account</button>

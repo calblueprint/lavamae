@@ -12,3 +12,15 @@
   margin: 10px 0;
   cursor: pointer;
 }
+
+.profile-preview {
+  max-height: 250px;
+  padding: 15px 0;
+}
+
+.previewText {
+  color: $grey;
+  padding: 15px 0;
+  font-style: italic;
+  font-weight: 500;
+}
