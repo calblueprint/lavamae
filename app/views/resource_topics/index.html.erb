@@ -1,52 +1,5 @@
 <%= react_component 'ResourcePage', {modules: @resource_topics} %>
 
-<!-- <section class="module">
-  <div class="container module-container">
-    <div class="module-search row">
-      <form>
-        <input class="module-search-input" placeholder="Search Modules..."
-        type="search" name="search">
-        <input class="module-search-submit" type="submit" />
-        <span class="module-search-icon">
-          </span>
-      </form>
-      <div class = "module-row">
-        <form class = "button_to" method = "get" action = "/resource_topics/new">
-            <input class = "btn btn-blue" type = "submit" value = "New Module">
-        </form>
-      </div>
-          <%= react_component'ResourceUploadModal', {style: 'btn btn-blue', modules: @resource_topics} %>
-    </div>
-    <div class= "module-title"> Modules </div>
-
-    <div class="row">
-      <% @resource_topics.each do |d| %>
-        <%= link_to resource_topics_path(resource_topics_id: d.id) do %>
-
-        <div class="module-item-container col-xs-12 col-md-5">
-          <div tabIndex="1" class="module-item row">
-          <div class="cover-picture">
-            <a href=""><img src="/assets/pug.jpg" /></a>
-          </div>
-            <h4 class="module-item-title">
-              <%= d.name %>
-              <div class = "module-item-description"> Manuals and blueprints for building your own buses. </div>
-              <div class = "module-item-description">
-                <% if d.created_at > Time.now.beginning_of_day %>
-                    Updated: <%= time_ago_in_words(d.updated_at) %> ago
-                <% else %>
-                    Updated: <%= d.created_at.strftime("%b %d, %Y") %>
-                <% end %>
-              </div>
-            </h4>
-          </div>
-        </div>
-        <% end %>
-      <% end %>
-    </div>
-  </div>
-</section> -->
-
 
 <table class="table table-bordered table-striped">
   <thead>
