@@ -4,6 +4,7 @@
 
 .vertical-line {
   border-left: solid $blue-dark;
+  flex: 1;
 }
 
 .user-profile {
@@ -21,7 +22,12 @@
   padding: 15px;
 }
 
+.user-flex {
+  display: flex;
+}
+
 .user-profile-fields {
   color: $blue-dark;
   font-weight: bold;
+  width: 100px;
 }
