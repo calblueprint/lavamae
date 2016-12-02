@@ -1,6 +1,5 @@
 /**
  * @prop resource_topic -- passed down module
- * @prop resources
  */
 var ButtonToolbar = ReactBootstrap.ButtonToolbar;
 var DropdownButton = ReactBootstrap.DropdownButton;
@@ -9,25 +8,50 @@ var MenuItem = ReactBootstrap.MenuItem;
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
-    this._success = this._success.bind(this);
     this._handleClick = this._handleClick.bind(this);
+    this._handleError = this._handleError.bind(this);
+    this.setDocuments = this.setDocuments.bind(this)
 
+    this.state = {
+      resources: {},
+    };
   }
 
   _handleClick(e) {
     e.preventDefault();
     console.log(this.props.resource_topic.id);
-    // console.log("hi");
 
     var route = `/resource_topics/${this.props.resource_topic.id}`
-    // console.log(route)
-
-    APIRequester.getJSON(route, this._success);
+    APIRequester.getJSON(route, this.setDocuments, this._handleError);
   }
 
-  _success(resources) {
-    console.log("hello");
+  _handleError(msg) {
+    console.log("fail");
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.error(msg);
   }
+
+  setDocuments(resources) {
+    this.setState({ resources: resources })
+  }
+
+  _renderDocuments() {
+    console.log(this.state.resource_topics)
+
+    if (this.state.resources.resource_topics == undefined) {
+      return
+    }
+
+    return this.state.resources.resource_topics.map((resource_doc) => {
+      return (
+        <ResourceDocument
+          key={resource_doc.id}
+          resource_doc = {resource_doc}
+        />
+      )
+    });
+  }
+
 
   render() {
     return (
@@ -43,6 +67,7 @@ class ResourceModule extends React.Component {
             <div className = "module-item-description">
             Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}
             </div>
+            {this._renderDocuments()}
           </h4>
         </div>
       </div>

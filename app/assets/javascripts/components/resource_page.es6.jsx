@@ -5,19 +5,21 @@
 class ResourcePage extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(this.props.modules);
-    // this._moduleClick = this._moduleClick.bind(this);
     this._renderModule = this._renderModule.bind(this);
 
   }
 
   _renderModule(resource_topic) {
     return (
-      <ResourceModule resource_topic = {resource_topic} resources = {resource_topic.resources}/>
+      <ResourceModule
+        key={resource_topic.id}
+        resource_topic = {resource_topic}
+      />
     );
   }
 
   _renderModules() {
+    console.log(this.props.modules);
     return this.props.modules.map((resource_topic) => this._renderModule(resource_topic));
   }
 
@@ -34,7 +36,10 @@ class ResourcePage extends React.Component {
                   <input className = "btn btn-blue btn-nav" type = "submit" value = "New Module" />
               </form>
             </div>
-            <ResourceUploadModal style = { "btn btn-blue" } modules = { this.props.modules } />
+            <ResourceUploadModal
+              style = { "btn btn-blue" }
+              modules = { this.props.modules }
+            />
           </div>
           <div>
           </div>
