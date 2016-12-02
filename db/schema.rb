@@ -122,8 +122,8 @@ ActiveRecord::Schema.define(version: 20161128083310) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "email",                  default: "", null: false
-    t.integer  "location_id"
     t.string   "profile_pic"
+    t.integer  "location_id"
   end
 
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
