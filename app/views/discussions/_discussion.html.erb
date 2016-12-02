@@ -24,21 +24,26 @@
     </div>
   </div>
 
+  <hr class="row" />
+
   <div class="response-form-container row">
     <% if current_user %>
-      <h4 class="response-form-header">Post a Reply</h4>
+      <h5 class="response-form-header">Post a Response</h5>
       <%= render 'responses/form' %>
     <% else %>
-      <h4 class="response-form-header">Want to Add a Discussion or Response?</h4>
+      <h4 class="response-form-header">Want to add a Discussion or Response?</h4>
       <%= react_component('LoginModal', style: "btn btn-transparent btn-forum-login") %>
-
     <% end %>
   </div>
+
+  <% if @discussion.responses.count > 0 %>
+    <h5 class="responses-title">Responses</h5>
+  <% end %>
 
   <% @responses.each do |r| %>
     <%= render r %>
     <% if !r.equal?(@responses.last) %>
-        <hr class="row"/>
+        <br>
     <% end %>
   <% end %>
 </div>

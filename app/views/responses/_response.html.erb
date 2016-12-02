@@ -1,14 +1,4 @@
 <div class="response-container row">
-  <div class="user-container pull-right">
-    <div class="name-date">
-      <a href=""><div class="user-name"><%= response.user.full_name %></div></a>
-      <div class="date"><%= time_ago_in_words(response.created_at) %> ago</div>
-    </div>
-    <div class="user-picture">
-      <a href=""><%= image_tag("grace.jpg") %></a>
-    </div>
-  </div>
-
   <div class="response-text">
   	<% if current_user and current_user == response.user %>
       <%= react_component "ResponseForm", {discussion: @discussion, response: response} %>
@@ -16,9 +6,17 @@
       <%= response.content %>
     <% end %>
   </div>
-</div>
-
-<div class="action-container">
-  <i class="upvote-button fa fa-angle-up fa-lg"></i>
-  <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
+  <div class="user-container">
+    <div class="name-date">
+      <a href=""><div class="user-name"><%= response.user.full_name %></div></a>
+      <div class="date"><%= time_ago_in_words(response.created_at) %> ago</div>
+    </div>
+    <div class="user-picture">
+      <a href=""><%= image_tag("grace.jpg") %></a>
+    </div>
+    <div class="upvote-container">
+      <i class="upvote-button fa fa-angle-up fa-lg"></i>
+      <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
+    </div>
+  </div>
 </div>
