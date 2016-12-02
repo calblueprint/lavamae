@@ -1,9 +1,7 @@
-<div class="discussion-selected-container col-xs-12 col-md-8">
+<div class="discussion-selected-container">
   <div class="row">
-
     <% if current_user and current_user == discussion.user %>
       <%= react_component "DiscussionForm", { discussion: @discussion } %>
-      <%= react_component "DeleteDiscussionModal", {discussion: @discussion} %>
     <% else %>
         <h2 class="discussion-title"><%= @discussion.title %></h2>
         <p class="discussion-description wordwrap"><%= @discussion.content %></p>
@@ -21,7 +19,11 @@
         <div class="date"><%= time_ago_in_words(@discussion.created_at) %> ago</div>
       </div>
       <div class="user-picture">
-        <a href=""><%= image_tag("grace.jpg") %></a>
+        <% if @discussion.user.profile_pic? %>
+          <a href=""><%= image_tag @discussion.user.profile_pic.url(:thumb) %></a>
+        <% else %>
+          <a href=""><%= image_tag("default.png") %></a>
+        <% end %>
       </div>
     </div>
   </div>

@@ -1,13 +1,14 @@
-<section class="discussion">
-    <div class="discussion-header row">
-      <div class="discussion-tag-container pull-left">
-        <i class="fa fa-tags fa-lg"></i>
-        <button class="discussion-tag">Starting up</button>
-        <button class="discussion-tag">Funding</button>
-        <button class="discussion-tag">Volunteering</button>
-        <button class="discussion-tag">Partnering</button>
-        <button class="discussion-tag">Learn More</button>
-      </div>
+<div class="discussion-container">
+  <div class="discussion-header">
+    <i class="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
+    <div class="discussion-tag-container" id="tags">
+      <i class="fa fa-tags fa-lg"></i>
+      <button class="discussion-tag">Starting up</button>
+      <button class="discussion-tag">Funding</button>
+      <button class="discussion-tag">Volunteering</button>
+      <button class="discussion-tag">Partnering</button>
+      <button class="discussion-tag">Learn More</button>
+    </div>
       <% if current_user %>
         <%= link_to discussions_path(discussion_id: params[:discussion_id], search: params[:search], fav: params[:fav].nil? ? true : nil) do %>
         <% if params[:fav] %>
@@ -21,29 +22,23 @@
         <% end %>
         <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
       <% end %>
-    </div>
-  <div class="container-lg">
-    <div class="discussion-container row">
-      <div class="discussion-item-container col-xs-12 col-md-4">
-        <% @discussions.each do |discussion| %>
-          <%= render 'discussions/shortened', {discussion: discussion} %>
-        <% end %>
-      </div>
-      <% if @discussion %>
-          <%= render @discussion %>
-      <% end %>
-      </div>
-    </div>
   </div>
-</section>
-
+  <div class="discussion-item-container col-xs-12 col-md-4" id="discussions">
+    <% @discussions.each do |discussion| %>
+      <%= render 'discussions/shortened', {discussion: discussion} %>
+    <% end %>
+  </div>
+  <% if @discussion %>
+      <%= render @discussion %>
+  <% end %>
+</div>
 
 <script>
 $('.favorite-discussion').click(function(){
   var data_id = $(this).data("id");
   var fav = $(this).data("fav");
   var star_id = "star" + data_id
-  $(this).data('fav', !fav); 
+  $(this).data('fav', !fav);
   if (!fav) {
     document.getElementById(star_id).className = "fa fa-star pull-right"
     $.ajax({url: '/favorite_discussion/' + data_id, type: 'POST' });
@@ -53,4 +48,16 @@ $('.favorite-discussion').click(function(){
     $.ajax({url: '/favorite_discussion/' + data_id, type: 'DELETE' });
   }
 });
+
+function discussionsMenu() {
+  var x = document.getElementById("discussions");
+  var y = document.getElementById("tags");
+  if (x.className === "discussion-item-container" || y.className === "discussion-tag-container") {
+      x.className += " responsive";
+      y.className += " responsive";
+  } else {
+      x.className = "discussion-item-container";
+      y.className = "discussion-tag-container";
+  }
+}
 </script>

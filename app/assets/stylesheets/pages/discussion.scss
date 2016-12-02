@@ -4,13 +4,16 @@
 }
 
 .discussion-header {
-  color: $blue-light;
-  padding: 10px 25px;
-  position: relative;
-  z-index: 100;
   display: flex;
+  position: fixed;
+  top: 80px;
   align-items: center;
+  color: $blue-light;
+  background-color: $blue-light-20;
+  padding: 10px 15px;
   min-height: 60px;
+  width: 100vw;
+  box-sizing: border-box;
 }
 
 .form-group {
@@ -42,19 +45,22 @@
 }
 
 .discussion-container {
-  overflow: hidden;
   display: flex;
+  align-items: center;
+  flex-wrap: wrap;
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0;
-  padding-top: 140px;
+  padding-top: 141px;
   box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 .discussion-item-container {
   height: 100%;
-  overflow: scroll;
+  overflow-y: scroll;
+  width: 35vw;
 
   .discussion-item-description {
     font-size: 12px;
@@ -67,11 +73,12 @@
 }
 
 .discussion-selected-container {
+  flex: 1;
   padding: 20px 40px;
   background: white;
   height: 100%;
   box-sizing: border-box;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .discussion-tag-container {
@@ -81,7 +88,7 @@
 .discussion-tag {
   font-family: $font-stack;
   cursor: pointer;
-  border: 2px solid $blue-light;
+  border: 1px solid $blue-light;
   border-radius: 2px;
   color: $blue-light;
   display: inline-block;
@@ -132,5 +139,88 @@
 
   &:active, &:focus {
     font-weight: 700;
+  }
+}
+
+.discussions-menu {
+  padding: 10px;
+  display: none;
+  cursor: pointer;
+  float: left;
+  border-radius: 2px;
+}
+
+@media screen and (max-width:630px) {
+  .discussion-tag-container {
+    position: absolute;
+    z-index: 3;
+    left: -1000px;
+    top: 0;
+    overflow: auto;
+    width: 100vw;
+    display: inline-block;
+    white-space: nowrap;
+    transition: 500ms;
+    padding: 18px 15px;
+    background: white;
+  }
+
+  .discussion-header {
+    padding-top: 0;
+    padding-bottom: 0;
+    z-index: 4;
+  }
+
+  .discussion-tag {
+    padding: 5px 10px;
+    font-size: 8px;
+  }
+
+  .discussion-item-container {
+    position: absolute;
+    z-index: 3;
+    left: -1000px;
+    top: 141px;
+    width: 100vw;
+    display: block;
+    transition: 500ms;
+    height: 100vh;
+  }
+
+  .tag-menu,.discussions-menu {
+    display: inherit;
+    float: right;
+  }
+
+  .favorites-text {
+    display: none;
+  }
+
+  .discussion-favorite {
+    padding: 10px;
+    margin-right: auto;
+
+    &:hover, &:active, &:focus {
+      background: transparent;
+    }
+  }
+
+  .create-discussion {
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+}
+
+@media screen and (max-width:630px) {
+  .discussion-tag-container {
+    &.responsive {
+      left: 0;
+    }
+  }
+
+  .discussion-item-container {
+    &.responsive {
+      left: 0;
+    }
   }
 }
