@@ -16,12 +16,14 @@
           </li>
           <%= link_to map_path do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
+                <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to resource_topics_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
@@ -39,9 +41,11 @@
               <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to resource_topics_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
@@ -83,9 +87,11 @@
               <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to resource_topics_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
@@ -103,9 +109,11 @@
               <button class="btn btn-transparent btn-nav">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to resource_topics_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
@@ -140,9 +148,11 @@
               <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to resource_topics_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
@@ -161,9 +171,11 @@
               <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Resources</button>
-          </li>
+          <%= link_to resource_topics_path do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Resources</button>
+            </li>
+          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>

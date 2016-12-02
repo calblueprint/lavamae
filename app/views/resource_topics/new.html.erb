@@ -1,0 +1,11 @@
+<br/>
+<br/>
+<br/>
+<br/>
+<div class="well">
+  <%= form_for @resource_topic do |f| %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+    <%= f.submit "Save", class: "btn btn-primary" %>
+  <% end %>
+</div>

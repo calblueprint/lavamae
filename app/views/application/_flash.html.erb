@@ -1,0 +1,6 @@
+<% toast.each do |type, message| %>
+  <script type="text/javascript">
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr['<%= type %>']('<%= message %>')
+  </script>
+<% end %>
