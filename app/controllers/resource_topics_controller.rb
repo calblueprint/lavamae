@@ -26,18 +26,25 @@ class ResourceTopicsController < ApplicationController
   def show
     @resource_topic = ResourceTopic.find(params[:id])
     @resources = @resource_topic.resources
+    # render json: @resources
   end
 
   def destroy
     @resource_topic = ResourceTopic.find(params[:id])
     @num_resources = @resource_topic.resources.length
-    if @num_resources
+    if @num_resources != 0
       flash[:error] = "#{@resource_topic.name} still has #{@num_resources} resources"
       redirect_to resource_topics_path
     else
       @resource_topic.destroy
       redirect_to resource_topics_path
     end
+  end
+
+  def get_resources
+    @resource_topic = ResourceTopic.find(params[:id])
+    @resources = @resource_topic.resources
+    render json: @resources
   end
 
   private

@@ -5,22 +5,15 @@
 class ResourcePage extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.modules);
-    this._moduleClick = this._moduleClick.bind(this);
+    // console.log(this.props.modules);
+    // this._moduleClick = this._moduleClick.bind(this);
     this._renderModule = this._renderModule.bind(this);
-    this._renderModules = this._renderModules.bind(this);
-    this.state = {
-      showModule: false
-    };
-  }
 
-  _moduleClick() {
-    this.setState({ showModule: true });
   }
 
   _renderModule(resource_topic) {
     return (
-      <ResourceModule resource_topic = {resource_topic} />
+      <ResourceModule resource_topic = {resource_topic} resources = {resource_topic.resources}/>
     );
   }
 
@@ -34,20 +27,15 @@ class ResourcePage extends React.Component {
       <section className="module">
         <div className="container module-container">
           <div className="module-search row">
-            <form>
-              <input className="module-search-input" placeholder="Search Modules..." type="search" name="search" />
-              <input className="module-search-submit" type="submit" />
-              <span className="module-search-icon">
-                </span>
-            </form>
+          <div className= "module-title"> Modules </div>
+
             <div className = "module-row">
               <form className = "button_to" method = "get" action = "/resource_topics/new">
-                  <input className = "btn btn-blue" type = "submit" value = "New Module" />
+                  <input className = "btn btn-blue btn-nav" type = "submit" value = "New Module" />
               </form>
             </div>
             <ResourceUploadModal style = { "btn btn-blue" } modules = { this.props.modules } />
           </div>
-          <div className= "module-title"> Modules </div>
           <div>
           </div>
           <div className="row">

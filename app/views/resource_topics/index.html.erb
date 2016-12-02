@@ -24,7 +24,7 @@
         <%= link_to resource_topics_path(resource_topics_id: d.id) do %>
 
         <div class="module-item-container col-xs-12 col-md-5">
-          <div tabindex="1" class="module-item row">
+          <div tabIndex="1" class="module-item row">
           <div class="cover-picture">
             <a href=""><img src="/assets/pug.jpg" /></a>
           </div>
@@ -47,16 +47,7 @@
   </div>
 </section> -->
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<%= react_component('ResourceUploadModal', style: 'btn-blue btn', modules: @resource_topics) %>
-<%= link_to "New Module", new_resource_topic_path %> <!-- make this into react component modal -->
-<br />
-<br />
+
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
