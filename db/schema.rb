@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161021014735) do
+ActiveRecord::Schema.define(version: 20161128083310) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,40 @@ ActiveRecord::Schema.define(version: 20161021014735) do
   end
 
   add_index "discussions", ["user_id"], name: "index_discussions_on_user_id", using: :btree
+
+  create_table "discussions_users", id: false, force: :cascade do |t|
+    t.integer "discussion_id"
+    t.integer "user_id"
+  end
+
+  add_index "discussions_users", ["discussion_id"], name: "index_discussions_users_on_discussion_id", using: :btree
+  add_index "discussions_users", ["user_id"], name: "index_discussions_users_on_user_id", using: :btree
+
+  create_table "locations", force: :cascade do |t|
+    t.string   "place"
+    t.decimal  "lat",        precision: 10, scale: 6
+    t.decimal  "lng",        precision: 10, scale: 6
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  create_table "resource_topics", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.string   "title"
+    t.integer  "user_id"
+    t.text     "description"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "attachment"
+    t.integer  "resource_topic_id"
+  end
+
+  add_index "resources", ["user_id"], name: "index_resources_on_user_id", using: :btree
 
   create_table "responses", force: :cascade do |t|
     t.text     "content"
@@ -88,12 +122,15 @@ ActiveRecord::Schema.define(version: 20161021014735) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "email",                  default: "", null: false
-    t.string   "city"
-    t.string   "country"
+    t.integer  "location_id"
+    t.string   "profile_pic"
   end
 
+  add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   add_foreign_key "discussions", "users"
+  add_foreign_key "resources", "users"
   add_foreign_key "responses", "users"
+  add_foreign_key "users", "locations"
 end

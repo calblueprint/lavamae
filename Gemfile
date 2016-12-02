@@ -19,6 +19,10 @@ gem 'pg'
 gem 'pg_search', '1.0.5'
 
 # Core
+gem 'carrierwave', '~> 0.9'
+gem 'carrierwave-base64'
+gem "mini_magick"
+gem 'fog'
 gem 'city-state'
 gem 'cancancan', '1.15.0'
 gem 'active_model_serializers', '0.9.4'

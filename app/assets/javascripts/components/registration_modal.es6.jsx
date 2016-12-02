@@ -13,10 +13,14 @@ class RegistrationModal extends React.Component {
     this._renderInput = this._renderInput.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
+    this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
+    this._startSignUpProcess = this._startSignUpProcess.bind(this);
+    this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       map_checked: false,
-      countries: this.props.countries || [],
-      country: this.props.countries[0] || "",
+      profile_pic: "",
+      imagePreviewUrl: "",
+      location: "",
     };
   }
 
@@ -39,18 +43,22 @@ class RegistrationModal extends React.Component {
     window.location = "/users/sign_in";
   }
 
-  _attemptRegistration(e) {
+  _attemptRegistration(response = null) {
+    var locId = null;
+    if (response) {
+      locId = response.id;
+    }
     const signupFields = {
       user: {
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         organization: this.state.organization,
-        city: this.state.city,
-        country: this.state.country,
+        location_id: locId,
         on_map: this.state.map_checked,
         email: this.state.email,
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
+        profile_pic: this.state.profile_pic,
       }
     };
     APIRequester.post("/sign_up", signupFields, this._success);
@@ -74,13 +82,58 @@ class RegistrationModal extends React.Component {
     this.setState({ country: e.target.value });
   }
 
-  render() {
-    const countryOptions = this.state.countries.map((country) => {
-            return (
-                <option key={country}>{country}</option>
-            );
-        });
+  _handleFileChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let attachment = e.target.files[0];
+    reader.onload = (file) => {
+      this.setState({
+        profile_pic: file.target.result,
+        imagePreviewUrl: reader.result,
+      });
+    }
+    reader.readAsDataURL(attachment);
+  }
 
+  _getLongitudeAndLatitudeAndSignUp() {
+    this.setState({ location:  document.getElementById("my-address").value }, function () {
+      geocoder = new google.maps.Geocoder();
+      var address = this.state.location;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          const locationFields = {
+            location: {
+              place: this.state.location,
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng(),
+            }
+          };
+          APIRequester.post("/locations", locationFields, this._attemptRegistration);
+        }
+        else {
+          message = "Location invalid, please try again!";
+          this._error(message);
+        }
+      }.bind(this));
+    });
+  }
+
+  _startSignUpProcess(e) {
+    if (this.state.map_checked) {
+      this._getLongitudeAndLatitudeAndSignUp();
+    } else {
+      this._attemptRegistration();
+    }
+  }
+
+  render() {
+    let imagePreviewUrl = this.state.imagePreviewUrl;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
     return (
       <section className="signup">
         <div className="container signup-container">
@@ -93,15 +146,11 @@ class RegistrationModal extends React.Component {
               <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
-              <div className="input-field">{ this._renderInput("city", "City", "text", "Berkeley") }</div>
-
               <div className="input-field">
-                <label>
-                  Country
-                  <select name="country" defaultValue="None" onChange={this._handleSelect} >
-                    {countryOptions}
-                  </select>
-                </label>
+                <div>
+                  <label htmlFor="location">Location</label>
+                  <input id="my-address" name="location" type="text" placeholder="Berkeley, CA, United States" />
+                </div>
               </div>
 
               <div className="input-field">
@@ -114,9 +163,15 @@ class RegistrationModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
-
+              <div className="input-field">
+                <label htmlFor="file-input">Profile Picture</label>
+                <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+              </div>
+              <div className="imgPreview">
+                {$imagePreview}
+              </div>
               <button className="btn btn-blue" name="submit" type="button"
-                onClick={this._attemptRegistration}>Create Account</button>
+                onClick={this._startSignUpProcess}>Create Account</button>
             </form>
           <div className="login-link">
             <a onClick={this._toLogin} >Already have an account?</a>

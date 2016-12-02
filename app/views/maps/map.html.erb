@@ -1,0 +1,56 @@
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+
+<div id='map'></div>
+<div class="aux-map-tools">
+  <%= button_to "Join the Movement", root_path, :class => "btn btn-blue btn-join", :method  => :get %>
+</div>
+<script>
+  mapboxgl.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
+
+  var map = new mapboxgl.Map({
+    container: 'map',
+    style: 'mapbox://styles/mapbox/light-v9',
+    zoom: 1,
+    minZoom: 1,
+  });
+
+  map.addControl(new MapboxGeocoder({
+    accessToken: mapboxgl.accessToken
+  }));
+
+  var markerHeight = 20;
+  var popupMargin = markerHeight/2 + 5;
+  map.on('load', function() {
+    <% @users_on_map.each do |user| %>
+      <% location = user.location %>
+      var popupOffsets = {
+       'top': [0, popupMargin],
+       'top-left': [0, popupMargin],
+       'top-right': [0, popupMargin],
+       'bottom': [0, -popupMargin],
+       'bottom-left': [0, -popupMargin],
+       'bottom-right': [0, -popupMargin],
+       'left': [popupMargin, 0],
+       'right': [-popupMargin, 0]
+       };
+      var popup = new mapboxgl.Popup({offset:popupOffsets}).setHTML(
+        '<div class="popup-preview">' +
+          '<div class="organization"><%= user.organization %></div>' +
+          '<div class="user-container">' +
+            '<div class="name"><%= user.first_name %> <%= user.last_name %></div>' +
+              // TODO: Use user's image
+              '<div class="user-image" style="background-image:url(\'https://scontent-sjc2-1.xx.fbcdn.net/v/t1.0-1/p64x64/13754547_10206918263334703_2191355668978129752_n.jpg?oh=d7c8d20514325912d1898ea9f9982ad8&oe=58B58FF7\')"></div>' +
+          '</div>' +
+        '</div>'
+      );
+      var marker = new mapboxgl.Marker(null, {offset:[-markerHeight/2, -markerHeight/2]})
+        .setLngLat([<%= location.lng %>, <%= location.lat %>])
+        .setPopup(popup)
+        .addTo(map);
+      marker.onMapClick = function() {
+        marker.togglePopup();
+      };
+    <% end %>
+  });
+</script>
