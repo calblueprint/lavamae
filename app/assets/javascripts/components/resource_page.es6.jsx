@@ -27,11 +27,7 @@ class ResourcePage extends React.Component {
 
     return (
       <section className="module">
-<<<<<<< HEAD
         <div className="module-container">
-=======
-        <div className="container module-container">
->>>>>>> ed3fc63cd381e03f1fc43c5defce777067cec74a
           <div className="module-search row">
           <div className= "module-title"> Modules </div>
 
