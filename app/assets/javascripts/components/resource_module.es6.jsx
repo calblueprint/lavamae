@@ -11,22 +11,29 @@ class ResourceModule extends React.Component {
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
     this.setDocuments = this.setDocuments.bind(this)
-
     this.state = {
       resources: {},
+      show_documents: false,
     };
   }
 
   _handleClick(e) {
     e.preventDefault();
-    console.log(this.props.resource_topic.id);
+    if (this.state.show_documents == false) {
+      console.log("click");
+      var route = `/resource_topics/${this.props.resource_topic.id}`
+      APIRequester.getJSON(route, this.setDocuments, this._handleError);
+      this.setState({show_documents: true});
 
-    var route = `/resource_topics/${this.props.resource_topic.id}`
-    APIRequester.getJSON(route, this.setDocuments, this._handleError);
+    } else {
+      this.setState({resources: {}});
+      this.setState({show_documents: false});
+      this._renderDocuments();
+
+    }
   }
 
   _handleError(msg) {
-    console.log("fail");
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.error(msg);
   }
@@ -36,8 +43,6 @@ class ResourceModule extends React.Component {
   }
 
   _renderDocuments() {
-    console.log(this.state.resource_topics)
-
     if (this.state.resources.resource_topics == undefined) {
       return
     }
