@@ -26,11 +26,10 @@ class ResourcePage extends React.Component {
 
     return (
       <section className="module">
-        <div className="module-container">
-          <div className="module-search row">
-          <div className= "module-title"> Modules </div>
-
-            <div className = "module-row">
+        <div className="container module-container">
+          <div className="module-header">
+            <h3>Modules</h3>
+            <div className="new-module">
               <form className = "button_to" method = "get" action = "/resource_topics/new">
                   <input className = "btn btn-blue btn-nav" type = "submit" value = "New Module" />
               </form>
@@ -42,7 +41,7 @@ class ResourcePage extends React.Component {
           </div>
           <div>
           </div>
-          <div className="row">
+          <div className="module-items row">
             {this._renderModules()}
 
           </div>

@@ -60,8 +60,8 @@ class ResourceModule extends React.Component {
 
   render() {
     return (
-      <div className="module-item-container col-xs-12 col-md-5" onClick = {this._handleClick}>
-        <div tabIndex="1" className="module-item row">
+      <div className="module-item-container" onClick = {this._handleClick}>
+        <div tabIndex="1" className="module-item">
           <div className="cover-picture">
             <a href=""><img src="/assets/greybus.svg" /></a>
           </div>
