@@ -19,6 +19,10 @@
   }
 }
 
+.module-item-container:last-child {
+  padding-bottom: 0;
+}
+
 .module-item-container:nth-child(odd) {
   padding-right: 15px;
 }

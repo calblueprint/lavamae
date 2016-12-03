@@ -61,26 +61,26 @@ class ResourceModule extends React.Component {
 
   render() {
     return (
-      <div className="module-item-container" onClick = {this._handleClick}>
-        <div tabIndex="1" className="module-item">
-          <div className="cover-picture">
-            <a href=""><img src="/assets/greybus.svg" /></a>
-          </div>
-          <div className="module-body">
-            <h5 className="module-item-title">
-              {this.props.resource_topic.name}
-            </h5>
-            <div className="module-item-description">
-              Manuals and blueprints for building your own buses.
-              <br></br>
-              <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
+        <div className="module-item-container">
+          <div tabIndex="1" className="module-item" onClick = {this._handleClick}>
+            <div className="cover-picture">
+              <a href=""><img src="/assets/greybus.svg" /></a>
+            </div>
+            <div className="module-body">
+              <h5 className="module-item-title">
+                {this.props.resource_topic.name}
+              </h5>
+              <div className="module-item-description">
+                Manuals and blueprints for building your own buses.
+                <br></br>
+                <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
+              </div>
             </div>
           </div>
+          <div className="resources-container">
+            {this._renderDocuments()}
+          </div>
         </div>
-        <div className="resources-container">
-          {this._renderDocuments()}
-        </div>
-      </div>
     )
   }
 }
