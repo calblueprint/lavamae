@@ -111,6 +111,7 @@ class ResourceUploadModal extends React.Component {
                 <label>
                   Module
                   <select name="module" defaultValue="None" onChange={this._handleSelect} >
+                    <option value=''>None</option>
                     {moduleOptions}
                   </select>
                 </label>
