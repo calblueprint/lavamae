@@ -63,7 +63,7 @@ class ResourceModule extends React.Component {
       <div className="module-item-container col-xs-12 col-md-5" onClick = {this._handleClick}>
         <div tabIndex="1" className="module-item row">
           <div className="cover-picture">
-            <a href=""><img src="/assets/bus.png" /></a>
+            <a href=""><img src="/assets/greybus.svg" /></a>
           </div>
           <h4 className="module-item-title">
             {this.props.resource_topic.name}
