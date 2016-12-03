@@ -10,19 +10,19 @@ class ResourceDocument extends React.Component {
   }
 
   _handleClick() {
-    console.log("clicked");
+    window.open(this.props.resource_doc.attachment.url);
   }
 
   render() {
     return (
-      <div className = "module-item-container" onClick = {this._handleClick}>
+      <a className = "module-item-container" onClick = {this._handleClick} >
         <h4 className="module-item-title">
           {this.props.resource_doc.title}
           <div className = "module-item-description">
           {this.props.resource_doc.description}
           </div>
         </h4>
-      </div>
+      </a>
     )
   }
 

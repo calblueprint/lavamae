@@ -19,7 +19,6 @@ class ResourcePage extends React.Component {
   }
 
   _renderModules() {
-    console.log(this.props.modules);
     return this.props.modules.map((resource_topic) => this._renderModule(resource_topic));
   }
 
