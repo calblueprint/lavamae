@@ -20,7 +20,6 @@ class ResourceModule extends React.Component {
   _handleClick(e) {
     e.preventDefault();
     if (this.state.show_documents == false) {
-      console.log("click");
       var route = `/resource_topics/${this.props.resource_topic.id}`
       APIRequester.getJSON(route, this.setDocuments, this._handleError);
       this.setState({show_documents: true});

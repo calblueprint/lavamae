@@ -5,7 +5,6 @@
 class ResourceDocument extends React.Component {
   constructor(props) {
     super(props);
-    console.log("passed");
     this._handleClick = this._handleClick.bind(this);
   }
 
