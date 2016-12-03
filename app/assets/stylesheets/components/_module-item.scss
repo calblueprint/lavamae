@@ -1,0 +1,50 @@
+.module-item {
+  cursor: pointer;
+  border: 2px solid transparent;
+  border-radius: 2px;
+  padding: 24px;
+  transition: 300ms;
+  background-color: white;
+
+  &:hover {
+    border: 2px solid $blue-light;
+    box-shadow: 0px 2px 8px $black-20;
+  }
+
+  &:focus {
+    border: 2px solid $blue-light;
+    box-shadow: 0px 2px 8px $black-20;
+    outline: none;
+  }
+
+  .module-item-description {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    font-size: 12px;
+    color: $black;
+
+    p {
+      color: $grey;
+    }
+  }
+
+  .cover-picture {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    float: left;
+    overflow: hidden;
+    vertical-align: middle;
+    display: inline-block;
+    margin-right: 15px;
+
+    img {
+      margin: 0 auto;
+      height: 100%;
+      width: auto;
+    }
+  }
+
+}

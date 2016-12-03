@@ -6,6 +6,7 @@ class ResourceUploadModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this._handleUpload = this._handleUpload.bind(this);
+    this._handleSelect = this._handleSelect.bind(this);
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this.state = {
@@ -14,8 +15,9 @@ class ResourceUploadModal extends React.Component {
       title: '',
       description: '',
       modules: this.props.modules || [],
-      module: this.props.modules[0] || null,
+      module: null,
       file: '',
+      fileName: '',
     };
   }
 
@@ -29,13 +31,12 @@ class ResourceUploadModal extends React.Component {
 
   _handleUpload(e) {
     e.preventDefault();
-
     const uploadFields = {
       resource: {
         title: this.state.title,
         description: this.state.description,
         attachment: this.state.file,
-        resource_topic_id: this.state.module.id,
+        resource_topic_id: this.state.module,
       }
     }
     APIRequester.post("/resources", uploadFields, this._success);
@@ -45,8 +46,15 @@ class ResourceUploadModal extends React.Component {
     this.state[$(e.target).attr("name")]= $(e.target).val();
   }
 
+  _handleSelect(e) {
+    this.setState({ module: e.target.value });
+  }
+
   _handleFileChange(e) {
     e.preventDefault();
+    var path = e.target.value;
+    var name = path.replace(/^.*\\/, "");
+    this.setState({ fileName: name });
     let reader = new FileReader();
     let attachment = e.target.files[0];
     reader.onload = (file) => {
@@ -72,12 +80,19 @@ class ResourceUploadModal extends React.Component {
   render () {
     const moduleOptions = this.state.modules.map((module) => {
         return (
-            <option key={module}>{module['name']}</option>
+            <option value={module['id']}>{module['name']}</option>
         );
       });
+    let filePreviewUrl = this.state.fileName;
+    let $filePreview = null;
+    if (filePreviewUrl) {
+      $filePreview = (<div className="previewText">{this.state.fileName}</div>);
+    } else {
+      $filePreview = (<div className="previewText">Please select a file</div>);
+    }
     return (
       <div>
-        <button onClick={this._openModal}>Upload Resource</button>
+        <button className="btn btn-blue btn-nav" onClick={this._openModal}>Upload Resource</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Upload New Resource</Modal.Title>
@@ -92,18 +107,19 @@ class ResourceUploadModal extends React.Component {
                 <label htmlFor="description-input">Description</label>
                 <input id="description-input" type="text" name="description" onChange={this._handleChange} />
               </div>
-              <div>
+              <div className="input-field">
                 <label>
-                  Module:
+                  Module
                   <select name="module" defaultValue="None" onChange={this._handleSelect} >
                     {moduleOptions}
                   </select>
                 </label>
               </div>
               <div className="input-field">
-                <label htmlFor="file-input">File</label>
-                <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+                <label className="file-label" htmlFor="file-input">Choose a File</label>
+                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
               </div>
+              {$filePreview}
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>

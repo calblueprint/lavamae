@@ -20,7 +20,9 @@ Rails.application.routes.draw do
   end
 
   resources :resources
-  resources :resource_topics
+  resources :resource_topics do
+    get '/resource_topics/:id', to: 'resource_topics#get_resources'
+  end
   resources :locations, :only =>[:create]
 
   get '/map', to: 'maps#map'
@@ -28,4 +30,5 @@ Rails.application.routes.draw do
   delete '/favorite_discussion/:id', to: 'discussions#unfavorite'
   get '/static_discussion', to: 'static_pages#discussion'
   get '/static_map', to: 'static_pages#map'
+
 end

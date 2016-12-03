@@ -16,4 +16,5 @@ class Resource < ActiveRecord::Base
   mount_base64_uploader :attachment, Attachment64Uploader
   belongs_to :user
   belongs_to :resource_topic
+
 end

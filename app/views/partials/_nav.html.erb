@@ -163,7 +163,8 @@
           <% end %>
           <%= link_to resource_topics_path do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
+              <button class="btn btn-transparent btn-nav resources-nav
+              <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
             </li>
           <% end %>
           <li class="nav-item">
@@ -186,7 +187,8 @@
           <% end %>
           <%= link_to resource_topics_path do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
+              <button class="btn btn-transparent btn-nav resources-nav
+              <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
             </li>
           <% end %>
           <li class="nav-item">
