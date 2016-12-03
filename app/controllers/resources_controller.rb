@@ -9,7 +9,6 @@ class ResourcesController < ApplicationController
 
   def create
 	  @resource = Resource.new(resource_params)
-
     if @resource.save
       flash[:success] = "#{@resource.title} was successfully uploaded!"
       redirect_to resource_topics_path

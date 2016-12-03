@@ -1,11 +1,10 @@
 var Modal = ReactBootstrap.Modal;
 
 /**
- * @prop discussion - discussion
- * @prop response - response
+ * @prop discussion - discussion??
  */
 
-class DeleteResponseModal extends React.Component {
+class NewModuleModal extends React.Component {
 
   constructor(props) {
     super(props);
@@ -16,7 +15,7 @@ class DeleteResponseModal extends React.Component {
     this._success = this._success.bind(this);
     this.state = {
       showModal: false,
-      data: this.props.response
+      data: this.props.discussion
     };
 
   }
@@ -39,7 +38,8 @@ class DeleteResponseModal extends React.Component {
     this.setState({data: null})
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Delete successful!");
-    APIRequester.delete(`/discussions/${this.props.discussion.id}/responses/${this.props.response.id}`, this._closeModal);
+    window.location = "/";
+    APIRequester.delete(`/discussions/${this.props.discussion.id}`, this._closeModal);
   }
 
 
@@ -47,15 +47,15 @@ class DeleteResponseModal extends React.Component {
   render () {
     return (
       <div>
-        <button className='btn-blue btn' onClick={this._openModal}>Delete</button>
+        <button className='btn btn-sm btn-action btn-destroy pull-right' onClick={this._openModal}>Delete</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
-            <Modal.Title>Delete Response?</Modal.Title>
+            <Modal.Title>Delete Discussion?</Modal.Title>
           </Modal.Header>
           <form onSubmit={this._success}>
             <Modal.Body>
               <div className="input-field">
-                Are you sure you want to delete this response?
+                Are you sure you want to delete this discussion?
               </div>
             </Modal.Body>
             <Modal.Footer>

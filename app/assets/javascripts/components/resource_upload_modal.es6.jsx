@@ -15,7 +15,7 @@ class ResourceUploadModal extends React.Component {
       title: '',
       description: '',
       modules: this.props.modules || [],
-      module: this.props.modules[0]['id'] || null,
+      module: null,
       file: '',
     };
   }
