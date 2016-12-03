@@ -6,6 +6,7 @@ class ResourceUploadModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this._handleUpload = this._handleUpload.bind(this);
+    this._handleSelect = this._handleSelect.bind(this);
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this.state = {
@@ -14,7 +15,7 @@ class ResourceUploadModal extends React.Component {
       title: '',
       description: '',
       modules: this.props.modules || [],
-      module: this.props.modules[0] || null,
+      module: this.props.modules[0]['id'] || null,
       file: '',
     };
   }
@@ -29,13 +30,12 @@ class ResourceUploadModal extends React.Component {
 
   _handleUpload(e) {
     e.preventDefault();
-
     const uploadFields = {
       resource: {
         title: this.state.title,
         description: this.state.description,
         attachment: this.state.file,
-        resource_topic_id: this.state.module.id,
+        resource_topic_id: this.state.module,
       }
     }
     APIRequester.post("/resources", uploadFields, this._success);
@@ -43,6 +43,10 @@ class ResourceUploadModal extends React.Component {
 
   _handleChange(e) {
     this.state[$(e.target).attr("name")]= $(e.target).val();
+  }
+
+  _handleSelect(e) {
+    this.setState({ module: e.target.value });
   }
 
   _handleFileChange(e) {
@@ -70,10 +74,9 @@ class ResourceUploadModal extends React.Component {
   }
 
   render () {
-    console.log(this.state.modules);
     const moduleOptions = this.state.modules.map((module) => {
         return (
-            <option key={module}>{module['name']}</option>
+            <option value={module['id']}>{module['name']}</option>
         );
       });
     return (
