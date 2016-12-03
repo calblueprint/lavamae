@@ -39,7 +39,9 @@ class ResourceModule extends React.Component {
   }
 
   setDocuments(resources) {
-    this.setState({ resources: resources })
+    this.setState({ resources: resources }, function() {
+      render();
+    })
   }
 
   _renderDocuments() {
@@ -57,7 +59,6 @@ class ResourceModule extends React.Component {
     });
   }
 
-
   render() {
     return (
       <div className="module-item-container" onClick = {this._handleClick}>
@@ -65,15 +66,19 @@ class ResourceModule extends React.Component {
           <div className="cover-picture">
             <a href=""><img src="/assets/greybus.svg" /></a>
           </div>
-          <h4 className="module-item-title">
-            {this.props.resource_topic.name}
-          </h4>
-            <div className = "module-item-description"> Manuals and blueprints for building your own buses.
+          <div className="module-body">
+            <h5 className="module-item-title">
+              {this.props.resource_topic.name}
+            </h5>
+            <div className="module-item-description">
+              Manuals and blueprints for building your own buses.
+              <br></br>
+              <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
             </div>
-            <div className = "module-item-description">
-            Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}
-            </div>
-            {this._renderDocuments()}
+          </div>
+        </div>
+        <div className="resources-container">
+          {this._renderDocuments()}
         </div>
       </div>
     )

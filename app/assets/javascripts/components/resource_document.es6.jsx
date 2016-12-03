@@ -15,14 +15,14 @@ class ResourceDocument extends React.Component {
 
   render() {
     return (
-      <a className = "module-item-container" onClick = {this._handleClick} >
-        <h4 className="module-item-title">
+      <a className = "resource-item" onClick = {this._handleClick}>
+        <h4 className="resource-title">
           {this.props.resource_doc.title}
         </h4>
-        <div className = "module-item-description">
+        <div className = "resource-description">
           {this.props.resource_doc.description}
         </div>
-      </div>
+      </a>
     )
   }
 
