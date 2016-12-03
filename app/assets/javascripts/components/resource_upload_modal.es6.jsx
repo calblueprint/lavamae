@@ -17,6 +17,7 @@ class ResourceUploadModal extends React.Component {
       modules: this.props.modules || [],
       module: null,
       file: '',
+      fileName: '',
     };
   }
 
@@ -51,6 +52,9 @@ class ResourceUploadModal extends React.Component {
 
   _handleFileChange(e) {
     e.preventDefault();
+    var path = e.target.value;
+    var name = path.replace(/^.*\\/, "");
+    this.setState({ fileName: name });
     let reader = new FileReader();
     let attachment = e.target.files[0];
     reader.onload = (file) => {
@@ -79,6 +83,13 @@ class ResourceUploadModal extends React.Component {
             <option value={module['id']}>{module['name']}</option>
         );
       });
+    let filePreviewUrl = this.state.fileName;
+    let $filePreview = null;
+    if (filePreviewUrl) {
+      $filePreview = (<div className="previewText">{this.state.fileName}</div>);
+    } else {
+      $filePreview = (<div className="previewText">Please select a file</div>);
+    }
     return (
       <div>
         <button className="btn btn-blue btn-nav" onClick={this._openModal}>Upload Resource</button>
@@ -105,9 +116,10 @@ class ResourceUploadModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label htmlFor="file-input">File</label>
-                <input id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+                <label className="file-label" htmlFor="file-input">Choose a File</label>
+                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
               </div>
+              {$filePreview}
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
