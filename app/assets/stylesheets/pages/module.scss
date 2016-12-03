@@ -44,6 +44,7 @@
 .module-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
 
  h3 {
    flex: 1;
@@ -74,5 +75,7 @@
 
   .module-header h3 {
     width: 100vw;
+    flex: auto;
+    padding-bottom: 15px;
   }
 }
