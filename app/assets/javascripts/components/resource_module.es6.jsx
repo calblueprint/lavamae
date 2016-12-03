@@ -67,13 +67,13 @@ class ResourceModule extends React.Component {
           </div>
           <h4 className="module-item-title">
             {this.props.resource_topic.name}
+          </h4>
             <div className = "module-item-description"> Manuals and blueprints for building your own buses.
             </div>
             <div className = "module-item-description">
             Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}
             </div>
             {this._renderDocuments()}
-          </h4>
         </div>
       </div>
     )
