@@ -96,9 +96,9 @@ class ResourceUploadModal extends React.Component {
                 <label htmlFor="description-input">Description</label>
                 <input id="description-input" type="text" name="description" onChange={this._handleChange} />
               </div>
-              <div>
+              <div className="input-field">
                 <label>
-                  Module:
+                  Module
                   <select name="module" defaultValue="None" onChange={this._handleSelect} >
                     {moduleOptions}
                   </select>
