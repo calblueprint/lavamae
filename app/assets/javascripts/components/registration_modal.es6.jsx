@@ -1,6 +1,3 @@
-/**
- * @prop countries - list of all countries
- */
 class RegistrationModal extends React.Component {
 
   constructor(props) {
@@ -180,7 +177,3 @@ class RegistrationModal extends React.Component {
     );
   }
 }
-
-RegistrationModal.propTypes = {
-    countries: React.PropTypes.array.isRequired
-};
