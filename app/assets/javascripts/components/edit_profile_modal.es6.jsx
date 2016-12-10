@@ -100,7 +100,6 @@ class EditProfileModal extends React.Component {
   }
 
   _attemptSave(response = null) {
-    debugger;
     console.log("here");
     console.log(response);
     var userFields = {
@@ -115,7 +114,6 @@ class EditProfileModal extends React.Component {
       locId = response.id;
       userFields["location_id"] = locId;
     }
-
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
   }
 
@@ -148,7 +146,7 @@ class EditProfileModal extends React.Component {
           <Modal.Header>
             <Modal.Title>Account Information</Modal.Title>
           </Modal.Header>
-          <form onSubmit={this._startSignUpProcess}>
+          <form>
             <Modal.Body>
               <div className="input-field">
                 <label htmlFor="first_name">First Name</label>
@@ -189,7 +187,7 @@ class EditProfileModal extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
-              <button className="btn btn-blue modal-btn" type="submit">Save Changes</button>
+              <input type="button" className="btn btn-blue modal-btn" onClick={this._startSignUpProcess}>Save Changes</input>
             </Modal.Footer>
           </form>
         </Modal>

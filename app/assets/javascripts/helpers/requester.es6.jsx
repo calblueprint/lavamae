@@ -17,8 +17,6 @@ class Requester {
             type: type,
             data: data,
             success: (msg) => {
-                console.log(msg);
-                debugger;
                 if (msg.message) {
                     toastr.options.positionClass = 'toast-bottom-right';
                     toastr.success(msg.message)
@@ -30,10 +28,6 @@ class Requester {
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
-                console.log("This is from the error!!!!");
-                console.log(status);
-                console.log(error);
-                debugger;
                 if (xhr.responseJSON) {
                     onError(xhr, status, error);
                 } else {
