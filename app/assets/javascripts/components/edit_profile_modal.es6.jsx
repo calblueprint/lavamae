@@ -64,7 +64,7 @@ class EditProfileModal extends React.Component {
   }
 
   _getLongitudeAndLatitudeAndSignUp() {
-    this.setState({ location:  document.getElementById("my-address").value }, function () {
+    this.setState({ location:  document.getElementById("my-edit-address").value }, function () {
       geocoder = new google.maps.Geocoder();
       var address = this.state.location;
       geocoder.geocode( { 'address': address}, function(results, status) {
@@ -76,7 +76,7 @@ class EditProfileModal extends React.Component {
               lng: results[0].geometry.location.lng(),
             }
           };
-          APIRequester.post("/locations", locationFields, this._attemptRegistration);
+          APIRequester.post("/locations", locationFields, this._attemptSave);
         }
         else {
           message = "Location invalid, please try again!";
@@ -98,7 +98,7 @@ class EditProfileModal extends React.Component {
     }
   }
 
-  _attemptSave(e) {
+  _attemptSave(response = null) {
     var locId = null;
     if (response) {
       locId = response.id;
@@ -112,6 +112,27 @@ class EditProfileModal extends React.Component {
       on_map: this.state.on_map,
     };
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
+  }
+
+  componentDidUpdate() {
+    var address = (document.getElementById('my-edit-address'));
+    var autocomplete = new google.maps.places.Autocomplete(address);
+    autocomplete.setTypes(['geocode']);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+            return;
+        }
+
+        var address = '';
+        if (place.address_components) {
+            address = [
+                (place.address_components[0] && place.address_components[0].short_name || ''),
+                (place.address_components[1] && place.address_components[1].short_name || ''),
+                (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+        }
+      });
   }
 
   render () {
@@ -147,7 +168,7 @@ class EditProfileModal extends React.Component {
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-address" name="location" type="text" placeholder="Berkeley, CA, United States" />
+                  <input id="my-edit-address" name="location" type="text" placeholder="Berkeley, CA, United States" />
                 </div>
               </div>
               <div className="input-field">
