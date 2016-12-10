@@ -17,6 +17,8 @@ class Requester {
             type: type,
             data: data,
             success: (msg) => {
+                console.log(msg);
+                debugger;
                 if (msg.message) {
                     toastr.options.positionClass = 'toast-bottom-right';
                     toastr.success(msg.message)
@@ -24,9 +26,14 @@ class Requester {
                 if (msg.to) {
                     window.location.href = msg.to
                 }
+                console.log("hello world lolololol");
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
+                console.log("This is from the error!!!!");
+                console.log(status);
+                console.log(error);
+                debugger;
                 if (xhr.responseJSON) {
                     onError(xhr, status, error);
                 } else {
@@ -38,6 +45,7 @@ class Requester {
     }
 
     post(endpoint, data, success, extraFields = {}) {
+        console.log("post");
         this._attemptAjax(endpoint, 'POST', data, extraFields, success,
             this._postErrorHandler);
     }
@@ -48,6 +56,7 @@ class Requester {
     }
 
     put(endpoint, data, success, extraFields = {}) {
+        console.log("put");
         this._attemptAjax(endpoint, 'PUT', data, extraFields, success,
             this._postErrorHandler);
     }

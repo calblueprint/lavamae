@@ -64,6 +64,7 @@ class EditProfileModal extends React.Component {
   }
 
   _getLongitudeAndLatitudeAndSignUp() {
+    console.log("here");
     this.setState({ location:  document.getElementById("my-edit-address").value }, function () {
       geocoder = new google.maps.Geocoder();
       var address = this.state.location;
@@ -87,30 +88,34 @@ class EditProfileModal extends React.Component {
   }
 
   _startSignUpProcess(e) {
-    if (this.state.map_checked) {
+    if (this.state.on_map) {
       if (!this.state.organization || this.state.organization.length == 0) {
         this._error("Please enter an organization name if you want to be on the map.");
       } else {
         this._getLongitudeAndLatitudeAndSignUp();
       }
     } else {
-      this._attemptRegistration();
+      this._attemptSave();
     }
   }
 
   _attemptSave(response = null) {
-    var locId = null;
-    if (response) {
-      locId = response.id;
-    }
-    const userFields = {
+    debugger;
+    console.log("here");
+    console.log(response);
+    var userFields = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
-      location_id: locId,
       email: this.state.email,
       organization: this.state.organization,
       on_map: this.state.on_map,
     };
+    var locId = null;
+    if (response) {
+      locId = response.id;
+      userFields["location_id"] = locId;
+    }
+
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
   }
 
