@@ -36,4 +36,9 @@
       </div>
     <% end %>
   </div>
+  <div class="discussion-item-container col-xs-12 col-md-4" id="discussions">
+    <% @favorite_discussions.each do |discussion| %>
+      <%= render 'discussions/shortened', {discussion: discussion} %>
+    <% end %>
+  </div>
 </div>
