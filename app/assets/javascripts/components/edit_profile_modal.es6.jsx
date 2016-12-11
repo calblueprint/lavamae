@@ -177,7 +177,7 @@ class EditProfileModal extends React.Component {
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} placeholder="Berkeley, CA, United States" />
+                  <input id="my-edit-address" name="location" type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
                 </div>
               </div>
               <div className="input-field">
