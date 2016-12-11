@@ -4,6 +4,7 @@
 * @props last_name - user's current last name
 * @props email - user's current email
 * @props organization - user's current orgnization
+* @props location - location city, state, country string
 * @props on_map - true if user appears on map
 */
 
@@ -20,6 +21,8 @@ class EditProfileModal extends React.Component {
     this._error = this._error.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
+    this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
+    this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._attemptSave = this._attemptSave.bind(this);
     this.state = {
       showModal: false,
@@ -27,6 +30,7 @@ class EditProfileModal extends React.Component {
       last_name: this.props.last_name,
       email: this.props.email,
       organization: this.props.organization,
+      location: this.props.location,
       on_map: this.props.on_map,
     };
   }
@@ -61,15 +65,83 @@ class EditProfileModal extends React.Component {
     this.setState({ on_map: e.target.checked });
   }
 
-  _attemptSave(e) {
-    const userFields = {
+  _getLongitudeAndLatitudeAndSignUp(loc) {
+    console.log("here");
+    this.setState({ location: loc }, function () {
+      geocoder = new google.maps.Geocoder();
+      var address = this.state.location;
+      geocoder.geocode( { 'address': address}, function(results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+          const locationFields = {
+            location: {
+              place: this.state.location,
+              lat: results[0].geometry.location.lat(),
+              lng: results[0].geometry.location.lng(),
+            }
+          };
+          APIRequester.post("/locations", locationFields, this._attemptSave);
+        }
+        else {
+          message = "Location invalid, please try again!";
+          this._error(message);
+        }
+      }.bind(this));
+    });
+  }
+
+  _startSignUpProcess(e) {
+    let loc = document.getElementById("my-edit-address").value;
+    if (this.state.on_map) {
+      if (loc.length == 0) {
+        this._error("Please enter a location if you want to be on the map.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp(loc);
+      }
+    } else if (loc.length != 0) {
+      this._getLongitudeAndLatitudeAndSignUp(loc);
+    } else {
+      this._attemptSave();
+    }
+  }
+
+  _attemptSave(response = null) {
+    console.log("RESPONSE");
+    console.log(response);
+    var userFields = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
       organization: this.state.organization,
       on_map: this.state.on_map,
     };
+    var locId = null;
+    if (response) {
+      console.log("here");
+      locId = response.id;
+      userFields["location_id"] = locId;
+    }
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
+  }
+
+  componentDidUpdate() {
+    var address = (document.getElementById('my-edit-address'));
+    var autocomplete = new google.maps.places.Autocomplete(address);
+    autocomplete.setTypes(['geocode']);
+    google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var place = autocomplete.getPlace();
+        if (!place.geometry) {
+            return;
+        }
+
+        var address = '';
+        if (place.address_components) {
+            address = [
+                (place.address_components[0] && place.address_components[0].short_name || ''),
+                (place.address_components[1] && place.address_components[1].short_name || ''),
+                (place.address_components[2] && place.address_components[2].short_name || '')
+                ].join(' ');
+        }
+      });
   }
 
   render () {
@@ -80,7 +152,7 @@ class EditProfileModal extends React.Component {
           <Modal.Header>
             <Modal.Title>Account Information</Modal.Title>
           </Modal.Header>
-          <form onSubmit={this._attemptSave}>
+          <form>
             <Modal.Body>
               <div className="input-field">
                 <label htmlFor="first_name">First Name</label>
@@ -103,6 +175,12 @@ class EditProfileModal extends React.Component {
                        placeholder="Lava Bae" defaultValue={this.props.organization} />
               </div>
               <div className="input-field">
+                <div>
+                  <label htmlFor="location">Location</label>
+                  <input id="my-edit-address" name="location" type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
+                </div>
+              </div>
+              <div className="input-field">
                 <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
@@ -115,7 +193,7 @@ class EditProfileModal extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
-              <button className="btn btn-blue modal-btn" type="submit">Save Changes</button>
+              <input type="button" className="btn btn-blue modal-btn" onClick={this._startSignUpProcess}>Save Changes</input>
             </Modal.Footer>
           </form>
         </Modal>
@@ -130,5 +208,6 @@ EditProfileModal.propTypes = {
   last_name    : React.PropTypes.string.isRequired,
   email        : React.PropTypes.string.isRequired,
   organization : React.PropTypes.string.isRequired,
+  location     : React.PropTypes.string,
   on_map       : React.PropTypes.bool.isRequired,
 };
