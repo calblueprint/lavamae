@@ -63,9 +63,9 @@ class EditProfileModal extends React.Component {
     this.setState({ on_map: e.target.checked });
   }
 
-  _getLongitudeAndLatitudeAndSignUp() {
+  _getLongitudeAndLatitudeAndSignUp(loc) {
     console.log("here");
-    this.setState({ location:  document.getElementById("my-edit-address").value }, function () {
+    this.setState({ location: loc }, function () {
       geocoder = new google.maps.Geocoder();
       var address = this.state.location;
       geocoder.geocode( { 'address': address}, function(results, status) {
@@ -88,12 +88,15 @@ class EditProfileModal extends React.Component {
   }
 
   _startSignUpProcess(e) {
+    let loc = document.getElementById("my-edit-address").value;
     if (this.state.on_map) {
-      if (!this.state.organization || this.state.organization.length == 0) {
-        this._error("Please enter an organization name if you want to be on the map.");
+      if (loc.length == 0) {
+        this._error("Please enter a location if you want to be on the map.");
       } else {
-        this._getLongitudeAndLatitudeAndSignUp();
+        this._getLongitudeAndLatitudeAndSignUp(loc);
       }
+    } else if (loc.length != 0) {
+      this._getLongitudeAndLatitudeAndSignUp(loc);
     } else {
       this._attemptSave();
     }
