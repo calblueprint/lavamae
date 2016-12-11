@@ -6,6 +6,7 @@
 * @props organization - user's current orgnization
 * @props location - location city, state, country string
 * @props on_map - true if user appears on map
+* @props profile_pic_url - url of user's current profile picture
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -21,6 +22,7 @@ class EditProfileModal extends React.Component {
     this._error = this._error.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
     this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
+    this._handleFileChange = this._handleFileChange.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._attemptSave = this._attemptSave.bind(this);
@@ -32,6 +34,7 @@ class EditProfileModal extends React.Component {
       organization: this.props.organization,
       location: this.props.location,
       on_map: this.props.on_map,
+      imagePreviewUrl: this.props.profile_pic_url,
     };
   }
 
@@ -65,8 +68,20 @@ class EditProfileModal extends React.Component {
     this.setState({ on_map: e.target.checked });
   }
 
+  _handleFileChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let attachment = e.target.files[0];
+    reader.onload = (file) => {
+      this.setState({
+        profile_pic: file.target.result,
+        imagePreviewUrl: reader.result,
+      });
+    }
+    reader.readAsDataURL(attachment);
+  }
+
   _getLongitudeAndLatitudeAndSignUp(loc) {
-    console.log("here");
     this.setState({ location: loc }, function () {
       geocoder = new google.maps.Geocoder();
       var address = this.state.location;
@@ -105,18 +120,17 @@ class EditProfileModal extends React.Component {
   }
 
   _attemptSave(response = null) {
-    console.log("RESPONSE");
-    console.log(response);
     var userFields = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
       organization: this.state.organization,
       on_map: this.state.on_map,
+      profile_pic: this.state.profile_pic,
     };
+    debugger;
     var locId = null;
     if (response) {
-      console.log("here");
       locId = response.id;
       userFields["location_id"] = locId;
     }
@@ -145,6 +159,13 @@ class EditProfileModal extends React.Component {
   }
 
   render () {
+    let imagePreviewUrl = this.state.imagePreviewUrl;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img className="profile-preview" src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an image for preview</div>);
+    }
     return (
       <div>
         <button className="btn btn-blue modal-btn" onClick={this._openModal}>Edit</button>
@@ -190,6 +211,14 @@ class EditProfileModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
+              <div className="input-field">
+                <label class>Profile Picture</label><br></br>
+                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+                  <div className="imgPreview">
+                    {$imagePreview}
+                  </div>
+                <label className="file-label" htmlFor="file-input">Change Profile Picture</label>
+              </div>
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
@@ -203,11 +232,12 @@ class EditProfileModal extends React.Component {
 }
 
 EditProfileModal.propTypes = {
-  user_id      : React.PropTypes.number.isRequired,
-  first_name   : React.PropTypes.string.isRequired,
-  last_name    : React.PropTypes.string.isRequired,
-  email        : React.PropTypes.string.isRequired,
-  organization : React.PropTypes.string.isRequired,
-  location     : React.PropTypes.string,
-  on_map       : React.PropTypes.bool.isRequired,
+  user_id         : React.PropTypes.number.isRequired,
+  first_name      : React.PropTypes.string.isRequired,
+  last_name       : React.PropTypes.string.isRequired,
+  email           : React.PropTypes.string.isRequired,
+  organization    : React.PropTypes.string.isRequired,
+  location        : React.PropTypes.string,
+  on_map          : React.PropTypes.bool.isRequired,
+  profile_pic_url : React.PropTypes.string,
 };

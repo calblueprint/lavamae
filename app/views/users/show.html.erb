@@ -32,9 +32,9 @@
       <div class="row user-flex">
         <div>
           <%if @location %>
-            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, location: @location.place, on_map: @user.on_map) %>
+            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, location: @location.place, on_map: @user.on_map, profile_pic_url: @user.profile_pic.url) %>
           <% else %>
-            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, on_map: @user.on_map) %>
+            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, on_map: @user.on_map, profile_pic_url: @user.profile_pic.url) %>
           <% end %>
         </div>
         <div>
