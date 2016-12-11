@@ -3,7 +3,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @location = Location.find(@user.location_id)
+    if @user.location_id
+      @location = Location.find(@user.location_id)
+    end
   end
 
   def update
