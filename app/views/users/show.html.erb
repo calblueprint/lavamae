@@ -24,7 +24,11 @@
     <%if current_user.id == @user.id %>
       <div class="row user-flex">
         <div>
-          <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, on_map: @user.on_map) %>
+          <%if @location %>
+            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, location: @location.place, on_map: @user.on_map) %>
+          <% else %>
+            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, on_map: @user.on_map) %>
+          <% end %>
         </div>
         <div>
           <%= react_component('ChangePasswordModal', user_id: @user.id) %>
