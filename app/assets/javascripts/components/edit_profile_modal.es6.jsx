@@ -66,7 +66,6 @@ class EditProfileModal extends React.Component {
   }
 
   _getLongitudeAndLatitudeAndSignUp(loc) {
-    console.log("here");
     this.setState({ location: loc }, function () {
       geocoder = new google.maps.Geocoder();
       var address = this.state.location;
@@ -105,8 +104,6 @@ class EditProfileModal extends React.Component {
   }
 
   _attemptSave(response = null) {
-    console.log("RESPONSE");
-    console.log(response);
     var userFields = {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
@@ -114,9 +111,9 @@ class EditProfileModal extends React.Component {
       organization: this.state.organization,
       on_map: this.state.on_map,
     };
+    debugger;
     var locId = null;
     if (response) {
-      console.log("here");
       locId = response.id;
       userFields["location_id"] = locId;
     }
@@ -203,11 +200,11 @@ class EditProfileModal extends React.Component {
 }
 
 EditProfileModal.propTypes = {
-  user_id      : React.PropTypes.number.isRequired,
-  first_name   : React.PropTypes.string.isRequired,
-  last_name    : React.PropTypes.string.isRequired,
-  email        : React.PropTypes.string.isRequired,
-  organization : React.PropTypes.string.isRequired,
-  location     : React.PropTypes.string,
-  on_map       : React.PropTypes.bool.isRequired,
+  user_id         : React.PropTypes.number.isRequired,
+  first_name      : React.PropTypes.string.isRequired,
+  last_name       : React.PropTypes.string.isRequired,
+  email           : React.PropTypes.string.isRequired,
+  organization    : React.PropTypes.string.isRequired,
+  location        : React.PropTypes.string,
+  on_map          : React.PropTypes.bool.isRequired,
 };

@@ -25,7 +25,6 @@ class ChangePasswordForm extends React.Component {
       password_confirmation: this.state.password_confirmation,
       model: this.props.model
     };
-    console.log(passwordData);
     APIRequester.put(`/passwords/${this.props.user_id}`, passwordData, (msg) => {} );
   }
 
