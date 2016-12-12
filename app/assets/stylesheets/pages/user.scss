@@ -9,7 +9,7 @@
 
 .user-profile {
   padding-top: 100px;
-  height: 600px;
+  height: 800px;
   background: $blue-light-20;
 }
 
@@ -29,5 +29,13 @@
 .user-profile-fields {
   color: $blue-dark;
   font-weight: bold;
-  width: 100px;
+  width: 120px;
+  padding: 20px;
+}
+
+.profile-picture {
+  border-radius: 50%;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
 }

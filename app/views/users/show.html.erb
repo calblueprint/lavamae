@@ -1,51 +1,53 @@
 <div class="user-profile">
-  <div class="user-info">
-    <div class="user-picture">
-      <% if @user.profile_pic? %>
-        <a href=""><%= image_tag @user.profile_pic.url(:thumb) %></a>
-      <% else %>
-        <a href=""><%= image_tag("default.png") %></a>
-      <% end %>
-    </div>
-    <div class="row user-flex">
-      <div class="user-profile-fields">
-        Name<br>
-        Email<br>
-        Organization<br>
-        Location<br>
-      </div>
-      <div class="vertical-line">
-        <div>
-          <%= @user.first_name %>
-          <%= @user.last_name %>
-        </div>
-        <%= @user.email %><br>
-        <%= @user.organization %><br>
-        <% if @location %>
-          <%= @location.place %>
+  <div class="row user-flex">
+    <div class="user-info">
+      <div class="profile-picture">
+        <% if @user.profile_pic? %>
+          <a href=""><%= image_tag @user.profile_pic.url(:thumb) %></a>
         <% else %>
-          <%= "Not Available" %>
+          <a href=""><%= image_tag("default.png") %></a>
         <% end %>
       </div>
-    </div>
-    <%if current_user.id == @user.id %>
       <div class="row user-flex">
-        <div>
-          <%if @location %>
-            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, location: @location.place, on_map: @user.on_map) %>
+        <div class="user-profile-fields">
+          Name<br>
+          Email<br>
+          Organization<br>
+          Location<br>
+        </div>
+        <div class="vertical-line">
+          <div>
+            <%= @user.first_name %>
+            <%= @user.last_name %>
+          </div>
+          <%= @user.email %><br>
+          <%= @user.organization %><br>
+          <% if @location %>
+            <%= @location.place %>
           <% else %>
-            <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, on_map: @user.on_map) %>
+            <%= "Not Available" %>
           <% end %>
         </div>
-        <div>
-          <%= react_component('ChangePasswordModal', user_id: @user.id) %>
-        </div>
       </div>
-    <% end %>
-  </div>
-  <div class="discussion-item-container col-xs-12 col-md-4" id="discussions">
-    <% @favorite_discussions.each do |discussion| %>
-      <%= render 'discussions/shortened', {discussion: discussion} %>
-    <% end %>
+      <%if current_user.id == @user.id %>
+        <div class="row user-flex">
+          <div>
+            <%if @location %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, location: @location.place, on_map: @user.on_map) %>
+            <% else %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, on_map: @user.on_map) %>
+            <% end %>
+          </div>
+          <div>
+            <%= react_component('ChangePasswordModal', user_id: @user.id) %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="discussion-item-container col-xs-12 col-md-4" id="discussions">
+      <% @favorite_discussions.each do |discussion| %>
+        <%= render 'discussions/shortened', {discussion: discussion} %>
+      <% end %>
+    </div>
   </div>
 </div>
