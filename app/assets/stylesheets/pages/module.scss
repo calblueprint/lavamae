@@ -45,6 +45,10 @@
   padding-right: 15px;
 }
 
+.edit-resources-button {
+  padding-left: 15px;
+}
+
 .module-items {
   display: flex;
   justify-content: flex-start;
@@ -68,4 +72,8 @@
     flex: auto;
     padding-bottom: 15px;
   }
+}
+
+.admin-edit-container {
+  padding-top: 100px;
 }
