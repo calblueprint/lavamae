@@ -19,7 +19,9 @@ Rails.application.routes.draw do
     resources :responses
   end
 
-  resources :resources
+  resources :resources do
+    get :admin_edit, :on => :collection
+  end
   resources :resource_topics do
     get '/resource_topics/:id', to: 'resource_topics#get_resources'
   end

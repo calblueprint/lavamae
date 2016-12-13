@@ -40,6 +40,10 @@ class ResourcesController < ApplicationController
   	redirect_to resource_topic_path(id: @resource_topic_id)
   end
 
+  def admin_edit
+    puts("admin edit :'( ")
+  end
+
   def show
   end
 
