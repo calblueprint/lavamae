@@ -204,7 +204,7 @@ EditProfileModal.propTypes = {
   first_name      : React.PropTypes.string.isRequired,
   last_name       : React.PropTypes.string.isRequired,
   email           : React.PropTypes.string.isRequired,
-  organization    : React.PropTypes.string.isRequired,
+  organization    : React.PropTypes.string,
   location        : React.PropTypes.string,
   on_map          : React.PropTypes.bool.isRequired,
 };

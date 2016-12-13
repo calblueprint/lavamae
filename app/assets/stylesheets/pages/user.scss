@@ -5,9 +5,12 @@
 .vertical-line {
   border-left: solid $blue-dark;
   flex: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .user-profile {
+  padding: 22px;
   padding-top: 100px;
   height: 800px;
   background: $blue-light-20;
@@ -15,11 +18,11 @@
 
 .user-info {
   background: white;
-  height: 250px;
-  width: 350px;
+  height: 360px;
+  width: 340px;
   border: 2px solid transparent;
   border-radius: 2px;
-  padding: 15px;
+  padding: 30px;
 }
 
 .user-flex {
@@ -31,11 +34,54 @@
   font-weight: bold;
   width: 120px;
   padding: 20px;
+  text-align: right;
+}
+
+.user-profile-answers {
+  padding-left: 20px;
+  text-align: left;
 }
 
 .profile-picture {
-  border-radius: 50%;
+  position: relative;
+  vertical-align: middle;
   display: inline-block;
-  height: 40px;
-  width: 40px;
+  padding-left: 90px;
+
+  img {
+    border-radius: 50%;
+    height: 90px;
+    width: 90px;
+    object-fit: cover;
+    margin: auto;
+  }
 }
+
+.profile-section-titles {
+  padding-left: 30px;
+  color: $blue-dark;
+  font-weight: bold;
+}
+
+.favorite-discussions-container {
+  height: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 10px;
+  overflow-y: scroll;
+  width: 50vw;
+
+  .discussion-item-description {
+    font-size: 12px;
+  }
+
+  .discussion-item-date {
+    float: right;
+    font-size: 14px;
+  }
+}
+
+.profile-edit-button {
+  padding-right: 10px;
+}
+
