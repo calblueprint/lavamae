@@ -11,6 +11,8 @@ class ResourceModule extends React.Component {
     super(props);
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
+    this._handleEditTopic = this._handleEditTopic.bind(this);
+    this._handleDeleteTopic = this._handleDeleteTopic.bind(this);
     this.setDocuments = this.setDocuments.bind(this)
     this.state = {
       resources: {},
@@ -36,6 +38,16 @@ class ResourceModule extends React.Component {
   _handleError(msg) {
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.error(msg);
+  }
+
+  _handleEditTopic() {
+    console.log("Edit Resource Topic");
+  }
+
+  _handleDeleteTopic() {
+    debugger;
+    console.log("Delete Resource Topic");
+    APIRequester.delete(`/resource_topics/${this.props.resource_topic.id}/admin_destroy`, () => {});
   }
 
   setDocuments(resources) {
@@ -80,6 +92,12 @@ class ResourceModule extends React.Component {
           </div>
           <div className="resources-container">
             {this._renderDocuments()}
+          </div>
+          <div className="resource-download" onClick = {this._handleEditTopic}>
+            <i className="fa fa-pencil fa-lg"></i>
+          </div>
+          <div className="resource-delete" onClick = {this._handleDeleteTopic}>
+            <i className="fa fa-trash-o fa-lg"></i>
           </div>
         </div>
     )

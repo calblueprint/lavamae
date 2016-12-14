@@ -9,6 +9,6 @@
 #
 
 class ResourceTopic < ActiveRecord::Base
-  has_many :resources
+  has_many :resources, :dependent => :delete_all
 
 end

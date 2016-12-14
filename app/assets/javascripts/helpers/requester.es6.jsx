@@ -24,7 +24,6 @@ class Requester {
                 if (msg.to) {
                     window.location.href = msg.to
                 }
-                console.log("hello world lolololol");
                 onSuccess(msg);
             },
             error: (xhr, status, error) => {
