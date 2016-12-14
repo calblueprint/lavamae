@@ -20,6 +20,10 @@ class ResourceTopicsController < ApplicationController
   def edit
   end
 
+  def admin_edit
+    @modules = ResourceTopic.all
+  end
+
   def update
   end
 
