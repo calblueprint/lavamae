@@ -39,7 +39,7 @@ class ResourcePage extends React.Component {
               modules = { this.props.modules }
             />
             <div className="edit-resources-button">
-              <form className="button_to" method="get" action="/resources/admin_edit">
+              <form className="button_to" method="get" action="/resource_topics/admin_edit">
                   <input className="btn btn-blue btn-nav" type="submit" value="Edit Resources" />
               </form>
             </div>
@@ -48,7 +48,6 @@ class ResourcePage extends React.Component {
           </div>
           <div className="module-items row">
             {this._renderModules()}
-
           </div>
         </div>
       </section>

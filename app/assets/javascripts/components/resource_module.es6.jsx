@@ -1,5 +1,6 @@
 /**
  * @prop resource_topic -- passed down module
+ * @prop is_admin -- passed down module
  */
 var ButtonToolbar = ReactBootstrap.ButtonToolbar;
 var DropdownButton = ReactBootstrap.DropdownButton;
@@ -53,6 +54,7 @@ class ResourceModule extends React.Component {
         <ResourceDocument
           key={resource_doc.id}
           resource_doc = {resource_doc}
+          is_admin = {this.props.is_admin}
         />
       )
     });
