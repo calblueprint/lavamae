@@ -24,6 +24,15 @@ class ResourceTopicsController < ApplicationController
     @modules = ResourceTopic.all
   end
 
+  def admin_destroy
+    @resource_topic = ResourceTopic.find(params[:resource_topic_id])
+    if @resource_topic.destroy
+      render_json_message(:ok, message: 'Deleted module!')
+    else
+      render_json_message(:forbidden, errors: @resource_topic.errors.full_messages)
+    end
+  end
+
   def update
   end
 

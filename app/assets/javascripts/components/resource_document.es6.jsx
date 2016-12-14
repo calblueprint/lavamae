@@ -7,8 +7,8 @@ class ResourceDocument extends React.Component {
   constructor(props) {
     super(props);
     this._handleDownload = this._handleDownload.bind(this);
-    this._handleEdit = this._handleEdit.bind(this);
-    this._handleDelete = this._handleDelete.bind(this);
+    this._handleEditDoc = this._handleEditDoc.bind(this);
+    this._handleDeleteDoc = this._handleDeleteDoc.bind(this);
     this._admin_edit = this._admin_edit.bind(this);
   }
 
@@ -16,12 +16,12 @@ class ResourceDocument extends React.Component {
     window.open(this.props.resource_doc.attachment.url);
   }
 
-  _handleEdit() {
-
+  _handleEditDoc() {
+    console.log("Edit Document");
   }
 
-  _handleDelete() {
-
+  _handleDeleteDoc() {
+    console.log("Delete Document");
   }
 
   _admin_edit() {
@@ -36,10 +36,10 @@ class ResourceDocument extends React.Component {
               {this.props.resource_doc.description}
             </div>
           </div>
-          <div className="resource-download" onClick = {this._handleEdit}>
+          <div className="resource-download" onClick = {this._handleEditDoc}>
             <i className="fa fa-pencil fa-lg"></i>
           </div>
-          <div className="resource-delete" onClick = {this._handleDelete}>
+          <div className="resource-delete" onClick = {this._handleDeleteDoc}>
             <i className="fa fa-trash-o fa-lg"></i>
           </div>
         </div>
