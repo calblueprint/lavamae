@@ -45,7 +45,6 @@ class ResourceModule extends React.Component {
   }
 
   _handleDeleteTopic() {
-    debugger;
     console.log("Delete Resource Topic");
     APIRequester.delete(`/resource_topics/${this.props.resource_topic.id}/admin_destroy`, () => {});
   }
@@ -72,6 +71,22 @@ class ResourceModule extends React.Component {
     });
   }
 
+   _admin_edit() {
+    if (this.props.is_admin) {
+      return (
+        <div>
+          <div className="resource-download" onClick = {this._handleEditTopic}>
+            <i className="fa fa-pencil fa-lg"></i>
+          </div>
+          <div className="resource-delete" onClick = {this._handleDeleteTopic}>
+            <i className="fa fa-trash-o fa-lg"></i>
+          </div>
+        </div>
+      );
+    }
+  }
+
+
   render() {
     return (
         <div className="module-item-container">
@@ -90,14 +105,9 @@ class ResourceModule extends React.Component {
               </div>
             </div>
           </div>
+          { this._admin_edit() }
           <div className="resources-container">
             {this._renderDocuments()}
-          </div>
-          <div className="resource-download" onClick = {this._handleEditTopic}>
-            <i className="fa fa-pencil fa-lg"></i>
-          </div>
-          <div className="resource-delete" onClick = {this._handleDeleteTopic}>
-            <i className="fa fa-trash-o fa-lg"></i>
           </div>
         </div>
     )

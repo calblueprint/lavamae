@@ -9,6 +9,7 @@ class ResourceDocument extends React.Component {
     this._handleDownload = this._handleDownload.bind(this);
     this._handleEditDoc = this._handleEditDoc.bind(this);
     this._handleDeleteDoc = this._handleDeleteDoc.bind(this);
+    this._successDelete = this._successDelete.bind(this);
     this._admin_edit = this._admin_edit.bind(this);
   }
 
@@ -20,22 +21,19 @@ class ResourceDocument extends React.Component {
     console.log("Edit Document");
   }
 
+  _successDelete(msg) {
+    window.location = location.pathname;
+  }
+
   _handleDeleteDoc() {
     console.log("Delete Document");
+    APIRequester.delete(`/resources/${this.props.resource_doc.id}`, this._successDelete);
   }
 
   _admin_edit() {
     if (this.props.is_admin) {
       return (
-        <div className="resource-item">
-          <div className="resource-body">
-            <h4 className="resource-title">
-              {this.props.resource_doc.title}
-            </h4>
-            <div className="resource-description">
-              {this.props.resource_doc.description}
-            </div>
-          </div>
+        <div>
           <div className="resource-download" onClick = {this._handleEditDoc}>
             <i className="fa fa-pencil fa-lg"></i>
           </div>
@@ -46,18 +44,8 @@ class ResourceDocument extends React.Component {
       );
     } else {
       return (
-        <div className="resource-item">
-          <div className="resource-body">
-            <h4 className="resource-title">
-              {this.props.resource_doc.title}
-            </h4>
-            <div className="resource-description">
-              {this.props.resource_doc.description}
-            </div>
-          </div>
-          <div className="resource-download" onClick = {this._handleDownload}>
-            <i className="fa fa-download fa-lg"></i>
-          </div>
+        <div className="resource-download" onClick = {this._handleDownload}>
+          <i className="fa fa-download fa-lg"></i>
         </div>
       );
     }
@@ -65,7 +53,15 @@ class ResourceDocument extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="resource-item">
+        <div className="resource-body">
+          <h4 className="resource-title">
+            {this.props.resource_doc.title}
+          </h4>
+          <div className="resource-description">
+            {this.props.resource_doc.description}
+          </div>
+        </div>
         { this._admin_edit() }
       </div>
     )

@@ -35,9 +35,11 @@ class ResourcesController < ApplicationController
 
   def destroy
   	@resource = Resource.find(params[:id])
-    @resource_topic_id = @resource.resource_topic_id
-  	@resource.destroy
-  	redirect_to resource_topic_path(id: @resource_topic_id)
+  	if @resource.destroy
+      render_json_message(:ok, message: 'Deleted resource!')
+    else
+      render_json_message(:forbidden, errors: @resource.errors.full_messages)
+    end
   end
 
   def show
