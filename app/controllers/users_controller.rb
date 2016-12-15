@@ -7,6 +7,7 @@ class UsersController < ApplicationController
     if @user.location_id
       @location = Location.find(@user.location_id)
     end
+    @favorite_discussions = @user.favorite_discussions
   end
 
   def update
