@@ -111,7 +111,6 @@ class EditProfileModal extends React.Component {
       organization: this.state.organization,
       on_map: this.state.on_map,
     };
-    debugger;
     var locId = null;
     if (response) {
       locId = response.id;
