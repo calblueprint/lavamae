@@ -21,27 +21,29 @@
   .resource-title {
     color: $blue-dark;
   }
+}
 
-  .resource-download {
-    cursor: pointer;
-    padding: 15px 20px;
-    transition: 300ms;
-    color: $blue-light;
+.resource-download {
+  cursor: pointer;
+  padding: 15px 20px;
+  transition: 300ms;
+  color: $blue-light;
+  display: inline;
 
-    &:hover {
-      background: $blue-light-20;
-    }
+  &:hover {
+    background: $blue-light-20;
   }
+}
 
-  .resource-delete {
-    cursor: pointer;
-    padding: 15px 20px;
-    transition: 300ms;
-    color: $red !important;
+.resource-delete {
+  cursor: pointer;
+  padding: 15px 20px;
+  transition: 300ms;
+  color: $red !important;
+  display: inline;
 
-    &:hover {
-      background: $red-20;
-    }
+  &:hover {
+    background: $red-20;
   }
 }
 

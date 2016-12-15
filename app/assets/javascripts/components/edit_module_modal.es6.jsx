@@ -32,7 +32,20 @@ class EditModuleModal extends React.Component {
 
   render () {
     return (
-      <div></div>
+      <div>
+        <button className="btn btn-blue modal-btn" onClick={this._openModal}>Edit</button>
+        <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
+          <Modal.Header>
+            <Modal.Title>Module Name</Modal.Title>
+          </Modal.Header>
+          <form>
+            <Modal.Body>
+            </Modal.Body>
+            <Modal.Footer>
+            </Modal.Footer>
+          </form>
+        </Modal>
+      </div>
     );
   }
 }

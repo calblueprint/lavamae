@@ -74,12 +74,14 @@ class ResourceModule extends React.Component {
    _admin_edit() {
     if (this.props.is_admin) {
       return (
-        <div>
-          <div className="resource-download" onClick = {this._handleEditTopic}>
-            <i className="fa fa-pencil fa-lg"></i>
-          </div>
-          <div className="resource-delete" onClick = {this._handleDeleteTopic}>
-            <i className="fa fa-trash-o fa-lg"></i>
+        <div className="module-hover-icons">
+          <div className="module-icons-corner">
+            <div className="module-download" onClick = {this._handleEditTopic}>
+              <i className="fa fa-pencil fa-lg"></i>
+            </div>
+            <div className="module-delete" onClick = {this._handleDeleteTopic}>
+              <i className="fa fa-trash-o fa-lg"></i>
+            </div>
           </div>
         </div>
       );
@@ -90,7 +92,7 @@ class ResourceModule extends React.Component {
   render() {
     return (
         <div className="module-item-container">
-          <div tabIndex="1" className="module-item" onClick = {this._handleClick}>
+          <div tabIndex="1" className="module-item module-flex" onClick = {this._handleClick}>
             <div className="cover-picture">
               <a href=""><img src="/assets/greybus.svg" /></a>
             </div>
@@ -104,8 +106,8 @@ class ResourceModule extends React.Component {
                 <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
               </div>
             </div>
+            { this._admin_edit() }
           </div>
-          { this._admin_edit() }
           <div className="resources-container">
             {this._renderDocuments()}
           </div>
