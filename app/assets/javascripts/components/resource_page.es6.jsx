@@ -1,5 +1,6 @@
 /**
   * @prop modules
+  * @prop current_user
   */
 
 class ResourcePage extends React.Component {
@@ -22,6 +23,18 @@ class ResourcePage extends React.Component {
     return this.props.modules.map((resource_topic) => this._renderModule(resource_topic));
   }
 
+  _adminEdit() {
+    if (this.props.current_user && this.props.current_user.is_admin) {
+      return (
+        <div className="edit-resources-button">
+          <form className="button_to" method="get" action="/resource_topics/admin_edit">
+              <input className="btn btn-blue btn-nav" type="submit" value="Edit Resources" />
+          </form>
+        </div>
+      );
+    }
+  }
+
   render() {
 
     return (
@@ -38,13 +51,7 @@ class ResourcePage extends React.Component {
               style = { "btn btn-blue" }
               modules = { this.props.modules }
             />
-            <div className="edit-resources-button">
-              <form className="button_to" method="get" action="/resource_topics/admin_edit">
-                  <input className="btn btn-blue btn-nav" type="submit" value="Edit Resources" />
-              </form>
-            </div>
-          </div>
-          <div>
+            { this._adminEdit() }
           </div>
           <div className="module-items row">
             {this._renderModules()}
