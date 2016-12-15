@@ -82,6 +82,11 @@
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
       <ul class="nav-items-container pull-right" id="topNav">
         <%if user_signed_in? %>
+          <%= link_to user_path(current_user.id) do %>
+            <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Profile</button>
+            </li>
+          <% end %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
