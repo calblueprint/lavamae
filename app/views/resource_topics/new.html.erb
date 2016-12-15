@@ -1,10 +1,6 @@
-<br/>
-<br/>
-<br/>
-<br/>
-<div class="well">
+<div class="new-resource-topic well">
   <%= form_for @resource_topic do |f| %>
-    <%= f.label :name %>
+    <%= f.label "Module Name" %>
     <%= f.text_field :name %>
     <%= f.submit "Save", class: "btn btn-primary" %>
   <% end %>

@@ -1,6 +1,6 @@
 /**
-  * @prop modules
-  * @prop current_user
+  * @prop modules      - all modules to display
+  * @prop current_user - either user or admin
   */
 
 class ResourcePage extends React.Component {
@@ -62,3 +62,8 @@ class ResourcePage extends React.Component {
   }
 
 }
+
+ResourcePage.propTypes = {
+  modules      : React.PropTypes.array.isRequired,
+  current_user : React.PropTypes.object.isRequired,
+};
