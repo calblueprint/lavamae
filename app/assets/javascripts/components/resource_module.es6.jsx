@@ -13,26 +13,32 @@ class ResourceModule extends React.Component {
     this._handleError = this._handleError.bind(this);
     this._handleEditTopic = this._handleEditTopic.bind(this);
     this._handleDeleteTopic = this._handleDeleteTopic.bind(this);
+    this._adminEdit = this._adminEdit.bind(this);
     this.setDocuments = this.setDocuments.bind(this)
     this.state = {
       resources: {},
       show_documents: false,
+      editing: false
     };
   }
 
   _handleClick(e) {
-    e.preventDefault();
-    if (this.state.show_documents == false) {
-      var route = `/resource_topics/${this.props.resource_topic.id}`
-      APIRequester.getJSON(route, this.setDocuments, this._handleError);
-      this.setState({show_documents: true});
+    if (!this.state.editing) {
+      console.log('yo');
+      e.preventDefault();
+      if (this.state.show_documents == false) {
+        var route = `/resource_topics/${this.props.resource_topic.id}`
+        APIRequester.getJSON(route, this.setDocuments, this._handleError);
+        this.setState({show_documents: true});
 
-    } else {
-      this.setState({resources: {}});
-      this.setState({show_documents: false});
-      this._renderDocuments();
+      } else {
+        this.setState({resources: {}});
+        this.setState({show_documents: false});
+        this._renderDocuments();
 
+      }
     }
+
   }
 
   _handleError(msg) {
@@ -41,6 +47,7 @@ class ResourceModule extends React.Component {
   }
 
   _handleEditTopic() {
+    this.setState({ editing: true });
     console.log("Edit Resource Topic");
   }
 
@@ -71,7 +78,7 @@ class ResourceModule extends React.Component {
     });
   }
 
-   _admin_edit() {
+   _adminEdit() {
     if (this.props.is_admin) {
       return (
         <div className="module-hover-icons">
@@ -106,7 +113,7 @@ class ResourceModule extends React.Component {
                 <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
               </div>
             </div>
-            { this._admin_edit() }
+            { this._adminEdit() }
           </div>
           <div className="resources-container">
             {this._renderDocuments()}
