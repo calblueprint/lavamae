@@ -1,5 +1,6 @@
 /**
  * @prop resource_topic -- passed down module
+ * @prop img_src        -- background image passed down by resource page componenet
  */
 var ButtonToolbar = ReactBootstrap.ButtonToolbar;
 var DropdownButton = ReactBootstrap.DropdownButton;
@@ -63,7 +64,7 @@ class ResourceModule extends React.Component {
         <div className="module-item-container">
           <div tabIndex="1" className="module-item" onClick = {this._handleClick}>
             <div className="cover-picture">
-              <a href=""><img src="/assets/greybus.svg" /></a>
+              <a href=""><img src={this.props.img_src} /></a>
             </div>
             <div className="module-body">
               <h5 className="module-item-title">
