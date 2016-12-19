@@ -120,7 +120,7 @@ class ResourceUploadModal extends React.Component {
 
     if (this.props.doc_id) {
       return (
-        <select name="module" value={this.props.module_id} onChange={this._handleSelect} >
+        <select name="module" defaultValue={this.props.module_id} onChange={this._handleSelect} >
           {moduleOptions}
         </select>
       );
