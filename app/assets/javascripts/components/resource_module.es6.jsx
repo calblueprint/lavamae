@@ -1,7 +1,8 @@
 /**
  * @prop resource_topic -- passed down module
- * @prop is_admin -- passed down module
+ * @prop is_admin - true if user is an admin
  */
+
 var ButtonToolbar = ReactBootstrap.ButtonToolbar;
 var DropdownButton = ReactBootstrap.DropdownButton;
 var MenuItem = ReactBootstrap.MenuItem;
@@ -11,34 +12,26 @@ class ResourceModule extends React.Component {
     super(props);
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
-    this._handleEditTopic = this._handleEditTopic.bind(this);
     this._handleDeleteTopic = this._handleDeleteTopic.bind(this);
     this._adminEdit = this._adminEdit.bind(this);
     this.setDocuments = this.setDocuments.bind(this)
     this.state = {
       resources: {},
       show_documents: false,
-      editing: false
     };
   }
 
   _handleClick(e) {
-    if (!this.state.editing) {
-      console.log('yo');
-      e.preventDefault();
-      if (this.state.show_documents == false) {
-        var route = `/resource_topics/${this.props.resource_topic.id}`
-        APIRequester.getJSON(route, this.setDocuments, this._handleError);
-        this.setState({show_documents: true});
-
-      } else {
-        this.setState({resources: {}});
-        this.setState({show_documents: false});
-        this._renderDocuments();
-
-      }
+    e.preventDefault();
+    if (this.state.show_documents == false) {
+      var route = `/resource_topics/${this.props.resource_topic.id}`
+      APIRequester.getJSON(route, this.setDocuments, this._handleError);
+      this.setState({show_documents: true});
+    } else {
+      this.setState({resources: {}});
+      this.setState({show_documents: false});
+      this._renderDocuments();
     }
-
   }
 
   _handleError(msg) {
@@ -46,13 +39,7 @@ class ResourceModule extends React.Component {
     toastr.error(msg);
   }
 
-  _handleEditTopic() {
-    this.setState({ editing: true });
-    console.log("Edit Resource Topic");
-  }
-
   _handleDeleteTopic() {
-    console.log("Delete Resource Topic");
     APIRequester.delete(`/resource_topics/${this.props.resource_topic.id}/admin_destroy`, () => {});
   }
 
@@ -83,8 +70,8 @@ class ResourceModule extends React.Component {
       return (
         <div className="module-hover-icons">
           <div className="module-icons-corner">
-            <div className="module-download" onClick = {this._handleEditTopic}>
-              <i className="fa fa-pencil fa-lg"></i>
+            <div className="module-download">
+              <EditModuleModal resource_topic={this.props.resource_topic} />
             </div>
             <div className="module-delete" onClick = {this._handleDeleteTopic}>
               <i className="fa fa-trash-o fa-lg"></i>
@@ -122,3 +109,8 @@ class ResourceModule extends React.Component {
     )
   }
 }
+
+ResourceModule.propTypes = {
+  resource_topic : React.PropTypes.object.isRequired,
+  is_admin : React.PropTypes.bool.isRequired,
+};
