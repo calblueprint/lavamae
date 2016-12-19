@@ -59,6 +59,17 @@
   &:hover {
     background: $red-20;
   }
+
+  .resource-delete {
+    cursor: pointer;
+    padding: 15px 20px;
+    transition: 300ms;
+    color: $red !important;
+
+    &:hover {
+      background: $red-20;
+    }
+  }
 }
 
 .resource-item:not(:last-child) {
