@@ -45,6 +45,10 @@
   padding-right: 15px;
 }
 
+.edit-resources-button {
+  padding-left: 15px;
+}
+
 .module-items {
   display: flex;
   justify-content: flex-start;
@@ -67,5 +71,55 @@
     width: 100vw;
     flex: auto;
     padding-bottom: 15px;
+  }
+}
+
+.admin-edit-container {
+  padding: 30px;
+  padding-top: 100px;
+}
+
+.modules-page-container {
+  padding-top: 80px;
+}
+
+.module-flex {
+  display: flex;
+}
+
+.module-download {
+  cursor: pointer;
+  padding: 5px 8px;
+  transition: 300ms;
+  color: $blue-light;
+  display: inline;
+
+  &:hover {
+    background: $blue-light-20;
+  }
+}
+
+.module-hover-icons {
+  opacity: 0;
+}
+
+.module-item:hover > .module-hover-icons {
+  opacity: 1;
+}
+
+.module-icons-corner {
+  margin-top: -10px;
+  margin-right: -15px;
+}
+
+.module-delete {
+  cursor: pointer;
+  padding: 5px 8px;
+  transition: 300ms;
+  color: $red !important;
+  display: inline;
+
+  &:hover {
+    background: $red-20;
   }
 }

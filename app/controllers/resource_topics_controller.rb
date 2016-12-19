@@ -20,7 +20,26 @@ class ResourceTopicsController < ApplicationController
   def edit
   end
 
+  def admin_edit
+    @modules = ResourceTopic.all
+  end
+
+  def admin_destroy
+    @resource_topic = ResourceTopic.find(params[:resource_topic_id])
+    if @resource_topic.destroy
+      render_json_message(:ok, message: 'Deleted module!')
+    else
+      render_json_message(:forbidden, errors: @resource_topic.errors.full_messages)
+    end
+  end
+
   def update
+    @resource_topic = ResourceTopic.find(params[:id])
+    if @resource_topic.update(update_params)
+      render_json_message(:ok, message: "Module name successfully updated!")
+    else
+      render_json_message(:forbidden, errors: resource_topic.errors.full_messages)
+    end
   end
 
   def show
@@ -44,6 +63,10 @@ class ResourceTopicsController < ApplicationController
   private
   def resource_topic_params
     params.require(:resource_topic).permit(:name)
+  end
+
+  def update_params
+    params.permit(:id, :name)
   end
 
 end

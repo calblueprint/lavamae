@@ -1,5 +1,6 @@
 /**
-  * @prop modules
+  * @prop modules      - all modules to display
+  * @prop current_user - either user or admin
   */
 
 class ResourcePage extends React.Component {
@@ -11,15 +12,27 @@ class ResourcePage extends React.Component {
 
   _renderModule(resource_topic) {
     return (
-      <ResourceModule
-        key={resource_topic.id}
-        resource_topic = {resource_topic}
-      />
+      <ResourceModule key={resource_topic.id}
+                      resource_topic={resource_topic}
+                      modules={this.props.modules}
+                      is_admin={false} />
     );
   }
 
   _renderModules() {
     return this.props.modules.map((resource_topic) => this._renderModule(resource_topic));
+  }
+
+  _adminEdit() {
+    if (this.props.current_user && this.props.current_user.is_admin) {
+      return (
+        <div className="edit-resources-button">
+          <form className="button_to" method="get" action="/resource_topics/admin_edit">
+              <input className="btn btn-blue btn-nav" type="submit" value="Edit Resources" />
+          </form>
+        </div>
+      );
+    }
   }
 
   render() {
@@ -34,16 +47,12 @@ class ResourcePage extends React.Component {
                   <input className = "btn btn-blue btn-nav" type = "submit" value = "New Module" />
               </form>
             </div>
-            <ResourceUploadModal
-              style = { "btn btn-blue" }
-              modules = { this.props.modules }
-            />
-          </div>
-          <div>
+            <ResourceUploadModal style={ "btn btn-blue btn-nav" }
+                                 modules={ this.props.modules } />
+            { this._adminEdit() }
           </div>
           <div className="module-items row">
             {this._renderModules()}
-
           </div>
         </div>
       </section>
@@ -51,3 +60,8 @@ class ResourcePage extends React.Component {
   }
 
 }
+
+ResourcePage.propTypes = {
+  modules      : React.PropTypes.array.isRequired,
+  current_user : React.PropTypes.object.isRequired,
+};

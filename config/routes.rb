@@ -21,6 +21,8 @@ Rails.application.routes.draw do
 
   resources :resources
   resources :resource_topics do
+    get :admin_edit, :on => :collection
+    delete :admin_destroy
     get '/resource_topics/:id', to: 'resource_topics#get_resources'
   end
   resources :locations, :only =>[:create]

@@ -21,15 +21,53 @@
   .resource-title {
     color: $blue-dark;
   }
+}
 
-  .resource-download {
+.resource-download {
+  cursor: pointer;
+  padding: 15px 20px;
+  transition: 300ms;
+  color: $blue-light;
+  display: inline;
+
+  &:hover {
+    background: $blue-light-20;
+  }
+}
+
+.resource-edit {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  padding: 15px 20px;
+  transition: 300ms;
+  color: $blue-light;
+  display: inline;
+
+  &:hover {
+    background: $blue-light-20;
+  }
+}
+
+.resource-delete {
+  cursor: pointer;
+  padding: 15px 20px;
+  transition: 300ms;
+  color: $red !important;
+  display: inline;
+
+  &:hover {
+    background: $red-20;
+  }
+
+  .resource-delete {
     cursor: pointer;
     padding: 15px 20px;
     transition: 300ms;
-    color: $blue-light;
+    color: $red !important;
 
     &:hover {
-      background: $blue-light-20;
+      background: $red-20;
     }
   }
 }

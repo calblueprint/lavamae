@@ -11,53 +11,37 @@
               <button class="btn btn-transparent btn-nav">Profile</button>
             </li>
           <% end %>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
+        <% end %>
+        <%= link_to discussions_path do %>
           <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
+            <button class="btn btn-transparent btn-nav">Discussions</button>
           </li>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-                <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
+        <% end %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Stories</button>
+        </li>
+        <%= link_to map_path do %>
+          <li class="nav-item">
+              <button class="btn btn-transparent btn-nav">Map</button>
+          </li>
+        <% end %>
+        <%= link_to resource_topics_path do %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+        <% end %>
+        <% if user_signed_in? %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
-        <%else%>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
-          </li>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
+        <% else %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
           <li class="nav-item">
             <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
           </li>
-        <%end%>
+        <% end %>
       </ul>
     </div>
   </div>
@@ -82,46 +66,35 @@
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
       <ul class="nav-items-container pull-right" id="topNav">
         <%if user_signed_in? %>
-          <%= link_to discussions_path do %>
+          <%= link_to user_path(current_user.id) do %>
             <li class="nav-item">
-              <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
+              <button class="btn btn-transparent btn-nav">Profile</button>
             </li>
           <% end %>
+        <% end %>
+        <%= link_to discussions_path do %>
           <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
+            <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
           </li>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
+        <% end %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Stories</button>
+        </li>
+        <%= link_to map_path do %>
           <li class="nav-item">
-            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
+            <button class="btn btn-transparent btn-nav">Map</button>
           </li>
+        <% end %>
+        <%= link_to resource_topics_path do %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav">Resources</button>
+          </li>
+        <% end %>
+        <%if user_signed_in? %>
+            <li class="nav-item">
+              <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
+            </li>
         <%else%>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
-          </li>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
@@ -147,57 +120,39 @@
               <button class="btn btn-transparent btn-nav">Profile</button>
             </li>
           <% end %>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
+        <% end %>
+        <%= link_to discussions_path do %>
           <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
+            <button class="btn btn-transparent btn-nav">Discussions</button>
           </li>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav
-              <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav resources-nav
-              <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
-            </li>
-          <% end %>
+        <% end %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Stories</button>
+        </li>
+        <%= link_to map_path do %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav
+            <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
+          </li>
+        <% end %>
+        <%= link_to resource_topics_path do %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav resources-nav
+            <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
+          </li>
+        <% end %>
+        <%if user_signed_in? %>
           <li class="nav-item">
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
           </li>
-        <%else%>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <button class="btn btn-transparent btn-nav">Stories</button>
-          </li>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav
-              <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav resources-nav
-              <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
-            </li>
-          <% end %>
+        <% else %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
           <li class="nav-item">
             <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
           </li>
-        <%end%>
+        <% end %>
       </ul>
     </div>
   </div>
