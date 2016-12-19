@@ -1,13 +1,13 @@
 /**
-  * @prop resource_doc
-  * @prop is_admin
+  * @prop resource_doc - passed down document
+  * @prop modules      - all module topics
+  * @prop is_admin     - true if user is an admin
   */
 
 class ResourceDocument extends React.Component {
   constructor(props) {
     super(props);
     this._handleDownload = this._handleDownload.bind(this);
-    this._handleEditDoc = this._handleEditDoc.bind(this);
     this._handleDeleteDoc = this._handleDeleteDoc.bind(this);
     this._successDelete = this._successDelete.bind(this);
     this._admin_edit = this._admin_edit.bind(this);
@@ -15,10 +15,6 @@ class ResourceDocument extends React.Component {
 
   _handleDownload() {
     window.open(this.props.resource_doc.attachment.url);
-  }
-
-  _handleEditDoc() {
-    console.log("Edit Document");
   }
 
   _successDelete(msg) {
@@ -34,17 +30,22 @@ class ResourceDocument extends React.Component {
     if (this.props.is_admin) {
       return (
         <div>
-          <div className="resource-download" onClick = {this._handleEditDoc}>
-            <i className="fa fa-pencil fa-lg"></i>
+          <div className="resource-edit">
+            <ResourceUploadModal style={"fa fa-pencil fa-lg"}
+                                 modules={this.props.modules}
+                                 module_id={this.props.resource_doc.resource_topic_id}
+                                 doc_id={this.props.resource_doc.id}
+                                 title={this.props.resource_doc.title}
+                                 description={this.props.resource_doc.description} />
           </div>
-          <div className="resource-delete" onClick = {this._handleDeleteDoc}>
+          <div className="resource-delete" onClick={this._handleDeleteDoc}>
             <i className="fa fa-trash-o fa-lg"></i>
           </div>
         </div>
       );
     } else {
       return (
-        <div className="resource-download" onClick = {this._handleDownload}>
+        <div className="resource-download" onClick={this._handleDownload}>
           <i className="fa fa-download fa-lg"></i>
         </div>
       );
@@ -68,3 +69,9 @@ class ResourceDocument extends React.Component {
   }
 
 }
+
+ResourceModule.propTypes = {
+  resource_doc : React.PropTypes.object.isRequired,
+  modules      : React.PropTypes.array.isRequired,
+  is_admin     : React.PropTypes.bool.isRequired,
+};

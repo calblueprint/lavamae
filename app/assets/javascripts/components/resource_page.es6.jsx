@@ -12,10 +12,10 @@ class ResourcePage extends React.Component {
 
   _renderModule(resource_topic) {
     return (
-      <ResourceModule
-        key={resource_topic.id}
-        resource_topic = {resource_topic}
-      />
+      <ResourceModule key={resource_topic.id}
+                      resource_topic={resource_topic}
+                      modules={this.props.modules}
+                      is_admin={false} />
     );
   }
 
@@ -47,10 +47,8 @@ class ResourcePage extends React.Component {
                   <input className = "btn btn-blue btn-nav" type = "submit" value = "New Module" />
               </form>
             </div>
-            <ResourceUploadModal
-              style = { "btn btn-blue" }
-              modules = { this.props.modules }
-            />
+            <ResourceUploadModal style={ "btn btn-blue btn-nav" }
+                                 modules={ this.props.modules } />
             { this._adminEdit() }
           </div>
           <div className="module-items row">

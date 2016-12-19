@@ -1,6 +1,7 @@
 /**
- * @prop resource_topic -- passed down module
- * @prop is_admin - true if user is an admin
+ * @prop resource_topic - passed down module
+ * @prop modules        - all module topics
+ * @prop is_admin       - true if user is an admin
  */
 
 var ButtonToolbar = ReactBootstrap.ButtonToolbar;
@@ -56,11 +57,10 @@ class ResourceModule extends React.Component {
 
     return this.state.resources.resource_topics.map((resource_doc) => {
       return (
-        <ResourceDocument
-          key={resource_doc.id}
-          resource_doc = {resource_doc}
-          is_admin = {this.props.is_admin}
-        />
+        <ResourceDocument key={resource_doc.id}
+                          resource_doc={resource_doc}
+                          modules={this.props.modules}
+                          is_admin={this.props.is_admin} />
       )
     });
   }
@@ -85,32 +85,33 @@ class ResourceModule extends React.Component {
 
   render() {
     return (
-        <div className="module-item-container">
-          <div tabIndex="1" className="module-item module-flex" onClick = {this._handleClick}>
-            <div className="cover-picture">
-              <a href=""><img src="/assets/greybus.svg" /></a>
-            </div>
-            <div className="module-body">
-              <h5 className="module-item-title">
-                {this.props.resource_topic.name}
-              </h5>
-              <div className="module-item-description">
-                Manuals and blueprints for building your own buses.
-                <br></br>
-                <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
-              </div>
-            </div>
-            { this._adminEdit() }
+      <div className="module-item-container">
+        <div tabIndex="1" className="module-item module-flex" onClick = {this._handleClick}>
+          <div className="cover-picture">
+            <a href=""><img src="/assets/greybus.svg" /></a>
           </div>
-          <div className="resources-container">
-            {this._renderDocuments()}
+          <div className="module-body">
+            <h5 className="module-item-title">
+              {this.props.resource_topic.name}
+            </h5>
+            <div className="module-item-description">
+              Manuals and blueprints for building your own buses.
+              <br></br>
+              <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
+            </div>
           </div>
+          { this._adminEdit() }
         </div>
+        <div className="resources-container">
+          {this._renderDocuments()}
+        </div>
+      </div>
     )
   }
 }
 
 ResourceModule.propTypes = {
   resource_topic : React.PropTypes.object.isRequired,
-  is_admin : React.PropTypes.bool.isRequired,
+  modules        : React.PropTypes.array.isRequired,
+  is_admin       : React.PropTypes.bool.isRequired,
 };

@@ -15,11 +15,10 @@ class EditResources extends React.Component {
   _renderModule(module) {
     if (module) {
       return (
-        <ResourceModule
-          key={module.id}
-          resource_topic = {module}
-          is_admin = {this.props.is_admin}
-        />
+        <ResourceModule key={module.id}
+                        resource_topic={module}
+                        modules={this.props.modules}
+                        is_admin={this.props.is_admin} />
       );
     }
   }

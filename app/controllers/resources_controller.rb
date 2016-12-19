@@ -24,12 +24,10 @@ class ResourcesController < ApplicationController
 
   def update
     @resource = Resource.find(params[:id])
-    @old_resource_topic_id = @resource.resource_topic_id
-    if @resource.update(resource_params)
-      redirect_to resource_topic_path(id: @old_resource_topic_id)
+    if @resource.update(update_params)
+      render_json_message(:ok, message: "Resource successfully updated!")
     else
-      flash[:error] = @resource.errors.full_messages.first
-      render "edit"
+      render_json_message(:forbidden, errors: resource.errors.full_messages)
     end
   end
 
@@ -49,5 +47,9 @@ class ResourcesController < ApplicationController
 	def resource_params
 	  params.require(:resource).permit(:title, :description, :attachment, :resource_topic_id)
 	end
+
+  def update_params
+    params.require(:resource).permit(:id, :title, :description, :resource_topic_id, :attachment)
+  end
 
 end
