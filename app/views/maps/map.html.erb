@@ -22,6 +22,7 @@
   var markerHeight = 20;
   var popupMargin = markerHeight/2 + 5;
   map.on('load', function() {
+    var points = new Set();
     <% @users_on_map.each do |user| %>
       <% location = user.location %>
       var popupOffsets = {
@@ -48,8 +49,19 @@
           '</div>' +
         '</div>'
       );
+      // TODO: Make markers circle around same point. This is quick fix.
+      var lng = <%= location.lng %>;
+      var lat = <%= location.lat %>;
+      if (points.has(<%= location.id %>)) {
+        let lng_r = Math.random() * (0.02) - 0.01;
+        let lat_r = Math.random() * (0.02) - 0.01;
+        lng += lng_r;
+        lat += lat_r;
+      } else {
+        points.add(<%= location.id %>);
+      }
       var marker = new mapboxgl.Marker(null, {offset:[-markerHeight/2, -markerHeight/2]})
-        .setLngLat([<%= location.lng %>, <%= location.lat %>])
+        .setLngLat([lng, lat])
         .setPopup(popup)
         .addTo(map);
       marker.onMapClick = function() {
