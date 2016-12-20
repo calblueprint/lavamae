@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require react
 //= require react_ujs
+//= require react_rails_img
 //= require react_bootstrap
 //= require components
 //= require toastr

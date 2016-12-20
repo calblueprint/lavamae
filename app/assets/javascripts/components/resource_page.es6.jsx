@@ -1,6 +1,5 @@
 /**
   * @prop modules
-  * @prop resource_module_img_src -- image link for background image of resource modules
   */
 
 class ResourcePage extends React.Component {
@@ -15,7 +14,6 @@ class ResourcePage extends React.Component {
       <ResourceModule
         key={resource_topic.id}
         resource_topic = {resource_topic}
-        img_src = {this.props.resource_module_img_src}
       />
     );
   }
