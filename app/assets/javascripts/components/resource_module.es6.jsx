@@ -6,10 +6,10 @@
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.resource_topic)
+    console.log(this.props.resource_topic.attachment)
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
-    this.setDocuments = this.setDocuments.bind(this)
+    // this.setDocuments = this.setDocuments.bind(this)
     this.state = {
       resources: {},
       // show_documents: false,
@@ -18,17 +18,7 @@ class ResourceModule extends React.Component {
 
   _handleClick(e) {
     e.preventDefault();
-    if (this.state.show_documents == false) {
-      var route = `/resource_topics/${this.props.resource_topic.id}`
-      APIRequester.getJSON(route, this.setDocuments, this._handleError);
-      this.setState({show_documents: true});
-
-    } else {
-      this.setState({resources: {}});
-      this.setState({show_documents: false});
-      this._renderDocuments();
-
-    }
+    window.open(this.props.resource_topic.attachment.url);
   }
 
   _handleError(msg) {
@@ -57,10 +47,47 @@ class ResourceModule extends React.Component {
                 {this.props.resource_topic.description}
                 <br></br>
                 <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
+                <div className="resource-download" onClick = {this._handleClick}>
+                  <i className="fa fa-download fa-lg"></i>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
     )
   }
 }
+// /**
+//   * @prop resource_doc
+//   */
+
+// class ResourceDocument extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this._handleClick = this._handleClick.bind(this);
+//   }
+
+//   _handleClick() {
+//     window.open(this.props.resource_doc.attachment.url);
+//   }
+
+//   render() {
+//     return (
+//       <div className="resource-item">
+//         <div className="resource-body">
+//           <h4 className="resource-title">
+//             {this.props.resource_doc.title}
+//           </h4>
+//           <div className="resource-description">
+//             {this.props.resource_doc.description}
+//           </div>
+//         </div>
+//         <div className="resource-download" onClick = {this._handleClick}>
+//           <i className="fa fa-download fa-lg"></i>
+//         </div>
+//       </div>
+//     )
+//   }
+
+// }
