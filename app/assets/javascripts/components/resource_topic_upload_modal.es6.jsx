@@ -1,4 +1,7 @@
-class ResourceUploadModal extends React.Component {
+/**
+  @style - button style
+*/
+class ResourceTopicUploadModal extends React.Component {
   constructor(props) {
     super(props);
     this._openModal = this._openModal.bind(this);
@@ -12,10 +15,8 @@ class ResourceUploadModal extends React.Component {
     this.state = {
       showModal: false,
       btnStyle: this.props.style,
-      title: '',
+      name: '',
       description: '',
-      modules: this.props.modules || [],
-      module: null,
       file: '',
       fileName: '',
     };
@@ -32,14 +33,13 @@ class ResourceUploadModal extends React.Component {
   _handleUpload(e) {
     e.preventDefault();
     const uploadFields = {
-      resource: {
-        title: this.state.title,
+      resource_topic: {
+        name: this.state.name,
         description: this.state.description,
         attachment: this.state.file,
-        resource_topic_id: this.state.module,
       }
     }
-    APIRequester.post("/resources", uploadFields, this._success);
+    APIRequester.post("/resource_topics", uploadFields, this._success);
   }
 
   _handleChange(e) {
@@ -78,11 +78,6 @@ class ResourceUploadModal extends React.Component {
   }
 
   render () {
-    const moduleOptions = this.state.modules.map((module) => {
-        return (
-            <option value={module['id']}>{module['name']}</option>
-        );
-      });
     let filePreviewUrl = this.state.fileName;
     let $filePreview = null;
     if (filePreviewUrl) {
@@ -92,29 +87,20 @@ class ResourceUploadModal extends React.Component {
     }
     return (
       <div>
-        <button className="btn btn-blue btn-nav" onClick={this._openModal}>Upload Resource</button>
+        <button className="btn btn-blue btn-nav" onClick={this._openModal}>Upload Module</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
-            <Modal.Title>Upload New Resource</Modal.Title>
+            <Modal.Title>Upload New Module</Modal.Title>
           </Modal.Header>
           <form onSubmit={this._handleUpload}>
             <Modal.Body>
               <div className="input-field">
                 <label htmlFor="title-input">Title</label>
-                <input id="title-input" type="text" name="title" onChange={this._handleChange} />
+                <input id="title-input" type="text" name="name" onChange={this._handleChange} />
               </div>
               <div className="input-field">
                 <label htmlFor="description-input">Description</label>
                 <input id="description-input" type="text" name="description" onChange={this._handleChange} />
-              </div>
-              <div className="input-field">
-                <label>
-                  Module
-                  <select name="module" defaultValue="None" onChange={this._handleSelect} >
-                    <option value=''>None</option>
-                    {moduleOptions}
-                  </select>
-                </label>
               </div>
               <div className="input-field">
                 <label className="file-label" htmlFor="file-input">Choose a File</label>
@@ -133,7 +119,6 @@ class ResourceUploadModal extends React.Component {
   }
 }
 
-ResourceUploadModal.propTypes = {
+ResourceTopicUploadModal.propTypes = {
   style: React.PropTypes.string.isRequired,
-  modules: React.PropTypes.array.isRequired,
 };

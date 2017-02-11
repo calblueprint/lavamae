@@ -1,19 +1,18 @@
 /**
  * @prop resource_topic -- passed down module
  */
-var ButtonToolbar = ReactBootstrap.ButtonToolbar;
-var DropdownButton = ReactBootstrap.DropdownButton;
-var MenuItem = ReactBootstrap.MenuItem;
+
 
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.resource_topic)
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
     this.setDocuments = this.setDocuments.bind(this)
     this.state = {
       resources: {},
-      show_documents: false,
+      // show_documents: false,
     };
   }
 
@@ -43,21 +42,6 @@ class ResourceModule extends React.Component {
     })
   }
 
-  _renderDocuments() {
-    if (this.state.resources.resource_topics == undefined) {
-      return
-    }
-
-    return this.state.resources.resource_topics.map((resource_doc) => {
-      return (
-        <ResourceDocument
-          key={resource_doc.id}
-          resource_doc = {resource_doc}
-        />
-      )
-    });
-  }
-
   render() {
     return (
         <div className="module-item-container">
@@ -70,14 +54,11 @@ class ResourceModule extends React.Component {
                 {this.props.resource_topic.name}
               </h5>
               <div className="module-item-description">
-                Manuals and blueprints for building your own buses.
+                {this.props.resource_topic.description}
                 <br></br>
                 <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
               </div>
             </div>
-          </div>
-          <div className="resources-container">
-            {this._renderDocuments()}
           </div>
         </div>
     )
