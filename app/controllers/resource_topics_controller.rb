@@ -11,8 +11,10 @@ class ResourceTopicsController < ApplicationController
   @resource_topic = ResourceTopic.new(resource_topic_params)
 
     if @resource_topic.save
+      flash[:success] = "#{@resource_topic.name} was successfully uploaded!"
       redirect_to resource_topics_path
     else
+      flash.now[:error] = @resource_topic.errors.full_messages.first
       render "new"
     end
   end
@@ -43,7 +45,7 @@ class ResourceTopicsController < ApplicationController
 
   private
   def resource_topic_params
-    params.require(:resource_topic).permit(:name)
+    params.require(:resource_topic).permit(:name, :description, :attachement)
   end
 
 end
