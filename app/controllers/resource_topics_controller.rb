@@ -45,7 +45,7 @@ class ResourceTopicsController < ApplicationController
 
   private
   def resource_topic_params
-    params.require(:resource_topic).permit(:name, :description, :attachement)
+    params.require(:resource_topic).permit(:name, :description, :attachment)
   end
 
 end
