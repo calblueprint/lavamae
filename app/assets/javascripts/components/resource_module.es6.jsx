@@ -5,6 +5,7 @@
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.resource_topic)
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
     this.state = {
@@ -37,7 +38,6 @@ class ResourceModule extends React.Component {
               {this.props.resource_topic.name}
             </h5>
             <div className="module-item-description">
-
               {this.props.resource_topic.description}
               <p>Last Updated: {this.props.resource_topic.updated_at.slice(0, 10)}</p>
             </div>
