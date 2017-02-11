@@ -5,7 +5,7 @@
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.resource_topic)
+    console.log(this.props.resource_topic.attachment)
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
     this.state = {
