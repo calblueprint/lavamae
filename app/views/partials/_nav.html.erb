@@ -6,11 +6,6 @@
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
       <ul class="nav-items-container" id="topNav">
         <% if user_signed_in? %>
-          <%= link_to user_path(current_user.id) do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Profile</button>
-            </li>
-          <% end %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
               <button class="btn btn-transparent btn-nav">Discussions</button>
@@ -29,9 +24,21 @@
               <button class="btn btn-transparent btn-nav">Resources</button>
             </li>
           <% end %>
-          <li class="nav-item">
-            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-login", :method => :delete %>
-          </li>
+          <div class="dropdown user-container">
+            <div class="dropbtn user-picture">
+              <% if current_user.profile_pic? %>
+                <a href=""><%= image_tag current_user.profile_pic.url(:thumb) %></a>
+              <% else %>
+                <a href=""><%= image_tag("default.png") %></a>
+              <% end %>
+            </div>
+            <div class="dropdown-content">
+              <%= link_to user_path(current_user.id) do %>
+                Profile
+              <% end %>
+              <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
+            </div>
+          </div>
         <%else%>
           <%= link_to discussions_path do %>
             <li class="nav-item">
