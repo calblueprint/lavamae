@@ -2,17 +2,14 @@
  * @prop resource_topic -- passed down module
  */
 
-
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.resource_topic.attachment)
+    console.log(this.props.resource_topic)
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
-    // this.setDocuments = this.setDocuments.bind(this)
     this.state = {
       resources: {},
-      // show_documents: false,
     };
   }
 
@@ -35,7 +32,7 @@ class ResourceModule extends React.Component {
   render() {
     return (
         <div className="module-item-container">
-          <div tabIndex="1" className="module-item" onClick = {this._handleClick}>
+          <div tabIndex="1" className="module-item">
             <div className="cover-picture">
               <a href=""><Img src="/assets/greybus.svg" /></a>
             </div>
@@ -46,11 +43,15 @@ class ResourceModule extends React.Component {
               <div className="module-item-description">
                 {this.props.resource_topic.description}
                 <br></br>
-                <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
-                <div className="resource-download" onClick = {this._handleClick}>
-                  <i className="fa fa-download fa-lg"></i>
-                </div>
+                <p>Last Updated: {this.props.resource_topic.created_at.slice(0, 10)}</p>
               </div>
+              <div className="module-download" onClick = {this._handleClick}>
+                <i className="fa fa-download fa-lg"></i>
+              </div>
+              <ModuleEditModal
+                style = {"btn-btn-blue"}
+                resource_topic = {this.props.resource_topic}
+              />
 
             </div>
           </div>
@@ -58,36 +59,3 @@ class ResourceModule extends React.Component {
     )
   }
 }
-// /**
-//   * @prop resource_doc
-//   */
-
-// class ResourceDocument extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this._handleClick = this._handleClick.bind(this);
-//   }
-
-//   _handleClick() {
-//     window.open(this.props.resource_doc.attachment.url);
-//   }
-
-//   render() {
-//     return (
-//       <div className="resource-item">
-//         <div className="resource-body">
-//           <h4 className="resource-title">
-//             {this.props.resource_doc.title}
-//           </h4>
-//           <div className="resource-description">
-//             {this.props.resource_doc.description}
-//           </div>
-//         </div>
-//         <div className="resource-download" onClick = {this._handleClick}>
-//           <i className="fa fa-download fa-lg"></i>
-//         </div>
-//       </div>
-//     )
-//   }
-
-// }

@@ -29,15 +29,10 @@ class ResourcePage extends React.Component {
         <div className="container module-container">
           <div className="module-header">
             <h3>Modules</h3>
-            <ResourceTopicUploadModal
-              style = { "btn-btn-blue" }
-            />
-          </div>
-          <div>
+            <ModuleUploadModal style = { "btn-btn-blue" } />
           </div>
           <div className="module-items row">
             {this._renderModules()}
-
           </div>
         </div>
       </section>
