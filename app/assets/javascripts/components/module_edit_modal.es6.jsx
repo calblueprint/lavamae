@@ -10,16 +10,15 @@ class ModuleEditModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this._handleUpdate = this._handleUpdate.bind(this);
-    this._handleSelect = this._handleSelect.bind(this);
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this.state = {
       showModal: false,
       btnStyle: this.props.style,
-      name: this.props.resource_topic.name,
-      description: this.props.resource_topic.description,
-      file: this.props.resource_topic.attachment,
-      fileName: this.props.resource_topic.attachment.name,
+      name: "",
+      description: "",
+      file: "",
+      fileName: "",
     };
   }
 
@@ -28,6 +27,13 @@ class ModuleEditModal extends React.Component {
   }
 
   _closeModal() {
+    if (this.state.name = "")
+      this.state.name = this.props.resource_topic.name
+    if (this.state.description = "")
+      this.state.description = this.props.resource_topic.description
+    if (this.state.file = "")
+      this.state.file = this.props.resource_topic.file
+
     this.setState({ showModal: false });
   }
 
@@ -41,18 +47,14 @@ class ModuleEditModal extends React.Component {
       }
     }
     APIRequester.put(`/resource_topics/${this.props.resource_topic.id}`, uploadFields, this._success);
-    this._closeModal()
-    window.location = "/resource_topics";
+    this.setState({ showModal: false });
+    window.location = location.pathname;
   }
 
 
   _handleChange(e) {
     console.log(e)
     this.state[$(e.target).attr("name")]= $(e.target).val();
-  }
-
-  _handleSelect(e) {
-    this.setState({ module: e.target.value });
   }
 
   _handleFileChange(e) {
@@ -92,7 +94,7 @@ class ModuleEditModal extends React.Component {
     }
     return (
       <div>
-        <button className="btn btn-blue btn-nav" onClick={this._openModal}>Update Module</button>
+        <button className="btn btn-sm btn-action btn-update pull-right" onClick={this._openModal}>Update Module</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Update Module</Modal.Title>
@@ -101,15 +103,15 @@ class ModuleEditModal extends React.Component {
             <Modal.Body>
               <div className="input-field">
                 <label htmlFor="title-input">Title</label>
-                <input id="title-input" type="text" name="name" onChange={this._handleChange} defaultValue = {this.state.name}/>
+                <input id="title-input" type="text" name="name" onChange={this._handleChange} defaultValue = {this.props.resource_topic.name}/>
               </div>
               <div className="input-field">
                 <label htmlFor="description-input">Description</label>
-                <input id="description-input" type="text" name="description" onChange={this._handleChange} defaultValue = {this.state.description}/>
+                <input id="description-input" type="text" name="description" onChange={this._handleChange} defaultValue = {this.props.resource_topic.description}/>
               </div>
               <div className="input-field">
                 <label className="file-label" htmlFor="file-input">Change Your File</label>
-                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange}/>
+                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} defaultValue = {this.props.resource_topic.attachment}/>
               </div>
               {$filePreview}
             </Modal.Body>
