@@ -12,7 +12,7 @@ class Requester {
     }
 
     _attemptAjax(endpoint, type, data, extraFields, onSuccess, onError) {
-       $. ajax($.extend({}, extraFields, {
+       $.ajax($.extend({}, extraFields, {
             url: endpoint,
             type: type,
             data: data,

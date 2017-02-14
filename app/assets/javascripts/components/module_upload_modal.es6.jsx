@@ -1,7 +1,7 @@
 /**
   @style - button style
 */
-class ResourceTopicUploadModal extends React.Component {
+class ModuleUploadModal extends React.Component {
   constructor(props) {
     super(props);
     this._openModal = this._openModal.bind(this);
@@ -119,6 +119,6 @@ class ResourceTopicUploadModal extends React.Component {
   }
 }
 
-ResourceTopicUploadModal.propTypes = {
+ModuleUploadModal.propTypes = {
   style: React.PropTypes.string.isRequired,
 };
