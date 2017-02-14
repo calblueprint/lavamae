@@ -45,14 +45,16 @@ class ResourceModule extends React.Component {
                 <br></br>
                 <p>Last Updated: {this.props.resource_topic.created_at.slice(0, 10)}</p>
               </div>
-              <div className="module-download" onClick = {this._handleClick}>
+              <div className="btn btn-sm btn-action pull-left module-download" onClick = {this._handleClick}>
                 <i className="fa fa-download fa-lg"></i>
               </div>
               <ModuleEditModal
                 style = {"btn-btn-blue"}
                 resource_topic = {this.props.resource_topic}
               />
-
+              <ModuleDeleteModal
+                resource_topic = {this.props.resource_topic}
+              />
             </div>
           </div>
         </div>
