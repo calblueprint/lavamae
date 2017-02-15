@@ -17,9 +17,30 @@
           <%= f.text_area :content %>
         </p>
       </div>
+
+      <div class="discussion-tag-container" id="tags">
+        <i class="fa fa-tags fa-lg"></i>
+        <button type="button" class="discussion-tag" name="Starting up">Starting up</button>
+        <button type="button" class="discussion-tag" name="Funding">Funding</button>
+        <button type="button" class="discussion-tag" name="Volunteering">Volunteering</button>
+        <button type="button" class="discussion-tag" name="Partnering">Partnering</button>
+        <button type="button" class="discussion-tag" name="Learn More">Learn More</button>
+      </div>
+      <%= check_box_tag("tags[]", "Starting up", false, {class: "hidden", id: "Starting up"}) %>
+      <%= check_box_tag("tags[]", "Funding", false, {class: "hidden", id: "Funding"}) %>
+      <%= check_box_tag("tags[]", "Volunteering", false, {class: "hidden", id: "Volunteering"}) %>
+      <%= check_box_tag("tags[]", "Partnering", false, {class: "hidden", id: "Partnering"}) %>
+      <%= check_box_tag("tags[]", "Learn More", false, {class: "hidden", id: "Learn More"}) %>
       <br />
       <%= f.submit 'create', class:"btn btn-blue" %>
       <% end %>
     </div>
   </div>
+  <script>
+    $('.discussion-tag').click(function(){
+      $(this).toggleClass('checked');
+      var cb = document.getElementById(this.name);
+      cb.checked = !cb.checked;
+    });
+  </script>
 </section>
