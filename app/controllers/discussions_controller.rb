@@ -28,6 +28,9 @@ class DiscussionsController < ApplicationController
   	discussion = Discussion.new(discussion_params)
     discussion.score = 0
     discussion.user_id = current_user.id
+    params[:tags].each do |t|
+      discussion.tag_list.add(t)
+    end
   	discussion.save
   	redirect_to discussions_path
   end
@@ -69,7 +72,7 @@ class DiscussionsController < ApplicationController
 
   private
   	def discussion_params
-  		params.require(:discussion).permit(:title, :content)
+  		params.require(:discussion).permit(:title, :content, :tag_list, tags:[])
   	end
 
   	def get_discussion
