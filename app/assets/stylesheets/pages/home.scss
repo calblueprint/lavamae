@@ -1,4 +1,4 @@
-.landing {
+.landing, .about {
   background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
   image_url("lavamae-hero.jpg");
   background-repeat: no-repeat, no-repeat;
@@ -19,21 +19,56 @@
   }
 }
 
-.preview {
-  padding: 100px 0;
-  display: flex;
-  align-items: center;
-  min-height: 100%;
+.about {
+  background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
+  image_url("about-hero.jpg");
+  justify-content: center;
 
-  .discussion-text {
-    float: right;
-  }
-
-  .preview-title, .preview-body {
-    padding-top: 5px;
-  }
-
-  .preview-body {
-    padding-bottom: 10px;
+  .about-text {
+    max-width: 500px;
   }
 }
+
+.site-map-container {
+  padding-bottom: 80px;
+}
+
+.third {
+  max-width: 300px;
+  text-align: center;
+
+  p {
+    color: $blue-light;
+  }
+
+  .third-hero {
+    max-width: 300px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    cursor: pointer;
+
+    &:hover img {
+      box-shadow: 0 2px 8px $black-20;
+    }
+  }
+
+}
+
+// .preview {
+//   padding: 100px 0;
+//   display: flex;
+//   align-items: center;
+//   min-height: 100%;
+//
+//   .discussion-text {
+//     float: right;
+//   }
+//
+//   .preview-title, .preview-body {
+//     padding-top: 5px;
+//   }
+//
+//   .preview-body {
+//     padding-bottom: 10px;
+//   }
+// }
