@@ -12,6 +12,11 @@
     <div class="action-container pull-left">
       <i class="upvote-button fa fa-angle-up fa-lg"></i>
       <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
+      <div class="discussion-tag-container" id="tags">
+        <% @discussion.tags.each do |t|%>
+          <button class="discussion-tag discussion-tag-small"><%= t.name %></button>
+        <% end %>  
+      </div>
     </div>
     <div class="user-container pull-right">
       <div class="name-date">
