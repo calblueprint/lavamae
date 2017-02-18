@@ -36,7 +36,9 @@
   <div class="container site-map-container">
     <div class="third">
       <h3>Discussions</h3>
-      <%= image_tag("discussion-hero.png", :class => "third-hero") %>
+      <%= link_to discussions_path do %>
+        <%= image_tag("discussion-hero.png", :class => "third-hero") %>
+      <% end %>
       <p>
         Connect with others around the globe through discussion threads. Ask
         discussions, answer discussions, and meet others.
@@ -44,74 +46,24 @@
     </div>
     <div class="third">
       <h3>Resources</h3>
-      <%= image_tag("resources-hero.png", :class => "third-hero") %>
+      <%= link_to resource_topics_path do %>
+        <%= image_tag("resources-hero.png", :class => "third-hero") %>
+      <% end %>
       <p>
         Read through our toolkits to learn more about how to start a project
         like Lava Mae and best strategies.
       </p>
     </div>
-  </div>
-</section>
-
-<!-- <section class="preview discussion-preview">
-  <div class="container">
-    <div class="row">
-      <%= image_tag("discussion_hero_placeholder.png", :class => "preview-hero col-xs-12 col-md-5") %>
-      <div class="col-xs-12 col-md-6 col-md-offset-1 discussion-text">
-        <h2 class="preview-title">
-          Discussion Threads
-        </h2>
-        <h4 class="preview-body">
-          Connect with others around the globe through discussion threads. Ask
-          discussions, answer discussions, and meet others.
-        </h4>
-        <%= link_to discussions_path do %>
-          <button class="btn btn-blue">Join the Conversation</button>
-        <% end %>
-      </div>
+    <div class="third">
+      <h3>Our Network</h3>
+      <%= image_tag("map-hero.png", :class => "third-hero", :id => "backToTop") %>
+      <p>
+        Discover Lava Mae projects all around the world and read stories about
+        other individuals and organizations revolutionizing global sanitation.
+      </p>
     </div>
   </div>
 </section>
-
-<section class="preview map-preview">
-  <div class="container map-container">
-    <div class="row">
-      <div class="col-xs-12 col-md-6 map-text">
-        <h2 class="preview-title">
-          Interactive Map
-        </h2>
-        <h4 class="preview-body">
-          Discover Lava Mae projects all around the world and read stories about
-          other individuals and organizations revolutionizing global sanitation.
-        </h4>
-        <a href="/">
-          <button class="btn btn-blue">See the Map</button>
-        </a>
-      </div>
-      <%= image_tag("map_hero_placeholder.png", :class => "preview-hero col-xs-12 col-md-5 col-md-offset-1") %>
-    </div>
-  </div>
-</section>
-
-<section class="preview stories-preview">
-  <div class="container stories-container">
-    <div class="row">
-      <%= image_tag("stories_hero_placeholder.png", :class => "preview-hero col-xs-12 col-md-5") %>
-      <div class="col-xs-12 col-md-6 col-md-offset-1 stories-text">
-        <h2 class="preview-title">
-          Success Stories
-        </h2>
-        <h4 class="preview-body">
-          Read stories of other people around the world and their journey starting their
-          own Lava Mae project in their local community.
-        </h4>
-        <a href="/">
-          <button class="btn btn-blue">Read Stories</button>
-        </a>
-      </div>
-    </div>
-  </div>
-</section> -->
 
 <!-- NAV BAR COLOR CHANGE JS -->
 <script>
@@ -122,5 +74,10 @@ $(document).scroll(function(){
     } else {
        $('.nav-home').css({"background":"transparent"});
     }
+});
+
+$("#backToTop").click(function(){
+  $('html').animate({scrollTop:0}, 'slow');
+  $('body').animate({scrollTop:0}, 'slow');
 });
 </script>

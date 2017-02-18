@@ -7,7 +7,6 @@
   display: flex;
   align-items: center;
   min-height: 100%;
-  // text-align: center;
 
   .landing-title, .landing-body {
     color: white;
@@ -31,11 +30,18 @@
 
 .site-map-container {
   padding-bottom: 80px;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  :not(:last-child) {
+    margin-right: 15px;
+  }
 }
 
 .third {
   max-width: 300px;
   text-align: center;
+  flex-grow: 1;
 
   p {
     color: $blue-light;
@@ -43,32 +49,20 @@
 
   .third-hero {
     max-width: 300px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
     cursor: pointer;
+    transition: 300ms;
 
-    &:hover img {
+    &:hover {
       box-shadow: 0 2px 8px $black-20;
     }
   }
-
 }
 
-// .preview {
-//   padding: 100px 0;
-//   display: flex;
-//   align-items: center;
-//   min-height: 100%;
-//
-//   .discussion-text {
-//     float: right;
-//   }
-//
-//   .preview-title, .preview-body {
-//     padding-top: 5px;
-//   }
-//
-//   .preview-body {
-//     padding-bottom: 10px;
-//   }
-// }
+//Responsive
+@media screen and (max-width:630px) {
+  .third:not(:last-child){
+    padding-bottom: 20px;
+  }
+}
