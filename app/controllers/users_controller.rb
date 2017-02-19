@@ -15,6 +15,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def approval_update
+    # batch update user's map_approval_state based on admin decision
+    puts(params)
+    User.update(params.keys, params.values)
+    redirect_to show
+  end
+
   def update
     user = User.find(params[:id])
     if user.update(update_params)
