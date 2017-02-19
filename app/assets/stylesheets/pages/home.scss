@@ -1,12 +1,16 @@
 .landing, .about {
-  background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
-  image_url("lavamae-hero.jpg");
+  background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%);
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
   height: 600px;
   display: flex;
   align-items: center;
   min-height: 100%;
+  justify-content: center;
+
+  .landing-text {
+    max-width: 500px;
+  }
 
   .landing-title, .landing-body {
     color: white;
@@ -18,14 +22,24 @@
   }
 }
 
+.landing {
+  position: absolute;
+  width: 100%;
+  z-index: 3;
+
+  .landing-text {
+    text-align: center;
+  }
+}
+
+.filler {
+  height: 100vh;
+  background: $blue-light;
+}
+
 .about {
   background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
   image_url("about-hero.jpg");
-  justify-content: center;
-
-  .about-text {
-    max-width: 500px;
-  }
 }
 
 .site-map-container {
@@ -58,6 +72,71 @@
       box-shadow: 0 2px 8px $black-20;
     }
   }
+}
+
+#cd-vertical-nav {
+	position: fixed;
+	right: 40px;
+	@include center(y); // see partials > _mixins.scss
+	z-index: 4;
+
+	li {
+		text-align: right;
+	}
+
+	a {
+		display: inline-block;
+		@include clearfix;
+
+		/* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
+		@include backface-visibility(hidden);
+
+		span {
+			float: right;
+			display: inline-block;
+			@include transform(scale(.6));
+		}
+
+		&:hover span {
+			@include transform(scale(1));
+		}
+
+		&:hover .cd-label {
+			opacity: 1;
+		}
+
+		&.is-selected .cd-dot {
+			background-color: white;
+		}
+	}
+
+	.cd-dot {
+		position: relative;
+		/* we set a top value in order to align the dot with the label. If you change label's font, you may need to change this top value*/
+		top: 8px;
+		height: 12px;
+		width: 12px;
+		border-radius: 50%;
+		background-color: white;
+		-webkit-transition: -webkit-transform 0.2s, background-color 0.5s;
+		-moz-transition: -moz-transform 0.2s, background-color 0.5s;
+		transition: transform 0.2s, background-color 0.5s;
+		@include transform-origin(50% 50%);
+	}
+
+	.cd-label {
+		position: relative;
+		margin-right: 10px;
+		padding: .4em .5em;
+		color: white;
+		font-size: 14px;
+
+		-webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
+		-moz-transition: -moz-transform 0.2s, opacity 0.2s;
+		transition: transform 0.2s, opacity 0.2s;
+		opacity: 0;
+		@include transform-origin(100% 50%);
+	}
 }
 
 //Responsive
