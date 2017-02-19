@@ -97,11 +97,20 @@
 <script>
 // NAV BAR COLOR CHANGE
 $(document).scroll(function(){
-    if($(this).scrollTop() > 535)
+    var h = ($(window).height())-80;
+    var x = $(this).scrollTop();
+    if(x > (h+300))
     {
+       $('.cd-dot').css({"background":"#16ACE6"});
+       $('.cd-label').css({"color":"#16ACE6"});
+    } else if(h < x && x <= (h+300)) {
        $('.nav-home').css({"background":"#16ACE6"});
+       $('.cd-dot').css({"background":"white"});
+       $('.cd-label').css({"color":"white"});
     } else {
        $('.nav-home').css({"background":"transparent"});
+       $('.cd-dot').css({"background":"white"});
+       $('.cd-label').css({"color":"white"});
     }
 });
 
@@ -227,10 +236,10 @@ jQuery(document).ready(function($){
 	}
 
 	function smoothScroll(target) {
-        $('body,html').animate(
-        	{'scrollTop':target.offset().top},
-        	300
-        );
+    $('body,html').animate(
+    	{'scrollTop':target.offset().top},
+    	300
+    );
 	}
 });
 </script>
