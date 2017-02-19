@@ -36,7 +36,6 @@ class ModuleEditModal extends React.Component {
 
   _handleUpdate(e) {
     e.preventDefault();
-
     var uploadFields = {
       resource_topic: {
         name: this.state.name || this.props.resource_topic.name,
@@ -51,7 +50,6 @@ class ModuleEditModal extends React.Component {
 
 
   _handleChange(e) {
-    console.log(e)
     this.state[$(e.target).attr("name")]= $(e.target).val();
   }
 
@@ -89,7 +87,6 @@ class ModuleEditModal extends React.Component {
   }
 
   render () {
-    console.log(this.props.resource_topic.attachment.url)
     let filePreviewUrl = this.state.fileName;
     let $filePreview = null;
     if (filePreviewUrl) {
@@ -104,7 +101,7 @@ class ModuleEditModal extends React.Component {
           <Modal.Header>
             <Modal.Title>Update Module</Modal.Title>
           </Modal.Header>
-          <form onSubmit={this._handleUpload}>
+          <form onSubmit={this._handleUpdate}>
             <Modal.Body>
               <div className="input-field">
                 <label htmlFor="title-input">Title</label>
@@ -122,7 +119,7 @@ class ModuleEditModal extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-              <button className="btn btn-blue modal-btn" type="submit" onClick = {this._handleUpdate} >Update</button>
+              <button className="btn btn-blue modal-btn" type="submit">Update</button>
             </Modal.Footer>
           </form>
         </Modal>

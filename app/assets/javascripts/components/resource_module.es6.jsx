@@ -43,9 +43,9 @@ class ResourceModule extends React.Component {
               <div className="module-item-description">
                 {this.props.resource_topic.description}
                 <br></br>
-                <p>Last Updated: {this.props.resource_topic.created_at.slice(0, 10)}</p>
+                <p>Last Updated: {this.props.resource_topic.updated_at.slice(0, 10)}</p>
               </div>
-              <div className="btn btn-sm btn-action pull-left module-download" onClick = {this._handleClick}>
+              <div className="btn btn-sm btn-action pull-right module-download" onClick = {this._handleClick}>
                 <i className="fa fa-download fa-lg"></i>
               </div>
               <ModuleEditModal
