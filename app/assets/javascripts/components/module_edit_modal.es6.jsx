@@ -10,6 +10,7 @@ class ModuleEditModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this._handleUpdate = this._handleUpdate.bind(this);
+    this._onClick = this._onClick.bind(this)
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this.state = {
@@ -27,11 +28,9 @@ class ModuleEditModal extends React.Component {
   }
 
   _closeModal() {
-
     this.state.name = this.state.name || this.props.resource_topic.name;
     this.state.description = this.state.description || this.props.resource_topic.description;
     this.state.file = this.state.file || this.props.resource_topic.file;
-
     this.setState({ showModal: false });
   }
 
@@ -71,6 +70,12 @@ class ModuleEditModal extends React.Component {
     reader.readAsDataURL(attachment);
   }
 
+  _onClick(e) {
+    console.log(e);
+    e.preventDefault();
+    window.open(this.props.resource_topic.attachment.url);
+  }
+
   _success(msg) {
     this._closeModal();
     toastr.options.positionClass = 'toast-bottom-right';
@@ -86,15 +91,11 @@ class ModuleEditModal extends React.Component {
   render () {
     console.log(this.props.resource_topic.attachment.url)
     let filePreviewUrl = this.state.fileName;
-    if (this.props.resource_topic.attachment.url) {
-      $filePreviewUrl = this.props.resource_topic.attachment.url
-      console.log(filePreviewUrl)
-    }
     let $filePreview = null;
     if (filePreviewUrl) {
       $filePreview = (<div className="previewText">{this.state.fileName}</div>);
     } else {
-      $filePreview = (<div className="previewText">{filePreviewUrl}</div>);
+      $filePreview = (<div className="fileText" onClick={this._onClick}> {this.props.resource_topic.attachment.url}</div>);
     }
     return (
       <div>
@@ -115,7 +116,7 @@ class ModuleEditModal extends React.Component {
               </div>
               <div className="input-field">
                 <label className="file-label" htmlFor="file-input">Change Your File</label>
-                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} defaultValue = {this.props.resource_topic.attachment}/>
+                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
               </div>
               {$filePreview}
             </Modal.Body>
