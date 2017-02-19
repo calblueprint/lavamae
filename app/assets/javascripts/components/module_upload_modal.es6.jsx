@@ -51,6 +51,7 @@ class ModuleUploadModal extends React.Component {
   }
 
   _handleFileChange(e) {
+    console.log(e.target.value.replace(/^.*\\/, ""))
     e.preventDefault();
     var path = e.target.value;
     var name = path.replace(/^.*\\/, "");
@@ -63,6 +64,7 @@ class ModuleUploadModal extends React.Component {
       });
     }
     reader.readAsDataURL(attachment);
+    // reader.readAsText(attachment);
   }
 
   _success(msg) {
