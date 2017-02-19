@@ -53,8 +53,8 @@
       var lng = <%= location.lng %>;
       var lat = <%= location.lat %>;
       if (points.has(<%= location.id %>)) {
-        let lng_r = Math.random() * (0.02) - 0.01;
-        let lat_r = Math.random() * (0.02) - 0.01;
+        let lng_r = Math.random() * (.03) - 0.01;
+        let lat_r = Math.random() * (.03) - 0.01;
         lng += lng_r;
         lat += lat_r;
       } else {
