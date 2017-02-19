@@ -27,23 +27,22 @@ class ModuleEditModal extends React.Component {
   }
 
   _closeModal() {
-    if (this.state.name = "")
-      this.state.name = this.props.resource_topic.name
-    if (this.state.description = "")
-      this.state.description = this.props.resource_topic.description
-    if (this.state.file = "")
-      this.state.file = this.props.resource_topic.file
+
+    this.state.name = this.state.name || this.props.resource_topic.name;
+    this.state.description = this.state.description || this.props.resource_topic.description;
+    this.state.file = this.state.file || this.props.resource_topic.file;
 
     this.setState({ showModal: false });
   }
 
   _handleUpdate(e) {
     e.preventDefault();
+
     var uploadFields = {
       resource_topic: {
-        name: this.state.name,
-        description: this.state.description,
-        attachment: this.state.file,
+        name: this.state.name || this.props.resource_topic.name,
+        description: this.state.description || this.props.resource_topic.description,
+        attachment: this.state.file || this.props.resource_topic.attachment,
       }
     }
     APIRequester.put(`/resource_topics/${this.props.resource_topic.id}`, uploadFields, this._success);
@@ -85,12 +84,17 @@ class ModuleEditModal extends React.Component {
   }
 
   render () {
+    console.log(this.props.resource_topic.attachment.url)
     let filePreviewUrl = this.state.fileName;
+    if (this.props.resource_topic.attachment.url) {
+      $filePreviewUrl = this.props.resource_topic.attachment.url
+      console.log(filePreviewUrl)
+    }
     let $filePreview = null;
     if (filePreviewUrl) {
       $filePreview = (<div className="previewText">{this.state.fileName}</div>);
     } else {
-      $filePreview = (<div className="previewText">Please select a file</div>);
+      $filePreview = (<div className="previewText">{filePreviewUrl}</div>);
     }
     return (
       <div>
