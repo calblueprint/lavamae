@@ -9,7 +9,6 @@ class ModuleUploadModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this._handleUpload = this._handleUpload.bind(this);
-    this._handleSelect = this._handleSelect.bind(this);
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this.state = {
@@ -32,26 +31,26 @@ class ModuleUploadModal extends React.Component {
 
   _handleUpload(e) {
     e.preventDefault();
-    const uploadFields = {
-      resource_topic: {
-        name: this.state.name,
-        description: this.state.description,
-        attachment: this.state.file,
-      }
+    if (this.state.file == "") {
+      this._error("No file attached.")
     }
-    APIRequester.post("/resource_topics", uploadFields, this._success);
+    else {
+      const uploadFields = {
+        resource_topic: {
+          name: this.state.name,
+          description: this.state.description,
+          attachment: this.state.file,
+        }
+      }
+      APIRequester.post("/resource_topics", uploadFields, this._success);
+    }
   }
 
   _handleChange(e) {
     this.state[$(e.target).attr("name")]= $(e.target).val();
   }
 
-  _handleSelect(e) {
-    this.setState({ module: e.target.value });
-  }
-
   _handleFileChange(e) {
-    console.log(e.target.value.replace(/^.*\\/, ""))
     e.preventDefault();
     var path = e.target.value;
     var name = path.replace(/^.*\\/, "");
@@ -64,7 +63,6 @@ class ModuleUploadModal extends React.Component {
       });
     }
     reader.readAsDataURL(attachment);
-    // reader.readAsText(attachment);
   }
 
   _success(msg) {
@@ -94,27 +92,25 @@ class ModuleUploadModal extends React.Component {
           <Modal.Header>
             <Modal.Title>Upload New Module</Modal.Title>
           </Modal.Header>
-          <form onSubmit={this._handleUpload}>
-            <Modal.Body>
-              <div className="input-field">
-                <label htmlFor="title-input">Title</label>
-                <input id="title-input" type="text" name="name" onChange={this._handleChange} />
-              </div>
-              <div className="input-field">
-                <label htmlFor="description-input">Description</label>
-                <input id="description-input" type="text" name="description" onChange={this._handleChange} />
-              </div>
-              <div className="input-field">
-                <label className="file-label" htmlFor="file-input">Choose a File</label>
-                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
-              </div>
-              {$filePreview}
-            </Modal.Body>
-            <Modal.Footer>
-              <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-              <button className="btn btn-blue modal-btn" type="submit">Upload</button>
-            </Modal.Footer>
-          </form>
+          <Modal.Body>
+            <div className="input-field">
+              <label htmlFor="title-input">Title</label>
+              <input id="title-input" type="text" name="name" onChange={this._handleChange} />
+            </div>
+            <div className="input-field">
+              <label htmlFor="description-input">Description</label>
+              <input id="description-input" type="text" name="description" onChange={this._handleChange} />
+            </div>
+            <div className="input-field">
+              <label className="file-label" htmlFor="file-input">Choose a File</label>
+              <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+            </div>
+            {$filePreview}
+          </Modal.Body>
+          <Modal.Footer>
+            <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
+            <button className="btn btn-blue modal-btn" type="button" onClick={this._handleUpload}>Upload</button>
+          </Modal.Footer>
         </Modal>
       </div>
     );
