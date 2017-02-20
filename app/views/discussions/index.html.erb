@@ -34,7 +34,7 @@
 </div>
 
 <script>
-$('.favorite-discussion').click(function(){
+$('.favorite-discussion').click(function(e){
   var data_id = $(this).data("id");
   var fav = $(this).data("fav");
   var star_id = "star" + data_id
@@ -60,4 +60,8 @@ function discussionsMenu() {
       y.className = "discussion-tag-container";
   }
 }
+
+$('.discussion-tag').click(function(){
+  $(this).toggleClass('checked');
+});
 </script>

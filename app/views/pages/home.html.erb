@@ -1,91 +1,245 @@
-<section class="landing">
-  <div class="container landing-text-container">
-    <div class="row">
-      <div class="col-xs-12 col-md-8 col-md-offset-2">
-        <h1 class="landing-title">
-          Lava Mae Reach
-        </h1>
-        <h4 class="landing-body">
-          Lava Mae Reach is a tool for anyone to learn more about how Lava Mae works,
-          how it's revolutionizing access to basic sanitation, and even how to start Lava Mae
-          projects in untapped areas.
-        </h4>
-        <a href="http://lavamae.org/" target="_blank">
-          <button class="btn btn-blue">What's Lava Mae?</button>
-        </a>
-      </div>
+<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
+<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
+
+<div id='map'></div>
+<div class="aux-map-tools">
+  <%= button_to "Join the Movement", root_path, :class => "btn btn-blue btn-join", :method  => :get %>
+</div>
+
+<div class="landing">
+  <div class="landing-text">
+    <h1 class="landing-title">
+      Lava Mae Reach
+    </h1>
+    <h4 class="landing-body">
+      Lava Mae Reach is a tool for anyone to learn more about how Lava Mae works,
+      how it's revolutionizing access to basic sanitation, and even how to start Lava Mae
+      projects in untapped areas.
+    </h4>
+    <button class="btn btn-blue" id="explore">Explore</button>
+  </div>
+</div>
+
+<div class="filler" id="section1">
+</div>
+
+<div class="about" id="section2">
+  <div class="landing-text">
+    <h1 class="landing-title">Who are we?</h1>
+    <h4 class="landing-body">
+      Lava Mae is a San Francisco-based nonprofit bringing humanity, innovation,
+      and collaboration to the way services are provided to those experiencing
+      homelessness.
+    </h4>
+    <a href="http://lavamae.org/" target="_blank">
+      <button class="btn btn-blue">Find Out More</button>
+    </a>
+  </div>
+</div>
+
+<section class="site-map" id="section3">
+  <div class="container site-map-container">
+    <div class="third">
+      <h3>Discussions</h3>
+      <%= link_to discussions_path do %>
+        <%= image_tag("discussion-hero.png", :class => "third-hero") %>
+      <% end %>
+      <p>
+        Connect with others around the globe through discussion threads. Ask
+        discussions, answer discussions, and meet others.
+      </p>
+    </div>
+    <div class="third">
+      <h3>Resources</h3>
+      <%= link_to resource_topics_path do %>
+        <%= image_tag("resources-hero.png", :class => "third-hero") %>
+      <% end %>
+      <p>
+        Read through our toolkits to learn more about how to start a project
+        like Lava Mae and best strategies.
+      </p>
+    </div>
+    <div class="third">
+      <h3>Our Network</h3>
+      <%= image_tag("map-hero.png", :class => "third-hero", :id => "backToTop") %>
+      <p>
+        Discover Lava Mae projects all around the world and read stories about
+        other individuals and organizations revolutionizing global sanitation.
+      </p>
     </div>
   </div>
 </section>
 
-<section class="preview discussion-preview">
-  <div class="container">
-    <div class="row">
-      <%= image_tag("discussion_hero_placeholder.png", :class => "preview-hero col-xs-12 col-md-5") %>
-      <div class="col-xs-12 col-md-6 col-md-offset-1 discussion-text">
-        <h2 class="preview-title">
-          Discussion Threads
-        </h2>
-        <h4 class="preview-body">
-          Connect with others around the globe through discussion threads. Ask
-          discussions, answer discussions, and meet others.
-        </h4>
-        <%= link_to discussions_path do %>
-          <button class="btn btn-blue">Join the Conversation</button>
-        <% end %>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Vertical Navigation -->
+<nav id="cd-vertical-nav">
+  <ul>
+    <li>
+      <a href="#section1" data-number="1">
+        <span class="cd-dot"></span>
+        <span class="cd-label">Network</span>
+      </a>
+    </li>
+    <li>
+      <a href="#section2" data-number="2">
+        <span class="cd-dot"></span>
+        <span class="cd-label">About</span>
+      </a>
+    </li>
+    <li>
+      <a href="#section3" data-number="3">
+        <span class="cd-dot"></span>
+        <span class="cd-label">Site Map</span>
+      </a>
+    </li>
+  </ul>
+</nav>
 
-<section class="preview map-preview">
-  <div class="container map-container">
-    <div class="row">
-      <div class="col-xs-12 col-md-6 map-text">
-        <h2 class="preview-title">
-          Interactive Map
-        </h2>
-        <h4 class="preview-body">
-          Discover Lava Mae projects all around the world and read stories about
-          other individuals and organizations revolutionizing global sanitation.
-        </h4>
-        <a href="/">
-          <button class="btn btn-blue">See the Map</button>
-        </a>
-      </div>
-      <%= image_tag("map_hero_placeholder.png", :class => "preview-hero col-xs-12 col-md-5 col-md-offset-1") %>
-    </div>
-  </div>
-</section>
-
-<section class="preview stories-preview">
-  <div class="container stories-container">
-    <div class="row">
-      <%= image_tag("stories_hero_placeholder.png", :class => "preview-hero col-xs-12 col-md-5") %>
-      <div class="col-xs-12 col-md-6 col-md-offset-1 stories-text">
-        <h2 class="preview-title">
-          Success Stories
-        </h2>
-        <h4 class="preview-body">
-          Read stories of other people around the world and their journey starting their
-          own Lava Mae project in their local community.
-        </h4>
-        <a href="/">
-          <button class="btn btn-blue">Read Stories</button>
-        </a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- NAV BAR COLOR CHANGE JS -->
 <script>
+// NAV BAR COLOR CHANGE
 $(document).scroll(function(){
-    if($(this).scrollTop() > 535)
+    var h = ($(window).height())-80;
+    var x = $(this).scrollTop();
+    if(x > (h+300))
     {
+       $('.cd-dot').css({"background":"#16ACE6"});
+       $('.cd-label').css({"color":"#16ACE6"});
+    } else if(h < x && x <= (h+300)) {
        $('.nav-home').css({"background":"#16ACE6"});
+       $('.cd-dot').css({"background":"white"});
+       $('.cd-label').css({"color":"white"});
     } else {
        $('.nav-home').css({"background":"transparent"});
+       $('.cd-dot').css({"background":"white"});
+       $('.cd-label').css({"color":"white"});
     }
+});
+
+// BACK TO TOP
+$("#backToTop").click(function(){
+  $('html').animate({scrollTop:0}, 'slow');
+  $('body').animate({scrollTop:0}, 'slow');
+});
+
+// EXPLORE
+$("#explore").click(function(){
+  $(this).parent().parent().fadeOut(300, function() {
+    $(this).remove();
+  });
+});
+
+// MAPBOX
+mapboxgl.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
+
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/light-v9',
+  zoom: 1,
+  minZoom: 1,
+});
+
+map.addControl(new MapboxGeocoder({
+  accessToken: mapboxgl.accessToken
+}));
+
+var markerHeight = 20;
+var popupMargin = markerHeight/2 + 5;
+map.on('load', function() {
+  var points = new Set();
+  <% @users_on_map.each do |user| %>
+    <% location = user.location %>
+    var popupOffsets = {
+     'top': [0, popupMargin],
+     'top-left': [0, popupMargin],
+     'top-right': [0, popupMargin],
+     'bottom': [0, -popupMargin],
+     'bottom-left': [0, -popupMargin],
+     'bottom-right': [0, -popupMargin],
+     'left': [popupMargin, 0],
+     'right': [-popupMargin, 0]
+     };
+    var popup = new mapboxgl.Popup({offset:popupOffsets}).setHTML(
+      '<div class="popup-preview">' +
+        '<div class="organization"><%= user.organization %></div>' +
+        '<div class="user-container">' +
+          '<%= link_to user_path(id: user.id) do %> ' +
+          '<div class="name"><%= user.first_name %> <%= user.last_name %></div>' +
+          '<% end %>' +
+          '<% if user.profile_pic? %> ' +
+          '<%= image_tag(user.profile_pic.url(:thumb), class: "user-image") %>' +
+          '<% else %><%= image_tag(("default.png"), class: "user-image") %>' +
+          '<% end %>' +
+        '</div>' +
+      '</div>'
+    );
+    // TODO: Make markers circle around same point. This is quick fix.
+    var lng = <%= location.lng %>;
+    var lat = <%= location.lat %>;
+    if (points.has(<%= location.id %>)) {
+      let lng_r = Math.random() * (0.02) - 0.01;
+      let lat_r = Math.random() * (0.02) - 0.01;
+      lng += lng_r;
+      lat += lat_r;
+    } else {
+      points.add(<%= location.id %>);
+    }
+    var marker = new mapboxgl.Marker(null, {offset:[-markerHeight/2, -markerHeight/2]})
+      .setLngLat([lng, lat])
+      .setPopup(popup)
+      .addTo(map);
+    marker.onMapClick = function() {
+      marker.togglePopup();
+    };
+  <% end %>
+});
+
+// VERTICAL NAV
+jQuery(document).ready(function($){
+	var contentSections = $('.cd-section'),
+		navigationItems = $('#cd-vertical-nav a');
+
+	updateNavigation();
+	$(window).on('scroll', function(){
+		updateNavigation();
+	});
+
+	//smooth scroll to the section
+	navigationItems.on('click', function(event){
+        event.preventDefault();
+        smoothScroll($(this.hash));
+    });
+    //smooth scroll to second section
+    $('.cd-scroll-down').on('click', function(event){
+        event.preventDefault();
+        smoothScroll($(this.hash));
+    });
+
+    //open-close navigation on touch devices
+    $('.touch .cd-nav-trigger').on('click', function(){
+    	$('.touch #cd-vertical-nav').toggleClass('open');
+
+    });
+    //close navigation on touch devices when selectin an elemnt from the list
+    $('.touch #cd-vertical-nav a').on('click', function(){
+    	$('.touch #cd-vertical-nav').removeClass('open');
+    });
+
+	function updateNavigation() {
+		contentSections.each(function(){
+			$this = $(this);
+			var activeSection = $('#cd-vertical-nav a[href="#'+$this.attr('id')+'"]').data('number') - 1;
+			if ( ( $this.offset().top - $(window).height()/2 < $(window).scrollTop() ) && ( $this.offset().top + $this.height() - $(window).height()/2 > $(window).scrollTop() ) ) {
+				navigationItems.eq(activeSection).addClass('is-selected');
+			}else {
+				navigationItems.eq(activeSection).removeClass('is-selected');
+			}
+		});
+	}
+
+	function smoothScroll(target) {
+    $('body,html').animate(
+    	{'scrollTop':target.offset().top},
+    	300
+    );
+	}
 });
 </script>

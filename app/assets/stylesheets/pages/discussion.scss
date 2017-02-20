@@ -104,10 +104,28 @@
   background: transparent;
   margin-left: 5px;
 
-  &:hover, &:active, &:focus {
+  &:hover {
     background: $blue-light;
     color: white;
   }
+
+  &.checked { 
+    background: $blue-light;
+    color: white;
+  }
+
+  &.discussion-tag-small {
+    font-size: 9px;
+    padding: 5px 10px 3px 10px;
+    background: $blue-light;
+    color: white;
+    margin-left: 0px;
+    margin-right: 5px;
+  }
+}
+
+.hidden {
+  display: none;
 }
 
 .discussion-favorite {
