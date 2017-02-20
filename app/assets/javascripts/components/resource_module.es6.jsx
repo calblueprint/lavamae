@@ -19,7 +19,7 @@ class ResourceModule extends React.Component {
 
   _handleClick(e) {
     e.preventDefault();
-    if (this.state.show_documents == false) {
+    if (!this.state.show_documents) {
       var route = `/resource_topics/${this.props.resource_topic.id}`
       APIRequester.getJSON(route, this.setDocuments, this._handleError);
       this.setState({show_documents: true});
@@ -44,7 +44,7 @@ class ResourceModule extends React.Component {
   }
 
   _renderDocuments() {
-    if (this.state.resources.resource_topics == undefined) {
+    if (!this.state.resources.resource_topics) {
       return
     }
 

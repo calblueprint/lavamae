@@ -60,5 +60,13 @@
         <% end %>
       </div>
     </div>
+    <div>
+      <div class="profile-section-titles">
+        <%= "Users Pending Map Approval" %><br>
+      </div>
+      <%if current_user.id == @user.id && @user.is_admin %>
+        <%= react_component('PendingMapUsers', pending_users: @pending_map_users) %>
+      <% end %>
+    </div>
   </div>
 </div>
