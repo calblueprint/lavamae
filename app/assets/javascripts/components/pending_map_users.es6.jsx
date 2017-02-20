@@ -32,7 +32,7 @@ class PendingMapUsers extends React.Component {
   }
 
   _handleUpdate() {
-    APIRequester.put('/users/update_map_approval', this.state.modified_users, this._success);
+    APIRequester.put('/users/update_map_approval', { modified_users: this.state.modified_users }, this._success);
   }
 
   _renderUsers() {
