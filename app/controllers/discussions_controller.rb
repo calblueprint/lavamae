@@ -28,6 +28,9 @@ class DiscussionsController < ApplicationController
   	discussion = Discussion.new(discussion_params)
     discussion.score = 0
     discussion.user_id = current_user.id
+    params[:tags].each do |t|
+      discussion.tag_list.add(t)
+    end
   	discussion.save
   	redirect_to discussions_path
   end
@@ -42,10 +45,15 @@ class DiscussionsController < ApplicationController
 
   def update
   	@discussion.update(discussion_params)
+    if params[:discussion].key? :tag_list
+      @discussion.tag_list = params[:discussion][:tag_list].join(", ")
+    else
+      @discussion.tag_list = ""
+    end
+    @discussion.save
     respond_to do |format|
       format.json { render json: @discussion.to_json }
     end
-  	# redirect_to discussions_path(discussion_id: @discussion.id)
   end
 
   def destroy
@@ -69,7 +77,7 @@ class DiscussionsController < ApplicationController
 
   private
   	def discussion_params
-  		params.require(:discussion).permit(:title, :content)
+  		params.require(:discussion).permit(:title, :content, tag_list:[], tags:[])
   	end
 
   	def get_discussion

@@ -44,6 +44,7 @@
   padding-right: 5px;
   transition: 300ms;
   cursor: pointer;
+  margin-bottom: 10px;
 
   &:hover {
     color: $blue-dark;
@@ -53,6 +54,7 @@
 .upvote-count {
   color: $blue-dark;
   font-size: 14px;
+  margin-bottom: 10px;
 }
 
 .save {
