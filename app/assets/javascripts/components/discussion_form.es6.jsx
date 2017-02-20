@@ -183,4 +183,5 @@ class DiscussionForm extends React.Component {
 
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired
+  tags: React.PropTypes.object.isRequired
 };
