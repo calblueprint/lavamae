@@ -17,9 +17,15 @@ class UsersController < ApplicationController
 
   def approval_update
     # batch update user's map_approval_state based on admin decision
-    puts(params)
-    User.update(params.keys, params.values)
-    redirect_to show
+    users_ids = []
+    approval_states = []
+    for user in params.keys do
+      if (user != "controller" && user != "action")
+        users_ids.push(user)
+        approval_states.push(params[user])
+      end
+    end
+    User.update(users_ids, approval_states)
   end
 
   def update
