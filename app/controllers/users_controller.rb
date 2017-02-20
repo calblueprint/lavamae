@@ -17,15 +17,11 @@ class UsersController < ApplicationController
 
   def approval_update
     # batch update user's map_approval_state based on admin decision
-    users_ids = []
-    approval_states = []
-    for user in params.keys do
-      if (user != "controller" && user != "action")
-        users_ids.push(user)
-        approval_states.push(params[user])
-      end
+    if User.update(params["modified_users"].keys, params["modified_users"].values)
+      render_json_message(:ok, message: "User map decisions saved!")
+    else
+      render_json_message(:forbidden, message: "User map decisions not updated.")
     end
-    User.update(users_ids, approval_states)
   end
 
   def update
