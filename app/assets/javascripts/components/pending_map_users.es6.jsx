@@ -36,7 +36,7 @@ class PendingMapUsers extends React.Component {
   }
 
   _renderUsers() {
-    if (this.state.users == undefined) {
+    if (!this.state.users) {
       return
     }
 
