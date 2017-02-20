@@ -37,7 +37,7 @@ class ApproveUser extends React.Component {
 }
 
 ApproveUser.propTypes = {
-  pending_user: React.PropTypes.Object.isRequired,
+  pending_user: React.PropTypes.object.isRequired,
   _handleApprove: React.PropTypes.func.isRequired,
   _handleReject: React.PropTypes.func.isRequired,
 }

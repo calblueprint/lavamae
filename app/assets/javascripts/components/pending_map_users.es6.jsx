@@ -55,7 +55,6 @@ class PendingMapUsers extends React.Component {
   render() {
     return (
       <div>
-        Users Pending Map Approval
         {this._renderUsers()}
         <button className="btn btn-outline" onClick={this._handleUpdate}>Update</button>
       </div>
