@@ -1,5 +1,3 @@
-var Modal = ReactBootstrap.Modal;
-
 /**
  * @prop resource_topic - passed down module
  */
@@ -8,7 +6,6 @@ class ModuleDeleteModal extends React.Component {
 
   constructor(props) {
     super(props);
-
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
     this._handleDelete = this._handleDelete.bind(this);
@@ -62,3 +59,7 @@ class ModuleDeleteModal extends React.Component {
     );
   }
 }
+
+ModuleDeleteModal.propTypes = {
+  resource_topic: React.PropTypes.object.isRequired,
+};

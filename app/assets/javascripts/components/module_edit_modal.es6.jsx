@@ -1,5 +1,4 @@
 /**
-  @style - button style
   @resource_topic - passed down module
 */
 class ModuleEditModal extends React.Component {
@@ -15,7 +14,6 @@ class ModuleEditModal extends React.Component {
     this._error = this._error.bind(this);
     this.state = {
       showModal: false,
-      btnStyle: this.props.style,
       name: "",
       description: "",
       file: "",
@@ -129,5 +127,5 @@ class ModuleEditModal extends React.Component {
 }
 
 ModuleEditModal.propTypes = {
-  style: React.PropTypes.string.isRequired,
+  resource_topic: React.PropTypes.object.isRequired,
 };

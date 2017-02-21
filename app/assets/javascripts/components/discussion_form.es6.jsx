@@ -74,7 +74,7 @@ class DiscussionForm extends React.Component {
   renderForm() {
     return (
       <div>
-        <form class="new_discussion" id="new_discussion" action="/discussions" acceptCharset="UTF-8" method="post">
+        <form className="new_discussion" id="new_discussion" action="/discussions" acceptCharset="UTF-8" method="post">
           <div className="input-field">
             <label htmlFor="discussion_title">Title</label>
             <input type="text" name="title" defaultValue={this.state.title} id="discussion_title" />

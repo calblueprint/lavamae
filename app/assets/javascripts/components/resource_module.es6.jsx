@@ -5,7 +5,6 @@
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.resource_topic)
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
     this.state = {
@@ -61,3 +60,7 @@ class ResourceModule extends React.Component {
     )
   }
 }
+
+ResourceModule.propTypes = {
+  resource_topic: React.PropTypes.object.isRequired,
+};

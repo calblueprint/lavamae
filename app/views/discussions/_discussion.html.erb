@@ -9,10 +9,7 @@
   </div>
 
   <div class="user-action row">
-    <div class="action-container pull-left">
-      <i class="upvote-button fa fa-angle-up fa-lg"></i>
-      <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
-    </div>
+    <%= react_component "DiscussionUpvote", { discussion: @discussion, user: current_user } %>
     <div class="user-container pull-right">
       <div class="name-date">
         <a href=""><div class="user-name"><%= @discussion.user.full_name %></div></a>
