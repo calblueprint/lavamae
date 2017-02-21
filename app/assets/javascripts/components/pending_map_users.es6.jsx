@@ -1,5 +1,5 @@
 /**
-  * @prop pending_users
+  * @prop pending_users - list of users with map_approval_state set to "pending"
   */
 
 class PendingMapUsers extends React.Component {

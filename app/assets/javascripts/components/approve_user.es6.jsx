@@ -1,7 +1,7 @@
 /**
-  * @prop pending_user
-  * @prop _handleApprove
-  * @prop _handleReject
+  * @prop pending_user - user whose map_approval_state is set to "pending"
+  * @prop _handleApprove - sets user's map_approval_state to "approved"
+  * @prop _handleReject - sets user's map_approval_state to "rejected"
   */
 
 class ApproveUser extends React.Component {
@@ -16,12 +16,10 @@ class ApproveUser extends React.Component {
 
   _approveUser() {
     this.props._handleApprove(this.state.user)
-    console.log(this.state.user);
   }
 
   _rejectUser() {
     this.props._handleReject(this.state.user)
-    console.log(this.state.user);
   }
 
   render() {
