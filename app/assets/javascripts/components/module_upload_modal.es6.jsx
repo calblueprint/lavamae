@@ -1,5 +1,5 @@
 /**
-  @style - button style
+  @resource_topic - module information
 */
 class ModuleUploadModal extends React.Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class ModuleUploadModal extends React.Component {
     this._error = this._error.bind(this);
     this.state = {
       showModal: false,
-      btnStyle: this.props.style,
       name: '',
       description: '',
       file: '',
@@ -118,5 +117,5 @@ class ModuleUploadModal extends React.Component {
 }
 
 ModuleUploadModal.propTypes = {
-  style: React.PropTypes.string.isRequired,
+  resource_topic: React.PropTypes.object.isRequired,
 };

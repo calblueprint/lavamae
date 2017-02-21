@@ -18,7 +18,7 @@ class DiscussionsController < ApplicationController
     else
       @discussion = Discussion.last
     end
-    
+
     unless @discussion.nil?
       @responses = @discussion.responses.sort_by{|r| [r.score, r.created_at]}.reverse
     end
