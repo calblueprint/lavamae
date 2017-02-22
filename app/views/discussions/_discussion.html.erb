@@ -1,6 +1,6 @@
 <div class="discussion-selected-container">
   <div class="row">
-    <% if current_user and current_user == discussion.user %>
+    <% if current_user and current_user == @discussion.user %>
       <%= react_component "DiscussionForm", { discussion: @discussion, tags: @discussion.tag_list } %>
     <% else %>
         <h2 class="discussion-title"><%= @discussion.title %></h2>
