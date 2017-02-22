@@ -1,19 +1,11 @@
 .module-item {
-  cursor: pointer;
   border: 2px solid transparent;
   border-radius: 2px;
   padding: 24px;
   transition: 300ms;
   background-color: white;
 
-  &:hover {
-    border: 2px solid $blue-light;
-    box-shadow: 0px 2px 8px $black-20;
-  }
-
   &:focus {
-    border: 2px solid $blue-light;
-    box-shadow: 0px 2px 8px $black-20;
     outline: none;
   }
 
@@ -44,6 +36,17 @@
       margin: 0 auto;
       height: 100%;
       width: auto;
+    }
+  }
+
+  .module-download {
+    cursor: pointer;
+    padding: 15px 20px;
+    transition: 300ms;
+    color: $blue-light;
+
+    &:hover {
+      background: $blue-light-20;
     }
   }
 

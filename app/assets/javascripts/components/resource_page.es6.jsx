@@ -29,21 +29,10 @@ class ResourcePage extends React.Component {
         <div className="container module-container">
           <div className="module-header">
             <h3>Modules</h3>
-            <div className="new-module">
-              <form className = "button_to" method = "get" action = "/resource_topics/new">
-                  <input className = "btn btn-blue btn-nav" type = "submit" value = "New Module" />
-              </form>
-            </div>
-            <ResourceUploadModal
-              style = { "btn btn-blue" }
-              modules = { this.props.modules }
-            />
-          </div>
-          <div>
+            <ModuleUploadModal style = { "btn-btn-blue" } />
           </div>
           <div className="module-items row">
             {this._renderModules()}
-
           </div>
         </div>
       </section>

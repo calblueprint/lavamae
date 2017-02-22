@@ -9,6 +9,8 @@
 #
 
 class ResourceTopic < ActiveRecord::Base
-  has_many :resources
+  mount_uploader :attachment, AttachmentUploader
+  mount_base64_uploader :attachment, Attachment64Uploader
+  belongs_to :user
 
 end

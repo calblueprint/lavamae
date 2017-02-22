@@ -1,6 +1,6 @@
 class ResourceTopicsController < ApplicationController
   def index
-    @resource_topics = ResourceTopic.all
+    @resource_topics = ResourceTopic.all.order('created_at')
   end
 
   def new
@@ -11,8 +11,10 @@ class ResourceTopicsController < ApplicationController
   @resource_topic = ResourceTopic.new(resource_topic_params)
 
     if @resource_topic.save
+      flash[:success] = "#{@resource_topic.name} was successfully uploaded!"
       redirect_to resource_topics_path
     else
+      flash.now[:error] = @resource_topic.errors.full_messages.first
       render "new"
     end
   end
@@ -21,29 +23,25 @@ class ResourceTopicsController < ApplicationController
   end
 
   def update
+    @resource_topic = ResourceTopic.find(params[:id])
+    @resource_topic.update(resource_topic_params)
+    puts @resource_topic.update(resource_topic_params)
+    redirect_to resource_topic_path
   end
 
   def show
     @resource_topic = ResourceTopic.find(params[:id])
-    @resources = @resource_topic.resources
-    render json: @resources
   end
 
   def destroy
     @resource_topic = ResourceTopic.find(params[:id])
-    @num_resources = @resource_topic.resources.length
-    if @num_resources != 0
-      flash[:error] = "#{@resource_topic.name} still has #{@num_resources} resources"
-      redirect_to resource_topics_path
-    else
-      @resource_topic.destroy
-      redirect_to resource_topics_path
-    end
+    @resource_topic.destroy
+    redirect_to resource_topic_path
   end
 
   private
-  def resource_topic_params
-    params.require(:resource_topic).permit(:name)
-  end
+    def resource_topic_params
+      params.require(:resource_topic).permit(:name, :description, :attachment)
+    end
 
 end

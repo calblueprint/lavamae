@@ -1,35 +1,20 @@
 /**
  * @prop resource_topic -- passed down module
  */
-var ButtonToolbar = ReactBootstrap.ButtonToolbar;
-var DropdownButton = ReactBootstrap.DropdownButton;
-var MenuItem = ReactBootstrap.MenuItem;
 
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
-    this.setDocuments = this.setDocuments.bind(this)
     this.state = {
       resources: {},
-      show_documents: false,
     };
   }
 
   _handleClick(e) {
     e.preventDefault();
-    if (!this.state.show_documents) {
-      var route = `/resource_topics/${this.props.resource_topic.id}`
-      APIRequester.getJSON(route, this.setDocuments, this._handleError);
-      this.setState({show_documents: true});
-
-    } else {
-      this.setState({resources: {}});
-      this.setState({show_documents: false});
-      this._renderDocuments();
-
-    }
+    window.open(this.props.resource_topic.attachment.url);
   }
 
   _handleError(msg) {
@@ -43,25 +28,10 @@ class ResourceModule extends React.Component {
     })
   }
 
-  _renderDocuments() {
-    if (!this.state.resources.resource_topics) {
-      return
-    }
-
-    return this.state.resources.resource_topics.map((resource_doc) => {
-      return (
-        <ResourceDocument
-          key={resource_doc.id}
-          resource_doc = {resource_doc}
-        />
-      )
-    });
-  }
-
   render() {
     return (
         <div className="module-item-container">
-          <div tabIndex="1" className="module-item" onClick = {this._handleClick}>
+          <div tabIndex="1" className="module-item">
             <div className="cover-picture">
               <a href=""><Img src="/assets/greybus.svg" /></a>
             </div>
@@ -70,16 +40,27 @@ class ResourceModule extends React.Component {
                 {this.props.resource_topic.name}
               </h5>
               <div className="module-item-description">
-                Manuals and blueprints for building your own buses.
+                {this.props.resource_topic.description}
                 <br></br>
-                <p>Last Updated: {Date(this.props.resource_topic.updated_at).slice(4, 15)}</p>
+                <p>Last Updated: {this.props.resource_topic.updated_at.slice(0, 10)}</p>
               </div>
+              <div className="btn btn-sm btn-action pull-right module-download" onClick = {this._handleClick}>
+                <i className="fa fa-download fa-lg"></i>
+              </div>
+              <ModuleEditModal
+                style = {"btn-btn-blue"}
+                resource_topic = {this.props.resource_topic}
+              />
+              <ModuleDeleteModal
+                resource_topic = {this.props.resource_topic}
+              />
             </div>
-          </div>
-          <div className="resources-container">
-            {this._renderDocuments()}
           </div>
         </div>
     )
   }
 }
+
+ResourceModule.propTypes = {
+  resource_topic: React.PropTypes.object.isRequired,
+};

@@ -48,8 +48,10 @@ ActiveRecord::Schema.define(version: 20170219193102) do
 
   create_table "resource_topics", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "description"
+    t.string   "attachment"
   end
 
   create_table "resources", force: :cascade do |t|
