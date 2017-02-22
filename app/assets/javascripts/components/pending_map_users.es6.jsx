@@ -1,5 +1,6 @@
 /**
   * @prop pending_users - list of users with map_approval_state set to "pending"
+  * @prop user_id - user id for the current user
   */
 
 class PendingMapUsers extends React.Component {
@@ -10,6 +11,7 @@ class PendingMapUsers extends React.Component {
     this._handleUpdate = this._handleUpdate.bind(this);
     this.state = {
       users: this.props.pending_users,
+      admin_id: this.props.user_id,
       modified_users: {},
     }
   }
@@ -32,7 +34,11 @@ class PendingMapUsers extends React.Component {
   }
 
   _handleUpdate() {
-    APIRequester.put('/users/update_map_approval', { modified_users: this.state.modified_users }, this._success);
+    approvalFields = {
+      modified_users: this.state.modified_users,
+      admin_id: this.props.user_id
+    }
+    APIRequester.put('/users/update_map_approval', approvalFields, this._success);
   }
 
   _renderUsers() {
@@ -62,7 +68,8 @@ class PendingMapUsers extends React.Component {
   }
 
 }
-1
+
 PendingMapUsers.propTypes = {
   pending_users: React.PropTypes.array.isRequired,
+  user_id: React.propTypes.number.isRequired,
 }

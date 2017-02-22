@@ -15,8 +15,9 @@ class UsersController < ApplicationController
     end
   end
 
+  # batch update user's map_approval_state based on admin decision
   def approval_update
-    # batch update user's map_approval_state based on admin decision
+    @user = User.find(params[:admin_id])
     if @user.is_admin
       if User.update(params["modified_users"].keys, params["modified_users"].values)
         render_json_message(:ok, message: "User map decisions saved!")
