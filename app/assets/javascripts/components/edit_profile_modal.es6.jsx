@@ -189,7 +189,7 @@ class EditProfileModal extends React.Component {
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
-              <input type="button" className="btn btn-blue modal-btn" onClick={this._startSignUpProcess}>Save Changes</input>
+              <button type="button" className="btn btn-blue modal-btn" onClick={this._startSignUpProcess}>Save Changes</button>
             </Modal.Footer>
           </form>
         </Modal>
