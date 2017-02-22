@@ -8,9 +8,9 @@
         <div class="action-container pull-left">
           <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
           <div class="discussion-tag-container" id="tags">
-             <% @discussion.tag_list.each do |t|%>
+            <% @discussion.tag_list.each do |t|%>
               <button class="discussion-tag discussion-tag-small"><%= t %></button>
-              <% end %>
+            <% end %>
           </div>
         </div> 
     <% end %>
