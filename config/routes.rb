@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     get '/users/password_reset' => 'registrations#password_reset', :as => 'edit_user_password'
   end
 
+  put '/users/update_map_approval', to: 'users#approval_update'
+
   resources :users, only: [:show, :update]
   resources :passwords, only: [:update]
 
