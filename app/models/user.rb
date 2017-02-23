@@ -36,6 +36,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :favorite_discussions, :class_name => "Discussion"
   has_many :responses
   belongs_to :location
+  enum map_approval_state: { pending: 0, approved: 1, rejected: 2}
 
   def full_name
   	return first_name + " " + last_name

@@ -1,18 +1,22 @@
 <div class="discussion-selected-container">
   <div class="row">
-    <% if current_user and current_user == discussion.user %>
-      <%= react_component "DiscussionForm", { discussion: @discussion } %>
+    <% if current_user and current_user == @discussion.user %>
+      <%= react_component "DiscussionForm", { discussion: @discussion, tags: @discussion.tag_list } %>
     <% else %>
         <h2 class="discussion-title"><%= @discussion.title %></h2>
         <p class="discussion-description wordwrap"><%= @discussion.content %></p>
+        <div class="action-container pull-left">
+          <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
+          <div class="discussion-tag-container" id="tags">
+            <% @discussion.tag_list.each do |t|%>
+              <button class="discussion-tag discussion-tag-small"><%= t %></button>
+            <% end %>
+          </div>
+        </div> 
     <% end %>
   </div>
 
   <div class="user-action row">
-    <div class="action-container pull-left">
-      <i class="upvote-button fa fa-angle-up fa-lg"></i>
-      <span class="upvote-count"><%= @discussion.score %> Upvotes</span>
-    </div>
     <div class="user-container pull-right">
       <div class="name-date">
         <a href=""><div class="user-name"><%= @discussion.user.full_name %></div></a>
