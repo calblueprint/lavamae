@@ -31,6 +31,7 @@ class EditProfileModal extends React.Component {
       email: this.props.email,
       organization: this.props.organization,
       location: this.props.location,
+      website: this.props.website,
       on_map: this.props.on_map,
     };
   }
