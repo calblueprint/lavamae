@@ -71,5 +71,5 @@ class PendingMapUsers extends React.Component {
 
 PendingMapUsers.propTypes = {
   pending_users: React.PropTypes.array.isRequired,
-  user_id: React.propTypes.number.isRequired,
+  user_id: React.PropTypes.number.isRequired,
 }
