@@ -16,7 +16,8 @@ def make_users
       on_map: true,
       email: "user#{n}@lavamae.org",
       password: "password",
-      password_confirmation: "password"
+      password_confirmation: "password",
+      map_approval_state: 0
     )
     user.id = n
     user.save
