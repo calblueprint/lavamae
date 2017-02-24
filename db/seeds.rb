@@ -11,6 +11,7 @@ def make_users
     user = User.create(
       first_name: FFaker::Name.first_name,
       last_name: FFaker::Name.last_name,
+      organization: "Lava Mae",
       is_admin: false,
       on_map: true,
       email: "user#{n}@lavamae.org",
@@ -23,10 +24,11 @@ def make_users
 end
 
 def make_admins
-  1.upto(5) do |n|
+  11.upto(15) do |n|
     admin = User.create(
       first_name: FFaker::Name.first_name,
       last_name: FFaker::Name.last_name,
+      organization: "Lava Mae",
       is_admin: true,
       email: "admin#{n}@lavamae.org",
       password: "password",
