@@ -49,6 +49,7 @@ class RegistrationModal extends React.Component {
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
         profile_pic: this.state.profile_pic,
+        website: this.state.website,
       }
     };
 
@@ -144,6 +145,7 @@ class RegistrationModal extends React.Component {
               <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
+              <div className="input-field">{ this._renderInput("website", "Website", "text", "lavabae.org") }</div>
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
