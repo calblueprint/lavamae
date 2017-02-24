@@ -5,6 +5,7 @@
 * @props email - user's current email
 * @props organization - user's current orgnization
 * @props location - location city, state, country string
+* @props website - user's website
 * @props on_map - true if user appears on map
 */
 
@@ -206,5 +207,6 @@ EditProfileModal.propTypes = {
   email           : React.PropTypes.string.isRequired,
   organization    : React.PropTypes.string,
   location        : React.PropTypes.string,
+  website         : React.PropTypes.string,
   on_map          : React.PropTypes.bool.isRequired,
 };
