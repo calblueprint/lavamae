@@ -1,14 +1,50 @@
-.module-title {
-  color: $blue-dark;
-  font-size: 24px;
-  /*font-weight: bold;*/
-}
+.module-item {
+  border-radius: 2px;
+  padding: 24px 24px 10px 24px;
+  background-color: white;
 
-.module-description {
-  font-size: 12px;
-  color: $grey;
-}
+  .module-item-description {
+    overflow: hidden;
+    font-size: 12px;
+    color: $black;
 
-.user-action {
-  padding: 10px;
+    p {
+      color: $grey;
+    }
+  }
+
+  .cover-picture {
+    max-width: 60px;
+    float: left;
+    margin-right: 15px;
+    margin-bottom: 15px;
+
+    img {
+      margin: 0 auto;
+      height: 100%;
+      width: auto;
+    }
+  }
+
+  .module-item-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .module-download {
+    cursor: pointer;
+    padding: 8px 12px;
+    transition: 300ms;
+    color: $blue-light;
+
+    span {
+      padding-left: 5px;
+    }
+
+    &:hover {
+      background: $blue-light-20;
+    }
+  }
+
 }
