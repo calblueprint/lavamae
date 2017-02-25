@@ -19,6 +19,8 @@ Rails.application.routes.draw do
 
   resources :discussions do
     resources :responses
+    post '/upvote', to: 'discussions#upvote'
+
   end
 
   resources :resources

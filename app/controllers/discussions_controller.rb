@@ -27,6 +27,7 @@ class DiscussionsController < ApplicationController
   def create
   	discussion = Discussion.new(discussion_params)
     discussion.score = 0
+    discussion.upvotes = []
     discussion.user_id = current_user.id
     params[:tags].each do |t|
       discussion.tag_list.add(t)
@@ -77,14 +78,17 @@ class DiscussionsController < ApplicationController
 
   def upvote
     if current_user
-      @discussion.upvotes.create(@upvote)
+      @discussion = Discussion.find(params[:discussion_id])
+      @discussion.upvotes.create(user_id: current_user.id)
+      @discussion.score += 1
+      @discussion.save
     end
     redirect_to discussions_path(discussion_id: params[:discussion_id])
   end
 
   private
   	def discussion_params
-  		params.require(:discussion).permit(:title, :content, tag_list:[], tags:[])
+  		params.require(:discussion).permit(:title, :content, :score, upvotes:[], tag_list:[], tags:[])
   	end
 
   	def get_discussion
@@ -94,7 +98,7 @@ class DiscussionsController < ApplicationController
     def save_params
     end
 
-    def upvote_params
-        params.require(:upvote).permit(:discussion_id)
-    end
+    # def upvote_params
+    #     params.require(:upvote).permit(:discussion_id)
+    # end
 end
