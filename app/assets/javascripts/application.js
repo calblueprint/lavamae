@@ -16,6 +16,8 @@
 //= require react_ujs
 //= require react_rails_img
 //= require react_bootstrap
+//= require moment
+//= require moment-timezone
 //= require components
 //= require toastr
 //= require_tree .

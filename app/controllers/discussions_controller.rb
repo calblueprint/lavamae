@@ -6,7 +6,7 @@ class DiscussionsController < ApplicationController
     @discussions = Discussion.all
     if current_user
       @favorite_discussions = current_user.favorite_discussions
-      if params[:fav]
+      if !params[:fav].blank?
         @discussions = @favorite_discussions
       end
     end
