@@ -30,7 +30,7 @@ class Upvote extends React.Component {
       if (!this.state.response) {
         APIRequester.post(`/discussions/${this.props.discussion.id}/upvote`, {}, this._successfulSave);
       } else {
-        APIRequester.post(`/discussions/${this.props.discussion.id}/response/${this.props.response.id}/upvote`, {}, this._successfulSave);
+        APIRequester.post(`/discussions/${this.props.discussion.id}/responses/${this.props.response.id}/upvote`, {}, this._successfulSave);
       }
     }
   }

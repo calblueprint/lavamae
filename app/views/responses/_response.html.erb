@@ -18,7 +18,7 @@
         <a href=""><%= image_tag("default.png") %></a>
       <% end %>
     </div>
-    <%= react_component "Upvote", {discussion: @discussion, response: @response, user: current_user, upvotes: @discussion.upvotes} %>
+    <%= react_component "Upvote", {discussion: @discussion, response: response, user: current_user, upvotes: response.upvotes} %>
   </div>
 </div>
 
