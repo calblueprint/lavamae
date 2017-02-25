@@ -96,7 +96,6 @@ class ApproveUser extends React.Component {
       </div>
     );
   }
-
 }
 
 ApproveUser.propTypes = {
