@@ -27,7 +27,8 @@ class ResponsesController < ApplicationController
     @response.update(response_params)
     respond_to do |format|
       format.json { render json: @response.to_json }
-    end  end
+    end
+  end
 
   def destroy
     @response.destroy
