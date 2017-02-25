@@ -111,6 +111,7 @@ class EditProfileModal extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       organization: this.state.organization,
+      website: this.state.website,
       on_map: this.state.on_map,
     };
     var locId = null;
@@ -171,6 +172,11 @@ class EditProfileModal extends React.Component {
                 <label htmlFor="organization">Organization</label>
                 <input id="organization-input" type="organization" name="organization" onChange={this._handleChange}
                        placeholder="Lava Bae" defaultValue={this.props.organization} />
+              </div>
+              <div className="input-field">
+                <label htmlFor="organization">Website</label>
+                <input id="website-input" type="website" name="website" onChange={this._handleChange}
+                       placeholder="lavabae.org" defaultValue={this.props.website} />
               </div>
               <div className="input-field">
                 <div>
