@@ -33,6 +33,12 @@ gem 'figaro', '1.1.1'
 gem 'has_scope', '0.6.0'
 gem 'kaminari', '0.16.3'
 gem 'nokogiri'
+gem 'acts-as-taggable-on', '~> 4.0'
+
+source "https://rails-assets.org" do
+  gem 'rails-assets-moment'
+  gem 'rails-assets-moment-timezone'
+end
 
 # Frontend
 gem 'font-awesome-rails', '4.5.0'
@@ -68,7 +74,6 @@ group :test do
   gem 'capybara', '~> 2.4.4'
   gem 'guard-rspec'
   gem 'launchy'
-
   gem "codeclimate-test-reporter", require: nil
 end
 
@@ -76,5 +81,3 @@ group :production, :staging do
   gem 'rails_12factor'
 end
 
-#used to tag discussions
-gem 'acts-as-taggable-on', '~> 4.0'
