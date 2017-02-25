@@ -99,8 +99,4 @@ class DiscussionsController < ApplicationController
 
     def save_params
     end
-
-    # def upvote_params
-    #     params.require(:upvote).permit(:discussion_id)
-    # end
 end

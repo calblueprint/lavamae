@@ -21,9 +21,10 @@ Rails.application.routes.draw do
   post '/passwords/reset', to: 'passwords#reset'
 
   resources :discussions do
-    resources :responses
+    resources :responses do
+      post '/upvote', to: 'responses#upvote'
+    end
     post '/upvote', to: 'discussions#upvote'
-
   end
 
   resources :resources
