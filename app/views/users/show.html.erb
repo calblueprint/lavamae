@@ -1,14 +1,14 @@
-<div class="user-profile">
-  <div class="row user-flex">
-    <div class="user-info">
+<section>
+  <div class="container profile-container">
+    <div class="user-info user-flex">
       <div class="profile-picture">
         <% if @user.profile_pic? %>
-          <a href=""><%= image_tag @user.profile_pic.url(:thumb) %></a>
+          <%= image_tag @user.profile_pic.url(:thumb) %>
         <% else %>
-          <a href=""><%= image_tag("default.png") %></a>
+          <%= image_tag("default.png") %>
         <% end %>
       </div>
-      <div class="row user-flex">
+      <div class="user-flex">
         <div class="user-profile-fields">
           Name<br>
           Email<br>
@@ -42,7 +42,7 @@
         </div>
       </div>
       <%if current_user.id == @user.id %>
-        <div class="row user-flex">
+        <div class="user-flex">
           <div class="profile-edit-button">
             <%if @location %>
               <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map) %>
@@ -56,23 +56,25 @@
         </div>
       <% end %>
     </div>
-    <div>
-      <div class="profile-section-titles">
-        <%= "Favorited Discussions" %><br>
-      </div>
-      <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">
-        <% @favorite_discussions.each do |discussion| %>
-          <%= render 'discussions/shortened', {discussion: discussion} %>
-        <% end %>
-      </div>
-    </div>
-    <div>
+    <div class="profile-right">
       <%if current_user.id == @user.id && @user.is_admin %>
-        <div class="profile-section-titles">
+      <div>
+        <h5 class="profile-section-titles">
           <%= "Users Pending Map Approval" %><br>
-        </div>
+        </h5>
         <%= react_component('PendingMapUsers', pending_users: @pending_map_users, user_id: @user.id) %>
+      </div>
       <% end %>
+      <div>
+        <h5 class="profile-section-titles">
+          <%= "Favorited Discussions" %><br>
+        </h5>
+        <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">
+          <% @favorite_discussions.each do |discussion| %>
+            <%= render 'discussions/shortened', {discussion: discussion} %>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+</section>
