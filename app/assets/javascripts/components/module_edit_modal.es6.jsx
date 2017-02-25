@@ -94,7 +94,7 @@ class ModuleEditModal extends React.Component {
     }
     return (
       <div>
-        <button className="btn btn-sm btn-action btn-update pull-right" onClick={this._openModal}>Update Module</button>
+        <button className="btn btn-sm btn-action btn-update pull-right" onClick={this._openModal}>Update</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Update Module</Modal.Title>

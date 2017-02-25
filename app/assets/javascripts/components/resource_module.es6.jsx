@@ -31,22 +31,18 @@ class ResourceModule extends React.Component {
   render() {
     return (
         <div className="module-item-container">
-          <div tabIndex="1" className="module-item">
-            <div className="cover-picture">
-              <a href=""><Img src="/assets/greybus.svg" /></a>
+          <div className="module-item">
+            <Img className="cover-picture" src="/assets/greybus.svg" />
+            <h5 className="module-item-title">
+              {this.props.resource_topic.name}
+            </h5>
+            <div className="module-item-description">
+
+              {this.props.resource_topic.description}
+              <p>Last Updated: {this.props.resource_topic.updated_at.slice(0, 10)}</p>
             </div>
-            <div className="module-body">
-              <h5 className="module-item-title">
-                {this.props.resource_topic.name}
-              </h5>
-              <div className="module-item-description">
-                {this.props.resource_topic.description}
-                <br></br>
-                <p>Last Updated: {this.props.resource_topic.updated_at.slice(0, 10)}</p>
-              </div>
-              <div className="btn btn-sm btn-action pull-right module-download" onClick = {this._handleClick}>
-                <i className="fa fa-download fa-lg"></i>
-              </div>
+            <hr></hr>
+            <div className="module-item-actions">
               <ModuleEditModal
                 style = {"btn-btn-blue"}
                 resource_topic = {this.props.resource_topic}
@@ -54,6 +50,10 @@ class ResourceModule extends React.Component {
               <ModuleDeleteModal
                 resource_topic = {this.props.resource_topic}
               />
+              <div className="btn btn-sm btn-action module-download" onClick = {this._handleClick}>
+                <i className="fa fa-download fa-lg"></i>
+                <span>Download</span>
+              </div>
             </div>
           </div>
         </div>
