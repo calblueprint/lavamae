@@ -16,13 +16,16 @@ class UsersController < ApplicationController
   end
 
   # batch update user's map_approval_state based on admin decision
-  def approval_update
-    @user = User.find(params[:admin_id])
-    if @user.is_admin
-      if User.update(params["modified_users"].keys, params["modified_users"].values)
-        render_json_message(:ok, message: "User map decisions saved!")
+  def map_approval_update
+    puts(params)
+    puts(map_approval_params)
+    @admin = User.find(params[:admin_id])
+    @user = User.find(params[:user_id])
+    if @admin.is_admin
+      if @user.update(map_approval_params)
+        render_json_message(:ok)
       else
-        render_json_message(:forbidden, message: "User map decisions not updated.")
+        render_json_message(:forbidden, message: "User not updated.")
       end
     end
   end
@@ -44,5 +47,9 @@ class UsersController < ApplicationController
 
   def update_params
     params.permit(:id, :first_name, :last_name, :email, :organization, :location_id, :on_map);
+  end
+
+  def map_approval_params
+    params.permit(:map_approval_state);
   end
 end
