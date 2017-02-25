@@ -12,34 +12,22 @@ class DiscussionUpvote extends React.Component {
     this._successfulSave = this._successfulSave.bind(this);
     this.state = {
       score: this.props.upvotes.length,
-      immediate_upvote: false
+      has_upvoted: false
     };
   }
 
   _handleUpvote() {
-    if(!this.state.immediate_upvote ) {
-      this.state.score += 1;
-      this.state.immediate_upvote = true;
-      APIRequester.post(`/discussions/${this.props.discussion.id}/upvote`, {}, this._successfulSave);
+    for (var i = 0; i < this.props.upvotes.length; i++) {
+      if (this.props.upvotes[i].user_id == this.props.user.id) {
+        this.state.has_upvoted = true;
+      }
     }
 
-
-    // var counts = this.props.upvotes
-    // counts.push(this.props.user.id)
-    // console.log(this.props.upvotes)
-
-
-    // this.setState({ score: counts.length }, () => {
-    //                   const discussionFields = {
-    //                     discussion: {
-    //                       score: counts.length,
-    //                     }
-    //                   };
-    //                   APIRequester.put(`/discussions/${this.props.discussion.id}/upvote`, discussionFields, this._successfulSave);
-    //                 });
-
-
-    // APIRequester.put(`/discussions/${this.props.discussion.id}`, discussionFields, this._successfulSave);
+    if(!this.state.has_upvoted) {
+      this.state.score += 1;
+      this.state.has_upvoted = true;
+      APIRequester.post(`/discussions/${this.props.discussion.id}/upvote`, {}, this._successfulSave);
+    }
   }
 
   _successfulSave() {
@@ -55,6 +43,8 @@ class DiscussionUpvote extends React.Component {
   }
 }
 
-DiscussionForm.propTypes = {
-  discussion: React.PropTypes.object.isRequired
+DiscussionUpvote.propTypes = {
+  discussion: React.PropTypes.object.isRequired,
+  user: React.PropTypes.object.isRequired,
+  upvotes: React.PropTypes.object.isRequired
 };
