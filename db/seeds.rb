@@ -40,5 +40,33 @@ def make_admins
   end
 end
 
+def make_discussions
+  1.upto(10) do |n|
+    discussion = Discussion.create(
+      content: "lavabae++",
+      title: "Discussion #{n}",
+      tag_list: ["Volunteering", "Starting up"],
+      user_id: n % 5 + 1
+    )
+    discussion.id = n
+    discussion.save
+  end
+end
+
+def make_responses
+  1.upto(30) do |n|
+    response = Response.create(
+      content: "Response!",
+      discussion_id: Discussion.find((n / 3.0).ceil).id,
+      user_id: n % 5 + 2
+    )
+    response.id = n
+    response.save
+  end
+end
+
 make_users
 make_admins
+make_discussions
+make_responses
+

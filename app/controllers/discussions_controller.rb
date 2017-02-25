@@ -28,8 +28,10 @@ class DiscussionsController < ApplicationController
   	discussion = Discussion.new(discussion_params)
     discussion.score = 0
     discussion.user_id = current_user.id
-    params[:tags].each do |t|
-      discussion.tag_list.add(t)
+    if params[:tags]
+      params[:tags].each do |t|
+        discussion.tag_list.add(t)
+      end
     end
   	discussion.save
   	redirect_to discussions_path
