@@ -18,7 +18,7 @@ class DiscussionsController < ApplicationController
     else
       @discussion = Discussion.last
     end
-    
+
     unless @discussion.nil?
       @responses = @discussion.responses.sort_by{|r| [r.score, r.created_at]}.reverse
     end
@@ -75,6 +75,13 @@ class DiscussionsController < ApplicationController
     redirect_to discussions_path(discussion_id: params[:discussion_id], search: params[:search])
   end
 
+  def upvote
+    if current_user
+      @discussion.upvotes.create(@upvote)
+    end
+    redirect_to discussions_path(discussion_id: params[:discussion_id])
+  end
+
   private
   	def discussion_params
   		params.require(:discussion).permit(:title, :content, tag_list:[], tags:[])
@@ -87,4 +94,7 @@ class DiscussionsController < ApplicationController
     def save_params
     end
 
+    def upvote_params
+        params.require(:upvote).permit(:discussion_id)
+    end
 end

@@ -12,11 +12,12 @@
               <button class="discussion-tag discussion-tag-small"><%= t %></button>
             <% end %>
           </div>
-        </div> 
+        </div>
     <% end %>
   </div>
 
   <div class="user-action row">
+    <%= react_component "DiscussionUpvote", {discussion: @discussion, user: current_user} %>
     <div class="user-container pull-right">
       <div class="name-date">
         <a href=""><div class="user-name"><%= @discussion.user.full_name %></div></a>

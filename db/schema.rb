@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170219193102) do
+ActiveRecord::Schema.define(version: 20170224230518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(version: 20170219193102) do
 
   add_index "discussions_users", ["discussion_id"], name: "index_discussions_users_on_discussion_id", using: :btree
   add_index "discussions_users", ["user_id"], name: "index_discussions_users_on_user_id", using: :btree
+
+  create_table "discussions_users_upvote", id: false, force: :cascade do |t|
+    t.integer "upvote_discussion"
+    t.integer "upvote_user"
+  end
+
+  add_index "discussions_users_upvote", ["upvote_discussion"], name: "index_discussions_users_upvote_on_upvote_discussion", using: :btree
+  add_index "discussions_users_upvote", ["upvote_user"], name: "index_discussions_users_upvote_on_upvote_user", using: :btree
 
   create_table "locations", force: :cascade do |t|
     t.string   "place"
@@ -78,6 +86,14 @@ ActiveRecord::Schema.define(version: 20170219193102) do
 
   add_index "responses", ["user_id"], name: "index_responses_on_user_id", using: :btree
 
+  create_table "responses_users_upvote", id: false, force: :cascade do |t|
+    t.integer "upvote_response"
+    t.integer "upvote_user"
+  end
+
+  add_index "responses_users_upvote", ["upvote_response"], name: "index_responses_users_upvote_on_upvote_response", using: :btree
+  add_index "responses_users_upvote", ["upvote_user"], name: "index_responses_users_upvote_on_upvote_user", using: :btree
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -104,6 +120,16 @@ ActiveRecord::Schema.define(version: 20170219193102) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
+
+  create_table "upvotes", force: :cascade do |t|
+    t.integer  "upvotable_id"
+    t.string   "upvotable_type"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "user_id"
+  end
+
+  add_index "upvotes", ["upvotable_type", "upvotable_id"], name: "index_upvotes_on_upvotable_type_and_upvotable_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "first_name"
