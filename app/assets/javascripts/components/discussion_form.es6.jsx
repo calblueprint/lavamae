@@ -1,6 +1,7 @@
 /**
  * @prop discussion - discussion
  * @prop tags - tag list
+ * @prop current_user - current user
  */
 
 class DiscussionForm extends React.Component {
@@ -25,6 +26,7 @@ class DiscussionForm extends React.Component {
       tags: this.props.tags,
       score: this.props.discussion.score,
       showModal: false,
+      current_user: this.props.current_user,
       data: this.props.discussion,
     };
   }
@@ -134,6 +136,21 @@ class DiscussionForm extends React.Component {
     )
   }
 
+  renderGuestContent() {
+    return (
+        <div>
+          <h2 className="discussion-title">{this.state.title} </h2>
+          <p className="discussion-description wordwrap">{this.state.content}</p>
+          <div className="action-container pull-left">
+            <span className="upvote-count">{this.state.score} Upvotes</span>
+            <div className="discussion-tag-container" id="tags">
+              {this._renderTags()}
+            </div>
+          </div> 
+        </div>
+      )
+  }
+
   renderContent() {
     return (
       <div>
@@ -163,8 +180,6 @@ class DiscussionForm extends React.Component {
           </div>
         </div>
       </div>
-
-
     )
   }
 
@@ -173,7 +188,11 @@ class DiscussionForm extends React.Component {
     if (this.state.show_form) {
       return this.renderForm();
     } else {
-      return this.renderContent();
+      if (this.state.current_user.id == this.state.data.user_id) {
+        return this.renderContent();
+      } else {
+        return this.renderGuestContent();
+      }
     }
 
     return renderedContent;
@@ -182,5 +201,6 @@ class DiscussionForm extends React.Component {
 
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  tags: React.PropTypes.array.isRequired
+  current_user: React.PropTypes.object,
+  tags: React.PropTypes.array
 };
