@@ -1,2 +1,1 @@
-<%= react_component "DiscussionPage", { discussion: @discussion, discussions: @discussions, current_user: current_user, favorite_discussions: current_user.favorite_discussions, tags: @discussion.tag_list } %>
-
+<%= react_component "DiscussionPage", { discussion: @discussion, discussions: @discussions, current_user: current_user, favorite_discussions: current_user.favorite_discussions, tags: @discussion.tag_list, show_favorites: params[:fav] } %>
