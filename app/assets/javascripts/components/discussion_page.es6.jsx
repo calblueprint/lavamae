@@ -45,7 +45,7 @@ class DiscussionPage extends React.Component {
             <div className="user-container pull-right">
               <div className="name-date">
                 <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
-                <div className="date">{this.state.discussion_date} ago</div>
+                <div className="date">{this.state.discussion_date}</div>
               </div>
               <div className="user-picture">
                 <img src={this.state.discussion_userimage} />

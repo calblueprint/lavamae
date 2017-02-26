@@ -43,10 +43,13 @@ class DiscussionIndex extends React.Component {
     this.setState({ show_favorites: !this.state.show_favorites });
   }
 
-  // /* TODO Discussion created at timestamp - moments */
-  // renderDiscussionTimeStamp(disc) {
-  //   return;
-  // }
+  renderDiscussionTimeStamp(disc) {
+    if (moment(disc.created_at) > moment().startOf('day')) {
+      return moment(disc.created_at).startOf('day').fromNow();
+    } else {
+      return moment(disc.created_at).format("MMM Do, YYYY");
+    }
+  }
 
   renderDiscussionHeader() {
     let searchParam = "";
@@ -107,7 +110,6 @@ class DiscussionIndex extends React.Component {
     }
   }
 
-   /* TODO Discussion created at timestamp - moments */
   renderShortened(disc, key) {
     return (
       <a href={'/discussions?discussion_id=' + disc.id} key={key}>
@@ -116,6 +118,7 @@ class DiscussionIndex extends React.Component {
           {disc.title}
           {this.renderStarred(disc)}
             <div className = "discussion-item-date pull-right">
+              {this.renderDiscussionTimeStamp(disc)}
             </div>
           </h4>
           <p className="discussion-item-description">
