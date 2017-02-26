@@ -7,6 +7,7 @@
  * @prop show_favorites - display favorites flag
  * @prop discussion_username - full name of discussion creator
  * @prop discussion_date - discussion created at timestamp
+ * @prop discussion_userimage - discussion user profile image
  * @prop responses - discussion responses
  * @prop upvotes - discussion upvotes
  */
@@ -23,7 +24,8 @@ class DiscussionPage extends React.Component {
       tags: this.props.tags,
       show_favorites: this.props.show_favorites,
       discussion_username: this.props.discussion_username,
-      discussion_date: this.props.discussion_date
+      discussion_date: this.props.discussion_date,
+      discussion_userimage: this.props.discussion_userimage
     };
   }
 
@@ -46,7 +48,7 @@ class DiscussionPage extends React.Component {
                 <div className="date">{this.state.discussion_date} ago</div>
               </div>
               <div className="user-picture">
-                {/* TODO render profile pic, also move user action row to DiscussionForm component */}
+                <img src={this.state.discussion_userimage} />
               </div>
             </div>
           </div> 
@@ -85,6 +87,7 @@ DiscussionPage.propTypes = {
   show_favorites: React.PropTypes.bool,
   discussion_username: React.PropTypes.string,
   discussion_date: React.PropTypes.string,
+  discussion_userimage: React.PropTypes.string,
   responses: React.PropTypes.array,
   upvotes: React.PropTypes.array
 };
