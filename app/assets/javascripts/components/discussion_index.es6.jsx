@@ -151,7 +151,7 @@ class DiscussionIndex extends React.Component {
 DiscussionIndex.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   discussions: React.PropTypes.array.isRequired,
-  current_user: React.PropTypes.object.isRequired,
-  favorite_discussions: React.PropTypes.array.isRequired,
-  show_favorites: React.PropTypes.bool.isRequired
+  current_user: React.PropTypes.object,
+  favorite_discussions: React.PropTypes.array,
+  show_favorites: React.PropTypes.bool
 };
