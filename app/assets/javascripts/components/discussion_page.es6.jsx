@@ -26,16 +26,9 @@ class DiscussionPage extends React.Component {
     };
   }
 
-  render() {
-    return (
-      <div className="discussion-container">
-        <DiscussionIndex
-          discussions = {this.props.discussions}
-          discussion = {this.props.discussion}
-          current_user = {this.props.current_user}
-          favorite_discussions = {this.props.favorite_discussions}
-          show_favorites = {this.props.show_favorites}
-        />
+  renderDiscussion() {
+    if (this.state.discussion) {
+      return (
         <div className="discussion-selected-container">
           <div className="row">
             <DiscussionForm
@@ -61,19 +54,34 @@ class DiscussionPage extends React.Component {
             responses = {this.props.responses}
           />
         </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div className="discussion-container">
+        <DiscussionIndex
+          discussions = {this.props.discussions}
+          discussion = {this.props.discussion}
+          current_user = {this.props.current_user}
+          favorite_discussions = {this.props.favorite_discussions}
+          show_favorites = {this.props.show_favorites}
+        />
+        {this.renderDiscussion()}
       </div>
     );
   }
 }
 
 DiscussionPage.propTypes = {
-  discussion: React.PropTypes.object.isRequired,
+  discussion: React.PropTypes.object,
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,
-  tags: React.PropTypes.array.isRequired,
+  tags: React.PropTypes.array,
   show_favorites: React.PropTypes.bool,
-  discussion_username: React.PropTypes.string.isRequired,
-  discussion_date: React.PropTypes.string.isRequired,
+  discussion_username: React.PropTypes.string,
+  discussion_date: React.PropTypes.string,
   responses: React.PropTypes.array
 };

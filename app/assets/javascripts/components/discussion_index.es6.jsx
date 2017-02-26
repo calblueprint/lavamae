@@ -48,7 +48,7 @@ class DiscussionIndex extends React.Component {
   //   return;
   // }
 
-  renderDiscussionHeader(disc) {
+  renderDiscussionHeader() {
     let searchParam = "";
     if (this.state.search != "") {
       searchParam = "&search=" + this.state.search;
@@ -58,7 +58,12 @@ class DiscussionIndex extends React.Component {
     if (this.state.show_favorites != false) {
       favParam = "&fav=true";
     }
-    let discussionRoute = '/discussions?discussion_id='+ disc.id + searchParam + favParam;
+
+    let discussionParam = "";
+    if (this.state.discussion) {
+      discussionParam = "discussion_id=" + this.state.discussion.id;
+    }
+    let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam;
     let header = null;
     if (this.state.current_user) {
       header = (
@@ -138,7 +143,7 @@ class DiscussionIndex extends React.Component {
               <button className="discussion-tag" onClick={this._selectTag}>Partnering</button>
               <button className="discussion-tag" onClick={this._selectTag}>Learn More</button>
             </div>
-              {this.renderDiscussionHeader(this.state.discussion)}
+              {this.renderDiscussionHeader()}
           </div>
           <div className="discussion-item-container col-xs-12 col-md-4" id="discussions">
             {this.renderIndex()}
@@ -149,7 +154,7 @@ class DiscussionIndex extends React.Component {
 }
 
 DiscussionIndex.propTypes = {
-  discussion: React.PropTypes.object.isRequired,
+  discussion: React.PropTypes.object,
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,
