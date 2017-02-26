@@ -45,7 +45,7 @@ class DiscussionIndex extends React.Component {
 
   renderDiscussionTimeStamp(disc) {
     if (moment(disc.created_at) > moment().startOf('day')) {
-      return moment(disc.created_at).startOf('day').fromNow();
+      return moment(disc.created_at).fromNow();
     } else {
       return moment(disc.created_at).format("MMM Do, YYYY");
     }
