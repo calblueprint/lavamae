@@ -46,7 +46,8 @@ def make_discussions
       content: "lavabae++",
       title: "Discussion #{n}",
       tag_list: ["Volunteering", "Starting up"],
-      user_id: n % 5 + 1
+      user_id: n % 5 + 1,
+      score: 0
     )
     discussion.id = n
     discussion.save

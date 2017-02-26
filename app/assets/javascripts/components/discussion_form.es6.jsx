@@ -141,6 +141,7 @@ class DiscussionForm extends React.Component {
           <h2 className="discussion-title">{this.state.title} </h2>
           <p className="discussion-description wordwrap">{this.state.content}</p>
           <div className="action-container pull-left">
+            <i className="upvote-button fa fa-angle-up fa-lg"></i>
             <span className="upvote-count">{this.state.score} Upvotes</span>
             <div className="discussion-tag-container" id="tags">
               {this._renderTags()}
@@ -185,7 +186,6 @@ class DiscussionForm extends React.Component {
   }
 
   render() {
-    let renderedContent;
     if (this.state.show_form) {
       return this.renderForm();
     } else {
@@ -195,8 +195,6 @@ class DiscussionForm extends React.Component {
         return this.renderGuestContent();
       }
     }
-
-    return renderedContent;
   }
 }
 
