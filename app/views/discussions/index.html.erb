@@ -1,9 +1,15 @@
 <% if @discussion_date %>
-	<% @discussion_date = time_ago_in_words(@discussion_date) %>
+	<% if @discussion_date > Time.now.beginning_of_day %>
+		<% @discussion_date = time_ago_in_words(@discussion_date) + " ago" %>
+	<% else %>
+    	<%= @discussion_date = @discussion_date.strftime("%b %d, %Y") %>
+	<% end %>
 <% end %>
+
 <% if @discussion.user.profile_pic? %>
   <% @userimage = asset_path(@discussion.user.profile_pic.url(:thumb)) %>
 <% else %>
   <% @userimage = asset_path('default.png') %>
 <% end %>
+
 <%= react_component "DiscussionPage", { discussion: @discussion, discussions: @discussions, current_user: current_user, favorite_discussions: @favorite_discussions, tags: @tag_list, show_favorites: params[:fav], discussion_username: @discussion_username, discussion_date: @discussion_date, discussion_userimage: @userimage, responses: @responses, upvotes: @upvotes } %>
