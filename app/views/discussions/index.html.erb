@@ -1,4 +1,4 @@
 <% if @discussion_date %>
-	<% @discussion_date = time_ago_in_words(@discussion_date)%> 
+	<% @discussion_date = time_ago_in_words(@discussion_date) %>
 <% end %>
 <%= react_component "DiscussionPage", { discussion: @discussion, discussions: @discussions, current_user: current_user, favorite_discussions: @favorite_discussions, tags: @tag_list, show_favorites: params[:fav], discussion_username: @discussion_username, discussion_date: @discussion_date, responses: @responses } %>
