@@ -67,7 +67,6 @@ class ModuleEditModal extends React.Component {
   }
 
   _onClick(e) {
-    console.log(e);
     e.preventDefault();
     window.open(this.props.resource_topic.attachment.url);
   }

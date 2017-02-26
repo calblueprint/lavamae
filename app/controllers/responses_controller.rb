@@ -8,6 +8,7 @@ class ResponsesController < ApplicationController
     response.discussion_id = @discussion.id
     response.user_id = current_user.id
     response.score = 0
+    response.upvotes = []
     if response.save
       redirect_to discussions_path(discussion_id: @discussion.id)
     else
@@ -27,16 +28,27 @@ class ResponsesController < ApplicationController
     @response.update(response_params)
     respond_to do |format|
       format.json { render json: @response.to_json }
-    end  end
+    end
+  end
 
   def destroy
     @response.destroy
     redirect_to discussions_path(discussion_id: @discussion.id)
   end
 
+  def upvote
+    if current_user
+      @response = Response.find(params[:response_id])
+      @response.upvotes.create(user_id: current_user.id)
+      @response.score += 1
+      @response.save
+    end
+    redirect_to discussions_path(discussion_id: params[:discussion_id])
+  end
+
   private
     def response_params
-      params.require(:response).permit(:content)
+      params.require(:response).permit(:content, :score, upvotes:[])
     end
 
     def get_response

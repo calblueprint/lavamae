@@ -37,6 +37,8 @@ class User < ActiveRecord::Base
   has_many :responses
   belongs_to :location
   enum map_approval_state: { pending: 0, approved: 1, rejected: 2}
+  has_many :upvotable, :dependent => :destroy
+
 
   def full_name
   	return first_name + " " + last_name

@@ -18,10 +18,7 @@
         <a href=""><%= image_tag("default.png") %></a>
       <% end %>
     </div>
-    <div class="upvote-container">
-      <i class="upvote-button fa fa-angle-up fa-lg"></i>
-      <span class="upvote-count"><%= response.score %> Upvotes</span>
-    </div>
+    <%= react_component "Upvote", {discussion: @discussion, response: response, user: current_user, upvotes: response.upvotes} %>
   </div>
 </div>
 

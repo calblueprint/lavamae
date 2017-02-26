@@ -17,6 +17,7 @@ class DiscussionForm extends React.Component {
     this._renderTags = this._renderTags.bind(this);
     this._renderFormTags = this._renderFormTags.bind(this);
     this._selectTag = this._selectTag.bind(this);
+
     this.state = {
       show_form: false,
       title: this.props.discussion.title,
@@ -157,8 +158,6 @@ class DiscussionForm extends React.Component {
         <h2 className="discussion-title">{this.state.title}</h2>
         <p className="discussion-description wordwrap">{this.state.content}</p>
         <div className="action-container pull-left">
-          <i className="upvote-button fa fa-angle-up fa-lg"></i>
-          <span className="upvote-count">{this.state.score} Upvotes</span>
           <div className="discussion-tag-container" id="tags">
             {this._renderTags()}
           </div>
@@ -183,5 +182,5 @@ class DiscussionForm extends React.Component {
 
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  tags: React.PropTypes.object.isRequired
+  tags: React.PropTypes.array.isRequired
 };
