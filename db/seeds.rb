@@ -48,6 +48,8 @@ def make_discussions
       tag_list: ["Volunteering", "Starting up"],
       user_id: n % 5 + 1
     )
+    discussion.score = 0
+    discussion.upvotes = []
     discussion.id = n
     discussion.save
   end
@@ -60,6 +62,8 @@ def make_responses
       discussion_id: Discussion.find((n / 3.0).ceil).id,
       user_id: n % 5 + 2
     )
+    response.score = 0
+    response.upvotes = []
     response.id = n
     response.save
   end
