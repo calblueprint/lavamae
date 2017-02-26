@@ -19,7 +19,7 @@ class DiscussionIndex extends React.Component {
       discussion: this.props.discussion,
       discussions: this.props.discussions,
       favorites_class: "",
-      search: null
+      search: ""
     };
   }
 
@@ -42,7 +42,7 @@ class DiscussionIndex extends React.Component {
   /* TODO: display favorites */
   _showFavorites(e) {
     $(e.target).toggleClass('selected');
-    this.setState({ show_favorites: true });
+    this.setState({ show_favorites: !show_favorites });
   }
 
   // /* TODO Discussion created at timestamp - moments */
@@ -51,11 +51,21 @@ class DiscussionIndex extends React.Component {
   // }
 
   renderDiscussionHeader(disc) {
+    let searchParam = "";
+    if (this.state.search != "") {
+      searchParam = "&search=" + this.state.search;
+    }
+
+    let favParam = "";
+    if (this.state.show_favorites != false) {
+      favParam = "&fav=true";
+    }
+    let discussionRoute = '/discussions?discussion_id='+ disc.id + searchParam + favParam;
     let header = null;
     if (this.state.current_user) {
       header = (
       <div>
-        <a href={'/discussions?discussion_id=${this.state.discussion.id}&search=${this.state.search}&fav=${this.state.show_favorites}'}> 
+        <a href={discussionRoute}> 
             <button className="discussion-favorite ${this.state.favorites_class}" onClick={this._showFavorites}>
               <i className="fa fa-star-o fa-lg"></i>
               Favorites
