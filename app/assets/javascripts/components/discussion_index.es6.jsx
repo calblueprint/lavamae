@@ -120,21 +120,21 @@ class DiscussionIndex extends React.Component {
   render() {
     return (
       <div>
-        <div className="discussion-header">
-          <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
-          <div className="discussion-tag-container" id="tags">
-            <i className="fa fa-tags fa-lg"></i>
-            <button className="discussion-tag" onClick={this._selectTag}>Starting up</button>
-            <button className="discussion-tag" onClick={this._selectTag}>Funding</button>
-            <button className="discussion-tag" onClick={this._selectTag}>Volunteering</button>
-            <button className="discussion-tag" onClick={this._selectTag}>Partnering</button>
-            <button className="discussion-tag" onClick={this._selectTag}>Learn More</button>
+          <div className="discussion-header">
+            <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
+            <div className="discussion-tag-container" id="tags">
+              <i className="fa fa-tags fa-lg"></i>
+              <button className="discussion-tag" onClick={this._selectTag}>Starting up</button>
+              <button className="discussion-tag" onClick={this._selectTag}>Funding</button>
+              <button className="discussion-tag" onClick={this._selectTag}>Volunteering</button>
+              <button className="discussion-tag" onClick={this._selectTag}>Partnering</button>
+              <button className="discussion-tag" onClick={this._selectTag}>Learn More</button>
+            </div>
+              {this.renderDiscussionHeader(this.state.discussion)}
           </div>
-            {this.renderDiscussionHeader(this.state.discussion)}
-        </div>
-        <div className="discussion-item-container col-xs-12 col-md-4" id="discussions">
-          {this.renderIndex()}
-        </div>
+          <div className="discussion-item-container col-xs-12 col-md-4" id="discussions">
+            {this.renderIndex()}
+          </div>
       </div>
     );
   }
