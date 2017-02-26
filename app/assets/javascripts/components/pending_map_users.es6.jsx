@@ -1,49 +1,4 @@
 /**
-  * @prop pending_users - list of users with map_approval_state set to "pending"
-  * @prop user_id - user id for the current user
-  */
-
-class PendingMapUsers extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      users: this.props.pending_users,
-      admin_id: this.props.user_id,
-    }
-  }
-
-  _renderUsers() {
-    if (!this.state.users) {
-      return
-    }
-
-    return this.state.users.map((pending_user) => {
-      return (
-        <ApproveUser
-          key = {pending_user.id}
-          admin_id = {this.state.admin_id}
-          pending_user = {pending_user}
-        />
-      )
-    });
-  }
-
-  render() {
-    return (
-      <div>
-        {this._renderUsers()}
-      </div>
-    );
-  }
-
-}
-
-PendingMapUsers.propTypes = {
-  pending_users: React.PropTypes.array.isRequired,
-  user_id: React.PropTypes.number.isRequired,
-};
-
-/**
   * @prop admin_id - id of admin approving or rejecting the pending user
   * @prop pending_user - user whose map_approval_state is set to "pending"
   */
@@ -96,7 +51,6 @@ class ApproveUser extends React.Component {
       </div>
     );
   }
-
 }
 
 ApproveUser.propTypes = {

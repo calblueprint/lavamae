@@ -13,6 +13,7 @@
           Name<br>
           Email<br>
           Organization<br>
+          Website<br>
           Location<br>
         </div>
         <div class="vertical-line">
@@ -24,6 +25,11 @@
             <%= @user.email %><br>
             <% if @user.organization %>
               <%= @user.organization %><br>
+            <% else %>
+              <%= "Not Available" %><br>
+            <% end %>
+            <% if @user.website %>
+              <%= @user.website %><br>
             <% else %>
               <%= "Not Available" %><br>
             <% end %>
@@ -39,9 +45,9 @@
         <div class="row user-flex">
           <div class="profile-edit-button">
             <%if @location %>
-              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, location: @location.place, on_map: @user.on_map) %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map) %>
             <% else %>
-              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, on_map: @user.on_map) %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, on_map: @user.on_map) %>
             <% end %>
           </div>
           <div>
@@ -61,10 +67,10 @@
       </div>
     </div>
     <div>
-      <div class="profile-section-titles">
-        <%= "Users Pending Map Approval" %><br>
-      </div>
       <%if current_user.id == @user.id && @user.is_admin %>
+        <div class="profile-section-titles">
+          <%= "Users Pending Map Approval" %><br>
+        </div>
         <%= react_component('PendingMapUsers', pending_users: @pending_map_users, user_id: @user.id) %>
       <% end %>
     </div>

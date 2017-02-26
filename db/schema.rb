@@ -153,6 +153,7 @@ ActiveRecord::Schema.define(version: 20170224230518) do
     t.string   "profile_pic"
     t.integer  "location_id"
     t.integer  "map_approval_state",     default: 0
+    t.string   "website"
   end
 
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree

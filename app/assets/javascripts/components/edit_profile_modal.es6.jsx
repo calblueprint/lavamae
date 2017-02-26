@@ -5,6 +5,7 @@
 * @props email - user's current email
 * @props organization - user's current orgnization
 * @props location - location city, state, country string
+* @props website - user's website
 * @props on_map - true if user appears on map
 */
 
@@ -31,6 +32,7 @@ class EditProfileModal extends React.Component {
       email: this.props.email,
       organization: this.props.organization,
       location: this.props.location,
+      website: this.props.website,
       on_map: this.props.on_map,
     };
   }
@@ -109,6 +111,7 @@ class EditProfileModal extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       organization: this.state.organization,
+      website: this.state.website,
       on_map: this.state.on_map,
     };
     var locId = null;
@@ -171,6 +174,11 @@ class EditProfileModal extends React.Component {
                        placeholder="Lava Bae" defaultValue={this.props.organization} />
               </div>
               <div className="input-field">
+                <label htmlFor="organization">Website</label>
+                <input id="website-input" type="website" name="website" onChange={this._handleChange}
+                       placeholder="lavabae.org" defaultValue={this.props.website} />
+              </div>
+              <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
                   <input id="my-edit-address" name="location" type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
@@ -205,5 +213,6 @@ EditProfileModal.propTypes = {
   email           : React.PropTypes.string.isRequired,
   organization    : React.PropTypes.string,
   location        : React.PropTypes.string,
+  website         : React.PropTypes.string,
   on_map          : React.PropTypes.bool.isRequired,
 };
