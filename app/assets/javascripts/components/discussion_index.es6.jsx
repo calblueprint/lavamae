@@ -3,6 +3,7 @@
  * @prop discussion - discussion
  * @prop current_user - current user
  * @prop favorite_discussions - favorite user discussions
+ * @prop show_favorites - display favorites flag
  */
 
 class DiscussionIndex extends React.Component {
@@ -13,12 +14,11 @@ class DiscussionIndex extends React.Component {
     this._starDiscussion = this._starDiscussion.bind(this);
     this._showFavorites = this._showFavorites.bind(this);
     this.state = {
-      show_favorites: false,
+      show_favorites: this.props.show_favorites,
       current_user: this.props.current_user,
       favorite_discussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
-      favorites_class: "",
       search: ""
     };
   }
@@ -28,11 +28,9 @@ class DiscussionIndex extends React.Component {
     $(e.target).toggleClass('checked');
   }
 
-  /* TODO: starring not working */
+  /* TODO: starring */
   _starDiscussion(e) {
     e.stopPropagation();
-    console.log($(e.target).attr('class'));
-    //if ((e.target).hasClass()
     //APIRequester.post(`/favorite_discussion/${e.target.id}`, this._closeModal);
     //APIRequester.delete(`/favorite_discussions/${e.target.id}`, this._closeModal);
     $(e.target).toggleClass('fa-star');
@@ -42,7 +40,7 @@ class DiscussionIndex extends React.Component {
   /* TODO: display favorites */
   _showFavorites(e) {
     $(e.target).toggleClass('selected');
-    this.setState({ show_favorites: !show_favorites });
+    this.setState({ show_favorites: !this.state.show_favorites });
   }
 
   // /* TODO Discussion created at timestamp - moments */
@@ -66,7 +64,7 @@ class DiscussionIndex extends React.Component {
       header = (
       <div>
         <a href={discussionRoute}> 
-            <button className="discussion-favorite ${this.state.favorites_class}" onClick={this._showFavorites}>
+            <button className="discussion-favorite" onClick={this._showFavorites}>
               <i className="fa fa-star-o fa-lg"></i>
               Favorites
             </button>
@@ -154,5 +152,6 @@ DiscussionIndex.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object.isRequired,
-  favorite_discussions: React.PropTypes.array.isRequired
+  favorite_discussions: React.PropTypes.array.isRequired,
+  show_favorites: React.PropTypes.bool.isRequired
 };
