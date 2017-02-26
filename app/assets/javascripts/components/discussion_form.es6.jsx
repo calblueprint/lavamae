@@ -189,7 +189,7 @@ class DiscussionForm extends React.Component {
     if (this.state.show_form) {
       return this.renderForm();
     } else {
-      if (this.state.current_user.id == this.state.data.user_id) {
+      if (this.state.current_user && this.state.current_user.id == this.state.data.user_id) {
         return this.renderContent();
       } else {
         return this.renderGuestContent();
@@ -200,6 +200,6 @@ class DiscussionForm extends React.Component {
 
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  current_user: React.PropTypes.object.isRequired,
+  current_user: React.PropTypes.object,
   tags: React.PropTypes.array.isRequired
 };

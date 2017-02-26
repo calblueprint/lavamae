@@ -5,6 +5,9 @@
  * @prop favorite_discussions - favorite user discussions
  * @prop tags - tag list
  * @prop show_favorites - display favorites flag
+ * @prop discussion_username - full name of discussion creator
+ * @prop discussion_date - discussion created at timestamp
+ * @prop responses - discussion responses
  */
 
 class DiscussionPage extends React.Component {
@@ -16,8 +19,10 @@ class DiscussionPage extends React.Component {
       favorite_discussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
-      show_favorites: this.props.show_favorites,
       tags: this.props.tags,
+      show_favorites: this.props.show_favorites,
+      discussion_username: this.props.discussion_username,
+      discussion_date: this.props.discussion_date
     };
   }
 
@@ -42,14 +47,19 @@ class DiscussionPage extends React.Component {
            <div className="user-action row">
             <div className="user-container pull-right">
               <div className="name-date">
-                <a href=""><div className="user-name">NAME PLACEHOLDER</div></a>
-                <div className="date">TIME PLACEHOLDER</div>
+                <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
+                <div className="date">{this.state.discussion_date} ago</div>
               </div>
               <div className="user-picture">
                 {/* TODO render profile pic, also move user action row to DiscussionForm component */}
               </div>
             </div>
-          </div>  
+          </div> 
+          <DiscussionResponses
+            discussion = {this.props.discussion}
+            current_user = {this.props.current_user}
+            responses = {this.props.responses}
+          />
         </div>
       </div>
     );
@@ -59,8 +69,11 @@ class DiscussionPage extends React.Component {
 DiscussionPage.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   discussions: React.PropTypes.array.isRequired,
-  current_user: React.PropTypes.object.isRequired,
-  favorite_discussions: React.PropTypes.array.isRequired,
+  current_user: React.PropTypes.object,
+  favorite_discussions: React.PropTypes.array,
   tags: React.PropTypes.array.isRequired,
-  show_favorites: React.PropTypes.bool.isRequired
+  show_favorites: React.PropTypes.bool,
+  discussion_username: React.PropTypes.string.isRequired,
+  discussion_date: React.PropTypes.string.isRequired,
+  responses: React.PropTypes.array
 };
