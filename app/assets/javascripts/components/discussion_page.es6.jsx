@@ -8,6 +8,7 @@
  * @prop discussion_username - full name of discussion creator
  * @prop discussion_date - discussion created at timestamp
  * @prop responses - discussion responses
+ * @prop upvotes - discussion upvotes
  */
 
 class DiscussionPage extends React.Component {
@@ -35,6 +36,7 @@ class DiscussionPage extends React.Component {
               discussion = {this.props.discussion}
               current_user = {this.props.current_user}
               tags = {this.props.tags}
+              upvotes = {this.props.upvotes}
             />
           </div>
            <div className="user-action row">
@@ -83,5 +85,6 @@ DiscussionPage.propTypes = {
   show_favorites: React.PropTypes.bool,
   discussion_username: React.PropTypes.string,
   discussion_date: React.PropTypes.string,
-  responses: React.PropTypes.array
+  responses: React.PropTypes.array,
+  upvotes: React.PropTypes.array
 };

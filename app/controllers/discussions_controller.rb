@@ -24,6 +24,7 @@ class DiscussionsController < ApplicationController
       @tag_list = @discussion.tag_list
       @discussion_username = @discussion.user.full_name
       @discussion_date = @discussion.created_at
+      @upvotes = @discussion.upvotes
     end
   end
 

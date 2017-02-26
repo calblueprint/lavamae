@@ -2,6 +2,7 @@
  * @prop discussion - discussion
  * @prop tags - tag list
  * @prop current_user - current user
+ * @prop upvotes - discussion upvotes
  */
 
 class DiscussionForm extends React.Component {
@@ -18,7 +19,6 @@ class DiscussionForm extends React.Component {
     this._renderTags = this._renderTags.bind(this);
     this._renderFormTags = this._renderFormTags.bind(this);
     this._selectTag = this._selectTag.bind(this);
-
     this.state = {
       show_form: false,
       title: this.props.discussion.title,
@@ -129,6 +129,7 @@ class DiscussionForm extends React.Component {
             {this._renderFormTags()}
           </div>
           <br></br>
+          <br></br>
           <button className="btn btn-blue btn-sm save" onClick={this._saveForm}>Save</button>
           <button className="btn btn-sm btn-outline" onClick={this._cancelEdit}>Cancel</button>
         </form>
@@ -142,8 +143,12 @@ class DiscussionForm extends React.Component {
           <h2 className="discussion-title">{this.state.title} </h2>
           <p className="discussion-description wordwrap">{this.state.content}</p>
           <div className="action-container pull-left">
-            <i className="upvote-button fa fa-angle-up fa-lg"></i>
-            <span className="upvote-count">{this.state.score} Upvotes</span>
+            <Upvote
+              discussion = {this.props.discussion}
+              user = {this.props.current_user}
+              upvotes = {this.props.upvotes}
+            />
+            <br></br>
             <div className="discussion-tag-container" id="tags">
               {this._renderTags()}
             </div>
@@ -176,6 +181,12 @@ class DiscussionForm extends React.Component {
         <h2 className="discussion-title">{this.state.title}</h2>
         <p className="discussion-description wordwrap">{this.state.content}</p>
         <div className="action-container pull-left">
+          <Upvote
+            discussion = {this.props.discussion}
+            user = {this.props.current_user}
+            upvotes = {this.props.upvotes}
+          />
+          <br></br>
           <div className="discussion-tag-container" id="tags">
             {this._renderTags()}
           </div>
@@ -200,5 +211,6 @@ class DiscussionForm extends React.Component {
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   current_user: React.PropTypes.object,
-  tags: React.PropTypes.array
+  tags: React.PropTypes.array,
+  upvotes: React.PropTypes.array
 };
