@@ -4,6 +4,7 @@
  * @prop current_user - current user
  * @prop favorite_discussions - favorite user discussions
  * @prop tags - tag list
+ * @prop show_favorites - display favorites flag
  */
 
 class DiscussionPage extends React.Component {
@@ -15,6 +16,7 @@ class DiscussionPage extends React.Component {
       favorite_discussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
+      show_favorites: this.props.show_favorites,
       tags: this.props.tags,
     };
   }
@@ -27,6 +29,7 @@ class DiscussionPage extends React.Component {
           discussion = {this.props.discussion}
           current_user = {this.props.current_user}
           favorite_discussions = {this.props.favorite_discussions}
+          show_favorites = {this.props.show_favorites}
         />
         <div className="discussion-selected-container">
           <div className="row">
@@ -58,5 +61,6 @@ DiscussionPage.propTypes = {
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object.isRequired,
   favorite_discussions: React.PropTypes.array.isRequired,
-  tags: React.PropTypes.array.isRequired
+  tags: React.PropTypes.array.isRequired,
+  show_favorites: React.PropTypes.bool.isRequired
 };
