@@ -74,7 +74,7 @@ class DiscussionIndex extends React.Component {
         <a href={discussionRoute}> 
             <button className="discussion-favorite" onClick={this._showFavorites}>
               <i className="fa fa-star-o fa-lg"></i>
-              Favorites
+              <span> Favorites </span>
             </button>
         </a>
         <a href={'/discussions/new'}> 
@@ -105,8 +105,6 @@ class DiscussionIndex extends React.Component {
                 <i id={disc.id} className="fa fa-star pull-right" onClick={this._starDiscussion}></i>
         </span>
       );
-    } else {
-      return;
     }
   }
 
