@@ -39,19 +39,11 @@ class DiscussionPage extends React.Component {
               current_user = {this.props.current_user}
               tags = {this.props.tags}
               upvotes = {this.props.upvotes}
+              discussion_username = {this.props.discussion_username}
+              discussion_date = {this.props.discussion_date}
+              discussion_userimage = {this.props.discussion_userimage}
             />
           </div>
-           <div className="user-action row">
-            <div className="user-container pull-right">
-              <div className="name-date">
-                <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
-                <div className="date">{this.state.discussion_date}</div>
-              </div>
-              <div className="user-picture">
-                <img src={this.state.discussion_userimage} />
-              </div>
-            </div>
-          </div> 
           <DiscussionResponses
             discussion = {this.props.discussion}
             current_user = {this.props.current_user}

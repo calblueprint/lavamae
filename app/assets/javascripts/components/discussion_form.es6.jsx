@@ -2,6 +2,9 @@
  * @prop discussion - discussion
  * @prop tags - tag list
  * @prop current_user - current user
+* @prop discussion_username - full name of discussion creator
+ * @prop discussion_date - discussion created at timestamp
+ * @prop discussion_userimage - discussion user profile image
  * @prop upvotes - discussion upvotes
  */
 
@@ -27,6 +30,9 @@ class DiscussionForm extends React.Component {
       score: this.props.discussion.score,
       showModal: false,
       current_user: this.props.current_user,
+      discussion_username: this.props.discussion_username,
+      discussion_date: this.props.discussion_date,
+      discussion_userimage: this.props.discussion_userimage,
       data: this.props.discussion,
     };
   }
@@ -142,17 +148,28 @@ class DiscussionForm extends React.Component {
         <div>
           <h2 className="discussion-title">{this.state.title} </h2>
           <p className="discussion-description wordwrap">{this.state.content}</p>
-          <div className="action-container pull-left">
-            <Upvote
-              discussion = {this.props.discussion}
-              user = {this.props.current_user}
-              upvotes = {this.props.upvotes}
-            />
-            <br></br>
-            <div className="discussion-tag-container" id="tags">
-              {this._renderTags()}
+          <div className="user-action row">
+            <div className="action-container pull-left">
+              <Upvote
+                discussion = {this.props.discussion}
+                user = {this.props.current_user}
+                upvotes = {this.props.upvotes}
+              />
+              <br></br>
+              <div className="discussion-tag-container" id="tags">
+                {this._renderTags()}
+              </div>
+            </div> 
+            <div className="user-container pull-right">
+              <div className="name-date">
+                <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
+                <div className="date">{this.state.discussion_date}</div>
+              </div>
+              <div className="user-picture">
+                <img src={this.state.discussion_userimage} />
+              </div>
             </div>
-          </div> 
+          </div>
         </div>
       )
   }
@@ -180,17 +197,28 @@ class DiscussionForm extends React.Component {
         <button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>
         <h2 className="discussion-title">{this.state.title}</h2>
         <p className="discussion-description wordwrap">{this.state.content}</p>
-        <div className="action-container pull-left">
-          <Upvote
-            discussion = {this.props.discussion}
-            user = {this.props.current_user}
-            upvotes = {this.props.upvotes}
-          />
-          <br></br>
-          <div className="discussion-tag-container" id="tags">
-            {this._renderTags()}
+        <div className="user-action row">
+          <div className="action-container pull-left">
+            <Upvote
+              discussion = {this.props.discussion}
+              user = {this.props.current_user}
+              upvotes = {this.props.upvotes}
+            />
+            <br></br>
+            <div className="discussion-tag-container" id="tags">
+              {this._renderTags()}
+            </div>
           </div>
-        </div>
+          <div className="user-container pull-right">
+            <div className="name-date">
+              <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
+              <div className="date">{this.state.discussion_date}</div>
+            </div>
+            <div className="user-picture">
+              <img src={this.state.discussion_userimage} />
+            </div>
+          </div>
+        </div> 
       </div>
     )
   }
@@ -212,5 +240,8 @@ DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   current_user: React.PropTypes.object,
   tags: React.PropTypes.array,
+  discussion_username: React.PropTypes.string,
+  discussion_date: React.PropTypes.string,
+  discussion_userimage: React.PropTypes.string,
   upvotes: React.PropTypes.array
 };
