@@ -56,6 +56,6 @@ class Upvote extends React.Component {
 Upvote.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   response: React.PropTypes.object,
-  user: React.PropTypes.object.isRequired,
+  user: React.PropTypes.object,
   upvotes: React.PropTypes.array.isRequired
 };
