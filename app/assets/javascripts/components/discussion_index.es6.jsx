@@ -57,11 +57,19 @@ class DiscussionIndex extends React.Component {
     }
     let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam;
     let header = null;
+
+    let favoritesSelected = "";
+    if (this.state.show_favorites) {  
+      favoritesSelected = "discussion-favorite selected";
+    } else {
+      favoritesSelected = "discussion-favorite";
+    }
+    
     if (this.state.current_user) {
       header = (
       <div>
         <a href={discussionRoute}> 
-            <button className="discussion-favorite" onClick={this._showFavorites}>
+            <button className={favoritesSelected} onClick={this._showFavorites}>
               <i className="fa fa-star-o fa-lg"></i>
               <span> Favorites </span>
             </button>
