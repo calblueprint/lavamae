@@ -20,14 +20,16 @@ class DiscussionFavorite extends React.Component {
   }
 
   _successfulFavorite() {
-    var favorites = this.state.favorite_discussions.push(this.state.discussion.id);
+    var favorites = this.state.favorite_discussions
+    favorites.push(this.state.discussion.id);
     this.setState({ has_favorited: !this.state.has_favorited,
                     favorite_discussions: favorites });
   }
 
   _successfulUnfavorite() {
     var index = this.state.favorite_discussions.indexOf(this.state.discussion.id);
-    var favorites = this.state.favorite_discussions.splice(index, 1);
+    favorites = this.state.favorite_discussions
+    favorites.splice(index, 1);
     this.setState({ has_favorited: !this.state.has_favorited,
                     favorite_discussions: favorites });
   }
