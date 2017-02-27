@@ -11,7 +11,6 @@ class DiscussionIndex extends React.Component {
   constructor(props) {
     super(props);
     this._selectTag = this._selectTag.bind(this);
-    this._starDiscussion = this._starDiscussion.bind(this);
     this._showFavorites = this._showFavorites.bind(this);
     this.state = {
       show_favorites: this.props.show_favorites,
@@ -28,16 +27,6 @@ class DiscussionIndex extends React.Component {
     $(e.target).toggleClass('checked');
   }
 
-  /* TODO: starring */
-  _starDiscussion(e) {
-    e.stopPropagation();
-    //APIRequester.post(`/favorite_discussion/${e.target.id}`, this._closeModal);
-    //APIRequester.delete(`/favorite_discussions/${e.target.id}`, this._closeModal);
-    $(e.target).toggleClass('fa-star');
-    $(e.target).toggleClass('fa-star-o');
-  }
-
-  /* TODO: display favorites */
   _showFavorites(e) {
     $(e.target).toggleClass('selected');
     this.setState({ show_favorites: !this.state.show_favorites });
@@ -88,36 +77,27 @@ class DiscussionIndex extends React.Component {
     return header;
   }
 
-  renderStarred(disc) {
-    if (this.state.current_user) {
-      let star = null;
-      if (this.state.favorite_discussions.includes(disc)) {
-          star =  <i className="fa fa-star pull-right">
-          </i>;
-      } else {
-          star =  <i className="fa fa-star-o pull-right"></i>;
-      }
-      return (
-        <span className="change-icon favorite-discussion" 
-                data-id={disc.id}
-                data-fav={this.state.favorite_discussions.includes(disc)}>
-                {star}
-                <i id={disc.id} className="fa fa-star pull-right" onClick={this._starDiscussion}></i>
-        </span>
-      );
-    }
-  }
 
   renderShortened(disc, key) {
+    let star = null;
+    if (this.state.current_user) {
+      star = (
+          <DiscussionFavorite
+            current_user = {this.props.current_user}
+            favorite_discussions= {this.props.favorite_discussions}
+            discussion = {disc}
+          />
+        )
+    }
     return (
-      <a href={'/discussions?discussion_id=' + disc.id} key={key}>
+      <a href={'/discussions?discussion_id=' + disc.id} key={disc.id}>
         <div tabIndex="4" className="discussion-item row">
           <h4 className="discussion-item-title">
-          {disc.title}
-          {this.renderStarred(disc)}
+            {disc.title}
             <div className = "discussion-item-date pull-right">
               {this.renderDiscussionTimeStamp(disc)}
             </div>
+            <span>{star}</span>
           </h4>
           <p className="discussion-item-description">
             {disc.content}
