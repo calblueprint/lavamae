@@ -65,7 +65,7 @@ class DiscussionsController < ApplicationController
 
   def destroy
   	@discussion.destroy
-  	redirect_to discussions_path
+    render :action => 'index'
   end
 
   def favorite
@@ -79,7 +79,7 @@ class DiscussionsController < ApplicationController
     if current_user
       current_user.favorite_discussions.delete(@discussion)
     end
-    redirect_to discussions_path(discussion_id: params[:discussion_id], search: params[:search])
+    render :action => 'index'
   end
 
   def upvote

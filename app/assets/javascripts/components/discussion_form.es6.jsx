@@ -52,7 +52,6 @@ class DiscussionForm extends React.Component {
 
   _success(msg) {
     this._closeModal();
-    this.setState({data: null})
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Delete successful!");
     window.location = "/";
