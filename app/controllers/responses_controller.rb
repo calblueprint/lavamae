@@ -7,7 +7,6 @@ class ResponsesController < ApplicationController
     response = Response.new(response_params)
     response.discussion_id = @discussion.id
     response.user_id = current_user.id
-    response.score = 0
     response.upvotes = []
     if response.save
       redirect_to discussions_path(discussion_id: @discussion.id)
