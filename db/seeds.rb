@@ -14,6 +14,7 @@ def make_users
       organization: "Lava Mae",
       is_admin: false,
       on_map: true,
+      website: "lavamae.org",
       email: "user#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password",
@@ -32,6 +33,7 @@ def make_admins
       organization: "Lava Mae",
       is_admin: true,
       on_map: false,
+      website: "lavamae.org",
       email: "admin#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password"

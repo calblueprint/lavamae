@@ -1,6 +1,3 @@
-/**
-  @resource_topic - module information
-*/
 class ModuleUploadModal extends React.Component {
   constructor(props) {
     super(props);
@@ -115,7 +112,3 @@ class ModuleUploadModal extends React.Component {
     );
   }
 }
-
-ModuleUploadModal.propTypes = {
-  resource_topic: React.PropTypes.object.isRequired,
-};
