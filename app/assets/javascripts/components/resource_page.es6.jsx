@@ -25,7 +25,7 @@ class ResourcePage extends React.Component {
   render() {
 
     return (
-      <section>
+      <section className="modules-section">
         <div className="container modules-container">
           <div className="modules-header">
             <h3>Modules</h3>
