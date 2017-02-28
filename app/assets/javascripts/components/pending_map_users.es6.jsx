@@ -87,12 +87,18 @@ class ApproveUser extends React.Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="approval">
+        <p className="approval-name">
           { this.props.pending_user.first_name } { this.props.pending_user.last_name }
+        </p>
+        <div className="approval-btns">
+          <button className="btn btn-sm btn-blue" onClick={this._handleApprove}>
+            <i className="fa fa-check"></i> Approve
+          </button>
+          <button className="btn btn-sm btn-outline" onClick={this._handleReject}>
+            <i className="fa fa-close"></i> Reject
+          </button>
         </div>
-        <button className="btn btn-outline" onClick={this._handleApprove}>Approve</button>
-        <button className="btn btn-outline" onClick={this._handleReject}>Reject</button>
       </div>
     );
   }

@@ -2,52 +2,52 @@
   padding-top: 80px;
 }
 
+.profile {
+  min-height: 100vh;
+}
+
+.profile-container {
+  align-items: flex-start;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 .vertical-line {
   border-left: solid $blue-dark;
-  flex: 1;
-  margin-top: 20px;
-  margin-bottom: 20px;
 }
 
-.user-profile {
-  padding: 22px;
-  padding-top: 100px;
-  height: 800px;
-  background: $blue-light-20;
-}
-
-.user-info {
+.user-card {
   background: white;
-  height: 360px;
-  width: 340px;
-  border: 2px solid transparent;
   border-radius: 2px;
-  padding: 30px;
+  padding: 24px;
+  margin-right: 15px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .user-flex {
   display: flex;
 }
 
+.user-info {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
 .user-profile-fields {
   color: $blue-dark;
   font-weight: bold;
-  width: 120px;
-  padding: 20px;
+  padding-right: 15px;
   text-align: right;
 }
 
 .user-profile-answers {
-  padding-left: 20px;
-  text-align: left;
+  padding-left: 15px;
 }
 
 .profile-picture {
-  position: relative;
-  vertical-align: middle;
-  display: inline-block;
-  padding-left: 90px;
-
   img {
     border-radius: 50%;
     height: 90px;
@@ -58,9 +58,7 @@
 }
 
 .profile-section-titles {
-  padding-left: 15px;
-  color: $blue-dark;
-  font-weight: bold;
+  padding-bottom: 15px;
 }
 
 .favorite-discussions-container {
@@ -85,3 +83,55 @@
   padding-right: 10px;
 }
 
+.profile-right {
+  flex-grow: 1;
+  overflow: hidden;
+}
+
+.approval {
+  background: $white-60;
+  display: flex;
+  border-radius: 2px;
+  padding: 15px;
+  align-items: center;
+  margin-bottom: 5px;
+
+  .approval-name {
+    flex-grow: 1;
+  }
+
+  .approval-btns {
+    button:last-child {
+      margin-left: 10px;
+    }
+  }
+}
+
+.approval:last-child {
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width:630px) {
+  .profile-container {
+    flex-wrap: wrap;
+    padding-top: 15px;
+  }
+
+  .user-card {
+    margin: 0;
+    width: 100vw;
+  }
+
+  .profile-section-titles {
+    padding-top: 15px;
+  }
+
+  .profile-right {
+    width: 100vw;
+  }
+
+  .approval:last-child {
+    margin-bottom: 0;
+  }
+
+}

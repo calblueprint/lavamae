@@ -146,7 +146,7 @@ class EditProfileModal extends React.Component {
   render () {
     return (
       <div>
-        <button className="btn btn-blue modal-btn" onClick={this._openModal}>Edit</button>
+        <button className="btn btn-sm btn-blue" onClick={this._openModal}>Edit</button>
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Account Information</Modal.Title>
