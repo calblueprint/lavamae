@@ -82,3 +82,8 @@ group :production, :staging do
   gem 'rails_12factor'
 end
 
+#used to tag discussions
+gem 'acts-as-taggable-on', '~> 4.0'
+
+#used for user photo gallery
+gem 'hermitage'
