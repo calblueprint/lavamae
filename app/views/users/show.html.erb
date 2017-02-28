@@ -1,6 +1,6 @@
-<section>
+<section class="profile">
   <div class="container profile-container">
-    <div class="user-info user-flex">
+    <div class="user-card user-flex">
       <div class="profile-picture">
         <% if @user.profile_pic? %>
           <%= image_tag @user.profile_pic.url(:thumb) %>
@@ -8,7 +8,7 @@
           <%= image_tag("default.png") %>
         <% end %>
       </div>
-      <div class="user-flex">
+      <div class="user-info user-flex">
         <div class="user-profile-fields">
           Name<br>
           Email<br>
@@ -69,7 +69,7 @@
         <h5 class="profile-section-titles">
           <%= "Favorited Discussions" %><br>
         </h5>
-        <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">
+        <div class="favorite-discussions-container" id="discussions">
           <% @favorite_discussions.each do |discussion| %>
             <%= render 'discussions/shortened', {discussion: discussion} %>
           <% end %>
