@@ -214,5 +214,5 @@ EditProfileModal.propTypes = {
   organization    : React.PropTypes.string,
   location        : React.PropTypes.string,
   website         : React.PropTypes.string,
-  on_map          : React.PropTypes.bool.isRequired,
+  on_map          : React.PropTypes.bool,
 };

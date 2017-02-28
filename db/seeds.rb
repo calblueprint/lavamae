@@ -31,6 +31,7 @@ def make_admins
       last_name: FFaker::Name.last_name,
       organization: "Lava Mae",
       is_admin: true,
+      on_map: false,
       email: "admin#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password"
