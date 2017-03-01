@@ -6,7 +6,7 @@ class DiscussionsController < ApplicationController
     @discussions = Discussion.all
     if current_user
       @favorite_discussions = current_user.favorite_discussions
-      if params[:fav]
+      if !params[:fav].blank?
         @discussions = @favorite_discussions
       end
     end
@@ -21,6 +21,9 @@ class DiscussionsController < ApplicationController
 
     unless @discussion.nil?
       @responses = @discussion.responses.sort_by{|r| [r.score, r.created_at]}.reverse
+      @tag_list = @discussion.tag_list
+      @discussion_username = @discussion.user.full_name
+      @discussion_date = @discussion.created_at
     end
   end
 
