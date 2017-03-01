@@ -4,6 +4,7 @@
  * @prop current_user - current user
  * @prop favorite_discussions - favorite user discussions
  * @prop show_favorites - display favorites flag
+ * @prop date_handler - handler to render timestamp
  */
 
 class DiscussionIndex extends React.Component {
@@ -30,14 +31,6 @@ class DiscussionIndex extends React.Component {
   _showFavorites(e) {
     $(e.target).toggleClass('selected');
     this.setState({ show_favorites: !this.state.show_favorites });
-  }
-
-  renderDiscussionTimeStamp(disc) {
-    if (moment(disc.created_at) > moment().startOf('day')) {
-      return moment(disc.created_at).fromNow();
-    } else {
-      return moment(disc.created_at).format("MMM Do, YYYY");
-    }
   }
 
   renderDiscussionHeader() {
@@ -103,7 +96,7 @@ class DiscussionIndex extends React.Component {
           <h4 className="discussion-item-title">
             {disc.title}
             <div className = "discussion-item-date pull-right">
-              {this.renderDiscussionTimeStamp(disc)}
+              {this.props.date_handler(disc)}
             </div>
             <span>{star}</span>
           </h4>

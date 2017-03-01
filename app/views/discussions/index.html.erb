@@ -16,4 +16,4 @@
   <% @favorite_discussions = current_user.favorite_discussions.pluck(:id) %>
 <% end %>
 
-<%= react_component "DiscussionPage", { discussion: @discussion, discussions: @discussions, current_user: current_user, favorite_discussions: @favorite_discussions, tags: @tag_list, show_favorites: params[:fav], discussion_username: @discussion_username, discussion_date: @discussion_date, discussion_userimage: @userimage, responses: @responses, upvotes: @upvotes } %>
+<%= react_component "DiscussionPage", { discussion: @discussion, discussions: @discussions, current_user: current_user, favorite_discussions: @favorite_discussions, tags: @tag_list, show_favorites: params[:fav], discussion_username: @discussion_username, discussion_userimage: @userimage, responses: @responses, upvotes: @upvotes } %>

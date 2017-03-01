@@ -2,10 +2,10 @@
  * @prop discussion - discussion
  * @prop tags - tag list
  * @prop current_user - current user
-* @prop discussion_username - full name of discussion creator
- * @prop discussion_date - discussion created at timestamp
+ * @prop discussion_username - full name of discussion creator
  * @prop discussion_userimage - discussion user profile image
  * @prop upvotes - discussion upvotes
+ * @prop date_handler - handler to render timestamp
  */
 
 class DiscussionForm extends React.Component {
@@ -31,7 +31,6 @@ class DiscussionForm extends React.Component {
       showModal: false,
       current_user: this.props.current_user,
       discussion_username: this.props.discussion_username,
-      discussion_date: this.props.discussion_date,
       discussion_userimage: this.props.discussion_userimage,
       data: this.props.discussion,
     };
@@ -104,14 +103,14 @@ class DiscussionForm extends React.Component {
 
   _renderFormTags() {
     const allTags = ["Starting up", "Funding", "Volunteering", "Partnering", "Learn More"];
-    let tagButtons = allTags.map((tag) => {
+    let tagButtons = allTags.map((tag, i) => {
       var tagClass;
       if (this.state.tags.includes(tag)) {
         tagClass = "discussion-tag checked";
       } else {
         tagClass = "discussion-tag";
       }
-      return <button type="button" className={tagClass} name={tag} onClick={this._selectTag}>{tag}</button>;
+      return <button key={i} type="button" className={tagClass} name={tag} onClick={this._selectTag}>{tag}</button>;
       });
     return tagButtons;
   }
@@ -162,7 +161,7 @@ class DiscussionForm extends React.Component {
             <div className="user-container pull-right">
               <div className="name-date">
                 <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
-                <div className="date">{this.state.discussion_date}</div>
+                <div className="date">posted {this.props.date_handler(this.state.data)}</div>
               </div>
               <div className="user-picture">
                 <img src={this.state.discussion_userimage} />
@@ -211,7 +210,7 @@ class DiscussionForm extends React.Component {
           <div className="user-container pull-right">
             <div className="name-date">
               <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
-              <div className="date">{this.state.discussion_date}</div>
+              <div className="date">posted {this.props.date_handler(this.state.data)}</div>
             </div>
             <div className="user-picture">
               <img src={this.state.discussion_userimage} />
@@ -239,8 +238,7 @@ DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   current_user: React.PropTypes.object,
   tags: React.PropTypes.array,
-  discussion_username: React.PropTypes.string,
-  discussion_date: React.PropTypes.string,
-  discussion_userimage: React.PropTypes.string,
+  discussion_username: React.PropTypes.string.isRequired,
+  discussion_userimage: React.PropTypes.string.isRequired,
   upvotes: React.PropTypes.array
 };
