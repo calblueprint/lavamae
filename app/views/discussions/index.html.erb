@@ -1,67 +1,19 @@
-<div class="discussion-container">
-  <div class="discussion-header">
-    <i class="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
-    <div class="discussion-tag-container" id="tags">
-      <i class="fa fa-tags fa-lg"></i>
-      <button class="discussion-tag">Starting up</button>
-      <button class="discussion-tag">Funding</button>
-      <button class="discussion-tag">Volunteering</button>
-      <button class="discussion-tag">Partnering</button>
-      <button class="discussion-tag">Learn More</button>
-    </div>
-      <% if current_user %>
-        <%= link_to discussions_path(discussion_id: params[:discussion_id], search: params[:search], fav: params[:fav].nil? ? true : nil) do %>
-        <% if params[:fav] %>
-          <button class="discussion-favorite selected">
-        <% else %>
-          <button class="discussion-favorite">
-        <% end %>
-          <i class="fa fa-star-o fa-lg"></i>
-          Favorites
-        </button>
-        <% end %>
-        <%= button_to "Create Discussion", new_discussion_path, method: :get, class: 'btn btn-blue pull-right' %>
-      <% end %>
-  </div>
-  <div class="discussion-item-container col-xs-12 col-md-4" id="discussions">
-    <% @discussions.each do |discussion| %>
-      <%= render 'discussions/shortened', {discussion: discussion} %>
-    <% end %>
-  </div>
-  <% if @discussion %>
-      <%= render @discussion %>
-  <% end %>
-</div>
+<% if @discussion_date %>
+	<% if @discussion_date > Time.now.beginning_of_day %>
+		<% @discussion_date = time_ago_in_words(@discussion_date) + " ago" %>
+	<% else %>
+    	<%= @discussion_date = @discussion_date.strftime("%b %d, %Y") %>
+	<% end %>
+<% end %>
 
-<script>
-$('.favorite-discussion').click(function(e){
-  var data_id = $(this).data("id");
-  var fav = $(this).data("fav");
-  var star_id = "star" + data_id
-  $(this).data('fav', !fav);
-  if (!fav) {
-    document.getElementById(star_id).className = "fa fa-star pull-right"
-    $.ajax({url: '/favorite_discussion/' + data_id, type: 'POST' });
-  }
-  else {
-    document.getElementById(star_id).className = "fa fa-star-o pull-right"
-    $.ajax({url: '/favorite_discussion/' + data_id, type: 'DELETE' });
-  }
-});
+<% if @discussion.user.profile_pic? %>
+  <% @userimage = asset_path(@discussion.user.profile_pic.url(:thumb)) %>
+<% else %>
+  <% @userimage = asset_path('default.png') %>
+<% end %>
 
-function discussionsMenu() {
-  var x = document.getElementById("discussions");
-  var y = document.getElementById("tags");
-  if (x.className === "discussion-item-container" || y.className === "discussion-tag-container") {
-      x.className += " responsive";
-      y.className += " responsive";
-  } else {
-      x.className = "discussion-item-container";
-      y.className = "discussion-tag-container";
-  }
-}
+<% if current_user %>
+  <% @favorite_discussions = current_user.favorite_discussions.pluck(:id) %>
+<% end %>
 
-$('.discussion-tag').click(function(){
-  $(this).toggleClass('checked');
-});
-</script>
+<%= react_component "DiscussionPage", { discussion: @discussion, discussions: @discussions, current_user: current_user, favorite_discussions: @favorite_discussions, tags: @tag_list, show_favorites: params[:fav], discussion_username: @discussion_username, discussion_userimage: @userimage, responses: @responses, upvotes: @upvotes } %>

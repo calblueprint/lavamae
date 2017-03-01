@@ -52,7 +52,7 @@ class Requester {
             this._postErrorHandler);
     }
 
-    delete(endpoint, success, data = {}, extraFields = {}) {
+    delete(endpoint, data, success, extraFields = {}) {
         this._attemptAjax(endpoint, 'DELETE', data, extraFields, success,
             this._postErrorHandler);
     }

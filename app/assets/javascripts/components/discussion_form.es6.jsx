@@ -1,6 +1,11 @@
 /**
  * @prop discussion - discussion
  * @prop tags - tag list
+ * @prop current_user - current user
+ * @prop discussion_username - full name of discussion creator
+ * @prop discussion_userimage - discussion user profile image
+ * @prop upvotes - discussion upvotes
+ * @prop date_handler - handler to render timestamp
  */
 
 class DiscussionForm extends React.Component {
@@ -17,7 +22,6 @@ class DiscussionForm extends React.Component {
     this._renderTags = this._renderTags.bind(this);
     this._renderFormTags = this._renderFormTags.bind(this);
     this._selectTag = this._selectTag.bind(this);
-
     this.state = {
       show_form: false,
       title: this.props.discussion.title,
@@ -25,6 +29,9 @@ class DiscussionForm extends React.Component {
       tags: this.props.tags,
       score: this.props.discussion.score,
       showModal: false,
+      current_user: this.props.current_user,
+      discussion_username: this.props.discussion_username,
+      discussion_userimage: this.props.discussion_userimage,
       data: this.props.discussion,
     };
   }
@@ -44,7 +51,6 @@ class DiscussionForm extends React.Component {
 
   _success(msg) {
     this._closeModal();
-    this.setState({data: null})
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Delete successful!");
     window.location = "/";
@@ -97,14 +103,14 @@ class DiscussionForm extends React.Component {
 
   _renderFormTags() {
     const allTags = ["Starting up", "Funding", "Volunteering", "Partnering", "Learn More"];
-    let tagButtons = allTags.map((tag) => {
+    let tagButtons = allTags.map((tag, i) => {
       var tagClass;
       if (this.state.tags.includes(tag)) {
         tagClass = "discussion-tag checked";
       } else {
         tagClass = "discussion-tag";
       }
-      return <button type="button" className={tagClass} name={tag} onClick={this._selectTag}>{tag}</button>;
+      return <button key={i} type="button" className={tagClass} name={tag} onClick={this._selectTag}>{tag}</button>;
       });
     return tagButtons;
   }
@@ -127,11 +133,43 @@ class DiscussionForm extends React.Component {
             {this._renderFormTags()}
           </div>
           <br></br>
+          <br></br>
           <button className="btn btn-blue btn-sm save" onClick={this._saveForm}>Save</button>
           <button className="btn btn-sm btn-outline" onClick={this._cancelEdit}>Cancel</button>
         </form>
       </div>
     )
+  }
+
+  renderGuestContent() {
+    return (
+        <div>
+          <h2 className="discussion-title">{this.state.title} </h2>
+          <p className="discussion-description wordwrap">{this.state.content}</p>
+          <div className="user-action row">
+            <div className="action-container pull-left">
+              <Upvote
+                discussion = {this.props.discussion}
+                user = {this.props.current_user}
+                upvotes = {this.props.upvotes}
+              />
+              <br></br>
+              <div className="discussion-tag-container" id="tags">
+                {this._renderTags()}
+              </div>
+            </div> 
+            <div className="user-container pull-right">
+              <div className="name-date">
+                <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
+                <div className="date">posted {this.props.date_handler(this.state.data)}</div>
+              </div>
+              <div className="user-picture">
+                <img src={this.state.discussion_userimage} />
+              </div>
+            </div>
+          </div>
+        </div>
+      )
   }
 
   renderContent() {
@@ -157,30 +195,50 @@ class DiscussionForm extends React.Component {
         <button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>
         <h2 className="discussion-title">{this.state.title}</h2>
         <p className="discussion-description wordwrap">{this.state.content}</p>
-        <div className="action-container pull-left">
-          <div className="discussion-tag-container" id="tags">
-            {this._renderTags()}
+        <div className="user-action row">
+          <div className="action-container pull-left">
+            <Upvote
+              discussion = {this.props.discussion}
+              user = {this.props.current_user}
+              upvotes = {this.props.upvotes}
+            />
+            <br></br>
+            <div className="discussion-tag-container" id="tags">
+              {this._renderTags()}
+            </div>
           </div>
-        </div>
+          <div className="user-container pull-right">
+            <div className="name-date">
+              <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
+              <div className="date">posted {this.props.date_handler(this.state.data)}</div>
+            </div>
+            <div className="user-picture">
+              <img src={this.state.discussion_userimage} />
+            </div>
+          </div>
+        </div> 
       </div>
-
-
     )
   }
 
   render() {
-    let renderedContent;
     if (this.state.show_form) {
       return this.renderForm();
     } else {
-      return this.renderContent();
+      if (this.state.current_user && this.state.current_user.id == this.state.data.user_id) {
+        return this.renderContent();
+      } else {
+        return this.renderGuestContent();
+      }
     }
-
-    return renderedContent;
   }
 }
 
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  tags: React.PropTypes.array.isRequired
+  current_user: React.PropTypes.object,
+  tags: React.PropTypes.array,
+  discussion_username: React.PropTypes.string.isRequired,
+  discussion_userimage: React.PropTypes.string.isRequired,
+  upvotes: React.PropTypes.array
 };
