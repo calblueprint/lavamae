@@ -27,11 +27,8 @@ class DiscussionForm extends React.Component {
       title: this.props.discussion.title,
       content: this.props.discussion.content,
       tags: this.props.tags,
-      score: this.props.discussion.score,
       showModal: false,
       current_user: this.props.current_user,
-      discussion_username: this.props.discussion_username,
-      discussion_userimage: this.props.discussion_userimage,
       data: this.props.discussion,
     };
   }
@@ -160,11 +157,11 @@ class DiscussionForm extends React.Component {
             </div> 
             <div className="user-container pull-right">
               <div className="name-date">
-                <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
+                <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
                 <div className="date">posted {this.props.date_handler(this.state.data)}</div>
               </div>
               <div className="user-picture">
-                <img src={this.state.discussion_userimage} />
+                <img src={this.props.discussion_userimage} />
               </div>
             </div>
           </div>
@@ -209,11 +206,11 @@ class DiscussionForm extends React.Component {
           </div>
           <div className="user-container pull-right">
             <div className="name-date">
-              <a href=""><div className="user-name">{this.state.discussion_username}</div></a>
+              <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
               <div className="date">posted {this.props.date_handler(this.state.data)}</div>
             </div>
             <div className="user-picture">
-              <img src={this.state.discussion_userimage} />
+              <img src={this.props.discussion_userimage} />
             </div>
           </div>
         </div> 
@@ -240,5 +237,6 @@ DiscussionForm.propTypes = {
   tags: React.PropTypes.array,
   discussion_username: React.PropTypes.string.isRequired,
   discussion_userimage: React.PropTypes.string.isRequired,
-  upvotes: React.PropTypes.array
+  upvotes: React.PropTypes.array,
+  date_handler: React.PropTypes.func
 };

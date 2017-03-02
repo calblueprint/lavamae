@@ -1,6 +1,7 @@
 /**
  * @prop discussion - discussion
  * @prop response - response
+ * @prop current_user - current user
  */
 
 class ResponseForm extends React.Component {
@@ -16,10 +17,10 @@ class ResponseForm extends React.Component {
     this._success = this._success.bind(this);
     this.state = {
       show_form: false,
+      current_user: this.props.current_user,
       content: this.props.response.content,
       showModal: false,
       data: this.props.response
-
     };
   }
 
@@ -71,7 +72,7 @@ class ResponseForm extends React.Component {
 
   renderForm() {
     return (
-      <div class="response-container row">
+      <div className="response-container row">
         <textarea name="content" defaultValue={this.state.content} id="response-content" ></textarea>
         <br></br>
         <button className="btn btn-sm btn-blue save" onClick={this._saveForm}>Save</button>
@@ -80,29 +81,39 @@ class ResponseForm extends React.Component {
     )
   }
 
+  renderGuestContent() {
+    return (
+      <div className="response-text">
+        <p className="discussion-description row wordwrap"> {this.state.content} </p>
+      </div>
+    );
+  }
+
   renderContent() {
     return (
       <div>
-        <p class="discussion-description row wordwrap"> {this.state.content} </p><br></br>
-        <div className="action-container pull-left">
-          <button className="btn btn-sm btn-action" onClick={this._enableForm}>Edit</button>
-          <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
-          <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
-            <Modal.Header>
-              <Modal.Title>Delete Response</Modal.Title>
-            </Modal.Header>
-            <form onSubmit={this._success}>
-              <Modal.Body>
-                <div className="input-field">
-                  Are you sure you want to delete this response?
-                </div>
-              </Modal.Body>
-              <Modal.Footer>
-                <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-                <button className="btn btn-blue modal-btn" type="submit">Delete</button>
-              </Modal.Footer>
-            </form>
-          </Modal>
+        <div className="response-text">
+          <p className="discussion-description row wordwrap"> {this.state.content} </p><br></br>
+          <div className="action-container pull-left">
+            <button className="btn btn-sm btn-action" onClick={this._enableForm}>Edit</button>
+            <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
+            <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
+              <Modal.Header>
+                <Modal.Title>Delete Response</Modal.Title>
+              </Modal.Header>
+              <form onSubmit={this._success}>
+                <Modal.Body>
+                  <div className="input-field">
+                    Are you sure you want to delete this response?
+                  </div>
+                </Modal.Body>
+                <Modal.Footer>
+                  <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
+                  <button className="btn btn-blue modal-btn" type="submit">Delete</button>
+                </Modal.Footer>
+              </form>
+            </Modal>
+          </div>
         </div>
       </div>
 
@@ -114,7 +125,11 @@ class ResponseForm extends React.Component {
     if (this.state.show_form) {
       renderedContent = this.renderForm();
     } else {
-      renderedContent = this.renderContent();
+      if (this.state.current_user && this.state.current_user.id == this.state.data.user_id) {
+        renderedContent = this.renderContent();
+      } else {
+        renderedContent = this.renderGuestContent();
+      }
     }
 
     return renderedContent;
@@ -123,5 +138,6 @@ class ResponseForm extends React.Component {
 
 ResponseForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  response: React.PropTypes.object.isRequired
+  response: React.PropTypes.object.isRequired,
+  current_user: React.PropTypes.object
 };

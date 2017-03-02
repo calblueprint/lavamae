@@ -18,13 +18,8 @@ class DiscussionPage extends React.Component {
     this._generateTimeStamp = this._generateTimeStamp.bind(this);
     this.state = {
       current_user: this.props.current_user,
-      favorite_discussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
-      tags: this.props.tags,
-      show_favorites: this.props.show_favorites,
-      discussion_username: this.props.discussion_username,
-      discussion_userimage: this.props.discussion_userimage
     };
   }
 
@@ -59,6 +54,7 @@ class DiscussionPage extends React.Component {
             discussion = {this.props.discussion}
             current_user = {this.props.current_user}
             responses = {this.props.responses}
+            date_handler = {this._generateTimeStamp}
           />
         </div>
       );
