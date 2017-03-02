@@ -37,7 +37,6 @@ class DiscussionIndex extends React.Component {
       } else {
         tagClass = "discussion-tag";
       }
-      console.log(filter == this.props.tag_filter);
       return (
         <a href={"/discussions?filter=" + filter} key={i}>
           <button className={tagClass}>{filter}</button>

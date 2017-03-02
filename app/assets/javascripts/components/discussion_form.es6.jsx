@@ -72,8 +72,10 @@ class DiscussionForm extends React.Component {
     var selectedTags = document.getElementsByClassName('discussion-tag checked');
     var tagList = [];
     for (var i = 0; i < selectedTags.length; i++) {
-      var t = selectedTags[i].name;
-      tagList.push(t)
+      if (selectedTags[i].name != "") {
+        var t = selectedTags[i].name;
+        tagList.push(t);
+      }
     }
     this.setState({ title: $("#discussion_title").val(),
                     content: $("#discussion_content").val(),
