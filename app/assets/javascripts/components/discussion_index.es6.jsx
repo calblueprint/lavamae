@@ -5,13 +5,13 @@
  * @prop favorite_discussions - favorite user discussions
  * @prop show_favorites - display favorites flag
  * @prop date_handler - handler to render timestamp
+ * @prop tag_filter - tag filter param
  */
 
 class DiscussionIndex extends React.Component {
   
   constructor(props) {
     super(props);
-    this._selectTag = this._selectTag.bind(this);
     this._showFavorites = this._showFavorites.bind(this);
     this.state = {
       show_favorites: this.props.show_favorites,
@@ -23,14 +23,26 @@ class DiscussionIndex extends React.Component {
     };
   }
 
-  /* TODO: apply filtering */
-  _selectTag(e) {
-    $(e.target).toggleClass('checked');
-  }
-
   _showFavorites(e) {
     $(e.target).toggleClass('selected');
     this.setState({ show_favorites: !this.state.show_favorites });
+  }
+
+  renderFilters() {
+    let filters = ["Starting up", "Funding", "Volunteering", "Partnering", "Learn More"];
+    return filters.map((filter, i) => {
+      var tagClass;
+      if (filter == this.props.tag_filter) {
+        tagClass = "discussion-tag checked";
+      } else {
+        tagClass = "discussion-tag";
+      }
+      console.log(filter == this.props.tag_filter);
+      return (
+        <a href={"/discussions?filter=" + filter} key={i}>
+          <button className={tagClass}>{filter}</button>
+        </a>
+      )});
   }
 
   renderDiscussionHeader() {
@@ -40,7 +52,7 @@ class DiscussionIndex extends React.Component {
     }
 
     let favParam = "";
-    if (this.state.show_favorites != false) {
+    if (this.state.show_favorites) {
       favParam = "&fav=true";
     }
 
@@ -119,11 +131,7 @@ class DiscussionIndex extends React.Component {
             <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
             <div className="discussion-tag-container" id="tags">
               <i className="fa fa-tags fa-lg"></i>
-              <button className="discussion-tag" onClick={this._selectTag}>Starting up</button>
-              <button className="discussion-tag" onClick={this._selectTag}>Funding</button>
-              <button className="discussion-tag" onClick={this._selectTag}>Volunteering</button>
-              <button className="discussion-tag" onClick={this._selectTag}>Partnering</button>
-              <button className="discussion-tag" onClick={this._selectTag}>Learn More</button>
+              {this.renderFilters()}
             </div>
               {this.renderDiscussionHeader()}
           </div>
@@ -141,5 +149,6 @@ DiscussionIndex.propTypes = {
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,
   show_favorites: React.PropTypes.bool,
-  date_handler: React.PropTypes.func
+  date_handler: React.PropTypes.func,
+  tag_filter: React.PropTypes.string
 };

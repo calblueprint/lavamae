@@ -9,6 +9,7 @@
  * @prop discussion_userimage - discussion user profile image
  * @prop responses - discussion responses
  * @prop upvotes - discussion upvotes
+ * @prop tag_filter - tag filter param
  */
 
 class DiscussionPage extends React.Component {
@@ -71,6 +72,7 @@ class DiscussionPage extends React.Component {
           favorite_discussions = {this.props.favorite_discussions}
           show_favorites = {this.props.show_favorites}
           date_handler = {this._generateTimeStamp}
+          tag_filter = {this.props.tag_filter}
         />
         {this.renderDiscussion()}
       </div>
@@ -88,5 +90,6 @@ DiscussionPage.propTypes = {
   discussion_username: React.PropTypes.string,
   discussion_userimage: React.PropTypes.string,
   responses: React.PropTypes.array,
-  upvotes: React.PropTypes.array
+  upvotes: React.PropTypes.array,
+  tag_filter: React.PropTypes.string
 };
