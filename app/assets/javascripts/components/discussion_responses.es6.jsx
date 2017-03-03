@@ -1,8 +1,8 @@
 /**
  * @prop discussion - discussion
- * @prop current_user - current user
+ * @prop currentUser - current user
  * @prop responses - discussion responses
- * @prop date_handler - handler to render timestamp
+ * @prop dateHandler - handler to render timestamp
  */
 
 class DiscussionResponses extends React.Component {
@@ -12,7 +12,7 @@ class DiscussionResponses extends React.Component {
     this._successfulSave = this._successfulSave.bind(this);
     this._saveResponse = this._saveResponse.bind(this);
     this.state = {
-      current_user: this.props.current_user,
+      currentUser: this.props.currentUser,
       discussion: this.props.discussion,
       responses: this.props.responses
     };
@@ -24,36 +24,36 @@ class DiscussionResponses extends React.Component {
 
   _saveResponse(e) {
     const responseFields = {
-                        response: {
-                          content: $("#response_content").val()
-                        }};
+      response: {
+        content: $("#response_content").val()
+      }};
     APIRequester.post(`/discussions/${this.props.discussion.id}/responses`, responseFields, this._successfulSave);
   }
 
   renderResponses() {
     let responsesIndex = this.state.responses.map((response, i) => {
-        return (
-          <div key={response.id}>
-            <div className="response-container row">
-              <ResponseForm
-                discussion = {this.props.discussion}
-                response = {response}
-                current_user = {this.props.current_user}
-              />
-              <div className="user-container">
-                <div className="name-date">
-                  <a href=""><div className="user-name">{response.user_name}</div></a>
-                  <div className="date">{this.props.date_handler(response.created_at)}</div>
-                </div>
-                <div className="user-picture">
-                  <img src={response.user_image} />
-                </div>
+      return (
+        <div key={response.id}>
+          <div className="response-container row">
+            <ResponseForm
+              discussion = {this.props.discussion}
+              response = {response}
+              currentUser = {this.props.currentUser}
+            />
+            <div className="user-container">
+              <div className="name-date">
+                <a href=""><div className="user-name">{response.user_name}</div></a>
+                <div className="date">{this.props.dateHandler(response.created_at)}</div>
+              </div>
+              <div className="user-picture">
+                <img src={response.user_image} />
               </div>
             </div>
-            <br />
           </div>
-        );
-      });
+          <br />
+        </div>
+      );
+    });
     if (this.state.responses.length > 0) {
       return (
         <div>
@@ -66,7 +66,7 @@ class DiscussionResponses extends React.Component {
 
   renderReponseForm() {
     let form = null;
-    if (this.state.current_user) {
+    if (this.state.currentUser) {
       form = (
         <div>
           <h5 className="response-form-header">Post a Response</h5>
@@ -106,7 +106,7 @@ class DiscussionResponses extends React.Component {
 
 DiscussionResponses.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  current_user: React.PropTypes.object,
+  currentUser: React.PropTypes.object,
   responses: React.PropTypes.array,
-  date_handler: React.PropTypes.func
+  dateHandler: React.PropTypes.func
 };

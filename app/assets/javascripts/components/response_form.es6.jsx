@@ -1,7 +1,7 @@
 /**
  * @prop discussion - discussion
  * @prop response - response
- * @prop current_user - current user
+ * @prop currentUser - current user
  */
 
 class ResponseForm extends React.Component {
@@ -17,7 +17,7 @@ class ResponseForm extends React.Component {
     this._success = this._success.bind(this);
     this.state = {
       show_form: false,
-      current_user: this.props.current_user,
+      currentUser: this.props.currentUser,
       content: this.props.response.content,
       showModal: false,
       data: this.props.response
@@ -125,7 +125,7 @@ class ResponseForm extends React.Component {
     if (this.state.show_form) {
       renderedContent = this.renderForm();
     } else {
-      if (this.state.current_user && this.state.current_user.id == this.state.data.user_id) {
+      if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id) {
         renderedContent = this.renderContent();
       } else {
         renderedContent = this.renderGuestContent();
@@ -139,5 +139,5 @@ class ResponseForm extends React.Component {
 ResponseForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   response: React.PropTypes.object.isRequired,
-  current_user: React.PropTypes.object
+  currentUser: React.PropTypes.object
 };

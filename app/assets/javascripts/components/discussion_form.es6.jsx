@@ -1,11 +1,11 @@
 /**
  * @prop discussion - discussion
  * @prop tags - tag list
- * @prop current_user - current user
- * @prop discussion_username - full name of discussion creator
- * @prop discussion_userimage - discussion user profile image
+ * @prop currentUser - current user
+ * @prop discussionUserName - full name of discussion creator
+ * @prop discussionUserImage - discussion user profile image
  * @prop upvotes - discussion upvotes
- * @prop date_handler - handler to render timestamp
+ * @prop dateHandler - handler to render timestamp
  */
 
 class DiscussionForm extends React.Component {
@@ -23,12 +23,12 @@ class DiscussionForm extends React.Component {
     this._renderFormTags = this._renderFormTags.bind(this);
     this._selectTag = this._selectTag.bind(this);
     this.state = {
-      show_form: false,
+      showForm: false,
       title: this.props.discussion.title,
       content: this.props.discussion.content,
       tags: this.props.tags,
       showModal: false,
-      current_user: this.props.current_user,
+      currentUser: this.props.currentUser,
       data: this.props.discussion,
     };
   }
@@ -56,15 +56,15 @@ class DiscussionForm extends React.Component {
 
   _cancelEdit(e) {
     e.preventDefault();
-    this.setState({ show_form: false });
+    this.setState({ showForm: false });
   }
 
   _enableForm() {
-    this.setState({ show_form: true });
+    this.setState({ showForm: true });
   }
 
   _successfulSave() {
-    this.setState({ show_form: false });
+    this.setState({ showForm: false });
   }
 
   _saveForm(e) {
@@ -149,7 +149,7 @@ class DiscussionForm extends React.Component {
             <div className="action-container pull-left">
               <Upvote
                 discussion = {this.props.discussion}
-                user = {this.props.current_user}
+                user = {this.props.currentUser}
                 upvotes = {this.props.upvotes}
               />
               <br></br>
@@ -159,11 +159,11 @@ class DiscussionForm extends React.Component {
             </div> 
             <div className="user-container pull-right">
               <div className="name-date">
-                <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
-                <div className="date">posted {this.props.date_handler(this.state.data)}</div>
+                <a href=""><div className="user-name">{this.props.discussionUserName}</div></a>
+                <div className="date">posted {this.props.dateHandler(this.state.data)}</div>
               </div>
               <div className="user-picture">
-                <img src={this.props.discussion_userimage} />
+                <img src={this.props.discussionUserImage} />
               </div>
             </div>
           </div>
@@ -198,7 +198,7 @@ class DiscussionForm extends React.Component {
           <div className="action-container pull-left">
             <Upvote
               discussion = {this.props.discussion}
-              user = {this.props.current_user}
+              user = {this.props.currentUser}
               upvotes = {this.props.upvotes}
             />
             <br></br>
@@ -208,11 +208,11 @@ class DiscussionForm extends React.Component {
           </div>
           <div className="user-container pull-right">
             <div className="name-date">
-              <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
-              <div className="date">posted {this.props.date_handler(this.state.data)}</div>
+              <a href=""><div className="user-name">{this.props.discussionUserName}</div></a>
+              <div className="date">posted {this.props.dateHandler(this.state.data)}</div>
             </div>
             <div className="user-picture">
-              <img src={this.props.discussion_userimage} />
+              <img src={this.props.discussionUserImage} />
             </div>
           </div>
         </div> 
@@ -221,10 +221,10 @@ class DiscussionForm extends React.Component {
   }
 
   render() {
-    if (this.state.show_form) {
+    if (this.state.showForm) {
       return this.renderForm();
     } else {
-      if (this.state.current_user && this.state.current_user.id == this.state.data.user_id) {
+      if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id) {
         return this.renderContent();
       } else {
         return this.renderGuestContent();
@@ -235,10 +235,10 @@ class DiscussionForm extends React.Component {
 
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  current_user: React.PropTypes.object,
+  currentUser: React.PropTypes.object,
   tags: React.PropTypes.array,
-  discussion_username: React.PropTypes.string.isRequired,
-  discussion_userimage: React.PropTypes.string.isRequired,
+  discussionUserName: React.PropTypes.string.isRequired,
+  discussionUserImage: React.PropTypes.string.isRequired,
   upvotes: React.PropTypes.array,
-  date_handler: React.PropTypes.func
+  dateHandler: React.PropTypes.func
 };

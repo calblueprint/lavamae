@@ -1,11 +1,11 @@
 /**
  * @prop discussions - discussion index
  * @prop discussion - discussion
- * @prop current_user - current user
- * @prop favorite_discussions - favorite user discussions
- * @prop show_favorites - display favorites flag
- * @prop date_handler - handler to render timestamp
- * @prop tag_filter - tag filter param
+ * @prop currentUser - current user
+ * @prop favoriteDiscussions - favorite user discussions
+ * @prop showFavorites - display favorites flag
+ * @prop dateHandler - handler to render timestamp
+ * @prop tagFilter - tag filter param
  */
 
 class DiscussionIndex extends React.Component {
@@ -14,9 +14,9 @@ class DiscussionIndex extends React.Component {
     super(props);
     this._showFavorites = this._showFavorites.bind(this);
     this.state = {
-      show_favorites: this.props.show_favorites,
-      current_user: this.props.current_user,
-      favorite_discussions: this.props.favorite_discussions,
+      showFavorites: this.props.showFavorites,
+      currentUser: this.props.currentUser,
+      favoriteDiscussions: this.props.favoriteDiscussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
       search: ""
@@ -25,20 +25,23 @@ class DiscussionIndex extends React.Component {
 
   _showFavorites(e) {
     $(e.target).toggleClass('selected');
-    this.setState({ show_favorites: !this.state.show_favorites });
+    this.setState({ showFavorites: !this.state.showFavorites });
   }
 
   renderFilters() {
     let filters = ["Starting up", "Funding", "Volunteering", "Partnering", "Learn More"];
     return filters.map((filter, i) => {
       var tagClass;
-      if (filter == this.props.tag_filter) {
+      var buttonLink;
+      if (filter == this.props.tagFilter) {
         tagClass = "discussion-tag checked";
+        buttonLink = "/discussions";
       } else {
         tagClass = "discussion-tag";
+        buttonLink = "/discussions?filter=" + filter;
       }
       return (
-        <a href={"/discussions?filter=" + filter} key={i}>
+        <a href={buttonLink} key={i}>
           <button className={tagClass}>{filter}</button>
         </a>
       )});
@@ -51,7 +54,7 @@ class DiscussionIndex extends React.Component {
     }
 
     let favParam = "";
-    if (this.state.show_favorites) {
+    if (this.state.showFavorites) {
       favParam = "&fav=true";
     }
 
@@ -63,27 +66,27 @@ class DiscussionIndex extends React.Component {
     let header = null;
 
     let favoritesSelected = "";
-    if (this.state.show_favorites) {  
+    if (this.state.showFavorites) {  
       favoritesSelected = "discussion-favorite selected";
     } else {
       favoritesSelected = "discussion-favorite";
     }
     
-    if (this.state.current_user) {
+    if (this.state.currentUser) {
       header = (
-      <div>
-        <a href={discussionRoute}> 
+        <div>
+          <a href={discussionRoute}> 
             <button className={favoritesSelected} onClick={this._showFavorites}>
               <i className="fa fa-star-o fa-lg"></i>
               <span> Favorites </span>
             </button>
-        </a>
-        <a href={'/discussions/new'}> 
-          <button className="btn btn-blue pull-right">
-            Create Discussion
-          </button>
-        </a>
-      </div>
+          </a>
+          <a href={'/discussions/new'}> 
+            <button className="btn btn-blue pull-right">
+              Create Discussion
+            </button>
+          </a>
+        </div>
       );
     }
     return header;
@@ -92,11 +95,11 @@ class DiscussionIndex extends React.Component {
 
   renderShortened(disc, key) {
     let star = null;
-    if (this.state.current_user) {
+    if (this.state.currentUser) {
       star = (
           <DiscussionFavorite
-            current_user = {this.props.current_user}
-            favorite_discussions= {this.props.favorite_discussions}
+            currentUser = {this.props.currentUser}
+            favoriteDiscussions= {this.props.favoriteDiscussions}
             discussion = {disc}
           />
         )
@@ -107,7 +110,7 @@ class DiscussionIndex extends React.Component {
           <h4 className="discussion-item-title">
             {disc.title}
             <div className = "discussion-item-date pull-right">
-              {this.props.date_handler(disc)}
+              {this.props.dateHandler(disc)}
             </div>
             <span>{star}</span>
           </h4>
@@ -126,17 +129,17 @@ class DiscussionIndex extends React.Component {
   render() {
     return (
       <div>
-          <div className="discussion-header">
-            <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
-            <div className="discussion-tag-container" id="tags">
-              <i className="fa fa-tags fa-lg"></i>
-              {this.renderFilters()}
-            </div>
-              {this.renderDiscussionHeader()}
+        <div className="discussion-header">
+          <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
+          <div className="discussion-tag-container" id="tags">
+            <i className="fa fa-tags fa-lg"></i>
+            {this.renderFilters()}
           </div>
-          <div className="discussion-item-container col-xs-12 col-md-4" id="discussions">
-            {this.renderIndex()}
-          </div>
+            {this.renderDiscussionHeader()}
+        </div>
+        <div className="discussion-item-container col-xs-12 col-md-4" id="discussions">
+          {this.renderIndex()}
+        </div>
       </div>
     );
   }
@@ -145,9 +148,9 @@ class DiscussionIndex extends React.Component {
 DiscussionIndex.propTypes = {
   discussion: React.PropTypes.object,
   discussions: React.PropTypes.array.isRequired,
-  current_user: React.PropTypes.object,
-  favorite_discussions: React.PropTypes.array,
-  show_favorites: React.PropTypes.bool,
-  date_handler: React.PropTypes.func,
-  tag_filter: React.PropTypes.string
+  currentUser: React.PropTypes.object,
+  favoriteDiscussions: React.PropTypes.array,
+  showFavorites: React.PropTypes.bool,
+  dateHandler: React.PropTypes.func,
+  tagFilter: React.PropTypes.string
 };

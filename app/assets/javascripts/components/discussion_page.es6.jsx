@@ -1,15 +1,15 @@
 /**
  * @prop discussions - discussion index
  * @prop discussion - discussion
- * @prop current_user - current user
- * @prop favorite_discussions - favorite user discussions
+ * @prop currentUser - current user
+ * @prop favoriteDiscussions - favorite user discussions
  * @prop tags - tag list
- * @prop show_favorites - display favorites flag
- * @prop discussion_username - full name of discussion creator
- * @prop discussion_userimage - discussion user profile image
+ * @prop showFavorites - display favorites flag
+ * @prop discussionUserName - full name of discussion creator
+ * @prop discussionUserImage - discussion user profile image
  * @prop responses - discussion responses
  * @prop upvotes - discussion upvotes
- * @prop tag_filter - tag filter param
+ * @prop tagFilter - tag filter param
  */
 
 class DiscussionPage extends React.Component {
@@ -18,7 +18,7 @@ class DiscussionPage extends React.Component {
     super(props);
     this._generateTimeStamp = this._generateTimeStamp.bind(this);
     this.state = {
-      current_user: this.props.current_user,
+      currentUser: this.props.currentUser,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
     };
@@ -43,19 +43,19 @@ class DiscussionPage extends React.Component {
           <div className="row">
             <DiscussionForm
               discussion = {this.props.discussion}
-              current_user = {this.props.current_user}
+              currentUser = {this.props.currentUser}
               tags = {this.props.tags}
               upvotes = {this.props.upvotes}
-              discussion_username = {this.props.discussion_username}
-              discussion_userimage = {this.props.discussion_userimage}
-              date_handler = {this._generateTimeStamp}
+              discussionUserName = {this.props.discussionUserName}
+              discussionUserImage = {this.props.discussionUserImage}
+              dateHandler = {this._generateTimeStamp}
             />
           </div>
           <DiscussionResponses
             discussion = {this.props.discussion}
-            current_user = {this.props.current_user}
+            currentUser = {this.props.currentUser}
             responses = {this.props.responses}
-            date_handler = {this._generateTimeStamp}
+            dateHandler = {this._generateTimeStamp}
           />
         </div>
       );
@@ -68,11 +68,11 @@ class DiscussionPage extends React.Component {
         <DiscussionIndex
           discussions = {this.props.discussions}
           discussion = {this.props.discussion}
-          current_user = {this.props.current_user}
-          favorite_discussions = {this.props.favorite_discussions}
-          show_favorites = {this.props.show_favorites}
-          date_handler = {this._generateTimeStamp}
-          tag_filter = {this.props.tag_filter}
+          currentUser = {this.props.currentUser}
+          favoriteDiscussions = {this.props.favoriteDiscussions}
+          showFavorites = {this.props.showFavorites}
+          dateHandler = {this._generateTimeStamp}
+          tagFilter = {this.props.tagFilter}
         />
         {this.renderDiscussion()}
       </div>
@@ -83,13 +83,13 @@ class DiscussionPage extends React.Component {
 DiscussionPage.propTypes = {
   discussion: React.PropTypes.object,
   discussions: React.PropTypes.array.isRequired,
-  current_user: React.PropTypes.object,
-  favorite_discussions: React.PropTypes.array,
+  currentUser: React.PropTypes.object,
+  favoriteDiscussions: React.PropTypes.array,
   tags: React.PropTypes.array,
-  show_favorites: React.PropTypes.bool,
-  discussion_username: React.PropTypes.string,
-  discussion_userimage: React.PropTypes.string,
+  showFavorites: React.PropTypes.bool,
+  discussionUserName: React.PropTypes.string,
+  discussionUserImage: React.PropTypes.string,
   responses: React.PropTypes.array,
   upvotes: React.PropTypes.array,
-  tag_filter: React.PropTypes.string
+  tagFilter: React.PropTypes.string
 };

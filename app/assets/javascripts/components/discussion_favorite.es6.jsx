@@ -1,7 +1,7 @@
 /**
  * @prop discussion - discussion
- * @prop current_user - current user
- * @prop favorite_discussions - favorite user discussions
+ * @prop currentUser - current user
+ * @prop favoriteDiscussions - favorite user discussions
  */
 
 class DiscussionFavorite extends React.Component {
@@ -12,32 +12,32 @@ class DiscussionFavorite extends React.Component {
     this._successfulFavorite = this._successfulFavorite.bind(this);
     this._successfulUnfavorite = this._successfulUnfavorite.bind(this);
     this.state = {
-      current_user: this.props.current_user,
-      favorite_discussions: this.props.favorite_discussions,
+      currentUser: this.props.currentUser,
+      favoriteDiscussions: this.props.favoriteDiscussions,
       discussion: this.props.discussion,
-      has_favorited: this.props.favorite_discussions.includes(this.props.discussion.id)
+      hasFavorited: this.props.favoriteDiscussions.includes(this.props.discussion.id)
     };
   }
 
   _successfulFavorite() {
-    var favorites = this.state.favorite_discussions
+    var favorites = this.state.favoriteDiscussions;
     favorites.push(this.state.discussion.id);
-    this.setState({ has_favorited: !this.state.has_favorited,
-                    favorite_discussions: favorites });
+    this.setState({ hasFavorited: !this.state.hasFavorited,
+                    favoriteDiscussions: favorites });
   }
 
   _successfulUnfavorite() {
-    var index = this.state.favorite_discussions.indexOf(this.state.discussion.id);
-    favorites = this.state.favorite_discussions
+    var index = this.state.favoriteDiscussions.indexOf(this.state.discussion.id);
+    favorites = this.state.favoriteDiscussions;
     favorites.splice(index, 1);
-    this.setState({ has_favorited: !this.state.has_favorited,
-                    favorite_discussions: favorites });
+    this.setState({ hasFavorited: !this.state.hasFavorited,
+                    favoriteDiscussions: favorites });
   }
 
   _starDiscussion(e) {
     e.preventDefault();
     e.stopPropagation();
-    if (this.state.has_favorited) {
+    if (this.state.hasFavorited) {
       APIRequester.delete(`/favorite_discussion/${this.state.discussion.id}`, {}, this._successfulUnfavorite);
     } else {
       APIRequester.post(`/favorite_discussion/${this.state.discussion.id}`, {}, this._successfulFavorite);
@@ -47,20 +47,20 @@ class DiscussionFavorite extends React.Component {
   }
 
   renderStarred(disc) {
-      let star = null;
-      if (this.state.has_favorited) {
-          star =  <i id={disc.id} className="fa fa-star pull-right"></i>;
-      } else {
-          star =  <i id={disc.id} className="fa fa-star-o pull-right"></i>;
-      }
-      return (
-        <span className="change-icon favorite-discussion" 
-                data-id={disc.id}
-                data-fav={this.state.has_favorited}>
-                {star}
-                <i id={disc.id} className="fa fa-star pull-right" onClick={this._starDiscussion}></i>
-        </span>
-      );
+    let star = null;
+    if (this.state.hasFavorited) {
+      star =  <i id={disc.id} className="fa fa-star pull-right"></i>;
+    } else {
+      star =  <i id={disc.id} className="fa fa-star-o pull-right"></i>;
+    }
+    return (
+      <span className="change-icon favorite-discussion" 
+        data-id={disc.id}
+        data-fav={this.state.hasFavorited}>
+        {star}
+        <i id={disc.id} className="fa fa-star pull-right" onClick={this._starDiscussion}></i>
+      </span>
+    );
   }
 
   render() {
@@ -74,6 +74,6 @@ class DiscussionFavorite extends React.Component {
 
 DiscussionFavorite.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  current_user: React.PropTypes.object.isRequired,
-  favorite_discussions: React.PropTypes.array,
+  currentUser: React.PropTypes.object.isRequired,
+  favoriteDiscussions: React.PropTypes.array,
 };
