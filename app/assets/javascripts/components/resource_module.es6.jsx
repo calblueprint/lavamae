@@ -1,5 +1,6 @@
 /**
- * @prop resource_topic -- passed down module
+ * @prop resource_topic - passed down module
+ * @prop is_admin - true if current user is an admin
  */
 
 class ResourceModule extends React.Component {
@@ -7,6 +8,8 @@ class ResourceModule extends React.Component {
     super(props);
     this._handleClick = this._handleClick.bind(this);
     this._handleError = this._handleError.bind(this);
+    this._renderAdminEditModal = this._renderAdminEditModal.bind(this);
+    this._renderAdminDeleteModal = this._renderAdminDeleteModal.bind(this);
     this.state = {
       resources: {},
     };
@@ -28,6 +31,31 @@ class ResourceModule extends React.Component {
     })
   }
 
+  _renderAdminEditModal() {
+    let editModal;
+    if (this.props.is_admin) {
+      editModal = (
+        <ModuleEditModal
+          style = {"btn-btn-blue"}
+          resource_topic = {this.props.resource_topic}
+        />
+      );
+    }
+    return editModal;
+  }
+
+  _renderAdminDeleteModal() {
+    let deleteModal;
+    if (this.props.is_admin) {
+      deleteModal = (
+        <ModuleDeleteModal
+          resource_topic = {this.props.resource_topic}
+        />
+      );
+    }
+    return deleteModal;
+  }
+
   render() {
     return (
         <div className="module-item-container">
@@ -42,13 +70,8 @@ class ResourceModule extends React.Component {
             </div>
             <hr></hr>
             <div className="module-item-actions">
-              <ModuleEditModal
-                style = {"btn-btn-blue"}
-                resource_topic = {this.props.resource_topic}
-              />
-              <ModuleDeleteModal
-                resource_topic = {this.props.resource_topic}
-              />
+              { this._renderAdminEditModal() }
+              { this._renderAdminDeleteModal() }
               <div className="btn btn-sm btn-action module-download" onClick = {this._handleClick}>
                 <i className="fa fa-download fa-lg"></i>
                 <span>Download</span>
@@ -62,4 +85,5 @@ class ResourceModule extends React.Component {
 
 ResourceModule.propTypes = {
   resource_topic: React.PropTypes.object.isRequired,
+  is_admin: React.PropTypes.bool.isRequired,
 };
