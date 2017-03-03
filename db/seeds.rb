@@ -6,6 +6,18 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+def make_locations
+  1.upto(10) do |n|
+    location = Location.create(
+      place: Faker::Address.street_address,
+      lat: Faker::Address.latitude,
+      lng: Faker::Address.longitude
+    )
+    location.id = n
+    location.save
+  end
+end
+
 def make_users
   1.upto(10) do |n|
     user = User.create(
@@ -21,6 +33,7 @@ def make_users
       map_approval_state: 0
     )
     user.id = n
+    user.location_id = n
     user.save
   end
 end
@@ -74,8 +87,22 @@ def make_responses
   end
 end
 
+def make_modules
+  1.upto(10) do |n|
+    resource_topic = ResourceTopic.create(
+      name: "Module #{n}",
+      created_at: Time.now.to_datetime,
+      description: "Lava Mae Toolkit",
+      attachment: "attachment.png"
+    )
+    resource_topic.id = n
+    resource_topic.save
+  end
+end
+
+make_locations
 make_users
 make_admins
 make_discussions
 make_responses
-
+make_modules

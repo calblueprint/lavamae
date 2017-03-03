@@ -110,10 +110,17 @@ class EditProfileModal extends React.Component {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
-      organization: this.state.organization,
-      website: this.state.website,
       on_map: this.state.on_map,
     };
+
+    if (this.state.organization) {
+      userFields.organization = this.state.organization;
+    }
+
+    if (this.state.website) {
+      userFields.website = this.state.website;
+    }
+
     var locId = null;
     if (response) {
       locId = response.id;
