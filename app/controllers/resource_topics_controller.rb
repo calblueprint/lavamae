@@ -1,6 +1,5 @@
 class ResourceTopicsController < ApplicationController
   def index
-    @resource_topics = ResourceTopic.all.order('created_at')
   end
 
   def new
@@ -8,7 +7,7 @@ class ResourceTopicsController < ApplicationController
   end
 
   def create
-  @resource_topic = ResourceTopic.new(resource_topic_params)
+    @resource_topic = ResourceTopic.new(resource_topic_params)
 
     if @resource_topic.save
       flash[:success] = "#{@resource_topic.name} was successfully uploaded!"

@@ -1,12 +1,16 @@
-/**
-  * @prop modules
-  */
-
 class ResourcePage extends React.Component {
   constructor(props) {
     super(props);
     this._renderModule = this._renderModule.bind(this);
+    this._success = this._success.bind(this);
+    this._fetchModules = this._fetchModules.bind(this);
+    this.state = {
+      modules : []
+    };
+  }
 
+  componentDidMount() {
+      this._fetchModules();
   }
 
   _renderModule(resource_topic) {
@@ -18,12 +22,19 @@ class ResourcePage extends React.Component {
     );
   }
 
+  _success(data) {
+    this.setState({ modules: data.resource_topics });
+  }
+
+  _fetchModules() {
+    APIRequester.get("/api/resource_topics", this._success);
+  }
+
   _renderModules() {
-    return this.props.modules.map((resource_topic) => this._renderModule(resource_topic));
+    return this.state.modules.map((resource_topic) => this._renderModule(resource_topic));
   }
 
   render() {
-
     return (
       <section>
         <div className="container modules-container">
@@ -38,5 +49,4 @@ class ResourcePage extends React.Component {
       </section>
     )
   }
-
 }
