@@ -34,6 +34,7 @@ gem 'figaro', '1.1.1'
 gem 'has_scope', '0.6.0'
 gem 'kaminari', '0.16.3'
 gem 'nokogiri'
+gem 'pry'
 
 # Frontend
 gem 'font-awesome-rails', '4.5.0'
