@@ -72,8 +72,20 @@ def make_responses
   end
 end
 
+def make_modules
+  1.upto(10) do |n|
+    resource_topic = ResourceTopic.create(
+      name: "Module #{n}",
+      created_at: Time.now.to_datetime,
+      description: "Lava Mae Toolkit",
+      attachment: "attachment.png"
+    )
+    resource_topic.id = n
+  end
+end
+
 make_users
 make_admins
 make_discussions
 make_responses
-
+make_modules
