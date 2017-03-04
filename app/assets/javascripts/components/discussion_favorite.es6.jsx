@@ -1,7 +1,6 @@
 /**
  * @prop discussion - discussion
- * @prop currentUser - current user
- * @prop favoriteDiscussions - favorite user discussions
+ * @prop favorite_discussions - favorite user discussions
  */
 
 class DiscussionFavorite extends React.Component {
@@ -12,10 +11,9 @@ class DiscussionFavorite extends React.Component {
     this._successfulFavorite = this._successfulFavorite.bind(this);
     this._successfulUnfavorite = this._successfulUnfavorite.bind(this);
     this.state = {
-      currentUser: this.props.currentUser,
-      favoriteDiscussions: this.props.favoriteDiscussions,
+      favoriteDiscussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
-      hasFavorited: this.props.favoriteDiscussions.includes(this.props.discussion.id)
+      hasFavorited: this.props.favorite_discussions.includes(this.props.discussion.id)
     };
   }
 
@@ -74,6 +72,5 @@ class DiscussionFavorite extends React.Component {
 
 DiscussionFavorite.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  currentUser: React.PropTypes.object.isRequired,
-  favoriteDiscussions: React.PropTypes.array,
+  favorite_discussions: React.PropTypes.array,
 };

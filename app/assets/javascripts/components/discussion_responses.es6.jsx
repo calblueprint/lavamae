@@ -1,8 +1,8 @@
 /**
  * @prop discussion - discussion
- * @prop currentUser - current user
+ * @prop current_user - current user
  * @prop responses - discussion responses
- * @prop dateHandler - handler to render timestamp
+ * @prop date_handler - handler to render timestamp
  */
 
 class DiscussionResponses extends React.Component {
@@ -12,7 +12,7 @@ class DiscussionResponses extends React.Component {
     this._successfulSave = this._successfulSave.bind(this);
     this._saveResponse = this._saveResponse.bind(this);
     this.state = {
-      currentUser: this.props.currentUser,
+      currentUser: this.props.current_user,
       discussion: this.props.discussion,
       responses: this.props.responses
     };
@@ -38,12 +38,12 @@ class DiscussionResponses extends React.Component {
             <ResponseForm
               discussion = {this.props.discussion}
               response = {response}
-              currentUser = {this.props.currentUser}
+              currentUser = {this.props.current_user}
             />
             <div className="user-container">
               <div className="name-date">
                 <a href=""><div className="user-name">{response.user_name}</div></a>
-                <div className="date">{this.props.dateHandler(response.created_at)}</div>
+                <div className="date">{this.props.date_handler(response.created_at)}</div>
               </div>
               <div className="user-picture">
                 <img src={response.user_image} />
@@ -106,7 +106,7 @@ class DiscussionResponses extends React.Component {
 
 DiscussionResponses.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  currentUser: React.PropTypes.object,
+  current_user: React.PropTypes.object,
   responses: React.PropTypes.array,
-  dateHandler: React.PropTypes.func
+  date_handler: React.PropTypes.func
 };

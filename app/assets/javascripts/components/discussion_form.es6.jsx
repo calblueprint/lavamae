@@ -1,11 +1,11 @@
 /**
  * @prop discussion - discussion
  * @prop tags - tag list
- * @prop currentUser - current user
- * @prop discussionUserName - full name of discussion creator
- * @prop discussionUserImage - discussion user profile image
+ * @prop current_user - current user
+ * @prop discussion_username - full name of discussion creator
+ * @prop discussion_userimage - discussion user profile image
  * @prop upvotes - discussion upvotes
- * @prop dateHandler - handler to render timestamp
+ * @prop date_handler - handler to render timestamp
  */
 
 class DiscussionForm extends React.Component {
@@ -28,7 +28,7 @@ class DiscussionForm extends React.Component {
       content: this.props.discussion.content,
       tags: this.props.tags,
       showModal: false,
-      currentUser: this.props.currentUser,
+      currentUser: this.props.current_user,
       data: this.props.discussion,
     };
   }
@@ -149,7 +149,7 @@ class DiscussionForm extends React.Component {
             <div className="action-container pull-left">
               <Upvote
                 discussion = {this.props.discussion}
-                user = {this.props.currentUser}
+                user = {this.props.current_user}
                 upvotes = {this.props.upvotes}
               />
               <br></br>
@@ -159,11 +159,11 @@ class DiscussionForm extends React.Component {
             </div> 
             <div className="user-container pull-right">
               <div className="name-date">
-                <a href=""><div className="user-name">{this.props.discussionUserName}</div></a>
-                <div className="date">posted {this.props.dateHandler(this.state.data)}</div>
+                <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
+                <div className="date">posted {this.props.date_handler(this.state.data)}</div>
               </div>
               <div className="user-picture">
-                <img src={this.props.discussionUserImage} />
+                <img src={this.props.discussion_userimage} />
               </div>
             </div>
           </div>
@@ -235,10 +235,10 @@ class DiscussionForm extends React.Component {
 
 DiscussionForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
-  currentUser: React.PropTypes.object,
+  current_user: React.PropTypes.object,
   tags: React.PropTypes.array,
-  discussionUserName: React.PropTypes.string.isRequired,
-  discussionUserImage: React.PropTypes.string.isRequired,
+  discussion_username: React.PropTypes.string.isRequired,
+  discussion_userimage: React.PropTypes.string.isRequired,
   upvotes: React.PropTypes.array,
-  dateHandler: React.PropTypes.func
+  date_handler: React.PropTypes.func
 };

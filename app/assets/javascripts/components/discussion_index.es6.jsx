@@ -1,11 +1,12 @@
 /**
  * @prop discussions - discussion index
  * @prop discussion - discussion
- * @prop currentUser - current user
- * @prop favoriteDiscussions - favorite user discussions
- * @prop showFavorites - display favorites flag
- * @prop dateHandler - handler to render timestamp
- * @prop tagFilter - tag filter param
+ * @prop current_user - current user
+ * @prop favorite_discussions - favorite user discussions
+ * @prop show_favorites - display favorites flag
+ * @prop date_handler - handler to render timestamp
+ * @prop tag_filter - tag filter param
+ * @prop search_param - search param
  */
 
 class DiscussionIndex extends React.Component {
@@ -14,12 +15,12 @@ class DiscussionIndex extends React.Component {
     super(props);
     this._showFavorites = this._showFavorites.bind(this);
     this.state = {
-      showFavorites: this.props.showFavorites,
-      currentUser: this.props.currentUser,
-      favoriteDiscussions: this.props.favoriteDiscussions,
+      showFavorites: this.props.show_favorites,
+      currentUser: this.props.current_user,
+      favoriteDiscussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
-      search: ""
+      search: this.props.search_param
     };
   }
 
@@ -49,7 +50,7 @@ class DiscussionIndex extends React.Component {
 
   renderDiscussionHeader() {
     let searchParam = "";
-    if (this.state.search != "") {
+    if (this.state.search != null) {
       searchParam = "&search=" + this.state.search;
     }
 
@@ -98,8 +99,7 @@ class DiscussionIndex extends React.Component {
     if (this.state.currentUser) {
       star = (
           <DiscussionFavorite
-            currentUser = {this.props.currentUser}
-            favoriteDiscussions= {this.props.favoriteDiscussions}
+            favoriteDiscussions= {this.props.favorite_discussions}
             discussion = {disc}
           />
         )
@@ -110,7 +110,7 @@ class DiscussionIndex extends React.Component {
           <h4 className="discussion-item-title">
             {disc.title}
             <div className = "discussion-item-date pull-right">
-              {this.props.dateHandler(disc)}
+              {this.props.date_handler(disc)}
             </div>
             <span>{star}</span>
           </h4>
@@ -148,9 +148,10 @@ class DiscussionIndex extends React.Component {
 DiscussionIndex.propTypes = {
   discussion: React.PropTypes.object,
   discussions: React.PropTypes.array.isRequired,
-  currentUser: React.PropTypes.object,
-  favoriteDiscussions: React.PropTypes.array,
-  showFavorites: React.PropTypes.bool,
-  dateHandler: React.PropTypes.func,
-  tagFilter: React.PropTypes.string
+  current_user: React.PropTypes.object,
+  favorite_discussions: React.PropTypes.array,
+  show_favorites: React.PropTypes.bool,
+  date_handler: React.PropTypes.func,
+  tag_filter: React.PropTypes.string,
+  search_param: React.PropTypes.string
 };

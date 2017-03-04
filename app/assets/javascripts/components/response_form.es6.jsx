@@ -1,7 +1,7 @@
 /**
  * @prop discussion - discussion
  * @prop response - response
- * @prop currentUser - current user
+ * @prop current_user - current user
  */
 
 class ResponseForm extends React.Component {
@@ -16,8 +16,8 @@ class ResponseForm extends React.Component {
     this._handleDelete = this._handleDelete.bind(this);
     this._success = this._success.bind(this);
     this.state = {
-      show_form: false,
-      currentUser: this.props.currentUser,
+      showForm: false,
+      currentUser: this.props.current_user,
       content: this.props.response.content,
       showModal: false,
       data: this.props.response
@@ -47,15 +47,15 @@ class ResponseForm extends React.Component {
 
   _cancelEdit(e) {
     e.preventDefault();
-    this.setState({ show_form: false });
+    this.setState({ showForm: false });
   }
 
   _enableForm() {
-    this.setState({ show_form: true});
+    this.setState({ showForm: true});
   }
 
   successfulSave() {
-    this.setState({ show_form: false});
+    this.setState({ showForm: false});
   }
 
   _saveForm(e) {
@@ -122,7 +122,7 @@ class ResponseForm extends React.Component {
 
   render() {
     let renderedContent;
-    if (this.state.show_form) {
+    if (this.state.showForm) {
       renderedContent = this.renderForm();
     } else {
       if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id) {
@@ -139,5 +139,5 @@ class ResponseForm extends React.Component {
 ResponseForm.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   response: React.PropTypes.object.isRequired,
-  currentUser: React.PropTypes.object
+  current_user: React.PropTypes.object
 };
