@@ -87,7 +87,7 @@ DiscussionPage.propTypes = {
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,
   tags: React.PropTypes.array,
-  show_favorites: React.PropTypes.bool,
+  show_favorites: React.PropTypes.string,
   discussion_username: React.PropTypes.string,
   discussion_userimage: React.PropTypes.string,
   responses: React.PropTypes.array,

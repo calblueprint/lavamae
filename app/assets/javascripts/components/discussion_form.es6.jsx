@@ -198,7 +198,7 @@ class DiscussionForm extends React.Component {
           <div className="action-container pull-left">
             <Upvote
               discussion = {this.props.discussion}
-              user = {this.props.currentUser}
+              user = {this.props.current_user}
               upvotes = {this.props.upvotes}
             />
             <br></br>
@@ -208,11 +208,11 @@ class DiscussionForm extends React.Component {
           </div>
           <div className="user-container pull-right">
             <div className="name-date">
-              <a href=""><div className="user-name">{this.props.discussionUserName}</div></a>
-              <div className="date">posted {this.props.dateHandler(this.state.data)}</div>
+              <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
+              <div className="date">posted {this.props.date_handler(this.state.data)}</div>
             </div>
             <div className="user-picture">
-              <img src={this.props.discussionUserImage} />
+              <img src={this.props.discussion_userimage} />
             </div>
           </div>
         </div> 

@@ -13,20 +13,34 @@ class DiscussionIndex extends React.Component {
   
   constructor(props) {
     super(props);
-    this._showFavorites = this._showFavorites.bind(this);
     this.state = {
-      showFavorites: this.props.show_favorites,
+      showFavorites: this.props.show_favorites != null,
       currentUser: this.props.current_user,
       favoriteDiscussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
-      search: this.props.search_param
+      search: this.props.search_param,
+      tagFilter: this.props.tag_filter
     };
   }
 
-  _showFavorites(e) {
-    $(e.target).toggleClass('selected');
-    this.setState({ showFavorites: !this.state.showFavorites });
+  _generateLink(disc, search, fav) {
+    let searchParam = "";
+    if (this.state.search != null) {
+      searchParam = "&search=" + this.state.search;
+    }
+
+    let favParam = "";
+    if (!fav) {
+      favParam = "&fav=true";
+    }
+
+    let discussionParam = "";
+    if (disc) {
+      discussionParam = "discussion_id=" + disc.id;
+    }
+    let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam;
+    return discussionRoute
   }
 
   renderFilters() {
@@ -34,12 +48,12 @@ class DiscussionIndex extends React.Component {
     return filters.map((filter, i) => {
       var tagClass;
       var buttonLink;
-      if (filter == this.props.tagFilter) {
+      if (filter == this.props.tag_filter) {
         tagClass = "discussion-tag checked";
-        buttonLink = "/discussions";
+        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites);
       } else {
         tagClass = "discussion-tag";
-        buttonLink = "/discussions?filter=" + filter;
+        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites) + "&filter=" + filter;
       }
       return (
         <a href={buttonLink} key={i}>
@@ -49,35 +63,18 @@ class DiscussionIndex extends React.Component {
   }
 
   renderDiscussionHeader() {
-    let searchParam = "";
-    if (this.state.search != null) {
-      searchParam = "&search=" + this.state.search;
-    }
-
-    let favParam = "";
-    if (this.state.showFavorites) {
-      favParam = "&fav=true";
-    }
-
-    let discussionParam = "";
-    if (this.state.discussion) {
-      discussionParam = "discussion_id=" + this.state.discussion.id;
-    }
-    let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam;
-    let header = null;
-
     let favoritesSelected = "";
     if (this.state.showFavorites) {  
       favoritesSelected = "discussion-favorite selected";
     } else {
       favoritesSelected = "discussion-favorite";
     }
-    
+    let header = null;
     if (this.state.currentUser) {
       header = (
         <div>
-          <a href={discussionRoute}> 
-            <button className={favoritesSelected} onClick={this._showFavorites}>
+          <a href={this._generateLink(this.state.discussion, this.state.search, this.state.showFavorites)}> 
+            <button className={favoritesSelected}>
               <i className="fa fa-star-o fa-lg"></i>
               <span> Favorites </span>
             </button>
@@ -99,13 +96,13 @@ class DiscussionIndex extends React.Component {
     if (this.state.currentUser) {
       star = (
           <DiscussionFavorite
-            favoriteDiscussions= {this.props.favorite_discussions}
+            favorite_discussions= {this.props.favorite_discussions}
             discussion = {disc}
           />
         )
     }
     return (
-      <a href={'/discussions?discussion_id=' + disc.id} key={disc.id}>
+      <a href={this._generateLink(disc, this.state.search, !this.state.showFavorites)} key={disc.id}>
         <div tabIndex="4" className="discussion-item row">
           <h4 className="discussion-item-title">
             {disc.title}
@@ -150,7 +147,7 @@ DiscussionIndex.propTypes = {
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,
-  show_favorites: React.PropTypes.bool,
+  show_favorites: React.PropTypes.string,
   date_handler: React.PropTypes.func,
   tag_filter: React.PropTypes.string,
   search_param: React.PropTypes.string

@@ -38,7 +38,7 @@ class DiscussionResponses extends React.Component {
             <ResponseForm
               discussion = {this.props.discussion}
               response = {response}
-              currentUser = {this.props.current_user}
+              current_user = {this.props.current_user}
             />
             <div className="user-container">
               <div className="name-date">
