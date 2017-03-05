@@ -6,7 +6,7 @@
  */
 
 class DiscussionResponses extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this._successfulSave = this._successfulSave.bind(this);
@@ -43,7 +43,7 @@ class DiscussionResponses extends React.Component {
             <div className="user-container">
               <div className="name-date">
                 <a href=""><div className="user-name">{response.user_name}</div></a>
-                <div className="date">{this.props.date_handler(response.created_at)}</div>
+                <div className="date">{this.props.date_handler(response)}</div>
               </div>
               <div className="user-picture">
                 <img src={response.user_image} />
@@ -82,7 +82,7 @@ class DiscussionResponses extends React.Component {
       form = (
         <div>
           <h4 className="response-form-header">Want to add a Discussion or Response?</h4>
-          <LoginModal 
+          <LoginModal
             style = "btn btn-transparent btn-forum-login"
           />
         </div>
