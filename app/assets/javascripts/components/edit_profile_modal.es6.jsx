@@ -118,15 +118,12 @@ class EditProfileModal extends React.Component {
       on_map: this.state.on_map,
       profile_pic: this.state.profile_pic,
     };
-
     if (this.state.organization) {
       userFields.organization = this.state.organization;
     }
-
     if (this.state.website) {
       userFields.website = this.state.website;
     }
-
     var locId = null;
     if (response) {
       locId = response.id;
@@ -166,7 +163,6 @@ class EditProfileModal extends React.Component {
         imagePreviewUrl: reader.result,
       });
     }
-    console.log('profile_pic state set')
     reader.readAsDataURL(attachment);
   }
 
