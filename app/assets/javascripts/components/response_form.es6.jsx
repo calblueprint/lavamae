@@ -72,7 +72,7 @@ class ResponseForm extends React.Component {
 
   renderForm() {
     return (
-      <div className="response-container row">
+      <div className="response-edit-form">
         <textarea name="content" defaultValue={this.state.content} id="response-content" ></textarea>
         <br></br>
         <button className="btn btn-sm btn-blue save" onClick={this._saveForm}>Save</button>
@@ -84,39 +84,36 @@ class ResponseForm extends React.Component {
   renderGuestContent() {
     return (
       <div className="response-text">
-        <p className="discussion-description row wordwrap"> {this.state.content} </p>
+        <p> {this.state.content} </p>
       </div>
     );
   }
 
   renderContent() {
     return (
-      <div>
-        <div className="response-text">
-          <p className="discussion-description row wordwrap"> {this.state.content} </p><br></br>
-          <div className="action-container pull-left">
-            <button className="btn btn-sm btn-action" onClick={this._enableForm}>Edit</button>
-            <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
-            <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
-              <Modal.Header>
-                <Modal.Title>Delete Response</Modal.Title>
-              </Modal.Header>
-              <form onSubmit={this._success}>
-                <Modal.Body>
-                  <div className="input-field">
-                    Are you sure you want to delete this response?
-                  </div>
-                </Modal.Body>
-                <Modal.Footer>
-                  <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-                  <button className="btn btn-blue modal-btn" type="submit">Delete</button>
-                </Modal.Footer>
-              </form>
-            </Modal>
-          </div>
+      <div className="response-text">
+        <p> {this.state.content} </p><br></br>
+        <div className="action-container pull-left">
+          <button className="btn btn-sm btn-action" onClick={this._enableForm}>Edit</button>
+          <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
+          <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
+            <Modal.Header>
+              <Modal.Title>Delete Response</Modal.Title>
+            </Modal.Header>
+            <form onSubmit={this._success}>
+              <Modal.Body>
+                <div className="input-field">
+                  Are you sure you want to delete this response?
+                </div>
+              </Modal.Body>
+              <Modal.Footer>
+                <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
+                <button className="btn btn-blue modal-btn" type="submit">Delete</button>
+              </Modal.Footer>
+            </form>
+          </Modal>
         </div>
       </div>
-
     )
   }
 
