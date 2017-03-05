@@ -254,6 +254,11 @@ EditProfileModal.propTypes = {
   organization    : React.PropTypes.string,
   location        : React.PropTypes.string,
   website         : React.PropTypes.string,
+<<<<<<< HEAD
   on_map          : React.PropTypes.bool,
   profile_pic     : React.PropTypes.object.isRequired,
+=======
+  on_map          : React.PropTypes.bool.isRequired,
+  profile_pic     : React.PropTypes.object,
+>>>>>>> resolved rebase merge conflict
 };
