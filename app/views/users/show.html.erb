@@ -45,9 +45,9 @@
         <div class="user-flex">
           <div class="profile-edit-button">
             <%if @location %>
-              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map) %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map, profile_pic: @user.profile_pic) %>
             <% else %>
-              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, on_map: @user.on_map) %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, on_map: @user.on_map, profile_pic: @user.profile_pic) %>
             <% end %>
           </div>
           <div>
