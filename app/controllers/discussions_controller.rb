@@ -4,14 +4,16 @@ class DiscussionsController < ApplicationController
 
   def index
     @discussions = Discussion.all
+
     if current_user
       @favorite_discussions = current_user.favorite_discussions
-      if params[:fav]
+      if !params[:fav].blank?
         @discussions = @favorite_discussions
       end
     end
 
   	@discussions = @discussions.search(params[:search]).order('created_at DESC')
+    @discussions = @discussions.tagged_with(params[:filter]) if params[:filter].present?
 
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
@@ -21,6 +23,10 @@ class DiscussionsController < ApplicationController
 
     unless @discussion.nil?
       @responses = @discussion.responses.sort_by{|r| [r.score, r.created_at]}.reverse
+      @tag_list = @discussion.tag_list
+      @discussion_username = @discussion.user.full_name
+      @discussion_date = @discussion.created_at
+      @upvotes = @discussion.upvotes
     end
   end
 
@@ -61,7 +67,7 @@ class DiscussionsController < ApplicationController
 
   def destroy
   	@discussion.destroy
-  	redirect_to discussions_path
+    render :action => 'index'
   end
 
   def favorite
@@ -75,7 +81,7 @@ class DiscussionsController < ApplicationController
     if current_user
       current_user.favorite_discussions.delete(@discussion)
     end
-    redirect_to discussions_path(discussion_id: params[:discussion_id], search: params[:search])
+    render :action => 'index'
   end
 
   def upvote

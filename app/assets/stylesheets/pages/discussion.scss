@@ -46,7 +46,6 @@
 
 .discussion-container {
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
   position: absolute;
   width: 100%;
@@ -83,6 +82,7 @@
 
 .discussion-tag-container {
   flex: 1;
+  display: inline-block;
 }
 
 .discussion-tag {

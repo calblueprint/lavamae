@@ -80,6 +80,8 @@ def make_responses
     )
     response.score = 0
     response.upvotes = []
+    response.user_name = User.find(response.user_id).full_name
+    response.user_image = "/assets/default-e0b9a38018677203d9482703c0bbe541842924517c1cd130b7c558ed0a31c4f6.png"
     response.id = n
     response.save
   end

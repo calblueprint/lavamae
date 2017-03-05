@@ -7,6 +7,12 @@ class ResponsesController < ApplicationController
     response = Response.new(response_params)
     response.discussion_id = @discussion.id
     response.user_id = current_user.id
+    response.user_name = current_user.full_name
+    if current_user.profile_pic?
+      response.user_image = view_context.image_path(current_user.profile_pic)
+    else 
+      response.user_image = view_context.image_path("default.png")
+    end
     response.score = 0
     response.upvotes = []
     if response.save
@@ -33,7 +39,7 @@ class ResponsesController < ApplicationController
 
   def destroy
     @response.destroy
-    redirect_to discussions_path(discussion_id: @discussion.id)
+    redirect_to discussions_path(discussion_id: params[:discussion_id])
   end
 
   def upvote

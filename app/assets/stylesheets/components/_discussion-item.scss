@@ -8,9 +8,12 @@
   padding: 15px;
   transition: 300ms;
 
-  &:hover, &:active, &:focus {
+  &:hover {
     background: $blue-light;
     color: white;
+  }
+
+  &:focus {
     outline: none;
   }
 
