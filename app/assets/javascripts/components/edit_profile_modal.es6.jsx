@@ -7,6 +7,7 @@
 * @props location - location city, state, country string
 * @props website - user's website
 * @props on_map - true if user appears on map
+* @props profile_pic - path of user's profile picture
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -25,8 +26,11 @@ class EditProfileModal extends React.Component {
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._attemptSave = this._attemptSave.bind(this);
+    this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       showModal: false,
+      profile_pic: "",
+      imagePreviewUrl: "",
       first_name: this.props.first_name,
       last_name: this.props.last_name,
       email: this.props.email,
@@ -113,6 +117,7 @@ class EditProfileModal extends React.Component {
       organization: this.state.organization,
       website: this.state.website,
       on_map: this.state.on_map,
+      profile_pic: this.state.profile_pic,
     };
     var locId = null;
     if (response) {
@@ -143,7 +148,27 @@ class EditProfileModal extends React.Component {
       });
   }
 
+  _handleFileChange(e) {
+    e.preventDefault();
+    let reader = new FileReader();
+    let attachment = e.target.files[0];
+    reader.onload = (file) => {
+      this.setState({
+        profile_pic: file.target.result,
+        imagePreviewUrl: reader.result,
+      });
+    }
+    reader.readAsDataURL(attachment);
+  }
+
   render () {
+    let imagePreviewUrl = this.state.imagePreviewUrl;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img className="profile-preview" src={imagePreviewUrl} />);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an image for preview</div>);
+    }
     return (
       <div>
         <button className="btn btn-blue modal-btn" onClick={this._openModal}>Edit</button>
@@ -194,6 +219,14 @@ class EditProfileModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
+              <div className="input-field">
+                <label class>Profile Picture</label><br></br>
+                <label className="file-label" htmlFor="file-input">Choose a File</label>
+                <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+                  <div className="imgPreview">
+                    {$imagePreview}
+                  </div>
+              </div>
             </Modal.Body>
             <Modal.Footer>
               <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
@@ -215,4 +248,5 @@ EditProfileModal.propTypes = {
   location        : React.PropTypes.string,
   website         : React.PropTypes.string,
   on_map          : React.PropTypes.bool.isRequired,
+  profile_pic     : React.PropTypes.object,
 };
