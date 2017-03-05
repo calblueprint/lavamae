@@ -26,7 +26,13 @@
 #
 # All available options are listed in default config above.
 #
+<<<<<<< HEAD
 
 Hermitage.configure :images do
 
 end
+=======
+# Hermitage.configure :images do
+#
+# end
+>>>>>>> added user bio
