@@ -29,8 +29,8 @@ class EditProfileModal extends React.Component {
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       showModal: false,
-      profile_pic: "",
-      imagePreviewUrl: "",
+      profile_pic: this.props.profile_pic,
+      imagePreviewUrl: this.props.profile_pic.profile_pic.url,
       first_name: this.props.first_name,
       last_name: this.props.last_name,
       email: this.props.email,
@@ -117,15 +117,12 @@ class EditProfileModal extends React.Component {
       on_map: this.state.on_map,
       profile_pic: this.state.profile_pic,
     };
-
     if (this.state.organization) {
       userFields.organization = this.state.organization;
     }
-
     if (this.state.website) {
       userFields.website = this.state.website;
     }
-
     var locId = null;
     if (response) {
       locId = response.id;
@@ -169,6 +166,7 @@ class EditProfileModal extends React.Component {
   }
 
   render () {
+    // TODO (amy): fix nested profile_pic prop
     let imagePreviewUrl = this.state.imagePreviewUrl;
     let $imagePreview = null;
     if (imagePreviewUrl) {
@@ -228,7 +226,7 @@ class EditProfileModal extends React.Component {
               </div>
               <div className="input-field">
                 <label class>Profile Picture</label><br></br>
-                <label className="file-label" htmlFor="file-input">Choose a File</label>
+                <label className="file-label" htmlFor="file-input">Choose an Image</label>
                 <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
                   <div className="imgPreview">
                     {$imagePreview}
@@ -254,6 +252,6 @@ EditProfileModal.propTypes = {
   organization    : React.PropTypes.string,
   location        : React.PropTypes.string,
   website         : React.PropTypes.string,
-  on_map          : React.PropTypes.bool.isRequired,
-  profile_pic     : React.PropTypes.object,
+  on_map          : React.PropTypes.bool,
+  profile_pic     : React.PropTypes.object.isRequired,
 };
