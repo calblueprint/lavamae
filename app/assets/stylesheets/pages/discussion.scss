@@ -83,6 +83,7 @@
 .discussion-tag-container {
   flex: 1;
   display: inline-block;
+  color: $blue-light;
 }
 
 .discussion-tag {
@@ -109,7 +110,7 @@
     color: white;
   }
 
-  &.checked { 
+  &.checked {
     background: $blue-light;
     color: white;
   }
