@@ -166,6 +166,7 @@ class EditProfileModal extends React.Component {
         imagePreviewUrl: reader.result,
       });
     }
+    console.log('profile_pic state set')
     reader.readAsDataURL(attachment);
   }
 
@@ -229,7 +230,7 @@ class EditProfileModal extends React.Component {
               </div>
               <div className="input-field">
                 <label class>Profile Picture</label><br></br>
-                <label className="file-label" htmlFor="file-input">Choose a File</label>
+                <label className="file-label" htmlFor="file-input">Choose an Image</label>
                 <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
                   <div className="imgPreview">
                     {$imagePreview}
