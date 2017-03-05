@@ -56,10 +56,27 @@
         </div>
       <% end %>
     </div>
-    <div class="profile-right">
-      <%if current_user && current_user.id == @user.id && @user.is_admin %>
-      <div>
-        <h5 class="profile-section-titles">
+    <div>
+      <div class="profile-section-titles">
+        <%= "Bio" %><br>
+        <%= react_component('UserBio', user: @user) %>
+      </div>
+      <div class="profile-section-titles">
+        <%= "Photo Gallery" %><br>
+        render_gallery_for @user.images
+      </div>
+      <div class="profile-section-titles">
+        <%= "Favorited Discussions" %><br>
+      </div>
+      <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">
+        <% @favorite_discussions.each do |discussion| %>
+          <%= render 'discussions/shortened', {discussion: discussion} %>
+        <% end %>
+      </div>
+    </div>
+    <div>
+      <%if current_user.id == @user.id && @user.is_admin %>
+        <div class="profile-section-titles">
           <%= "Users Pending Map Approval" %><br>
         </h5>
         <%= react_component('PendingMapUsers', pending_users: @pending_map_users, user_id: @user.id) %>

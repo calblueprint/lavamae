@@ -26,6 +26,6 @@
 #
 # All available options are listed in default config above.
 #
-Hermitage.configure :images do
-
-end
+# Hermitage.configure :images do
+#
+# end
