@@ -163,8 +163,6 @@ class DiscussionForm extends React.Component {
           </div>
         </div>
       </div>
-
-
     )
   }
 

@@ -58,6 +58,14 @@
     </div>
     <div>
       <div class="profile-section-titles">
+        <%= "Bio" %><br>
+        <%= react_component('UserBio', user: @user) %>
+      </div>
+      <div class="profile-section-titles">
+        <%= "Photo Gallery" %><br>
+        render_gallery_for @user.images
+      </div>
+      <div class="profile-section-titles">
         <%= "Favorited Discussions" %><br>
       </div>
       <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">

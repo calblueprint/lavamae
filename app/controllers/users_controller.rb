@@ -17,8 +17,6 @@ class UsersController < ApplicationController
 
   # batch update user's map_approval_state based on admin decision
   def map_approval_update
-    puts(params)
-    puts(map_approval_params)
     @admin = User.find(params[:admin_id])
     @user = User.find(params[:user_id])
     if @admin.is_admin
@@ -46,10 +44,10 @@ class UsersController < ApplicationController
   private
 
   def update_params
-    params.permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map);
+    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio)
   end
 
   def map_approval_params
-    params.permit(:map_approval_state);
+    params.permit(:map_approval_state)
   end
 end
