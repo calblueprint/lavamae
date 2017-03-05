@@ -29,8 +29,9 @@ class EditProfileModal extends React.Component {
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       showModal: false,
-      profile_pic: "",
-      imagePreviewUrl: "",
+      // TODO (amy): fix nested profile_pic prop
+      profile_pic: this.props.profile_pic,
+      imagePreviewUrl: this.props.profile_pic.profile_pic.url,
       first_name: this.props.first_name,
       last_name: this.props.last_name,
       email: this.props.email,
