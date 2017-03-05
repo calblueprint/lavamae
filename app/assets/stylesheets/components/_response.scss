@@ -12,6 +12,12 @@
   flex-wrap: wrap;
   border: 1px solid $blue-light-20;
   border-radius: 2px;
+
+  .user-container {
+    img {
+      margin-right: 0;
+    }
+  }
 }
 
 .responses-title {
@@ -28,4 +34,21 @@
   width: 100%;
   text-align: right;
   padding-top: 15px;
+}
+
+.response-edit-form {
+  flex: 1;
+  padding-right: 15px;
+}
+
+@media screen and (max-width:630px) {
+  .response-text, .response-edit-form {
+    flex: auto;
+    padding-right: 0;
+  }
+
+  .user-container {
+    margin-left: auto;
+    padding-right: 0;
+  }
 }

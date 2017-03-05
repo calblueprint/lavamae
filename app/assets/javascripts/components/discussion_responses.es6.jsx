@@ -6,7 +6,7 @@
  */
 
 class DiscussionResponses extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this._successfulSave = this._successfulSave.bind(this);
@@ -82,7 +82,7 @@ class DiscussionResponses extends React.Component {
       form = (
         <div>
           <h4 className="response-form-header">Want to add a Discussion or Response?</h4>
-          <LoginModal 
+          <LoginModal
             style = "btn btn-transparent btn-forum-login"
           />
         </div>
