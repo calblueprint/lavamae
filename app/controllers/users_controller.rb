@@ -41,10 +41,16 @@ class UsersController < ApplicationController
     `/passwords/update`
   end
 
+  def image
+    @user = User.find(params[:user_id])
+    @user.images.create(user_id: user.id, )
+    @user.save
+    redirect_to users_path(user_id: params[:user_id])
+  end
   private
 
   def update_params
-    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio)
+    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, images:[])
   end
 
   def map_approval_params

@@ -57,21 +57,24 @@
       <% end %>
     </div>
     <div>
-      <div class="profile-section-titles">
+      <div>
+        <h5 class="profile-section-titles">
+          <%= "Favorited Discussions" %><br>
+        </h5>
+        <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">
+          <% @favorite_discussions.each do |discussion| %>
+            <%= render 'discussions/shortened', {discussion: discussion} %>
+          <% end %>
+        </div>
+      </div>
+      <div class="user-profile-answers">
         <%= "Bio" %><br>
         <%= react_component('UserBio', user: @user) %>
       </div>
-      <div class="profile-section-titles">
+      <div class="user-profile-answers">
         <%= "Photo Gallery" %><br>
+        <%= react_component('UserPhotos', user: @user, images: @user.images) %>
         render_gallery_for @user.images
-      </div>
-      <div class="profile-section-titles">
-        <%= "Favorited Discussions" %><br>
-      </div>
-      <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">
-        <% @favorite_discussions.each do |discussion| %>
-          <%= render 'discussions/shortened', {discussion: discussion} %>
-        <% end %>
       </div>
     </div>
     <div class="profile-right">
