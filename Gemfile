@@ -7,6 +7,7 @@ gem 'rails', '4.2.1'
 # React
 gem 'react-rails', '1.4.0'
 gem 'react-rails-img'
+gem 'react-autocomplete-rails'
 
 # Bootstrap Grid
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -81,4 +82,3 @@ end
 group :production, :staging do
   gem 'rails_12factor'
 end
-

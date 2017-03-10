@@ -76,5 +76,16 @@
         </div>
       </div>
     </div>
+    <div>
+      <%if current_user && current_user.id == @user.id && @user.is_admin %>
+        <div>
+          <h5 class="profile-section-titles">
+            <%= "Admins" %><br>
+          </h5>
+          <!--TODO: generate error messages if user can't be found -->
+          <%= react_component('AdminApproval', current_admins: @current_admins, user_id: @user.id)%>
+        </div>
+      <% end %>
+    </div>
   </div>
 </section>

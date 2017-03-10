@@ -10,8 +10,10 @@ class UsersController < ApplicationController
     @favorite_discussions = @user.favorite_discussions
     if @user.is_admin
       @pending_map_users = User.where(map_approval_state: 0, on_map: true)
+      @current_admins = User.where(is_admin: true)
     else
       @pending_map_users = []
+      @current_admins = []
     end
   end
 
