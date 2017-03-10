@@ -20,4 +20,5 @@
 //= require moment-timezone
 //= require components
 //= require toastr
-//= require_tree .
+//= require_tree
+//= require react-autocomplete .

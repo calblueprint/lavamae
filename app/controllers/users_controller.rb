@@ -11,9 +11,11 @@ class UsersController < ApplicationController
     if @user.is_admin
       @pending_map_users = User.where(map_approval_state: 0, on_map: true)
       @current_admins = User.where(is_admin: true)
+      @non_admin_users = User.where(is_admin: false)
     else
       @pending_map_users = []
       @current_admins = []
+      @non_admin_users = []
     end
   end
 

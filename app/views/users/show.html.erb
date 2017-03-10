@@ -83,7 +83,7 @@
             <%= "Admins" %><br>
           </h5>
           <!--TODO: generate error messages if user can't be found -->
-          <%= react_component('AdminApproval', current_admins: @current_admins, user_id: @user.id)%>
+          <%= react_component('AdminApproval', current_admins: @current_admins, user_id: @user.id, users: @non_admin_users)%>
         </div>
       <% end %>
     </div>

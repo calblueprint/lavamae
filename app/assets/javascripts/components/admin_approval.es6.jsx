@@ -1,6 +1,7 @@
 /**
   * @prop current_admins - list of current admins
   * @prop user_id - user id for current user
+  * @prop non_admin_users - list of users who are not admins
   */
 
 class AdminApproval extends React.Component {
@@ -9,7 +10,13 @@ class AdminApproval extends React.Component {
     this.state = {
       admins: this.props.current_admins,
       admin_id: this.props.user_id,
+      non_admins: this.props.non_admin_users
+      input: '',
     }
+  }
+
+  _renderSearch() {
+
   }
 
   _renderAdmins() {
@@ -31,6 +38,9 @@ class AdminApproval extends React.Component {
   render() {
     return (
       <div>
+        <Autocomplete
+          value = {this.state}
+        />
         {this._renderAdmins()}
       </div>
     );
