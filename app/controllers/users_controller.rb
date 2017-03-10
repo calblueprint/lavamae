@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, :except => [:show]
+  before_filter :convert_photo, only: [:update]
 
   def show
     @user = User.find(params[:id])
@@ -29,8 +30,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
-    if user.update(update_params)
+    @user = User.find(params[:user_id])
+    if @user.update(update_params)
       render_json_message(:ok, message: "Account info successfully updated!")
     else
       render_json_message(:forbidden, errors: user.errors.full_messages)
@@ -41,16 +42,44 @@ class UsersController < ApplicationController
     `/passwords/update`
   end
 
-  def image
+
+  # def image
+  #   respond_to do |format|
+  #     if @user.update(update_params)
+  #       format.html { redirect_to @user.post, notice: 'Post attachment was successfully updated.' }
+  #     end
+  #   end
+  # end
+
+  def convert_photo
     @user = User.find(params[:user_id])
-    @user.images.create(user_id: user.id, )
-    @user.save
-    redirect_to users_path(user_id: params[:user_id])
+
+    params[:user][:image_attributes].push()
+
+    return if params[:user][:image_attributes].blank? ||
+      params[:user][:image_attributes][:photo_data].blank?
+    puts "3"
+
+    photo_file = FileUploadUtils.convert_base64(
+        params[:user][:image_attributes][:photo_data])
+    return unless photo_file
+
+    params[:user][:image_attributes][:photo] = photo_file
+    params[:user][:image_attributes].delete(:photo_data)
+    puts photo_file
+    render_json_message(:ok, message: "Account info successfully updated!")
   end
+
+  # def image
+  #   @user = User.find(params[:user_id])
+  #   @user.images.create(user_id: @user.id)
+  #   @user.save
+  #   redirect_to users_path(user_id: params[:user_id])
+  # end
   private
 
   def update_params
-    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, images:[])
+    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, image_attributes:[:photo])
   end
 
   def map_approval_params
