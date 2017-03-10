@@ -45,15 +45,13 @@ constructor(props) {
 
   _saveForm(e) {
     e.preventDefault();
+    const userFields = {
+      user: {
+        photo: this.state.photo
+      }
+    }
+    APIRequester.put(`/users/${this.props.user.id}/update`, userFields, this._successfulSave);
 
-    this.setState({ images: $("#file").val() }, () => {
-                      const userFields = {
-                        user: {
-                          images: this.state.images
-                        }
-                      };
-                      APIRequester.put(`/users/${this.props.user.id}`, userFields, this._successfulSave);
-                    });
   }
 
   renderForm () {
@@ -67,7 +65,6 @@ constructor(props) {
     return (
       <div>
         <div className="input-field">
-          <label>Photo Gallery</label><br></br>
           <label className="file-label" htmlFor="file-input">Choose a Photo</label>
           <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
             <div className="imgPreview">
@@ -82,17 +79,16 @@ constructor(props) {
 
   renderContent() {
     let $display = null;
-    console.log("hello")
     let userBio = this.state.images;
-    if (userBio) {
-      $display = (<button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit Gallery</button>);
+    if (userBio[0] != null) {
+      $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Edit Gallery</button>);
     } else {
       $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Add Photos</button>);
     }
     return (
       <div>
         {$display}
-        <p className="discussion-description wordwrap">{this.state.images}</p>
+        <p className="discussion-description wordwrap">{}</p>
       </div>
     )
   }

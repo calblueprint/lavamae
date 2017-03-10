@@ -21,8 +21,11 @@
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
 #  email                  :string           default(""), not null
-#  city                   :string
-#  country                :string
+#  profile_pic            :string
+#  location_id            :integer
+#  map_approval_state     :integer          default(0)
+#  website                :string
+#  bio                    :text
 #
 
 require 'rails_helper'

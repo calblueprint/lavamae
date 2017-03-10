@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   resources :users do
     put '/map_approval', to: 'users#map_approval_update'
+    put '/update', to: 'users#update'
   end
 
   resources :passwords, only: [:update]
