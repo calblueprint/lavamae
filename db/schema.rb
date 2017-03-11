@@ -50,7 +50,10 @@ ActiveRecord::Schema.define(version: 20170308020749) do
     t.string   "photo"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+<<<<<<< HEAD
     t.integer  "user_id"
+=======
+>>>>>>> 6bf45df1e810713cc840d64a5524085b01291172
   end
 
   create_table "locations", force: :cascade do |t|
