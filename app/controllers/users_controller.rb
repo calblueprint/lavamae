@@ -30,8 +30,8 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:user_id])
-    if @user.update(update_params)
+    user = User.find(params[:id])
+    if user.update(update_params)
       render_json_message(:ok, message: "Account info successfully updated!")
     else
       render_json_message(:forbidden, errors: user.errors.full_messages)
