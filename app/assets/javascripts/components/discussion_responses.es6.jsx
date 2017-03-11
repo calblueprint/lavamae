@@ -42,11 +42,15 @@ class DiscussionResponses extends React.Component {
             />
             <div className="user-container">
               <div className="name-date">
-                <a href=""><div className="user-name">{response.user_name}</div></a>
+                <a href={"users/" + response.user_id}>
+                  <div className="user-name">{response.user_name}</div>
+                </a>
                 <div className="date">{this.props.date_handler(response)}</div>
               </div>
               <div className="user-picture">
-                <img src={response.user_image} />
+                <a href={"users/" + response.user_id}>
+                  <img src={response.user_image} />
+                </a>
               </div>
             </div>
           </div>
