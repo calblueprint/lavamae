@@ -10,7 +10,7 @@ class ResponsesController < ApplicationController
     response.user_name = current_user.full_name
     if current_user.profile_pic?
       response.user_image = view_context.image_path(current_user.profile_pic)
-    else 
+    else
       response.user_image = view_context.image_path("default.png")
     end
     response.score = 0
