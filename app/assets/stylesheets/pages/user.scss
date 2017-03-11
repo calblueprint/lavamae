@@ -62,12 +62,23 @@
 }
 
 .favorite-discussions-container {
-  height: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
-  padding-top: 10px;
-  overflow-y: scroll;
-  width: 50vw;
+  border-radius: 2px;
+
+  .discussion-item {
+    background: white;
+    margin-left: 0;
+    margin-right: 0;
+    border-radius: 2px;
+    border-bottom: none;
+
+    &:hover {
+      background: $blue-light;
+    }
+  }
+
+  a:not(:last-child) .discussion-item {
+    margin-bottom: 5px;
+  }
 
   .discussion-item-description {
     font-size: 12px;
