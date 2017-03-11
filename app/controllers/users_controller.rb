@@ -52,22 +52,16 @@ class UsersController < ApplicationController
   # end
 
   def convert_photo
-    @user = User.find(params[:user_id])
-
-    params[:user][:image_attributes].push()
-
-    return if params[:user][:image_attributes].blank? ||
-      params[:user][:image_attributes][:photo_data].blank?
-    puts "3"
-
+    return if params[:user][:images].blank? ||
+      params[:user][:images][:photo_data].blank?
     photo_file = FileUploadUtils.convert_base64(
-        params[:user][:image_attributes][:photo_data])
+        params[:user][:images][:photo_data])
     return unless photo_file
 
-    params[:user][:image_attributes][:photo] = photo_file
-    params[:user][:image_attributes].delete(:photo_data)
+    params[:user][:images][:photo] = photo_file
+    params[:user][:images].delete(:photo_data)
     puts photo_file
-    render_json_message(:ok, message: "Account info successfully updated!")
+    render_json_message(:ok, message: "Photo(s) successfully updated!")
   end
 
   # def image
@@ -79,7 +73,7 @@ class UsersController < ApplicationController
   private
 
   def update_params
-    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, image_attributes:[:photo])
+    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, images:[:photo])
   end
 
   def map_approval_params

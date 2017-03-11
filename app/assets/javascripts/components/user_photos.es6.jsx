@@ -11,7 +11,7 @@ constructor(props) {
     this._handleFileChange = this._handleFileChange.bind(this);
     this._saveForm = this._saveForm.bind(this);
     this.state = {
-      images: this.props.images,
+      images: [],
       photo: "",
       filePreviewUrl: ""
     }
@@ -47,7 +47,7 @@ constructor(props) {
     e.preventDefault();
     const userFields = {
       user: {
-        photo: this.state.photo
+        images: {photo_data: this.state.photo}
       }
     }
     APIRequester.put(`/users/${this.props.user.id}/update`, userFields, this._successfulSave);
@@ -79,7 +79,7 @@ constructor(props) {
 
   renderContent() {
     let $display = null;
-    let userBio = this.state.images;
+    let userBio = this.props.images;
     if (userBio[0] != null) {
       $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Edit Gallery</button>);
     } else {
