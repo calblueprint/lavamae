@@ -15,23 +15,34 @@ class Upvote extends React.Component {
       has_upvoted: false,
       response: this.props.response
     };
+
+    if (this.props.user && this.props.upvotes.length != 0) {
+      this.state.has_upvoted = this.props.upvotes.every((element) => {
+        element != this.props.user.id
+      })
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.state.response) {
+      if (nextProps.upvotes) {
+        this.setState({ score: nextProps.upvotes.length })
+      }
+    }
   }
 
   _handleUpvote() {
     if(!this.state.has_upvoted) {
-      for (var i = 0; i < this.props.upvotes.length; i++) {
-        if (this.props.upvotes[i].user_id == this.props.user.id) {
-          this.state.has_upvoted = true;
-          return;
-        }
-      }
       this.state.score += 1;
       this.state.has_upvoted = true;
-      if (!this.state.response) {
-        APIRequester.post(`/discussions/${this.props.discussion.id}/upvote`, {}, this._successfulSave);
-      } else {
-        APIRequester.post(`/discussions/${this.props.discussion.id}/responses/${this.props.response.id}/upvote`, {}, this._successfulSave);
-      }
+    } else {
+      this.state.score -= 1;
+      this.state.has_upvoted = false;
+    }
+    if (!this.state.response) {
+      APIRequester.post(`/discussions/${this.props.discussion.id}/upvote`, {}, this._successfulSave);
+    } else {
+      APIRequester.post(`/discussions/${this.props.discussion.id}/responses/${this.props.response.id}/upvote`, {}, this._successfulSave);
     }
   }
 
@@ -41,13 +52,19 @@ class Upvote extends React.Component {
 
   render() {
     let $upvoteArrow = null;
-    if (this.props.user) {
+    let $plural = "Upvotes";
+    if (this.state.has_upvoted) {
+      $upvoteArrow = (<i className="upvote-button fa fa-angle-down fa-lg" onClick = {this._handleUpvote}></i>);
+    } else if (!this.state.has_upvoted && this.props.user) {
       $upvoteArrow = (<i className="upvote-button fa fa-angle-up fa-lg" onClick = {this._handleUpvote}></i>);
+    }
+    if (this.state.score == 1) {
+      $plural = "Upvote"
     }
     return (
       <div className="action-container pull-left">
         {$upvoteArrow}
-        <span className="upvote-count"> {this.state.score} Upvotes</span>
+        <span className="upvote-count"> {this.state.score} {$plural} </span>
       </div>
     )
   }

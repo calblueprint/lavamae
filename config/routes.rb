@@ -39,7 +39,11 @@ Rails.application.routes.draw do
   get '/static_discussion', to: 'static_pages#discussion'
   get '/static_map', to: 'static_pages#map'
 
+
   namespace :api do
     resources :resource_topics, only: [:index]
+    resources :responses do
+      get '/upvotes', to: 'responses#get_upvotes'
+    end
   end
 end

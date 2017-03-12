@@ -17,8 +17,6 @@ class UsersController < ApplicationController
 
   # batch update user's map_approval_state based on admin decision
   def map_approval_update
-    puts(params)
-    puts(map_approval_params)
     @admin = User.find(params[:admin_id])
     @user = User.find(params[:user_id])
     if @admin.is_admin
