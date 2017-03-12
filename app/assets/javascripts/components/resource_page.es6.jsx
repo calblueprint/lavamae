@@ -10,8 +10,10 @@ class ResourcePage extends React.Component {
     this._success = this._success.bind(this);
     this._fetchModules = this._fetchModules.bind(this);
     this._renderModuleUploadModal = this._renderModuleUploadModal.bind(this);
+    this._renderStyledModules = this._renderStyledModules.bind(this);
     this.state = {
-      modules : []
+      modules : [],
+      isLoading : true,
     };
   }
 
@@ -30,7 +32,7 @@ class ResourcePage extends React.Component {
   }
 
   _success(data) {
-    this.setState({ modules: data.resource_topics });
+    this.setState({ modules: data.resource_topics, isLoading: false});
   }
 
   _fetchModules() {
@@ -39,6 +41,22 @@ class ResourcePage extends React.Component {
 
   _renderModules() {
     return this.state.modules.map((resource_topic) => this._renderModule(resource_topic));
+  }
+
+  _renderStyledModules() {
+    if (this.state.isLoading) {
+      return (
+        <div className="loading">
+          <img src="/assets/lavamae-bus.gif" />
+        </div>
+      );
+    } else {
+      return (
+        <div className="modules row">
+          {this._renderModules()}
+        </div>
+      );
+    }
   }
 
   _renderModuleUploadModal() {
@@ -59,9 +77,7 @@ class ResourcePage extends React.Component {
             <h3>Modules</h3>
             { this._renderModuleUploadModal() }
           </div>
-          <div className="modules row">
-            {this._renderModules()}
-          </div>
+          { this._renderStyledModules() }
         </div>
       </section>
     )
