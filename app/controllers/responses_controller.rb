@@ -43,10 +43,15 @@ class ResponsesController < ApplicationController
   end
 
   def upvote
-    if current_user
-      @response = Response.find(params[:response_id])
-      @response.upvotes.create(user_id: current_user.id)
+    @response = Response.find(params[:response_id])
+    @upvote = @response.upvotes.find_by(user_id: current_user.id)
+    if !@upvote
+      @reponse.upvotes.create(user_id: current_user.id)
       @response.score += 1
+      @response.save
+    elsif @upvote
+      @response.upvotes.destroy(@upvote)
+      @response.score -= 1
       @response.save
     end
     redirect_to discussions_path(discussion_id: params[:discussion_id])
