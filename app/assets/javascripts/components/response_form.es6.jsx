@@ -7,7 +7,6 @@
 class ResponseForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.upvotes)
     this._cancelEdit = this._cancelEdit.bind(this);
     this._successfulSave = this._successfulSave.bind(this);
     this._enableForm = this._enableForm.bind(this);
@@ -26,6 +25,8 @@ class ResponseForm extends React.Component {
       data: this.props.response,
       upvotes: []
     };
+
+    console.log(this.props)
   }
 
   componentDidMount() {
@@ -37,7 +38,7 @@ class ResponseForm extends React.Component {
   }
 
   _setUpvotes(data) {
-    this.setState({ modules: data.upvotes });
+    this.setState({ upvotes: data.responses });
   }
 
   _openModal() {
@@ -101,6 +102,12 @@ class ResponseForm extends React.Component {
     return (
       <div className="response-text">
         <p> {this.state.content} </p>
+        <Upvote
+            discussion = {this.props.discussion}
+            response = {this.props.response}
+            user = {this.props.current_user}
+            upvotes = {this.state.upvotes}
+          />
       </div>
     );
   }
@@ -113,11 +120,11 @@ class ResponseForm extends React.Component {
           <button className="btn btn-sm btn-action" onClick={this._enableForm}>Edit</button>
           <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
           <Upvote
-                discussion = {this.props.discussion}
-                response = {this.props.response}
-                user = {this.props.current_user}
-                upvotes = {this.state.upvotes}
-              />
+            discussion = {this.props.discussion}
+            response = {this.props.response}
+            user = {this.props.current_user}
+            upvotes = {this.state.upvotes}
+          />
           <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
             <Modal.Header>
               <Modal.Title>Delete Response</Modal.Title>
