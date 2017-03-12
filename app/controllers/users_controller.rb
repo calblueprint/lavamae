@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:id])
+    user = User.find(params[:user_id])
     if user.update(update_params)
       render_json_message(:ok, message: "Account info successfully updated!")
     else
@@ -52,16 +52,20 @@ class UsersController < ApplicationController
   # end
 
   def convert_photo
-    return if params[:user][:images].blank? ||
-      params[:user][:images][:photo_data].blank?
-    photo_file = FileUploadUtils.convert_base64(
-        params[:user][:images][:photo_data])
-    return unless photo_file
+    return if params[:user].blank? ||
+        params[:user][:images_attributes].blank?
+    images = params[:user][:images_attributes].map do |k, photo_object|
 
-    params[:user][:images][:photo] = photo_file
-    params[:user][:images].delete(:photo_data)
-    puts photo_file
-    render_json_message(:ok, message: "Photo(s) successfully updated!")
+      photo_file = FileUploadUtils.convert_base64(
+          photo_object[:photo_data])
+      return unless photo_file
+
+      photo_object[:photo] = photo_file
+      photo_object.delete(:photo_data)
+      photo_object
+    end
+
+    params[:user][:images_attributes] = images.compact
   end
 
   # def image
@@ -73,7 +77,7 @@ class UsersController < ApplicationController
   private
 
   def update_params
-    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, images:[:photo])
+    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, images_attributes: [:id, :photo])
   end
 
   def map_approval_params
