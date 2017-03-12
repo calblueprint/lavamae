@@ -25,8 +25,6 @@ class ResponseForm extends React.Component {
       data: this.props.response,
       upvotes: []
     };
-
-    console.log(this.props)
   }
 
   componentDidMount() {

@@ -24,7 +24,6 @@ class ResourceTopicsController < ApplicationController
   def update
     @resource_topic = ResourceTopic.find(params[:id])
     @resource_topic.update(resource_topic_params)
-    puts @resource_topic.update(resource_topic_params)
     redirect_to resource_topic_path
   end
 

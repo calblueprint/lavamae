@@ -16,15 +16,18 @@ class Upvote extends React.Component {
       response: this.props.response
     };
 
-    this.state.has_upvoted = this.props.upvotes.every((element) => {
-      element != this.props.user.id
-    })
-
+    if (this.props.user && this.props.upvotes.length != 0) {
+      this.state.has_upvoted = this.props.upvotes.every((element) => {
+        element != this.props.user.id
+      })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.upvotes) {
-      this.setState({ score: nextProps.upvotes.length })
+    if (this.state.response) {
+      if (nextProps.upvotes) {
+        this.setState({ score: nextProps.upvotes.length })
+      }
     }
   }
 
@@ -36,13 +39,11 @@ class Upvote extends React.Component {
       this.state.score -= 1;
       this.state.has_upvoted = false;
     }
-
     if (!this.state.response) {
       APIRequester.post(`/discussions/${this.props.discussion.id}/upvote`, {}, this._successfulSave);
     } else {
       APIRequester.post(`/discussions/${this.props.discussion.id}/responses/${this.props.response.id}/upvote`, {}, this._successfulSave);
     }
-    console.log(this.props.upvotes)
   }
 
   _successfulSave() {
@@ -51,16 +52,19 @@ class Upvote extends React.Component {
 
   render() {
     let $upvoteArrow = null;
+    let $plural = "Upvotes";
     if (this.state.has_upvoted) {
       $upvoteArrow = (<i className="upvote-button fa fa-angle-down fa-lg" onClick = {this._handleUpvote}></i>);
     } else if (!this.state.has_upvoted && this.props.user) {
       $upvoteArrow = (<i className="upvote-button fa fa-angle-up fa-lg" onClick = {this._handleUpvote}></i>);
-
+    }
+    if (this.state.score == 1) {
+      $plural = "Upvote"
     }
     return (
       <div className="action-container pull-left">
         {$upvoteArrow}
-        <span className="upvote-count"> {this.state.score} Upvotes</span>
+        <span className="upvote-count"> {this.state.score} {$plural} </span>
       </div>
     )
   }

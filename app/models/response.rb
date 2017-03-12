@@ -17,6 +17,4 @@ class Response < ActiveRecord::Base
 	belongs_to :discussion
 	validates :content, presence: true
   has_many :upvotes, as: :upvotable, dependent: :destroy
-
-  # accepts_nested_attributes_for :upvotes, as: :upvotable
 end
