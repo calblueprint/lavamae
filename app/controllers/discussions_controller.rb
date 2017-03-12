@@ -13,7 +13,7 @@ class DiscussionsController < ApplicationController
     end
 
   	@discussions = @discussions.search(params[:search]).order('created_at DESC')
-    @discussions = @discussions.tagged_with(params[:filter]) if params[:filter].present?
+    @discussions = @discussions.tagged_with(params[:filter], any: true) if params[:filter].present?
 
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
