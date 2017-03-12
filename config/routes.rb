@@ -27,7 +27,6 @@ Rails.application.routes.draw do
     post '/upvote', to: 'discussions#upvote'
   end
 
-  resources :resources
   resources :resource_topics do
     get '/resource_topics/:id', to: 'resource_topics#get_resources'
   end
