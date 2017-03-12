@@ -29,7 +29,6 @@ class EditProfileModal extends React.Component {
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       showModal: false,
-      // TODO (amy): fix nested profile_pic prop
       profile_pic: this.props.profile_pic,
       imagePreviewUrl: this.props.profile_pic.profile_pic.url,
       first_name: this.props.first_name,
@@ -225,7 +224,8 @@ class EditProfileModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label class>Profile Picture</label><br></br>
+                <label htmlFor="profile-picture">Profile Picture</label>
+                <br/>
                 <label className="file-label" htmlFor="file-input">Choose an Image</label>
                 <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
                   <div className="imgPreview">
