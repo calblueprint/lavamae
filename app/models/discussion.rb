@@ -28,4 +28,13 @@ class Discussion < ActiveRecord::Base
       self.all
     end
   end
+
+  def self.filter(tags)
+    discussions = self.all
+    tags.each do |t|
+      discussions = discussions.tagged_with(t)
+    end
+    return discussions
+  end
+  
 end
