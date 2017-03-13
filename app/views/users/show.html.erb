@@ -70,10 +70,10 @@
           <div class="profile-edit-button">
             <%if @location %>
               <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, secondary_name: @user.secondary_name, secondary_email: @user.secondary_email,
-                                        tertiary_name: @user.tertiary_name, tertiary_email: @user.tertiary_email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map) %>
+                                        tertiary_name: @user.tertiary_name, tertiary_email: @user.tertiary_email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map, profile_pic: @user.profile_pic) %>
             <% else %>
               <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, secondary_name: @user.secondary_name, secondary_email: @user.secondary_email,
-                                        tertiary_name: @user.tertiary_name, tertiary_email: @user.tertiary_email, organization: @user.organization, website: @user.website, on_map: @user.on_map) %>
+                                        tertiary_name: @user.tertiary_name, tertiary_email: @user.tertiary_email, organization: @user.organization, website: @user.website, on_map: @user.on_map, profile_pic: @user.profile_pic) %>
             <% end %>
           </div>
           <div>
