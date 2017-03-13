@@ -15,10 +15,9 @@ class Upvote extends React.Component {
       has_upvoted: false,
       response: this.props.response
     };
-
     if (this.props.user && this.props.upvotes.length != 0) {
-      this.state.has_upvoted = this.props.upvotes.every((element) => {
-        element != this.props.user.id
+      this.state.has_upvoted = !this.props.upvotes.every((element) => {
+        element.user_id != this.props.user.id
       })
     }
   }
