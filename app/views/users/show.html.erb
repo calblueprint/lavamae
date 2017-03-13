@@ -12,10 +12,18 @@
         <div class="user-profile-fields">
           Name<br>
           Email<br>
+          <% if (@user.secondary_name && @user.secondary_name != "") || (@user.secondary_email && @user.secondary_email != "") %>
           Secondary<br>
+          <% end %>
+          <% if @user.secondary_name && @user.secondary_name != "" && @user.secondary_email && @user.secondary_email != "" %>
           <br>
+          <% end %>
+          <% if (@user.tertiary_name && @user.tertiary_name != "") || (@user.tertiary_email && @user.tertiary_email != "") %>
           Tertiary<br>
+          <% end %>
+          <% if @user.tertiary_name && @user.tertiary_name != "" && @user.tertiary_email && @user.tertiary_email != "" %>
           <br>
+          <% end %>
           Organization<br>
           Website<br>
           Location<br>
@@ -27,25 +35,17 @@
               <%= @user.last_name %>
             </div>
             <%= @user.email %><br>
-            <% if @user.secondary_name %>
+            <% if @user.secondary_name && @user.secondary_name != "" %>
               <%= @user.secondary_name %><br>
-            <% else %>
-              <%= "Not Available" %><br>
             <% end %>
-            <% if @user.secondary_email %>
+            <% if @user.secondary_email && @user.secondary_email != "" %>
               <%= @user.secondary_email %><br>
-            <% else %>
-              <%= "Not Available" %><br>
             <% end %>
-            <% if @user.tertiary_name %>
+            <% if @user.tertiary_name && @user.tertiary_name != "" %>
               <%= @user.tertiary_name %><br>
-            <% else %>
-              <%= "Not Available" %><br>
             <% end %>
-            <% if @user.tertiary_email %>
+            <% if @user.tertiary_email && @user.tertiary_email != ""%>
               <%= @user.tertiary_email %><br>
-            <% else %>
-              <%= "Not Available" %><br>
             <% end %>
             <% if @user.organization %>
               <%= @user.organization %><br>

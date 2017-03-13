@@ -124,25 +124,17 @@ class EditProfileModal extends React.Component {
       email: this.state.email,
       on_map: this.state.on_map,
       profile_pic: this.state.profile_pic,
+      secondary_name: this.state.secondary_name,
+      secondary_email: this.state.secondary_email,
+      tertiary_name: this.state.tertiary_name,
+      tertiary_email: this.state.tertiary_email,
     };
-    
+
     if (this.state.organization) {
       userFields.organization = this.state.organization;
     }
     if (this.state.website) {
       userFields.website = this.state.website;
-    }
-    if (this.state.secondary_name) {
-      userFields.secondary_name = this.state.secondary_name;
-    }
-    if (this.state.secondary_email) {
-      userFields.secondary_email = this.state.secondary_email;
-    }
-    if (this.state.tertiary_name) {
-      userFields.tertiary_name = this.state.tertiary_name;
-    }
-    if (this.state.tertiary_email) {
-      userFields.tertiary_email = this.state.tertiary_email;
     }
 
     var locId = null;
