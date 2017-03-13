@@ -92,6 +92,6 @@ DiscussionPage.propTypes = {
   discussion_userimage: React.PropTypes.string,
   responses: React.PropTypes.array,
   upvotes: React.PropTypes.array,
-  tag_filter: React.PropTypes.string,
+  tag_filter: React.PropTypes.array,
   search_param: React.PropTypes.string
 };

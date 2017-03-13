@@ -24,7 +24,7 @@ class DiscussionIndex extends React.Component {
     };
   }
 
-  _generateLink(disc, search, fav) {
+  _generateLink(disc, search, fav, filter) {
     let searchParam = "";
     if (this.state.search != null) {
       searchParam = "&search=" + this.state.search;
@@ -35,11 +35,21 @@ class DiscussionIndex extends React.Component {
       favParam = "&fav=true";
     }
 
+    let filterParam = "";
+    if (this.state.tagFilter) {
+      for (var i = 0; i < this.state.tagFilter.length; i++) {
+          if (filter != this.state.tagFilter[i]) {
+            filterParam += "&filter[]=" + this.state.tagFilter[i];
+          }
+      }
+    }
+
     let discussionParam = "";
     if (disc) {
       discussionParam = "discussion_id=" + disc.id;
     }
-    let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam;
+
+    let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam + filterParam;
     return discussionRoute
   }
 
@@ -48,12 +58,12 @@ class DiscussionIndex extends React.Component {
     return filters.map((filter, i) => {
       var tagClass;
       var buttonLink;
-      if (filter == this.props.tag_filter) {
+      if (this.props.tag_filter && this.props.tag_filter.includes(filter)) {
         tagClass = "discussion-tag checked";
-        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites);
+        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites, filter);
       } else {
         tagClass = "discussion-tag";
-        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites) + "&filter=" + filter;
+        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites, filter) + "&filter[]=" + filter;
       }
       return (
         <a href={buttonLink} key={i}>
@@ -149,6 +159,6 @@ DiscussionIndex.propTypes = {
   favorite_discussions: React.PropTypes.array,
   show_favorites: React.PropTypes.string,
   date_handler: React.PropTypes.func,
-  tag_filter: React.PropTypes.string,
+  tag_filter: React.PropTypes.array,
   search_param: React.PropTypes.string
 };
