@@ -23,7 +23,10 @@ class Discussion < ActiveRecord::Base
 
   def self.search(search)
     if search
-      where('title LIKE ? or content LIKE ?', "%#{search}%", "%#{search}%")
+      Discussion.includes(:responses)
+        .where('discussions.title LIKE ? or discussions.content LIKE ? 
+          or responses.content LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+        .references(:responses)
     else
       self.all
     end
