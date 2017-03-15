@@ -72,6 +72,14 @@ section {
 
 }
 
+.margin-l {
+  margin-left: 15px;
+}
+
+.margin-r {
+  margin-right: 15px;
+}
+
 @media (min-width: 1200px) {
     .container, .container-lg {
       max-width: 960px;

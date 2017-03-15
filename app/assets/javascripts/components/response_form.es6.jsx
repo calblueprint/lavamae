@@ -122,7 +122,7 @@ class ResponseForm extends React.Component {
       <div className="response-text">
         <p> {this.state.content} </p><br></br>
         <div className="action-container pull-left">
-          <button className="btn btn-sm btn-action" onClick={this._enableForm}>Edit</button>
+          <button className="btn btn-sm btn-action margin-l" onClick={this._enableForm}>Edit</button>
           <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
           <Upvote
             discussion = {this.props.discussion}
