@@ -65,6 +65,7 @@
         <%= react_component('PendingMapUsers', pending_users: @pending_map_users, user_id: @user.id) %>
       </div>
       <% end %>
+      <% if @favorite_discussions.count > 0 %>
       <div>
         <h5 class="profile-section-titles">
           <%= "Favorited Discussions" %><br>
@@ -75,6 +76,7 @@
           <% end %>
         </div>
       </div>
+      <% end %>
     </div>
   </div>
 </section>
