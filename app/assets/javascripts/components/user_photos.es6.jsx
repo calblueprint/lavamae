@@ -5,7 +5,6 @@
 class UserPhotos extends React.Component {
 constructor(props) {
     super(props);
-    console.log(this.props.images)
     this._cancelEdit = this._cancelEdit.bind(this);
     this._successfulSave = this._successfulSave.bind(this);
     this._enableForm = this._enableForm.bind(this);
@@ -52,8 +51,7 @@ constructor(props) {
         images_attributes: [{photo_data: this.state.photo}]
       }
     }
-    APIRequester.put(`/users/${this.props.user.id}/update`, userFields, this._successfulSave);
-    console.log(userFields)
+    APIRequester.put(`/users/${this.props.user.id}/photo_update`, userFields, this._successfulSave);
   }
 
   renderForm () {

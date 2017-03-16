@@ -5,6 +5,7 @@
 class UserBio extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.user.id)
     this._cancelEdit = this._cancelEdit.bind(this);
     this._successfulSave = this._successfulSave.bind(this);
     this._enableForm = this._enableForm.bind(this);
@@ -29,7 +30,6 @@ class UserBio extends React.Component {
 
   _saveForm(e) {
     e.preventDefault();
-
     this.setState({ bio: $("#user_bio").val() }, () => {
                       const userFields = {
                         user: {

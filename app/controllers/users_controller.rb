@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :authenticate_user!, :except => [:show]
-  before_filter :convert_photo, only: [:update]
+  before_filter :convert_photo, only: [:photo_update]
 
   def show
     @user = User.find(params[:id])
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    user = User.find(params[:user_id])
+    user = User.find(params[:id])
     if user.update(update_params)
       render_json_message(:ok, message: "Account info successfully updated!")
     else
@@ -42,14 +42,14 @@ class UsersController < ApplicationController
     `/passwords/update`
   end
 
-
-  # def image
-  #   respond_to do |format|
-  #     if @user.update(update_params)
-  #       format.html { redirect_to @user.post, notice: 'Post attachment was successfully updated.' }
-  #     end
-  #   end
-  # end
+  def photo_update
+    user = User.find(params[:user_id])
+    if user.update(update_params)
+      render_json_message(:ok, message: "Gallery successfully updated!")
+    else
+      render_json_message(:forbidden, errors: user.errors.full_messages)
+    end
+  end
 
   def convert_photo
     return if params[:user].blank? ||
@@ -68,12 +68,6 @@ class UsersController < ApplicationController
     params[:user][:images_attributes] = images.compact
   end
 
-  # def image
-  #   @user = User.find(params[:user_id])
-  #   @user.images.create(user_id: @user.id)
-  #   @user.save
-  #   redirect_to users_path(user_id: params[:user_id])
-  # end
   private
 
   def update_params

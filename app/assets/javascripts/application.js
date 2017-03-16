@@ -11,7 +11,6 @@
 // about supported directives.
 //
 //= require jquery
-//= require hermitage
 //= require jquery_ujs
 //= require react
 //= require react_ujs
