@@ -34,6 +34,10 @@
   background: transparent;
 }
 
+.profile-selected img {
+  box-shadow: 0 0 0 5px $white-40;
+}
+
 //smartphones, iPhone, portrait 480x320 phones
 .hamburger {
   margin-left: auto;

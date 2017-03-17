@@ -21,12 +21,15 @@
               <button class="btn btn-transparent btn-nav">Resources</button>
             </li>
           <% end %>
+
           <div class="dropdown user-container">
             <div class="dropbtn user-picture">
-              <% if current_user.profile_pic? %>
-                <a href=""><%= image_tag current_user.profile_pic.url(:thumb) %></a>
-              <% else %>
-                <a href=""><%= image_tag("default.png") %></a>
+              <%= link_to user_path(current_user.id) do %>
+                <% if current_user.profile_pic? %>
+                  <%= image_tag current_user.profile_pic.url(:thumb) %>
+                <% else %>
+                  <%= image_tag("default.png") %>
+                <% end %>
               <% end %>
             </div>
             <div class="dropdown-content">
@@ -98,12 +101,15 @@
               <button class="btn btn-transparent btn-nav">Resources</button>
             </li>
           <% end %>
+
           <div class="dropdown user-container">
             <div class="dropbtn user-picture">
-              <% if current_user.profile_pic? %>
-                <a href=""><%= image_tag current_user.profile_pic.url(:thumb) %></a>
-              <% else %>
-                <a href=""><%= image_tag("default.png") %></a>
+              <%= link_to user_path(current_user.id) do %>
+                <% if current_user.profile_pic? %>
+                  <%= image_tag current_user.profile_pic.url(:thumb) %>
+                <% else %>
+                  <%= image_tag("default.png") %>
+                <% end %>
               <% end %>
             </div>
             <div class="dropdown-content">
@@ -166,12 +172,16 @@
               <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
             </li>
           <% end %>
+
           <div class="dropdown user-container">
-            <div class="dropbtn user-picture">
-              <% if current_user.profile_pic? %>
-                <a href=""><%= image_tag current_user.profile_pic.url(:thumb) %></a>
-              <% else %>
-                <a href=""><%= image_tag("default.png") %></a>
+            <div class="dropbtn user-picture
+            <%= 'profile-selected' if current_page?(user_path(current_user.id)) %>">
+              <%= link_to user_path(current_user.id) do %>
+                <% if current_user.profile_pic? %>
+                  <%= image_tag current_user.profile_pic.url(:thumb) %>
+                <% else %>
+                  <%= image_tag("default.png") %>
+                <% end %>
               <% end %>
             </div>
             <div class="dropdown-content">
