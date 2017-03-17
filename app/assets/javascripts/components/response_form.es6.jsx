@@ -23,7 +23,8 @@ class ResponseForm extends React.Component {
       content: this.props.response.content,
       showModal: false,
       data: this.props.response,
-      upvotes: []
+      upvotes: [],
+      finish_upload: false
     };
   }
 
@@ -36,7 +37,7 @@ class ResponseForm extends React.Component {
   }
 
   _setUpvotes(data) {
-    this.setState({ upvotes: data.responses });
+    this.setState({ upvotes: data.responses, finish_upload: true});
   }
 
   _openModal() {
@@ -97,6 +98,9 @@ class ResponseForm extends React.Component {
   }
 
   renderGuestContent() {
+    if (!this.state.finish_upload) {
+      return (<div></div>)
+    }
     return (
       <div className="response-text">
         <p> {this.state.content} </p>
@@ -111,6 +115,9 @@ class ResponseForm extends React.Component {
   }
 
   renderContent() {
+    if (!this.state.finish_upload) {
+      return (<div></div>)
+    }
     return (
       <div className="response-text">
         <p> {this.state.content} </p><br></br>
