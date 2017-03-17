@@ -1,10 +1,10 @@
 <%= link_to discussions_path(discussion_id: discussion.id, fav: params[:fav]) do %>
-  <div tabindex="4" class="discussion-item row">
+  <div tabindex="4" class="discussion-item">
     <h4 class="discussion-item-title">
       <%= discussion.title %>
       <% if current_user %>
-        <span class="change-icon favorite-discussion" 
-          data-id=<%=discussion.id.to_s%> 
+        <span class="change-icon favorite-discussion"
+          data-id=<%=discussion.id.to_s%>
           data-fav=<%= @favorite_discussions.include?(discussion) %>>
           <% if @favorite_discussions.include?(discussion) %>
             <i class="fa fa-star pull-right" id=<%="star#{discussion.id}"%>></i>

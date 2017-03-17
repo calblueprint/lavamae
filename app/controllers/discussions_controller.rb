@@ -12,8 +12,8 @@ class DiscussionsController < ApplicationController
       end
     end
 
-  	@discussions = @discussions.search(params[:search]).order('created_at DESC')
-    @discussions = @discussions.tagged_with(params[:filter]) if params[:filter].present?
+  	@discussions = @discussions.search(params[:search]).order('discussions.created_at DESC')
+    @discussions = @discussions.filter(params[:filter]) if params[:filter].present?
 
     if params[:discussion_id]
       @discussion = Discussion.find(params[:discussion_id])
@@ -85,10 +85,15 @@ class DiscussionsController < ApplicationController
   end
 
   def upvote
-    if current_user
-      @discussion = Discussion.find(params[:discussion_id])
+    @discussion = Discussion.find(params[:discussion_id])
+    @upvote = @discussion.upvotes.find_by(user_id: current_user.id)
+    if !@upvote
       @discussion.upvotes.create(user_id: current_user.id)
       @discussion.score += 1
+      @discussion.save
+    elsif @upvote
+      @discussion.upvotes.destroy(@upvote)
+      @discussion.score -= 1
       @discussion.save
     end
     redirect_to discussions_path(discussion_id: params[:discussion_id])

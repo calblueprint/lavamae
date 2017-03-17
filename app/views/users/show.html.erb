@@ -45,9 +45,9 @@
         <div class="user-flex">
           <div class="profile-edit-button">
             <%if @location %>
-              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map) %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, location: @location.place, on_map: @user.on_map, profile_pic: @user.profile_pic) %>
             <% else %>
-              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, on_map: @user.on_map) %>
+              <%= react_component('EditProfileModal', user_id: @user.id, first_name: @user.first_name, last_name: @user.last_name, email: @user.email, organization: @user.organization, website: @user.website, on_map: @user.on_map, profile_pic: @user.profile_pic) %>
             <% end %>
           </div>
           <div>
@@ -56,7 +56,16 @@
         </div>
       <% end %>
     </div>
-    <div>
+    <div class="profile-right">
+      <%if current_user && current_user.id == @user.id && @user.is_admin %>
+      <div>
+        <h5 class="profile-section-titles">
+          <%= "Users Pending Map Approval" %><br>
+        </h5>
+        <%= react_component('PendingMapUsers', pending_users: @pending_map_users, user_id: @user.id) %>
+      </div>
+      <% end %>
+      <% if @favorite_discussions.count > 0 %>
       <div>
         <h5 class="profile-section-titles">
           <%= "Favorited Discussions" %><br>
@@ -76,16 +85,6 @@
         <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
         <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
       </div>
-    </div>
-    <div class="profile-right">
-      <%if current_user && current_user.id == @user.id && @user.is_admin %>
-      <div>
-        <h5 class="profile-section-titles">
-          <%= "Users Pending Map Approval" %><br>
-        </h5>
-        <%= react_component('PendingMapUsers', pending_users: @pending_map_users, user_id: @user.id) %>
-      </div>
-      <% end %>
     </div>
   </div>
 </section>

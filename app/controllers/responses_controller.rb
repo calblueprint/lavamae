@@ -8,13 +8,13 @@ class ResponsesController < ApplicationController
     response.discussion_id = @discussion.id
     response.user_id = current_user.id
     response.user_name = current_user.full_name
+    response.score = 0
+    response.upvotes = []
     if current_user.profile_pic?
       response.user_image = view_context.image_path(current_user.profile_pic)
     else
       response.user_image = view_context.image_path("default.png")
     end
-    response.score = 0
-    response.upvotes = []
     if response.save
       redirect_to discussions_path(discussion_id: @discussion.id)
     else
@@ -43,10 +43,15 @@ class ResponsesController < ApplicationController
   end
 
   def upvote
-    if current_user
-      @response = Response.find(params[:response_id])
+    @response = Response.find(params[:response_id])
+    @upvote = @response.upvotes.find_by(user_id: current_user.id)
+    if !@upvote
       @response.upvotes.create(user_id: current_user.id)
       @response.score += 1
+      @response.save
+    elsif @upvote
+      @response.upvotes.destroy(@upvote)
+      @response.score -= 1
       @response.save
     end
     redirect_to discussions_path(discussion_id: params[:discussion_id])

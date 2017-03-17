@@ -23,22 +23,25 @@ class ResourceTopicsController < ApplicationController
 
   def update
     @resource_topic = ResourceTopic.find(params[:id])
-    @resource_topic.update(resource_topic_params)
-    redirect_to resource_topic_path
-  end
-
-  def show
-    @resource_topic = ResourceTopic.find(params[:id])
+    if @resource_topic.update(resource_topic_params)
+      render_json_message(:ok, to: resource_topics_path)
+    else
+      render_json_message(:forbidden, message: "Error: Module not deleted.", to: resource_topics_path)
+    end
   end
 
   def destroy
     @resource_topic = ResourceTopic.find(params[:id])
-    @resource_topic.destroy
-    redirect_to resource_topic_path
+    if @resource_topic.destroy
+      render_json_message(:ok, message: "Delete successful!", to: resource_topics_path)
+    else
+      render_json_message(:forbidden, message: "Error: Module not deleted.", to: resource_topics_path)
+    end
   end
 
   private
-    def resource_topic_params
-      params.require(:resource_topic).permit(:name, :description, :attachment)
-    end
+
+  def resource_topic_params
+    params.require(:resource_topic).permit(:name, :description, :attachment)
+  end
 end

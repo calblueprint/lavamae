@@ -13,7 +13,6 @@ class ModuleDeleteModal extends React.Component {
       showModal: false,
       data: this.props.resource_topic
     };
-
   }
 
   _openModal() {
@@ -26,12 +25,8 @@ class ModuleDeleteModal extends React.Component {
 
   _handleDelete(msg) {
     this.setState({data: null})
-    toastr.options.positionClass = 'toast-bottom-right';
-    toastr.success("Delete successful!");
-    APIRequester.delete(`/resource_topics/${this.props.resource_topic.id}`, this._closeModal);
     this._closeModal();
-    window.location = location.pathname;
-
+    APIRequester.delete(`/resource_topics/${this.props.resource_topic.id}`, () => {});
   }
 
 
