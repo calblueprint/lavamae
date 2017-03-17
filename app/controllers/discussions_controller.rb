@@ -12,7 +12,7 @@ class DiscussionsController < ApplicationController
       end
     end
 
-  	@discussions = @discussions.search(params[:search]).order('created_at DESC')
+  	@discussions = @discussions.search(params[:search]).order('discussions.created_at DESC')
     @discussions = @discussions.filter(params[:filter]) if params[:filter].present?
 
     if params[:discussion_id]
