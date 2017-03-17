@@ -39,6 +39,7 @@ gem 'acts-as-taggable-on', '~> 4.0'
 source "https://rails-assets.org" do
   gem 'rails-assets-moment'
   gem 'rails-assets-moment-timezone'
+  gem 'rails-assets-lightgallery'
 end
 
 # Frontend
@@ -82,5 +83,4 @@ group :production, :staging do
   gem 'rails_12factor'
 end
 
-#used for user photo gallery
-gem 'hermitage'
+

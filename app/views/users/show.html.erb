@@ -73,8 +73,8 @@
       </div>
       <div class="user-profile-answers">
         <%= "Photo Gallery" %><br>
-        <%= react_component('UserPhotos', user: @user, images: @user.images) %>
-        render_gallery_for @user.images
+        <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
+        <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
       </div>
     </div>
     <div class="profile-right">

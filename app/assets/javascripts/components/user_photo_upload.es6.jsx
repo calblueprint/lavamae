@@ -2,7 +2,7 @@
  * @prop user - user
  * @prop images - photo gallery for user
 **/
-class UserPhotos extends React.Component {
+class UserPhotoUpload extends React.Component {
 constructor(props) {
     super(props);
     this._cancelEdit = this._cancelEdit.bind(this);
@@ -35,7 +35,6 @@ constructor(props) {
         photo: file.target.result,
         imagePreviewUrl: reader.result,
       });
-    console.log(file.target.result)
     }
     reader.readAsDataURL(attachment);
   }
