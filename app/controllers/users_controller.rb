@@ -72,6 +72,7 @@ class UsersController < ApplicationController
 
   def update_params
     params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :bio, images_attributes: [:id, :photo])
+
   end
 
   def map_approval_params
