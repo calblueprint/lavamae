@@ -3,6 +3,10 @@
 * @props first_name - user's current first name
 * @props last_name - user's current last name
 * @props email - user's current email
+* @props secondary_name - secondary contact's first and last name
+* @props secondary_email - secondary contact's email
+* @props tertiary_name - tertiary contact's first and last name
+* @props tertiary_email - tertiary contact's email
 * @props organization - user's current orgnization
 * @props location - location city, state, country string
 * @props website - user's website
@@ -34,6 +38,10 @@ class EditProfileModal extends React.Component {
       first_name: this.props.first_name,
       last_name: this.props.last_name,
       email: this.props.email,
+      secondary_name: this.props.secondary_name,
+      secondary_email: this.props.secondary_email,
+      tertiary_name: this.props.tertiary_name,
+      tertiary_email: this.props.tertiary_email,
       organization: this.props.organization,
       location: this.props.location,
       website: this.props.website,
@@ -116,13 +124,19 @@ class EditProfileModal extends React.Component {
       email: this.state.email,
       on_map: this.state.on_map,
       profile_pic: this.state.profile_pic,
+      secondary_name: this.state.secondary_name,
+      secondary_email: this.state.secondary_email,
+      tertiary_name: this.state.tertiary_name,
+      tertiary_email: this.state.tertiary_email,
     };
+
     if (this.state.organization) {
       userFields.organization = this.state.organization;
     }
     if (this.state.website) {
       userFields.website = this.state.website;
     }
+
     var locId = null;
     if (response) {
       locId = response.id;
@@ -198,6 +212,26 @@ class EditProfileModal extends React.Component {
                        placeholder="panda@lavamae.org" defaultValue={this.props.email} />
               </div>
               <div className="input-field">
+                <label htmlFor="secondary_name">Secondary Contact Name</label>
+                <input id="secondary-name-input" type="secondary_name" name="secondary_name" onChange={this._handleChange}
+                       placeholder="Baby" defaultValue={this.props.secondary_name} />
+              </div>
+              <div className="input-field">
+                <label htmlFor="email">Secondary Email Address</label>
+                <input id="secondary-email-input" type="secondary_email" name="secondary_email" onChange={this._handleChange}
+                       placeholder="panda@lavamae.org" defaultValue={this.props.secondary_email} />
+              </div>
+              <div className="input-field">
+                <label htmlFor="tertiary_name">Tertiary Contact Name</label>
+                <input id="tertiary-name-input" type="tertiary_name" name="tertiary_name" onChange={this._handleChange}
+                       placeholder="Baby" defaultValue={this.props.tertiary_name} />
+              </div>
+              <div className="input-field">
+                <label htmlFor="email">Tertiary Email Address</label>
+                <input id="tertiary-email-input" type="tertiary_email" name="tertiary_email" onChange={this._handleChange}
+                       placeholder="panda@lavamae.org" defaultValue={this.props.tertiary_email} />
+              </div>
+              <div className="input-field">
                 <label htmlFor="organization">Organization</label>
                 <input id="organization-input" type="organization" name="organization" onChange={this._handleChange}
                        placeholder="Lava Bae" defaultValue={this.props.organization} />
@@ -249,6 +283,10 @@ EditProfileModal.propTypes = {
   first_name      : React.PropTypes.string.isRequired,
   last_name       : React.PropTypes.string.isRequired,
   email           : React.PropTypes.string.isRequired,
+  secondary_name  : React.PropTypes.string,
+  secondary_email : React.PropTypes.string,
+  tertiary_name   : React.PropTypes.string,
+  tertiary_email  : React.PropTypes.string,
   organization    : React.PropTypes.string,
   location        : React.PropTypes.string,
   website         : React.PropTypes.string,
