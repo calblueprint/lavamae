@@ -90,7 +90,7 @@ end
 def make_modules
   1.upto(10) do |n|
     resource_topic = ResourceTopic.create(
-      name: "Module #{n}",
+      name: "Toolkit #{n}",
       created_at: Time.now.to_datetime,
       description: "Lava Mae Toolkit",
       attachment: "attachment.png"

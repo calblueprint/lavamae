@@ -1,4 +1,5 @@
 /**
+  * @props signed_in - true if there a user signed in
   * @props is_admin - true if current user is an admin
   */
 
@@ -26,6 +27,7 @@ class ResourcePage extends React.Component {
       <ResourceModule
         key = { resource_topic.id }
         resource_topic = { resource_topic }
+        signed_in = { this.props.signed_in }
         is_admin = { this.props.is_admin }
       />
     );
@@ -85,5 +87,6 @@ class ResourcePage extends React.Component {
 }
 
 ResourcePage.propTypes = {
+  signed_in: React.PropTypes.bool.isRequired,
   is_admin: React.PropTypes.bool.isRequired,
 };
