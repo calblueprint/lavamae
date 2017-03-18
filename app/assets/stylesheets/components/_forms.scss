@@ -18,6 +18,10 @@ input {
   margin-top: 10px;
 }
 
+.required-field {
+  color: $red;
+}
+
 label {
   font-family: inherit;
   margin-top: 10px;
