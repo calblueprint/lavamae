@@ -74,7 +74,7 @@ class ResourcePage extends React.Component {
       <section className="modules-section">
         <div className="container modules-container">
           <div className="modules-header">
-            <h3>Modules</h3>
+            <h3>Resources</h3>
             { this._renderModuleUploadModal() }
           </div>
           { this._renderStyledModules() }

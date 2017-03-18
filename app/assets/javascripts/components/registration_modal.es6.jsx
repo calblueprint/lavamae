@@ -40,6 +40,7 @@ class RegistrationModal extends React.Component {
     }
     const signupFields = {
       user: {
+        is_admin: false,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         organization: this.state.organization,
