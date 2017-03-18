@@ -44,12 +44,17 @@ class UsersController < ApplicationController
 
   def photo_update
     user = User.find(params[:user_id])
-    if user.update(update_params)
+    if user.update(photo_update_params)
       render_json_message(:ok, message: "Gallery successfully updated!")
     else
       render_json_message(:forbidden, errors: user.errors.full_messages)
     end
   end
+
+  # def photo_destroy
+  #   user = User.find(params[:user_id])
+
+  # end
 
   def convert_photo
     return if params[:user].blank? ||
@@ -64,14 +69,17 @@ class UsersController < ApplicationController
       photo_object.delete(:photo_data)
       photo_object
     end
-
     params[:user][:images_attributes] = images.compact
   end
 
   private
 
   def update_params
-    params.require(:user).permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :profile_pic, :bio, images_attributes: [:id, :photo])
+    params.permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :profile_pic, :bio)
+  end
+
+  def photo_update_params
+    params.require(:user).permit(:id, images_attributes: [:id, :photo])
   end
 
   def map_approval_params

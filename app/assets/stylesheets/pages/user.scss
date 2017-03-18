@@ -122,6 +122,17 @@
   margin-bottom: 15px;
 }
 
+.user-photo {
+  margin: 10px;
+  cursor: pointer;
+
+  &.selected {
+    outline-style: solid;
+    outline-width: 5px;
+    outline-color: $blue-light;
+  }
+}
+
 @media screen and (max-width:630px) {
   .profile-container {
     flex-wrap: wrap;

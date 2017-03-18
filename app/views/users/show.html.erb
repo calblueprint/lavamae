@@ -57,6 +57,22 @@
       <% end %>
     </div>
     <div class="profile-right">
+      <div>
+        <h5 class="profile-section-titles">
+          <%= "Bio" %><br>
+        </h5>
+          <%= react_component('UserBio', user: @user, current_user: current_user) %>
+      </div>
+      <div>
+        <h5 class="profile-section-titles">
+          <%= "Photo Gallery" %><br>
+        </h5>
+          <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
+          <%if current_user && current_user.id == @user.id %>
+            <%= react_component('UserPhotoDelete', user: @user, images: @user.images) %>
+            <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
+          <% end %>
+      </div>
       <%if current_user && current_user.id == @user.id && @user.is_admin %>
       <div>
         <h5 class="profile-section-titles">
@@ -70,22 +86,13 @@
         <h5 class="profile-section-titles">
           <%= "Favorited Discussions" %><br>
         </h5>
-        <div class="favorite-discussions-container col-xs-12 col-md-4" id="discussions">
+        <div class="favorite-discussions" id="discussions">
           <% @favorite_discussions.each do |discussion| %>
             <%= render 'discussions/shortened', {discussion: discussion} %>
           <% end %>
         </div>
       </div>
       <% end %>
-      <div class="user-profile-answers">
-        <%= "Bio" %><br>
-        <%= react_component('UserBio', user: @user) %>
-      </div>
-      <div class="user-profile-answers">
-        <%= "Photo Gallery" %><br>
-        <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
-        <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
-      </div>
     </div>
   </div>
 </section>

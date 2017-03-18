@@ -1,5 +1,6 @@
 /**
- * @prop user - passing in the profile user
+ * @prop user - passing in the profile page user
+ * @prop current_user - passing in the current user viewing the profile page
 **/
 
 class UserBio extends React.Component {
@@ -55,10 +56,12 @@ class UserBio extends React.Component {
   renderContent() {
     let $display = null;
     let userBio = this.state.bio;
-    if (userBio) {
-      $display = (<button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>);
-    } else {
-      $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Add Bio</button>);
+    if (this.props.user.id == this.props.current_user.id) {
+      if (userBio) {
+        $display = (<button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>);
+      } else {
+        $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Add Bio</button>);
+      }
     }
     return (
       <div>

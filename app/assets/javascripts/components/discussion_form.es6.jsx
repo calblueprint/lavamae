@@ -110,7 +110,7 @@ class DiscussionForm extends React.Component {
         tagClass = "discussion-tag";
       }
       return <button key={i} type="button" className={tagClass} name={tag} onClick={this._selectTag}>{tag}</button>;
-      });
+    });
     return tagButtons;
   }
 
@@ -156,7 +156,7 @@ class DiscussionForm extends React.Component {
               <div className="discussion-tag-container" id="tags">
                 {this._renderTags()}
               </div>
-            </div> 
+            </div>
             <div className="user-container pull-right">
               <div className="name-date">
                 <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
@@ -215,7 +215,7 @@ class DiscussionForm extends React.Component {
               <img src={this.props.discussion_userimage} />
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     )
   }

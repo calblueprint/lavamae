@@ -40,6 +40,7 @@ constructor(props) {
   }
 
   _successfulSave() {
+    window.location = "/";
     this.setState({ show_form: false });
   }
 
@@ -80,9 +81,9 @@ constructor(props) {
     let $display = null;
     let userBio = this.props.images;
     if (userBio[0] != null) {
-      $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Edit Gallery</button>);
-    } else {
       $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Add Photos</button>);
+    } else {
+      $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Start a Gallery!</button>);
     }
     return (
       <div>

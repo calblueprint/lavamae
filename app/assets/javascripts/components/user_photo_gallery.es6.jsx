@@ -1,6 +1,5 @@
 /**
  * @prop images - photo gallery for user
- * @prop user - user
 */
 class UserPhotoGallery extends React.Component {
   constructor(props) {
@@ -11,8 +10,11 @@ class UserPhotoGallery extends React.Component {
 
   componentDidMount() {
     $(document).ready(function() {
-      $('#lightgallery').lightGallery({
-        thumbnail: true
+      $('#lightgallery').lightGallery();
+      $('#aniimated-thumbnials').lightGallery({
+        thumbnail:true,
+        animateThumb: false,
+        showThumbByDefault: false
       });
     })
   }
@@ -39,6 +41,5 @@ class UserPhotoGallery extends React.Component {
 }
 
 UserPhotoGallery.propTypes = {
-  user: React.PropTypes.object.isRequired,
   images: React.PropTypes.array,
 };
