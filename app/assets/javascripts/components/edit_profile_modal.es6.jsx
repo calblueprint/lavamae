@@ -199,52 +199,52 @@ class EditProfileModal extends React.Component {
               <div className="input-field">
                 <label htmlFor="first_name">First Name</label>
                 <input id="first-name-input" type="first_name" name="first_name" onChange={this._handleChange}
-                       placeholder="Baby" defaultValue={this.props.first_name} />
+                       placeholder="John" defaultValue={this.props.first_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="last_name">Last Name</label>
                 <input id="last-name-input" type="last_name" name="last_name" onChange={this._handleChange}
-                       placeholder="Panda" defaultValue={this.props.last_name} />
+                       placeholder="Doe" defaultValue={this.props.last_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="email">Email Address</label>
                 <input id="email-input" type="email" name="email" onChange={this._handleChange}
-                       placeholder="panda@lavamae.org" defaultValue={this.props.email} />
+                       placeholder="lavamae@gmail.com" defaultValue={this.props.email} />
               </div>
               <div className="input-field">
                 <label htmlFor="secondary_name">Secondary Contact Name</label>
                 <input id="secondary-name-input" type="secondary_name" name="secondary_name" onChange={this._handleChange}
-                       placeholder="Baby" defaultValue={this.props.secondary_name} />
+                       placeholder="Jane Doe" defaultValue={this.props.secondary_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="email">Secondary Email Address</label>
                 <input id="secondary-email-input" type="secondary_email" name="secondary_email" onChange={this._handleChange}
-                       placeholder="panda@lavamae.org" defaultValue={this.props.secondary_email} />
+                       placeholder="jane@gmail.com" defaultValue={this.props.secondary_email} />
               </div>
               <div className="input-field">
                 <label htmlFor="tertiary_name">Tertiary Contact Name</label>
                 <input id="tertiary-name-input" type="tertiary_name" name="tertiary_name" onChange={this._handleChange}
-                       placeholder="Baby" defaultValue={this.props.tertiary_name} />
+                       placeholder="John Smith" defaultValue={this.props.tertiary_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="email">Tertiary Email Address</label>
                 <input id="tertiary-email-input" type="tertiary_email" name="tertiary_email" onChange={this._handleChange}
-                       placeholder="panda@lavamae.org" defaultValue={this.props.tertiary_email} />
+                       placeholder="john@gmail.com" defaultValue={this.props.tertiary_email} />
               </div>
               <div className="input-field">
                 <label htmlFor="organization">Organization</label>
                 <input id="organization-input" type="organization" name="organization" onChange={this._handleChange}
-                       placeholder="Lava Bae" defaultValue={this.props.organization} />
+                       placeholder="Lava Mae" defaultValue={this.props.organization} />
               </div>
               <div className="input-field">
                 <label htmlFor="organization">Website</label>
                 <input id="website-input" type="website" name="website" onChange={this._handleChange}
-                       placeholder="lavabae.org" defaultValue={this.props.website} />
+                       placeholder="lavamae.org" defaultValue={this.props.website} />
               </div>
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-edit-address" name="location" type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
+                  <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
                 </div>
               </div>
               <div className="input-field">
