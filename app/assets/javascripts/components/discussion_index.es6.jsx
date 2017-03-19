@@ -10,7 +10,7 @@
  */
 
 class DiscussionIndex extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -74,7 +74,7 @@ class DiscussionIndex extends React.Component {
 
   renderDiscussionHeader() {
     let favoritesSelected = "";
-    if (this.state.showFavorites) {  
+    if (this.state.showFavorites) {
       favoritesSelected = "discussion-favorite selected";
     } else {
       favoritesSelected = "discussion-favorite";
@@ -83,13 +83,13 @@ class DiscussionIndex extends React.Component {
     if (this.state.currentUser) {
       header = (
         <div>
-          <a href={this._generateLink(this.state.discussion, this.state.search, this.state.showFavorites)}> 
+          <a href={this._generateLink(this.state.discussion, this.state.search, this.state.showFavorites)}>
             <button className={favoritesSelected}>
               <i className="fa fa-star-o fa-lg"></i>
               <span> Favorites </span>
             </button>
           </a>
-          <a href={'/discussions/new'}> 
+          <a href={'/discussions/new'}>
             <button className="btn btn-blue pull-right">
               Create Discussion
             </button>
@@ -113,7 +113,8 @@ class DiscussionIndex extends React.Component {
     }
     return (
       <a href={this._generateLink(disc, this.state.search, !this.state.showFavorites)} key={disc.id}>
-        <div tabIndex="4" className="discussion-item row">
+        <div tabIndex="4" className={"discussion-item row " +
+          (this.state.discussion.id == disc.id ? "selected-discussion" : "")}>
           <h4 className="discussion-item-title">
             {disc.title}
             <div className = "discussion-item-date pull-right">
