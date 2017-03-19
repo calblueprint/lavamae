@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170312195457) do
+ActiveRecord::Schema.define(version: 20170319064521) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -140,18 +140,18 @@ ActiveRecord::Schema.define(version: 20170312195457) do
     t.integer  "num_actions"
     t.boolean  "is_admin"
     t.boolean  "on_map"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "encrypted_password",     default: "",    null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,     null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "email",                  default: "", null: false
+    t.string   "email",                  default: "",    null: false
     t.string   "profile_pic"
     t.integer  "location_id"
     t.integer  "map_approval_state",     default: 0
@@ -160,6 +160,8 @@ ActiveRecord::Schema.define(version: 20170312195457) do
     t.string   "secondary_email"
     t.string   "tertiary_name"
     t.string   "tertiary_email"
+    t.boolean  "volunteer",              default: false
+    t.boolean  "seeking_volunteer",      default: false
   end
 
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree

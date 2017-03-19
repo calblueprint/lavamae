@@ -7,13 +7,17 @@ class RegistrationModal extends React.Component {
     this._toLogin = this._toLogin.bind(this);
     this._attemptRegistration = this._attemptRegistration.bind(this);
     this._renderInput = this._renderInput.bind(this);
-    this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
+    this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
+    this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
+    this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       map_checked: false,
+      volunteer_checked: false,
+      seeking_volunteer_checked: false,
       profile_pic: "",
       imagePreviewUrl: "",
       location: "",
@@ -54,6 +58,8 @@ class RegistrationModal extends React.Component {
         secondary_email: this.state.secondary_email,
         tertiary_name: this.state.tertiary_name,
         tertiary_email: this.state.tertiary_email,
+        volunteer: this.state.volunteer_checked,
+        seeking_volunteer: this.state.seeking_volunteer_checked,
       }
     };
 
@@ -70,8 +76,16 @@ class RegistrationModal extends React.Component {
     );
   }
 
-  _handleCheckboxChange(e) {
+  _handleMapCheckboxChange(e) {
     this.setState({ map_checked: e.target.checked });
+  }
+
+  _handleVolunteerCheckboxChange(e) {
+    this.setState({ volunteer_checked: e.target.checked });
+  }
+
+  _handleSeekingVolunteerCheckboxChange(e) {
+    this.setState({ seeking_volunteer_checked: e.target.checked });
   }
 
   _handleSelect(e) {
@@ -166,7 +180,27 @@ class RegistrationModal extends React.Component {
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.map_checked}
-                    onChange={this._handleCheckboxChange}
+                    onChange={this._handleMapCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div className="input-field">
+                <label className="control control--checkbox"> I want to volunteer!
+                  <input type="checkbox"
+                    name="volunteer"
+                    checked={this.state.volunteer_checked}
+                    onChange={this._handleVolunteerCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div className="input-field">
+                <label className="control control--checkbox"> I'm looking for volunteers!
+                  <input type="checkbox"
+                    name="seeking_volunteer"
+                    checked={this.state.seeking_volunteer_checked}
+                    onChange={this._handleSeekingVolunteerCheckboxChange}
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>
