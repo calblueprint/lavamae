@@ -21,6 +21,8 @@ Rails.application.routes.draw do
   post '/passwords/request_reset', to: 'passwords#request_reset'
   post '/passwords/reset', to: 'passwords#reset'
 
+  resources :images, only: [:update, :destroy]
+
   resources :discussions do
     resources :responses do
       post '/upvote', to: 'responses#upvote'

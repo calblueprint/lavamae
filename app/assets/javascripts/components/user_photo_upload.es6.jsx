@@ -40,7 +40,7 @@ constructor(props) {
   }
 
   _successfulSave() {
-    window.location = "/";
+    window.location = `/users/${this.props.user.id}`;
     this.setState({ show_form: false });
   }
 
@@ -51,7 +51,7 @@ constructor(props) {
         images_attributes: [{photo_data: this.state.photo}]
       }
     }
-    APIRequester.put(`/users/${this.props.user.id}/photo_update`, userFields, this._successfulSave);
+    APIRequester.put(`/images/${this.props.user.id}`, userFields, this._successfulSave);
   }
 
   renderForm () {

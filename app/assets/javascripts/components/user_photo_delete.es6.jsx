@@ -56,15 +56,9 @@ constructor(props) {
     return renderPhotos;
     }
 
-  // _renderImage(image) {
-  //   return (
-  //     <img className="user-photo" src={image.photo.thumb.url}/>
-  //   );
-  // }
-
   _saveForm(e) {
     e.preventDefault();
-    var selectedImages = document.not('user-photo selected');
+    var selectedImages = document.getElementsByClassName('user-photo selected');
     var imageList = [];
     for (var i = 0; i < selectedImages.length; i++) {
       if (selectedImages[i].name != "") {
@@ -75,10 +69,10 @@ constructor(props) {
     this.setState ({ images: imageList }, () => {
       const userFields = {
         user: {
-          images_attributes: this.state.images
+          photo_ids: this.state.images
         }
       };
-      APIRequester.delete(`/users/${this.props.user.id}`, userFields, this._successfulSave);
+      APIRequester.delete(`/images/${this.props.user.id}`, userFields, this._successfulSave);
     });
   }
 
@@ -94,7 +88,7 @@ constructor(props) {
           <Modal.Header>
             <Modal.Title>Remove Images</Modal.Title>
           </Modal.Header>
-          <form onSubmit={this._success}>
+          <form onSubmit={this._saveForm}>
             <Modal.Body>
               <div className="input-field">
                 Select the images you would like to delete.
