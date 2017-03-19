@@ -113,7 +113,8 @@ class EditProfileModal extends React.Component {
     } else if (loc.length != 0) {
       this._getLongitudeAndLatitudeAndSignUp(loc);
     } else {
-      this._attemptSave();
+      this.setState({ location: "" },
+                    this._attemptSave );
     }
   }
 
@@ -141,6 +142,8 @@ class EditProfileModal extends React.Component {
     if (response) {
       locId = response.id;
       userFields["location_id"] = locId;
+    } else if (this.state.location == "") {
+      userFields["location_id"] = null;
     }
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
   }
