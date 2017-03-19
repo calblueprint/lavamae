@@ -31,6 +31,9 @@ class ModuleUploadModal extends React.Component {
       this._error("No file attached.")
     }
     else {
+      $("#upload").hide();
+      $("#close").hide();
+      $("#loading").show();
       const uploadFields = {
         resource_topic: {
           name: this.state.name,
@@ -104,8 +107,11 @@ class ModuleUploadModal extends React.Component {
             {$filePreview}
           </Modal.Body>
           <Modal.Footer>
-            <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-            <button className="btn btn-blue modal-btn" type="button" onClick={this._handleUpload}>Upload</button>
+            <button id="close" className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
+            <button id="upload" className="btn btn-blue modal-btn" type="button" onClick={this._handleUpload}>Upload</button>
+            <div id="loading" className="loading" style={{display: "none"}}>
+              <img src="/assets/lavamae-bus.gif" />
+            </div>
           </Modal.Footer>
         </Modal>
       </div>
