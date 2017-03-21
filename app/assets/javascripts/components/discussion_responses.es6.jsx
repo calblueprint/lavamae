@@ -14,7 +14,7 @@ class DiscussionResponses extends React.Component {
     this.state = {
       currentUser: this.props.current_user,
       discussion: this.props.discussion,
-      responses: this.props.responses
+      responses: this.props.responses,
     };
   }
 
@@ -68,7 +68,7 @@ class DiscussionResponses extends React.Component {
     }
   }
 
-  renderReponseForm() {
+  renderResponseForm() {
     let form = null;
     if (this.state.currentUser) {
       form = (
@@ -97,10 +97,10 @@ class DiscussionResponses extends React.Component {
 
   render() {
     return (
-      <div>
+      <div id="wrapper">
         <hr className="row" />
         <div className="response-form-container row">
-          {this.renderReponseForm()}
+          {this.renderResponseForm()}
         </div>
         {this.renderResponses()}
       </div>

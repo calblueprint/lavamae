@@ -145,7 +145,7 @@ class DiscussionIndex extends React.Component {
           </div>
             {this.renderDiscussionHeader()}
         </div>
-        <div className="discussion-item-container col-xs-12 col-md-4" id="discussions">
+        <div className="discussion-item-container" id="discussions">
           {this.renderIndex()}
         </div>
       </div>
