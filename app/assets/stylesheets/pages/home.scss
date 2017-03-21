@@ -1,4 +1,4 @@
-.landing, .about {
+.landing, .about, .site-guide {
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%);
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
@@ -41,47 +41,55 @@
   image_url("about-hero.jpg");
 }
 
-.site-map-container {
-  padding-bottom: 80px;
+.site-guide {
+  background: $bg-color;
   flex-wrap: wrap;
-  justify-content: center;
+}
 
-  :not(:last-child) {
-    margin-right: 15px;
-  }
+.thirds-container {
+  align-items: flex-start;
+  display: flex;
 }
 
 .third {
-  max-width: 300px;
+  max-width: 350px;
+  min-height: 354px;
   text-align: center;
+  justify-content: center;
+  flex-direction: column;
   flex-grow: 1;
+  transition: 300ms;
+  cursor: pointer;
+  padding: 20px 20px;
 
   p {
     color: $blue-light;
   }
 
-  .third-hero {
-    max-width: 300px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: 300ms;
+  &:hover {
+    background: $blue-light-10;
 
-    &:hover {
+    img {
       box-shadow: 0 2px 8px $black-20;
     }
+  }
+
+  .third-hero {
+    max-width: 250px;
+    margin-top: 15px;
+    margin-bottom: 15px;;
   }
 }
 
 // VERTICAL NAV
 #cd-vertical-nav {
 	position: fixed;
-	right: 40px;
+	left: 20px;
 	@include center(y); // see partials > _mixins.scss
 	z-index: 4;
 
 	li {
-		text-align: right;
+		text-align: left;
 	}
 
 	a {
@@ -92,7 +100,7 @@
 		@include backface-visibility(hidden);
 
 		span {
-			float: right;
+			float: left;
 			display: inline-block;
 			@include transform(scale(.6));
 		}
@@ -114,8 +122,8 @@
 		position: relative;
 		/* we set a top value in order to align the dot with the label. If you change label's font, you may need to change this top value*/
 		top: 8px;
-		height: 12px;
-		width: 12px;
+		height: 14px;
+		width: 14px;
 		border-radius: 50%;
 		background-color: white;
 		-webkit-transition: -webkit-transform 0.2s, background-color 0.5s;
@@ -126,16 +134,19 @@
 
 	.cd-label {
 		position: relative;
-		margin-right: 10px;
+		margin-left: 10px;
 		padding: .4em .5em;
-		color: white;
-		font-size: 14px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: white;
+    text-transform: uppercase;
 
 		-webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
 		-moz-transition: -moz-transform 0.2s, opacity 0.2s;
 		transition: transform 0.2s, opacity 0.2s;
 		opacity: 0;
-		@include transform-origin(100% 50%);
+		@include transform-origin(0% 50%);
 	}
 }
 
