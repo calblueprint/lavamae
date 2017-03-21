@@ -54,7 +54,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 }
 
 section {
-  padding-top: 80px;
+  padding-top: $nav-height;
   background-color: $bg-color;
 }
 
@@ -73,11 +73,11 @@ section {
 }
 
 .margin-l {
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 .margin-r {
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 @media (min-width: 1200px) {
