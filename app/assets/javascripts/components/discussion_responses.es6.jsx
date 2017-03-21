@@ -97,7 +97,7 @@ class DiscussionResponses extends React.Component {
 
   render() {
     return (
-      <div id="wrapper">
+      <div>
         <hr className="row" />
         <div className="response-form-container row">
           {this.renderResponseForm()}
