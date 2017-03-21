@@ -39,38 +39,40 @@
   </div>
 </div>
 
-<section class="site-map" id="section3">
-  <div class="container site-map-container">
-    <div class="third">
-      <h3>Discussions</h3>
-      <%= link_to discussions_path do %>
+<div class="site-guide" id="section3">
+  <div class="thirds-container">
+    <%= link_to discussions_path do %>
+      <div class="third">
+        <h3>Discussions</h3>
         <%= image_tag("discussion-hero.png", :class => "third-hero") %>
-      <% end %>
-      <p>
-        Connect with others around the globe through discussion threads. Ask
-        discussions, answer discussions, and meet others.
-      </p>
-    </div>
-    <div class="third">
-      <h3>Resources</h3>
-      <%= link_to resource_topics_path do %>
+        <p>
+          Connect with others around the globe through discussion threads. Ask
+          discussions, answer discussions, and meet others.
+        </p>
+      </div>
+    <% end %>
+    <%= link_to resource_topics_path do %>
+      <div class="third">
+        <h3>Resources</h3>
         <%= image_tag("resources-hero.png", :class => "third-hero") %>
-      <% end %>
-      <p>
-        Read through our toolkits to learn more about how to start a project
-        like Lava Mae and best strategies.
-      </p>
-    </div>
-    <div class="third">
-      <h3>Our Network</h3>
-      <%= image_tag("map-hero.png", :class => "third-hero", :id => "backToTop") %>
-      <p>
-        Discover Lava Mae projects all around the world and read stories about
-        other individuals and organizations revolutionizing global sanitation.
-      </p>
-    </div>
+        <p>
+          Read through our toolkits to learn more about how to start a project
+          like Lava Mae and best strategies.
+        </p>
+      </div>
+    <% end %>
+    <%= link_to map_path do %>
+      <div class="third">
+        <h3>Our Network</h3>
+        <%= image_tag("map-hero.png", :class => "third-hero") %>
+        <p>
+          Discover Lava Mae projects all around the world and read stories about
+          other individuals and organizations revolutionizing global sanitation.
+        </p>
+      </div>
+    <% end %>
   </div>
-</section>
+</div>
 
 <!-- Vertical Navigation -->
 <nav id="cd-vertical-nav">
@@ -78,7 +80,7 @@
     <li>
       <a href="#section1" data-number="1">
         <span class="cd-dot"></span>
-        <span class="cd-label">Network</span>
+        <span class="cd-label">Our Network</span>
       </a>
     </li>
     <li>
@@ -90,7 +92,7 @@
     <li>
       <a href="#section3" data-number="3">
         <span class="cd-dot"></span>
-        <span class="cd-label">Site Map</span>
+        <span class="cd-label">Site Guide</span>
       </a>
     </li>
   </ul>
@@ -98,35 +100,37 @@
 
 <script>
 // NAV BAR COLOR CHANGE
+var clicked = false;
 $(document).scroll(function(){
-    var h = ($(window).height())-80;
+    var h = ($(window).height())-67;
     var x = $(this).scrollTop();
     if(x > (h+300))
     {
-       $('.cd-dot').css({"background":"#16ACE6"});
-       $('.cd-label').css({"color":"#16ACE6"});
+       $('.cd-dot').css({"background":"#0093CD"});
+       $('.cd-label').css({"color":"#0093CD"});
     } else if(h < x && x <= (h+300)) {
        $('.nav-home').css({"background":"#16ACE6"});
        $('.cd-dot').css({"background":"white"});
        $('.cd-label').css({"color":"white"});
-    } else {
-       $('.nav-home').css({"background":"transparent"});
-       $('.cd-dot').css({"background":"white"});
-       $('.cd-label').css({"color":"white"});
+    } else if(clicked == false) {
+      $('.cd-dot').css({"background":"white"});
+      $('.cd-label').css({"color":"white"});
     }
-});
-
-// BACK TO TOP
-$("#backToTop").click(function(){
-  $('html').animate({scrollTop:0}, 'slow');
-  $('body').animate({scrollTop:0}, 'slow');
+    else {
+       $('.nav-home').css({"background":"transparent"});
+       $('.cd-dot').css({"background":"#0093CD"});
+       $('.cd-label').css({"color":"#0093CD"});
+    }
 });
 
 // EXPLORE
 $("#explore").click(function(){
+  clicked = true;
   $(this).parent().parent().fadeOut(300, function() {
     $(this).remove();
   });
+  $('.cd-label').css({"color": "#0093CD"});
+  $('.cd-dot').css({"background-color": "#0093CD"});
 });
 
 // MAPBOX
