@@ -106,15 +106,16 @@ $(document).scroll(function(){
     var x = $(this).scrollTop();
     if(x > (h+300))
     {
-       $('.cd-dot').css({"background":"#0093CD"});
-       $('.cd-label').css({"color":"#0093CD"});
+      $('.cd-dot').css({"background":"#0093CD"});
+      $('.cd-label').css({"color":"#0093CD"});
     } else if(h < x && x <= (h+300)) {
-       $('.nav-home').css({"background":"#16ACE6"});
-       $('.cd-dot').css({"background":"white"});
-       $('.cd-label').css({"color":"white"});
+        $('.nav-home').css({"background":"#16ACE6"});
+        $('.cd-dot').css({"background":"white"});
+        $('.cd-label').css({"color":"white"});
     } else if(clicked == false) {
-      $('.cd-dot').css({"background":"white"});
-      $('.cd-label').css({"color":"white"});
+        $('.nav-home').css({"background":"transparent"});
+        $('.cd-dot').css({"background":"white"});
+        $('.cd-label').css({"color":"white"});
     }
     else {
        $('.nav-home').css({"background":"transparent"});
