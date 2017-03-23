@@ -8,12 +8,15 @@ constructor(props) {
     this._cancelEdit = this._cancelEdit.bind(this);
     this._successfulSave = this._successfulSave.bind(this);
     this._enableForm = this._enableForm.bind(this);
+    this._handleTextChange = this._handleTextChange.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this._saveForm = this._saveForm.bind(this);
     this.state = {
       images: [],
       photo: "",
-      filePreviewUrl: ""
+      filePreviewUrl: "",
+      title: "",
+      description: ""
     }
   }
 
@@ -24,6 +27,10 @@ constructor(props) {
 
   _enableForm() {
     this.setState({ show_form: true });
+  }
+
+  _handleTextChange(e) {
+    this.state[$(e.target).attr("name")]= $(e.target).val();
   }
 
   _handleFileChange(e) {
@@ -46,12 +53,12 @@ constructor(props) {
 
   _saveForm(e) {
     e.preventDefault();
-    const userFields = {
+    const imageFields = {
       user: {
-        images_attributes: [{photo_data: this.state.photo}]
+        images_attributes: [{photo_data: this.state.photo}],
       }
     }
-    APIRequester.put(`/images/${this.props.user.id}`, userFields, this._successfulSave);
+    APIRequester.put(`/images/${this.props.user.id}`, imageFields, this._successfulSave);
   }
 
   renderForm () {
@@ -70,6 +77,14 @@ constructor(props) {
             <div className="imgPreview">
               {$imagePreview}
             </div>
+        </div>
+        <div className="input-field">
+          <label htmlFor="title-input">Title</label>
+          <input id="title-input" type="text" name="name" onChange={this._handleTextChange} />
+        </div>
+        <div className="input-field">
+          <label htmlFor="description-input">Description</label>
+          <input id="description-input" type="text" name="description" onChange={this._handleTextChange} />
         </div>
         <button className="btn btn-blue btn-sm save" onClick={this._saveForm}>Save</button>
         <button className="btn btn-sm btn-outline" onClick={this._cancelEdit}>Cancel</button>

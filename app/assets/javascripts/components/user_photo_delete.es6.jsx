@@ -15,7 +15,8 @@ constructor(props) {
     this._successfulSave = this._successfulSave.bind(this);
     this.state = {
       images: this.props.images,
-      showModal: false
+      showModal: false,
+      photo_ids: []
     }
   }
 
@@ -50,7 +51,7 @@ constructor(props) {
         photoClass = "user-photo selected";
       }
       return (
-        <img key={i} onClick={this._selectImage} className={photoClass} src={image.photo.thumb.url}/>
+        <img key={i} onClick={this._selectImage} className="user-photo" src={image.photo.thumb.url} id={image.id}/>
       );
     });
     return renderPhotos;
@@ -61,15 +62,12 @@ constructor(props) {
     var selectedImages = document.getElementsByClassName('user-photo selected');
     var imageList = [];
     for (var i = 0; i < selectedImages.length; i++) {
-      if (selectedImages[i].name != "") {
-        var t = selectedImages[i].name;
-        imageList.push(t);
-      }
+        imageList.push(selectedImages[i].id);
     }
-    this.setState ({ images: imageList }, () => {
+    this.setState ({ photo_ids: imageList }, () => {
       const userFields = {
         user: {
-          photo_ids: this.state.images
+          photo_ids: this.state.photo_ids
         }
       };
       APIRequester.delete(`/images/${this.props.user.id}`, userFields, this._successfulSave);
@@ -77,7 +75,9 @@ constructor(props) {
   }
 
   _successfulSave() {
+    window.location = location.pathname;
     this.setState({ show_form: false });
+    this._closeModal();
   }
 
   render() {

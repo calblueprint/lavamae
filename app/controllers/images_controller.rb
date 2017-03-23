@@ -27,17 +27,18 @@ class ImagesController < ApplicationController
   end
 
   def destroy
-    Image.destroy_all(params[:delete_params])
+    delete_params[:photo_ids].map { |i| i.to_i }
+    Image.where(id: delete_params[:photo_ids]).destroy_all
     render_json_message(:ok, message: "Photos successfully deleted!")
   end
 
   private
 
   def update_params
-    params.require(:user).permit(:id, images_attributes: [:id, :photo], )
+    params.require(:user).permit(:id, images_attributes:[:id, :photo, :title, :description])
   end
 
   def delete_params
-    params.permit(:user_id, photo_ids:[])
+    params.require(:user)
   end
 end
