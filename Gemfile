@@ -39,6 +39,7 @@ gem 'acts-as-taggable-on', '~> 4.0'
 source "https://rails-assets.org" do
   gem 'rails-assets-moment'
   gem 'rails-assets-moment-timezone'
+  gem 'rails-assets-react-tagsinput'
 end
 
 # Frontend

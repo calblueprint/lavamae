@@ -56,6 +56,12 @@ def make_admins
   end
 end
 
+def make_tags
+  ["Starting up", "Funding", "Volunteering", "Partnering", "Learn More"].each do |t|
+    AdminTag.create(name: t)
+  end
+end
+
 def make_discussions
   1.upto(10) do |n|
     discussion = Discussion.create(
@@ -103,6 +109,7 @@ end
 make_locations
 make_users
 make_admins
+make_tags
 make_discussions
 make_responses
 make_modules
