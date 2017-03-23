@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   private
 
   def update_params
-    params.permit(:id, :first_name, :last_name, :email, :organization, :location_id, :website, :on_map, :profile_pic, :bio)
+    params.permit(:id, :first_name, :last_name, :email, :secondary_name, :secondary_email, :tertiary_name, :tertiary_email, :organization, :location_id, :website, :on_map, :profile_pic, :bio);
   end
 
   def map_approval_params

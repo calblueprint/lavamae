@@ -50,6 +50,10 @@ class RegistrationModal extends React.Component {
         password_confirmation: this.state.password_confirmation,
         profile_pic: this.state.profile_pic,
         website: this.state.website,
+        secondary_name: this.state.secondary_name,
+        secondary_email: this.state.secondary_email,
+        tertiary_name: this.state.tertiary_name,
+        tertiary_email: this.state.tertiary_email,
       }
     };
 
@@ -142,6 +146,10 @@ class RegistrationModal extends React.Component {
               <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "Baby") }</div>
               <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Panda") }</div>
               <div className="input-field">{ this._renderInput("email", "Email", "text", "panda@lavabae.org") }</div>
+              <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Baby Panda") }</div>
+              <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "panda2@lavabae.org") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "Baby Panda") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "panda3@lavabae.org") }</div>
               <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
               <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
