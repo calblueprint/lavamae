@@ -61,17 +61,22 @@ constructor(props) {
     e.preventDefault();
     var selectedImages = document.getElementsByClassName('user-photo selected');
     var imageList = [];
-    for (var i = 0; i < selectedImages.length; i++) {
-        imageList.push(selectedImages[i].id);
+    if (selectedImages[0] != null) {
+      for (var i = 0; i < selectedImages.length; i++) {
+          imageList.push(selectedImages[i].id);
+      }
+      this.setState ({ photo_ids: imageList }, () => {
+        const userFields = {
+          user: {
+            photo_ids: this.state.photo_ids
+          }
+        };
+        APIRequester.delete(`/images/${this.props.user.id}`, userFields, this._successfulSave);
+      });
+    } else {
+      toastr.options.positionClass = 'toast-bottom-right';
+      toastr.error("Please select an image.");
     }
-    this.setState ({ photo_ids: imageList }, () => {
-      const userFields = {
-        user: {
-          photo_ids: this.state.photo_ids
-        }
-      };
-      APIRequester.delete(`/images/${this.props.user.id}`, userFields, this._successfulSave);
-    });
   }
 
   _successfulSave() {

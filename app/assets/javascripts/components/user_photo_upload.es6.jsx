@@ -55,7 +55,9 @@ constructor(props) {
     e.preventDefault();
     const imageFields = {
       user: {
-        images_attributes: [{photo_data: this.state.photo}],
+        images_attributes: [{photo_data: this.state.photo,
+                              title: this.state.title,
+                              description: this.state.description}],
       }
     }
     APIRequester.put(`/images/${this.props.user.id}`, imageFields, this._successfulSave);
@@ -80,7 +82,7 @@ constructor(props) {
         </div>
         <div className="input-field">
           <label htmlFor="title-input">Title</label>
-          <input id="title-input" type="text" name="name" onChange={this._handleTextChange} />
+          <input id="title-input" type="text" name="title" onChange={this._handleTextChange} />
         </div>
         <div className="input-field">
           <label htmlFor="description-input">Description</label>

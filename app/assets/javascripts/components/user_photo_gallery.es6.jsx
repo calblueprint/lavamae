@@ -27,7 +27,7 @@ class UserPhotoGallery extends React.Component {
 
   _renderImage(image) {
     return (
-      <a href={image.photo.url} data-sub-html={this._renderCaption("TITLE", "DESCRIPTION")}>
+      <a href={image.photo.url} data-sub-html={this._renderCaption(image.title, image.description)}>
           <img src={image.photo.thumb.url} id={image.id}/>
       </a>
     );

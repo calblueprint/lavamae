@@ -165,14 +165,11 @@ ActiveRecord::Schema.define(version: 20170319214642) do
     t.integer  "location_id"
     t.integer  "map_approval_state",     default: 0
     t.string   "website"
-<<<<<<< HEAD
     t.text     "bio"
-=======
     t.string   "secondary_name"
     t.string   "secondary_email"
     t.string   "tertiary_name"
     t.string   "tertiary_email"
->>>>>>> master
   end
 
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
