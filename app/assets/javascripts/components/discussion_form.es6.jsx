@@ -156,14 +156,18 @@ class DiscussionForm extends React.Component {
               <div className="discussion-tag-container" id="tags">
                 {this._renderTags()}
               </div>
-            </div> 
+            </div>
             <div className="user-container pull-right">
               <div className="name-date">
-                <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
+                <a href={"users/" + this.props.discussion.user_id}>
+                  <div className="user-name">{this.props.discussion_username}</div>
+                </a>
                 <div className="date">posted {this.props.date_handler(this.state.data)}</div>
               </div>
               <div className="user-picture">
-                <img src={this.props.discussion_userimage} />
+                <a href={"users/" + this.props.discussion.user_id}>
+                  <img src={this.props.discussion_userimage} />
+                </a>
               </div>
             </div>
           </div>
@@ -208,14 +212,18 @@ class DiscussionForm extends React.Component {
           </div>
           <div className="user-container pull-right">
             <div className="name-date">
-              <a href=""><div className="user-name">{this.props.discussion_username}</div></a>
+              <a href={"users/" + this.props.discussion.user_id}>
+                <div className="user-name">{this.props.discussion_username}</div>
+              </a>
               <div className="date">posted {this.props.date_handler(this.state.data)}</div>
             </div>
             <div className="user-picture">
-              <img src={this.props.discussion_userimage} />
+              <a href={"users/" + this.props.discussion.user_id}>
+                <img src={this.props.discussion_userimage} />
+              </a>
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     )
   }

@@ -54,9 +54,9 @@ class Upvote extends React.Component {
     let $upvoteArrow = null;
     let $plural = "Upvotes";
     if (this.state.has_upvoted) {
-      $upvoteArrow = (<i className="upvote-button fa fa-angle-down fa-lg" onClick = {this._handleUpvote}></i>);
+      $upvoteArrow = (<i className="upvote-button fa fa-thumbs-up fa-lg" onClick = {this._handleUpvote}></i>);
     } else if (!this.state.has_upvoted && this.props.user) {
-      $upvoteArrow = (<i className="upvote-button fa fa-angle-up fa-lg" onClick = {this._handleUpvote}></i>);
+      $upvoteArrow = (<i className="upvote-button fa fa-thumbs-o-up fa-lg" onClick = {this._handleUpvote}></i>);
     }
     if (this.state.score == 1) {
       $plural = "Upvote"

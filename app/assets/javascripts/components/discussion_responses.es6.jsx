@@ -14,7 +14,7 @@ class DiscussionResponses extends React.Component {
     this.state = {
       currentUser: this.props.current_user,
       discussion: this.props.discussion,
-      responses: this.props.responses
+      responses: this.props.responses,
     };
   }
 
@@ -42,11 +42,15 @@ class DiscussionResponses extends React.Component {
             />
             <div className="user-container">
               <div className="name-date">
-                <a href=""><div className="user-name">{response.user_name}</div></a>
+                <a href={"users/" + response.user_id}>
+                  <div className="user-name">{response.user_name}</div>
+                </a>
                 <div className="date">{this.props.date_handler(response)}</div>
               </div>
               <div className="user-picture">
-                <img src={response.user_image} />
+                <a href={"users/" + response.user_id}>
+                  <img src={response.user_image} />
+                </a>
               </div>
             </div>
           </div>
@@ -64,7 +68,7 @@ class DiscussionResponses extends React.Component {
     }
   }
 
-  renderReponseForm() {
+  renderResponseForm() {
     let form = null;
     if (this.state.currentUser) {
       form = (
@@ -96,7 +100,7 @@ class DiscussionResponses extends React.Component {
       <div>
         <hr className="row" />
         <div className="response-form-container row">
-          {this.renderReponseForm()}
+          {this.renderResponseForm()}
         </div>
         {this.renderResponses()}
       </div>
