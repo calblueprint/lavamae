@@ -14,13 +14,9 @@ class DiscussionIndex extends React.Component {
 
   constructor(props) {
     super(props);
-    this._addTag = this._addTag.bind(this);
-    this._successfulSave = this._successfulSave.bind(this);
     this._generateLink = this._generateLink.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
-    this._success = this._success.bind(this);
-    this._handleChange = this._handleChange.bind(this);
     this.state = {
       showFavorites: this.props.show_favorites != null,
       currentUser: this.props.current_user,
@@ -35,40 +31,12 @@ class DiscussionIndex extends React.Component {
     };
   }
 
-  _handleChange(tags) {
-    this.setState({tags})
-  }
-
-
   _openModal() {
     this.setState({ showModal: true });
   }
 
   _closeModal() {
     this.setState({ showModal: false });
-  }
-
-  _success(msg) {
-    this._closeModal();
-    toastr.options.positionClass = 'toast-bottom-right';
-    toastr.success("Save successful!");
-    window.location = "/";
-  }
-
-  _successfulSave() {
-
-  }
-
-  _addTag(tag) {
-    this.setState({ allTags: this.state.allTags.push(tag) },
-                   () => {
-                    const tagFields = {
-                    tag: {
-                      name: tag
-                    }
-                  };
-                  APIRequester.put(`/admintags/new`, tagFields, this._successfulSave);
-                });
   }
 
   _generateLink(disc, search, fav, filter) {
@@ -189,21 +157,11 @@ class DiscussionIndex extends React.Component {
             {this.renderFilters()}
             <button className="discussion-tag" onClick={this._openModal}>Manage Tags</button>
 
-            <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
-              <Modal.Header>
-                <Modal.Title>Manage Tags</Modal.Title>
-              </Modal.Header>
-              <form onSubmit={this._success}>
-                <Modal.Body>
-                  <TagManager
-                    tags = {this.state.allTags}
-                  />
-                </Modal.Body>
-                <Modal.Footer>
-                  <button className="btn btn-outline" type="button" onClick={this._closeModal}>Cancel</button>
-                  <button className="btn btn-blue modal-btn" type="submit">Save</button>
-                </Modal.Footer>
-              </form>
+            <Modal className="modal" show={this.state.showModal} onHide={this._closeModal}>
+              <TagManager
+                tags = {this.state.allTags}
+                close_modal_handler = {this._closeModal}
+              />
             </Modal>
 
           </div>
