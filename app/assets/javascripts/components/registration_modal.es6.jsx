@@ -40,6 +40,7 @@ class RegistrationModal extends React.Component {
     }
     const signupFields = {
       user: {
+        is_admin: false,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         organization: this.state.organization,
@@ -60,10 +61,14 @@ class RegistrationModal extends React.Component {
     APIRequester.post("/sign_up", signupFields, (msg) => {});
   }
 
-  _renderInput(name, label, type, placeholder) {
+  _renderInput(name, label, type, placeholder, required=false) {
+    let $requiredField;
+    if (required) {
+      $requiredField = (<label className="required-field">*</label>);
+    }
     return (
       <div>
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name}>{label} {$requiredField}</label>
         <input onChange={this._handleChange} name={name}
           type={type} placeholder={placeholder} />
       </div>
@@ -143,21 +148,22 @@ class RegistrationModal extends React.Component {
           <div className="signup-row">
           <h3>Create an Account</h3>
             <form>
-              <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "Baby") }</div>
-              <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Panda") }</div>
-              <div className="input-field">{ this._renderInput("email", "Email", "text", "panda@lavabae.org") }</div>
-              <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Baby Panda") }</div>
-              <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "panda2@lavabae.org") }</div>
-              <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "Baby Panda") }</div>
-              <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "panda3@lavabae.org") }</div>
-              <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
-              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
-              <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
+              <label className="required-field">* Required</label>
+              <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "John", required=true) }</div>
+              <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Doe", required=true) }</div>
+              <div className="input-field">{ this._renderInput("email", "Email", "text", "lavamae@gmail.com", required=true) }</div>
+              <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Jane Doe") }</div>
+              <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "jane@gmail.com") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "John Smith") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "john@gmail.com") }</div>
+              <div className="input-field">{ this._renderInput("password", "Password", "password", "", required=true) }</div>
+              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "", required=true) }</div>
+              <div className="input-field">{ this._renderInput("organization", "Organization", "text", "Lava Mae") }</div>
               <div className="input-field">{ this._renderInput("website", "Website", "text", "lavabae.org") }</div>
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-address" name="location" type="text" placeholder="Berkeley, CA, United States" />
+                  <input id="my-address" name="location" type="text" />
                 </div>
               </div>
 

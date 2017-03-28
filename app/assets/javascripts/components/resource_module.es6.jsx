@@ -1,21 +1,24 @@
 /**
  * @prop resource_topic - passed down module
+ * @prop signed_in - true if there a user signed in
  * @prop is_admin - true if current user is an admin
  */
 
 class ResourceModule extends React.Component {
   constructor(props) {
     super(props);
-    this._handleClick = this._handleClick.bind(this);
+    this._handlePreview = this._handlePreview.bind(this);
     this._handleError = this._handleError.bind(this);
     this._renderAdminEditModal = this._renderAdminEditModal.bind(this);
     this._renderAdminDeleteModal = this._renderAdminDeleteModal.bind(this);
+    this._renderPreviewButton = this._renderPreviewButton.bind(this);
+    this._renderActionItems = this._renderActionItems.bind(this);
     this.state = {
       resources: {},
     };
   }
 
-  _handleClick(e) {
+  _handlePreview(e) {
     e.preventDefault();
     window.open(this.props.resource_topic.attachment.url);
   }
@@ -56,6 +59,33 @@ class ResourceModule extends React.Component {
     return deleteModal;
   }
 
+  _renderPreviewButton() {
+    let previewButton = (
+      <div className="btn btn-sm btn-action module-download" onClick = {this._handlePreview}>
+        <i className="fa fa-download fa-lg"></i>
+        <span>Preview</span>
+      </div>
+    );
+    return previewButton;
+  }
+
+  _renderActionItems() {
+    let actionItems;
+    if (this.props.signed_in) {
+      actionItems = (
+        <div>
+          <hr></hr>
+          <div className="module-item-actions">
+            { this._renderAdminEditModal() }
+            { this._renderAdminDeleteModal() }
+            { this._renderPreviewButton() }
+          </div>
+        </div>
+      );
+    }
+    return actionItems;
+  }
+
   render() {
     return (
         <div className="module-item-container">
@@ -68,15 +98,7 @@ class ResourceModule extends React.Component {
               {this.props.resource_topic.description}
               <p>Last Updated: {this.props.resource_topic.updated_at.slice(0, 10)}</p>
             </div>
-            <hr></hr>
-            <div className="module-item-actions">
-              { this._renderAdminEditModal() }
-              { this._renderAdminDeleteModal() }
-              <div className="btn btn-sm btn-action module-download" onClick = {this._handleClick}>
-                <i className="fa fa-download fa-lg"></i>
-                <span>Download</span>
-              </div>
-            </div>
+            { this._renderActionItems() }
           </div>
         </div>
     )
@@ -85,5 +107,6 @@ class ResourceModule extends React.Component {
 
 ResourceModule.propTypes = {
   resource_topic: React.PropTypes.object.isRequired,
+  signed_in: React.PropTypes.bool.isRequired,
   is_admin: React.PropTypes.bool.isRequired,
 };
