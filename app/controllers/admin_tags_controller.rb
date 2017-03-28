@@ -1,13 +1,16 @@
 class AdminTagsController < ApplicationController
 
-  def create
-  	tag = AdminTag.create(tag_params)
+  def save
+  	AdminTag.destroy_all
+  	params[:tags].each do |t|
+  		AdminTag.create(name: t)
+  	end
   	redirect_to discussions_path
   end
 
     private
   	def tag_params
-  		params.require(:tag).permit(:name)
+  		params.permit(tags: [])
   	end
 
 end
