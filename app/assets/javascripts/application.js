@@ -20,5 +20,4 @@
 //= require moment-timezone
 //= require components
 //= require toastr
-//= require react-tagsinput
 //= require_tree .
