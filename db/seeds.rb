@@ -62,7 +62,7 @@ def make_admins
 end
 
 def make_tags
-  ["Starting up", "Funding", "Volunteering", "Partnering", "Learn More"].each do |t|
+  ["starting up", "funding", "volunteering", "partnering", "learn more"].each do |t|
     AdminTag.create(name: t)
   end
 end
@@ -72,7 +72,7 @@ def make_discussions
     discussion = Discussion.create(
       content: "lavabae++",
       title: "Discussion #{n}",
-      tag_list: ["Volunteering", "Starting up"],
+      tag_list: ["volunteering", "starting up"],
       user_id: n % 5 + 1
     )
     discussion.score = 0

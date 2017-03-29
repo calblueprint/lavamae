@@ -148,6 +148,11 @@ class DiscussionIndex extends React.Component {
   }
 
   render() {
+    var tagManager = null;
+    if (this.props.current_user && this.props.current_user.is_admin) {
+      tagManager =  <button className="discussion-tag" onClick={this._openModal}>Manage Tags</button>;
+    }
+
     return (
       <div>
         <div className="discussion-header">
@@ -155,8 +160,7 @@ class DiscussionIndex extends React.Component {
           <div className="discussion-tag-container" id="tags">
             <i className="fa fa-tags fa-lg"></i>
             {this.renderFilters()}
-            <button className="discussion-tag" onClick={this._openModal}>Manage Tags</button>
-
+            {tagManager}
             <Modal className="modal" show={this.state.showModal} onHide={this._closeModal}>
               <TagManager
                 tags = {this.state.allTags}

@@ -6,6 +6,7 @@
  * @prop discussion_userimage - discussion user profile image
  * @prop upvotes - discussion upvotes
  * @prop date_handler - handler to render timestamp
+ * @prop all_tags - all tags
  */
 
 class DiscussionForm extends React.Component {
@@ -51,7 +52,7 @@ class DiscussionForm extends React.Component {
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Delete successful!");
     window.location = "/";
-    APIRequester.delete(`/discussions/${this.props.discussion.id}`, this._closeModal);
+    APIRequester.delete(`/discussions/${this.props.discussion.id}`, {} , this._closeModal);
   }
 
   _cancelEdit(e) {
@@ -101,7 +102,7 @@ class DiscussionForm extends React.Component {
   }
 
   _renderFormTags() {
-    const allTags = ["Starting up", "Funding", "Volunteering", "Partnering", "Learn More"];
+    const allTags = this.props.all_tags;
     let tagButtons = allTags.map((tag, i) => {
       var tagClass;
       if (this.state.tags.includes(tag)) {
@@ -248,5 +249,6 @@ DiscussionForm.propTypes = {
   discussion_username: React.PropTypes.string.isRequired,
   discussion_userimage: React.PropTypes.string.isRequired,
   upvotes: React.PropTypes.array,
-  date_handler: React.PropTypes.func
+  date_handler: React.PropTypes.func,
+  all_tags: React.PropTypes.array.isRequired
 };
