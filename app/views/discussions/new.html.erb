@@ -21,11 +21,11 @@
       <div class="discussion-tag-container" id="tags">
         <i class="fa fa-tags fa-lg"></i>
         <% @all_tags.each do |t|%>
-        <button type="button" class="discussion-tag" name=<%= t %>><%= t %></button>
+          <%= button_tag(t, {class: "discussion-tag", name: t.downcase, type: 'button'}) %>
         <% end %>
       </div>
       <% @all_tags.each do |t|%>
-        <%= check_box_tag("tags[]", t, false, {class: "hidden", id: t}) %>
+        <%= check_box_tag("tags[]", t, false, {class: "hidden", id: t.downcase}) %>
       <% end %>
       <br />
       <br />

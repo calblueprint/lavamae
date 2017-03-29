@@ -50,6 +50,7 @@ class DiscussionPage extends React.Component {
               discussion_username = {this.props.discussion_username}
               discussion_userimage = {this.props.discussion_userimage}
               date_handler = {this._generateTimeStamp}
+              all_tags = {this.props.all_tags}
             />
           </div>
           <DiscussionResponses

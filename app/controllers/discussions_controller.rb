@@ -48,6 +48,7 @@ class DiscussionsController < ApplicationController
   def new
   	@discussion = Discussion.new
     @all_tags = AdminTag.pluck(:name)
+    puts @all_tags
   end
 
   def edit
