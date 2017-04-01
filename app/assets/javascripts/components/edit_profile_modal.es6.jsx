@@ -124,9 +124,17 @@ class EditProfileModal extends React.Component {
       } else {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
+    } else if (this.state.volunteer_checked || this.state.seeking_volunteer_checked) {
+      if (loc.length == 0) {
+        this._error("Please enter a location if you want to volunteer/find volunteers in your area.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp(loc);
+      }
     } else if (loc.length != 0) {
+      console.log("where are u bug")
       this._getLongitudeAndLatitudeAndSignUp(loc);
     } else {
+      console.log("where are u bug 2")
       this._attemptSave();
     }
   }
@@ -260,7 +268,7 @@ class EditProfileModal extends React.Component {
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-edit-address" name="location" type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
+                  <input id="my-edit-address" name="location" onChange={this._handleChange} type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
                 </div>
               </div>
               <div className="input-field">

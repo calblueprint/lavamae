@@ -8,7 +8,6 @@ class UsersController < ApplicationController
       @location = Location.find(@user.location_id)
     end
     @favorite_discussions = @user.favorite_discussions
-    # TODO: also filter by location id
     @volunteers = User.where("volunteer = ? OR seeking_volunteer = ?", true, true).where(location_id: @location).where.not(id: @user.id)
     if @user.is_admin
       @pending_map_users = User.where(map_approval_state: 0, on_map: true)

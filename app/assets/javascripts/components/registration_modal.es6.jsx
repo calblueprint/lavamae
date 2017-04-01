@@ -136,6 +136,12 @@ class RegistrationModal extends React.Component {
       } else {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
+    } else if (this.state.volunteer_checked || this.state.seeking_volunteer_checked) {
+      if (loc.length == 0) {
+        this._error("Please enter a location if you want to volunteer/find volunteers in your area.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp(loc);
+      }
     } else if (loc.length != 0) {
       this._getLongitudeAndLatitudeAndSignUp(loc);
     } else {
@@ -171,7 +177,7 @@ class RegistrationModal extends React.Component {
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-address" name="location" type="text" placeholder="Berkeley, CA, United States" />
+                  <input id="my-address" name="location" onChange={this._handleChange} type="text" placeholder="Berkeley, CA, United States" />
                 </div>
               </div>
 
