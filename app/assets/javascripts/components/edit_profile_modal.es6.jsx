@@ -124,7 +124,14 @@ class EditProfileModal extends React.Component {
       } else {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
+    } else if (this.state.volunteer_checked || this.state.seeking_volunteer_checked) {
+      if (loc.length == 0) {
+        this._error("Please enter a location if you want to volunteer/find volunteers in your area.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp(loc);
+      }
     } else if (loc.length != 0) {
+      console.log("where are u bug")
       this._getLongitudeAndLatitudeAndSignUp(loc);
     } else {
       this.setState({ location: "" },

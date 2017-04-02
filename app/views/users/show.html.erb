@@ -105,7 +105,7 @@
         </div>
       </div>
       <% end %>
-      <%if current_user && current_user.id == @user.id %>
+      <%if current_user && current_user.id == @user.id  && (@user.volunteer || @user.seeking_volunteer)%>
       <div>
         <h5 class="profile-section-titles">
           <%= "Volunteer Matching in Your Area" %><br>
