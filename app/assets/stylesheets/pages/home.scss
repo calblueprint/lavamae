@@ -1,8 +1,8 @@
-.landing, .about, .site-guide {
+.landing, .site-guide {
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%);
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
-  height: 100vh;
+  height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,9 +31,18 @@
   }
 }
 
+.map-home {
+  top: 0 !important;
+  height: 95vh;
+
+  .mapboxgl-ctrl-geocoder {
+    display: none;
+  }
+}
+
 .filler {
-  height: 100vh;
-  background: $blue-light;
+  height: 95vh;
+  background: $bg-color;
 }
 
 .about {

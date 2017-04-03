@@ -1,12 +1,7 @@
 <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
 
-<div id='map'></div>
-<% if !user_signed_in? %>
-  <div class="aux-map-tools">
-    <%= button_to "Join the Movement", sign_up_path, :class => "btn btn-blue btn-join", :method  => :get %>
-  </div>
-<% end %>
+<div class="map-home" id='map'></div>
 
 <div class="landing">
   <div class="landing-text">
@@ -22,24 +17,11 @@
   </div>
 </div>
 
-<div class="filler" id="section1">
+<!-- Needed for black overlay -->
+<div class="filler">
 </div>
 
-<div class="about" id="section2">
-  <div class="landing-text">
-    <h1 class="landing-title">Who are we?</h1>
-    <h4 class="landing-body">
-      Lava Mae is a San Francisco-based nonprofit bringing humanity, innovation,
-      and collaboration to the way services are provided to those experiencing
-      homelessness.
-    </h4>
-    <a href="http://lavamae.org/" target="_blank">
-      <button class="btn btn-blue">Find Out More</button>
-    </a>
-  </div>
-</div>
-
-<div class="site-guide" id="section3">
+<div class="site-guide">
   <div class="thirds-container">
     <%= link_to discussions_path do %>
       <div class="third">
@@ -74,64 +56,24 @@
   </div>
 </div>
 
-<!-- Vertical Navigation -->
-<nav id="cd-vertical-nav">
-  <ul>
-    <li>
-      <a href="#section1" data-number="1">
-        <span class="cd-dot"></span>
-        <span class="cd-label">Our Network</span>
-      </a>
-    </li>
-    <li>
-      <a href="#section2" data-number="2">
-        <span class="cd-dot"></span>
-        <span class="cd-label">About</span>
-      </a>
-    </li>
-    <li>
-      <a href="#section3" data-number="3">
-        <span class="cd-dot"></span>
-        <span class="cd-label">Site Guide</span>
-      </a>
-    </li>
-  </ul>
-</nav>
-
 <script>
 // NAV BAR COLOR CHANGE
-var clicked = false;
-$(document).scroll(function(){
-    var h = ($(window).height())-67;
-    var x = $(this).scrollTop();
-    if(x > (h+300))
-    {
-      $('.cd-dot').css({"background":"#0093CD"});
-      $('.cd-label').css({"color":"#0093CD"});
-    } else if(h < x && x <= (h+300)) {
-        $('.nav-home').css({"background":"#16ACE6"});
-        $('.cd-dot').css({"background":"white"});
-        $('.cd-label').css({"color":"white"});
-    } else if(clicked == false) {
-        $('.nav-home').css({"background":"transparent"});
-        $('.cd-dot').css({"background":"white"});
-        $('.cd-label').css({"color":"white"});
-    }
-    else {
-       $('.nav-home').css({"background":"transparent"});
-       $('.cd-dot').css({"background":"#0093CD"});
-       $('.cd-label').css({"color":"#0093CD"});
+var h = $(".site-guide").offset().top;
+$(window).scroll(function () {
+    var x = $(this).scrollTop() + 67;
+    console.log(h, x);
+    if (x > h) {
+      $('.nav-home').addClass('blue-nav');
+    } else {
+      $('.nav-home').removeClass('blue-nav');
     }
 });
 
 // EXPLORE
 $("#explore").click(function(){
-  clicked = true;
-  $(this).parent().parent().fadeOut(300, function() {
-    $(this).remove();
-  });
-  $('.cd-label').css({"color": "#0093CD"});
-  $('.cd-dot').css({"background-color": "#0093CD"});
+  $('html,body').animate({
+    scrollTop: $(".site-guide").offset().top},
+  'slow');
 });
 
 // MAPBOX
@@ -199,54 +141,4 @@ map.on('load', function() {
   <% end %>
 });
 
-// VERTICAL NAV
-jQuery(document).ready(function($){
-	var contentSections = $('.cd-section'),
-		navigationItems = $('#cd-vertical-nav a');
-
-	updateNavigation();
-	$(window).on('scroll', function(){
-		updateNavigation();
-	});
-
-	//smooth scroll to the section
-	navigationItems.on('click', function(event){
-        event.preventDefault();
-        smoothScroll($(this.hash));
-    });
-    //smooth scroll to second section
-    $('.cd-scroll-down').on('click', function(event){
-        event.preventDefault();
-        smoothScroll($(this.hash));
-    });
-
-    //open-close navigation on touch devices
-    $('.touch .cd-nav-trigger').on('click', function(){
-    	$('.touch #cd-vertical-nav').toggleClass('open');
-
-    });
-    //close navigation on touch devices when selectin an elemnt from the list
-    $('.touch #cd-vertical-nav a').on('click', function(){
-    	$('.touch #cd-vertical-nav').removeClass('open');
-    });
-
-	function updateNavigation() {
-		contentSections.each(function(){
-			$this = $(this);
-			var activeSection = $('#cd-vertical-nav a[href="#'+$this.attr('id')+'"]').data('number') - 1;
-			if ( ( $this.offset().top - $(window).height()/2 < $(window).scrollTop() ) && ( $this.offset().top + $this.height() - $(window).height()/2 > $(window).scrollTop() ) ) {
-				navigationItems.eq(activeSection).addClass('is-selected');
-			}else {
-				navigationItems.eq(activeSection).removeClass('is-selected');
-			}
-		});
-	}
-
-	function smoothScroll(target) {
-    $('body,html').animate(
-    	{'scrollTop':target.offset().top},
-    	300
-    );
-	}
-});
 </script>
