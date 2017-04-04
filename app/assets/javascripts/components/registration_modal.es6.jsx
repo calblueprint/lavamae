@@ -186,7 +186,7 @@ class RegistrationModal extends React.Component {
                   <input id="my-address" name="location" type="text" />
                 </div>
               </div>
-
+              <div>Map Pin</div>
               <div className="input-field">
                 <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
@@ -197,8 +197,9 @@ class RegistrationModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
+              <div >I want to...</div>
               <div className="input-field">
-                <label className="control control--checkbox"> I want to volunteer!
+                <label className="control control--checkbox"> Volunteer
                   <input type="checkbox"
                     name="volunteer"
                     checked={this.state.volunteer_checked}
@@ -208,7 +209,7 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label className="control control--checkbox"> I'm looking for volunteers!
+                <label className="control control--checkbox"> Look for volunteers
                   <input type="checkbox"
                     name="seeking_volunteer"
                     checked={this.state.seeking_volunteer_checked}
