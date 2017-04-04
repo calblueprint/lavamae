@@ -40,7 +40,7 @@ class TagManager extends React.Component {
 
   _removeTag(e) {
     e.preventDefault();
-    var newTags = this.state.tags.filter(function(x) { return x != $(e.target).val() })
+    var newTags = this.state.tags.filter(function(x) { return x != e.currentTarget.value })
     this.setState({tags: newTags});
   }
 
@@ -62,7 +62,7 @@ class TagManager extends React.Component {
         </Modal.Header>
         <form onSubmit={this._success}>
           <Modal.Body>
-            <input type="text" onKeyPress={this._handleKeyPress}/>
+            <input type="text" placeholder="Press enter to add" onKeyPress={this._handleKeyPress}/>
             <br />
             <br />
             {this.renderTags()}
