@@ -125,7 +125,6 @@ class EditProfileModal extends React.Component {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
     } else if (loc.length != 0) {
-      console.log("where are u bug")
       this._getLongitudeAndLatitudeAndSignUp(loc);
     } else {
       this.setState({ location: "" },
@@ -264,7 +263,11 @@ class EditProfileModal extends React.Component {
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
+<<<<<<< HEAD
                   <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
+=======
+                  <input id="my-edit-address" name="location" onChange={this._handleChange} type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
+>>>>>>> 45c5fbf8c006b5da06fdfac7c0c59be56efd79a1
                 </div>
               </div>
               <div className="input-field">
