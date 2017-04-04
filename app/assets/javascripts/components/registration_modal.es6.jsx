@@ -135,7 +135,7 @@ class RegistrationModal extends React.Component {
 
   _startSignUpProcess(e) {
     let loc = document.getElementById("my-address").value;
-    if (this.state.on_map) {
+    if (this.state.map_checked) {
       if (loc.length == 0) {
         this._error("Please enter a location if you want to be on the map.");
       } else {

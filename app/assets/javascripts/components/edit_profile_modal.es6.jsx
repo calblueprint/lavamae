@@ -118,15 +118,9 @@ class EditProfileModal extends React.Component {
 
   _startSignUpProcess(e) {
     let loc = document.getElementById("my-edit-address").value;
-    if (this.state.on_map) {
+    if (this.state.on_map || this.state.volunteer || this.state.seeking_volunteer) {
       if (loc.length == 0) {
-        this._error("Please enter a location if you want to be on the map.");
-      } else {
-        this._getLongitudeAndLatitudeAndSignUp(loc);
-      }
-    } else if (this.state.volunteer_checked || this.state.seeking_volunteer_checked) {
-      if (loc.length == 0) {
-        this._error("Please enter a location if you want to volunteer/find volunteers in your area.");
+        this._error("Please enter a location.");
       } else {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
@@ -160,7 +154,7 @@ class EditProfileModal extends React.Component {
     if (this.state.website) {
       userFields.website = this.state.website;
     }
-
+    console.log(this.state.location)
     var locId = null;
     if (response) {
       locId = response.id;
