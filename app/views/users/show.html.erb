@@ -8,9 +8,18 @@
           <%= image_tag("default.png") %>
         <% end %>
       </div>
+      <div>
+        <%= @user.first_name %>
+        <%= @user.last_name %>
+        <% if @user.seeking_volunteer %>
+        <p>Seeking Volunteers</p>
+        <% end %>
+        <% if @user.volunteer %>
+        <p>Volunteer</p>
+        <% end %>
+      </div>
       <div class="user-info user-flex">
         <div class="user-profile-fields">
-          Name<br>
           Email<br>
           <% if (@user.secondary_name && @user.secondary_name != "") || (@user.secondary_email && @user.secondary_email != "") %>
           Secondary<br>
@@ -30,10 +39,6 @@
         </div>
         <div class="vertical-line">
           <div class="user-profile-answers">
-            <div>
-              <%= @user.first_name %>
-              <%= @user.last_name %>
-            </div>
             <%= @user.email %><br>
             <% if @user.secondary_name && @user.secondary_name != "" %>
               <%= @user.secondary_name %><br>
