@@ -61,12 +61,18 @@ def make_admins
   end
 end
 
+def make_tags
+  ["starting up", "funding", "volunteering", "partnering", "learn more"].each do |t|
+    AdminTag.create(name: t)
+  end
+end
+
 def make_discussions
   1.upto(10) do |n|
     discussion = Discussion.create(
       content: "lavabae++",
       title: "Discussion #{n}",
-      tag_list: ["Volunteering", "Starting up"],
+      tag_list: ["volunteering", "starting up"],
       user_id: n % 5 + 1
     )
     discussion.score = 0
@@ -108,6 +114,7 @@ end
 make_locations
 make_users
 make_admins
+make_tags
 make_discussions
 make_responses
 make_modules

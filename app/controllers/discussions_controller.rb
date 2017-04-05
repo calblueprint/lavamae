@@ -4,6 +4,7 @@ class DiscussionsController < ApplicationController
 
   def index
     @discussions = Discussion.all
+    @all_tags = AdminTag.pluck(:name)
 
     if current_user
       @favorite_discussions = current_user.favorite_discussions
@@ -46,6 +47,8 @@ class DiscussionsController < ApplicationController
 
   def new
   	@discussion = Discussion.new
+    @all_tags = AdminTag.pluck(:name)
+    puts @all_tags
   end
 
   def edit
