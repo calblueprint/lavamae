@@ -5,6 +5,7 @@
   justify-content: center;
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%),
   image_url("about-hero.jpg");
+  text-align: center;
 
   .about-text {
     max-width: 500px;
