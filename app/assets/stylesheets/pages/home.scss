@@ -45,11 +45,6 @@
   background: $bg-color;
 }
 
-.about {
-  background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
-  image_url("about-hero.jpg");
-}
-
 .site-guide {
   background: $bg-color;
   flex-wrap: wrap;
