@@ -4,7 +4,7 @@
  */
 
 class TagManager extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this._handleKeyPress = this._handleKeyPress.bind(this);
@@ -47,9 +47,9 @@ class TagManager extends React.Component {
   renderTags() {
     return this.state.tags.map((tag, i) => {
       return ( 
-            <button key={i} value={tag} className="discussion-tag" onClick={this._removeTag}>
+            <button key={i} value={tag} className="discussion-tag discussion-tag-filter" onClick={this._removeTag}>
               {tag} <i className="fa fa-times fa-lg"></i>
-              
+
             </button>
       )});
   }
