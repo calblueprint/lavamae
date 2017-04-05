@@ -35,9 +35,7 @@ Rails.application.routes.draw do
   get '/map', to: 'maps#map'
   post '/favorite_discussion/:id', to: 'discussions#favorite'
   delete '/favorite_discussion/:id', to: 'discussions#unfavorite'
-  get '/static_discussion', to: 'static_pages#discussion'
-  get '/static_map', to: 'static_pages#map'
-
+  get '/about', to: 'pages#about'
 
   namespace :api do
     resources :resource_topics, only: [:index]

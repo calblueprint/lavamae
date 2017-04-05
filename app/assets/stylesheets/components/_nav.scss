@@ -76,6 +76,10 @@
   margin-right: 15px;
 }
 
+.blue-nav {
+  background: $blue-light;
+}
+
 @media screen and (max-width:630px) {
   .nav-items-container {
     &.responsive {

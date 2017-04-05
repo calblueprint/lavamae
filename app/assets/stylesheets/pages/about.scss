@@ -1,0 +1,22 @@
+.about {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%),
+  image_url("about-hero.jpg");
+  text-align: center;
+
+  .about-text {
+    max-width: 500px;
+  }
+
+  .about-title, .about-body {
+    color: white;
+    padding-top: 5px;
+  }
+
+  .about-body {
+    padding-bottom: 10px;
+  }
+}
