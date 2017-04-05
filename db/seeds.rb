@@ -30,7 +30,9 @@ def make_users
       email: "user#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password",
-      map_approval_state: 0
+      map_approval_state: 0,
+      volunteer: true,
+      seeking_volunteer: false,
     )
     user.id = n
     user.location_id = n
@@ -39,7 +41,7 @@ def make_users
 end
 
 def make_admins
-  11.upto(15) do |n|
+  11.upto(30) do |n|
     admin = User.create(
       first_name: FFaker::Name.first_name,
       last_name: FFaker::Name.last_name,
@@ -49,9 +51,12 @@ def make_admins
       website: "lavamae.org",
       email: "admin#{n}@lavamae.org",
       password: "password",
-      password_confirmation: "password"
+      password_confirmation: "password",
+      volunteer: true,
+      seeking_volunteer: true,
     )
     admin.id = n
+    admin.location_id = n % 10 + 1
     admin.save
   end
 end
