@@ -126,6 +126,13 @@
     margin-right: 5px;
   }
 
+  &:last-child {
+    margin-right: 5px;
+  }
+
+  i {
+    vertical-align: middle;
+  }
 }
 
 .hidden {
@@ -162,6 +169,7 @@
   &:active, &:focus {
     font-weight: 700;
   }
+
 }
 
 .discussions-menu {
@@ -170,6 +178,15 @@
   cursor: pointer;
   float: left;
   border-radius: 2px;
+}
+
+.manage-tags {
+  font-size: 11px;
+
+  &:hover {
+    background: transparent;
+    color: $blue-dark;
+  }
 }
 
 @media screen and (max-width:630px) {

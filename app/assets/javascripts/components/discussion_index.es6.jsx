@@ -150,7 +150,9 @@ class DiscussionIndex extends React.Component {
   render() {
     var tagManager = null;
     if (this.props.current_user && this.props.current_user.is_admin) {
-      tagManager =  <button className="discussion-tag" onClick={this._openModal}>Manage Tags</button>;
+      tagManager =  (<button className="btn btn-action btn-sm manage-tags" onClick={this._openModal}>
+                      <i className="fa fa-edit fa-lg"></i> Manage Tags
+                    </button>);
     }
 
     return (
