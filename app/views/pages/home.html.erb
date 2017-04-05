@@ -57,18 +57,6 @@
 </div>
 
 <script>
-// NAV BAR COLOR CHANGE
-var h = $(".site-guide").offset().top;
-$(window).scroll(function () {
-    var x = $(this).scrollTop() + 67;
-    console.log(h, x);
-    if (x > h) {
-      $('.nav-home').addClass('blue-nav');
-    } else {
-      $('.nav-home').removeClass('blue-nav');
-    }
-});
-
 // EXPLORE
 $("#explore").click(function(){
   $('html,body').animate({

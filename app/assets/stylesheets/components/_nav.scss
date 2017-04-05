@@ -1,4 +1,4 @@
-.nav, .nav-home {
+.nav {
   padding: 10px 0;
   position: fixed;
   width: 100%;
@@ -6,6 +6,7 @@
   z-index: 5;
   color: white;
   min-height: $nav-height;
+  background: $blue-light;
 
   .logo {
     background-image: image_url('lavamae-logo.svg');
@@ -24,15 +25,6 @@
   .nav-item {
     display: inline-block;
   }
-}
-
-// Overriding global nav blue background
-.nav {
-  background: $blue-light;
-}
-
-.nav-home {
-  background: transparent;
 }
 
 .profile-selected img {
