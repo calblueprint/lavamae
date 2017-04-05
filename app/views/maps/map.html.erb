@@ -2,11 +2,11 @@
 <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
 
 <div id='map'></div>
-<% if !user_signed_in? %>
-  <div class="aux-map-tools">
-    <%= button_to "Join the Movement", sign_up_path, :class => "btn btn-blue btn-join", :method  => :get %>
-  </div>
-<% end %>
+<div class="aux-map-tools">
+  <p>Explore the network of Lava Mae around the world.
+    Click on a point to see more information about a friend who's changing the world!</p>
+  <%= button_to "Join the Movement", root_path, :class => "btn btn-blue btn-join", :method  => :get %>
+</div>
 
 <script>
   mapboxgl.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
