@@ -48,8 +48,8 @@ class TagManager extends React.Component {
     return this.state.tags.map((tag, i) => {
       return ( 
             <button key={i} value={tag} className="discussion-tag" onClick={this._removeTag}>
-              <span>{tag}</span>
-              <i className="fa fa-times fa-lg"></i>
+              {tag} <i className="fa fa-times fa-lg"></i>
+              
             </button>
       )});
   }
