@@ -59,37 +59,26 @@
   <div class="nav">
     <div class="container-lg">
       <a href="/" class="logo"></a>
-
-      <form class="discussion-search">
-        <input class="discussion-search-input" placeholder="Search discussion threads..."
-        type="search" name="search" value=<%= params[:search]%>>
-
-        <% if @discussion %>
-        <input type="hidden" name="discussion_id" value=<%= @discussion.id%>>
-        <% end %>
-        <% if params[:fav] %>
-        <input type="hidden" name="fav" value=<%= params[:fav]%>>
-        <% end %>
-      </form>
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
-      <ul class="nav-items-container pull-right" id="topNav">
+      <ul class="left-item-container" id="topNav">
+        <%= link_to discussions_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
+        </li>
+        <% end %>
+        <%= link_to map_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Map</button>
+        </li>
+        <% end %>
+        <%= link_to resource_topics_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Resources</button>
+        </li>
+        <% end %>
+      </ul>
+      <ul class="right-item-container">
         <%if user_signed_in? %>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
-            </li>
-          <% end %>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
-
           <div class="dropdown user-container">
             <div class="dropbtn user-picture">
               <%= link_to user_path(current_user.id) do %>
@@ -109,21 +98,6 @@
             </div>
           </div>
         <%else%>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav btn-nav-selected">Discussions</button>
-            </li>
-          <% end %>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
