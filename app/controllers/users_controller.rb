@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       @location = Location.find(@user.location_id)
     end
     @favorite_discussions = @user.favorite_discussions
+    @volunteers = User.where("volunteer = ? OR seeking_volunteer = ?", true, true).where(location_id: @location).where.not(id: @user.id)
     if @user.is_admin
       @pending_map_users = User.where(map_approval_state: 0, on_map: true)
     else
@@ -45,7 +46,7 @@ class UsersController < ApplicationController
 
   def update_params
     params.permit(:id, :first_name, :last_name, :email, :secondary_name, :secondary_email, :tertiary_name, :tertiary_email,
-                      :organization, :location_id, :website, :on_map);
+                      :organization, :location_id, :website, :on_map, :volunteer, :seeking_volunteer);
   end
 
   def map_approval_params

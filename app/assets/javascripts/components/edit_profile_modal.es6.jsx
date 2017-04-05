@@ -12,6 +12,8 @@
 * @props website - user's website
 * @props on_map - true if user appears on map
 * @props profile_pic - path of user's profile picture
+* @props volunteer - true if user wants to be a volunteer
+* @props seeking_volunteer - true if user is seeking volunteers
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -26,7 +28,9 @@ class EditProfileModal extends React.Component {
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
-    this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
+    this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
+    this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
+    this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._attemptSave = this._attemptSave.bind(this);
@@ -46,6 +50,8 @@ class EditProfileModal extends React.Component {
       location: this.props.location,
       website: this.props.website,
       on_map: this.props.on_map,
+      volunteer: this.props.volunteer,
+      seeking_volunteer: this.props.seeking_volunteer,
     };
   }
 
@@ -75,8 +81,16 @@ class EditProfileModal extends React.Component {
     this.setState({ country: e.target.value });
   }
 
-  _handleCheckboxChange(e) {
+  _handleMapCheckboxChange(e) {
     this.setState({ on_map: e.target.checked });
+  }
+
+  _handleVolunteerCheckboxChange(e) {
+    this.setState({ volunteer: e.target.checked });
+  }
+
+  _handleSeekingVolunteerCheckboxChange(e) {
+    this.setState({ seeking_volunteer: e.target.checked });
   }
 
   _getLongitudeAndLatitudeAndSignUp(loc) {
@@ -104,9 +118,9 @@ class EditProfileModal extends React.Component {
 
   _startSignUpProcess(e) {
     let loc = document.getElementById("my-edit-address").value;
-    if (this.state.on_map) {
+    if (this.state.on_map || this.state.volunteer || this.state.seeking_volunteer) {
       if (loc.length == 0) {
-        this._error("Please enter a location if you want to be on the map.");
+        this._error("Please enter a location.");
       } else {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
@@ -129,6 +143,8 @@ class EditProfileModal extends React.Component {
       secondary_email: this.state.secondary_email,
       tertiary_name: this.state.tertiary_name,
       tertiary_email: this.state.tertiary_email,
+      volunteer: this.state.volunteer,
+      seeking_volunteer: this.state.seeking_volunteer,
     };
 
     if (this.state.organization) {
@@ -137,7 +153,7 @@ class EditProfileModal extends React.Component {
     if (this.state.website) {
       userFields.website = this.state.website;
     }
-
+    console.log(this.state.location)
     var locId = null;
     if (response) {
       locId = response.id;
@@ -250,12 +266,34 @@ class EditProfileModal extends React.Component {
                   <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
                 </div>
               </div>
+              <div>Map Pin</div>
               <div className="input-field">
                 <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.on_map}
-                    onChange={this._handleCheckboxChange}
+                    onChange={this._handleMapCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div >I want to...</div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Volunteer
+                  <input type="checkbox"
+                    name="volunteer"
+                    checked={this.state.volunteer}
+                    onChange={this._handleVolunteerCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Look for volunteers
+                  <input type="checkbox"
+                    name="seeking_volunteer"
+                    checked={this.state.seeking_volunteer}
+                    onChange={this._handleSeekingVolunteerCheckboxChange}
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>
@@ -282,17 +320,19 @@ class EditProfileModal extends React.Component {
 }
 
 EditProfileModal.propTypes = {
-  user_id         : React.PropTypes.number.isRequired,
-  first_name      : React.PropTypes.string.isRequired,
-  last_name       : React.PropTypes.string.isRequired,
-  email           : React.PropTypes.string.isRequired,
-  secondary_name  : React.PropTypes.string,
-  secondary_email : React.PropTypes.string,
-  tertiary_name   : React.PropTypes.string,
-  tertiary_email  : React.PropTypes.string,
-  organization    : React.PropTypes.string,
-  location        : React.PropTypes.string,
-  website         : React.PropTypes.string,
-  on_map          : React.PropTypes.bool,
-  profile_pic     : React.PropTypes.object.isRequired,
+  user_id           : React.PropTypes.number.isRequired,
+  first_name        : React.PropTypes.string.isRequired,
+  last_name         : React.PropTypes.string.isRequired,
+  email             : React.PropTypes.string.isRequired,
+  secondary_name    : React.PropTypes.string,
+  secondary_email   : React.PropTypes.string,
+  tertiary_name     : React.PropTypes.string,
+  tertiary_email    : React.PropTypes.string,
+  organization      : React.PropTypes.string,
+  location          : React.PropTypes.string,
+  website           : React.PropTypes.string,
+  on_map            : React.PropTypes.bool,
+  profile_pic       : React.PropTypes.object.isRequired,
+  volunteer         : React.PropTypes.bool,
+  seeking_volunteer : React.PropTypes.bool,
 };
