@@ -1,5 +1,5 @@
 <!-- IF on home page, make nav transparent -->
-<% if current_page?(root_path) %>
+<% if current_page?(root_path) || current_page?(about_path) %>
   <div class="nav-home">
     <div class="container-lg">
       <a href="/" class="logo"></a>
@@ -18,6 +18,12 @@
         <%= link_to resource_topics_path do %>
         <li class="nav-item">
           <button class="btn btn-transparent btn-nav">Resources</button>
+        </li>
+        <% end %>
+        <%= link_to about_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav
+          <%= 'btn-nav-selected' if current_page?(about_path) %>">About</button>
         </li>
         <% end %>
       </ul>
@@ -76,6 +82,11 @@
           <button class="btn btn-transparent btn-nav">Resources</button>
         </li>
         <% end %>
+        <%= link_to about_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">About</button>
+        </li>
+        <% end %>
       </ul>
       <ul class="right-item-container">
         <%if user_signed_in? %>
@@ -130,8 +141,13 @@
         <% end %>
         <%= link_to resource_topics_path do %>
         <li class="nav-item">
-          <button class="btn btn-transparent btn-nav resources-nav
+          <button class="btn btn-transparent btn-nav
           <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
+        </li>
+        <% end %>
+        <%= link_to about_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">About</button>
         </li>
         <% end %>
       </ul>
