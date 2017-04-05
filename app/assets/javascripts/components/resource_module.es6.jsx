@@ -90,7 +90,7 @@ class ResourceModule extends React.Component {
     return (
         <div className="module-item-container">
           <div className="module-item">
-            <Img className="cover-picture" src="/assets/greybus.svg" />
+            <Img className="cover-picture" src="/assets/lavamae-logo-blue.svg" />
             <h5 className="module-item-title">
               {this.props.resource_topic.name}
             </h5>
