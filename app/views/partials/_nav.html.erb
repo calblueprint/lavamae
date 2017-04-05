@@ -4,64 +4,50 @@
     <div class="container-lg">
       <a href="/" class="logo"></a>
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
-      <ul class="nav-items-container" id="topNav">
+      <ul class="left-item-container" id="topNav">
+        <%= link_to discussions_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Discussions</button>
+        </li>
+        <% end %>
+        <%= link_to map_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Map</button>
+        </li>
+        <% end %>
+        <%= link_to resource_topics_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Resources</button>
+        </li>
+        <% end %>
+      </ul>
+      <ul class="right-item-container">
         <% if user_signed_in? %>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-                <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
-
-          <div class="dropdown user-container">
-            <div class="dropbtn user-picture">
-              <%= link_to user_path(current_user.id) do %>
-                <% if current_user.profile_pic? %>
-                  <%= image_tag current_user.profile_pic.url(:thumb) %>
-                <% else %>
-                  <%= image_tag("default.png") %>
-                <% end %>
-              <% end %>
-            </div>
-            <i class="fa fa-caret-down fa-lg margin-l"></i>
-            <div class="dropdown-content">
-              <%= link_to user_path(current_user.id) do %>
-                Profile
-              <% end %>
-              <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
-            </div>
+        <div class="dropdown user-container">
+          <div class="dropbtn user-picture">
+            <%= link_to user_path(current_user.id) do %>
+            <% if current_user.profile_pic? %>
+            <%= image_tag current_user.profile_pic.url(:thumb) %>
+            <% else %>
+            <%= image_tag("default.png") %>
+            <% end %>
+            <% end %>
           </div>
+          <i class="fa fa-caret-down fa-lg margin-l"></i>
+          <div class="dropdown-content">
+            <%= link_to user_path(current_user.id) do %>
+            Profile
+            <% end %>
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
+          </div>
+        </div>
         <%else%>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Resources</button>
-            </li>
-          <% end %>
-          <li class="nav-item">
-            <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
-          </li>
-          <li class="nav-item">
-            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
-          </li>
+        <li class="nav-item">
+          <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
+        </li>
+        <li class="nav-item">
+          <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
+        </li>
         <%end%>
       </ul>
     </div>
@@ -73,6 +59,7 @@
   <div class="nav">
     <div class="container-lg">
       <a href="/" class="logo"></a>
+
       <form class="discussion-search">
         <input class="discussion-search-input" placeholder="Search discussion threads..."
         type="search" name="search" value=<%= params[:search]%>>
@@ -155,26 +142,28 @@
       <%= 'container-lg' if current_page?(map_path) %>">
       <a href="/" class="logo"></a>
       <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
-      <ul class="nav-items-container" id="topNav">
-        <%if user_signed_in? %>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav
-              <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav resources-nav
-              <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
-            </li>
-          <% end %>
+      <ul class="left-item-container" id="topNav">
+        <%= link_to discussions_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav">Discussions</button>
+        </li>
+        <% end %>
+        <%= link_to map_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav
+          <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
+        </li>
+        <% end %>
+        <%= link_to resource_topics_path do %>
+        <li class="nav-item">
+          <button class="btn btn-transparent btn-nav resources-nav
+          <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
+        </li>
+        <% end %>
+      </ul>
 
+      <ul class="right-item-container">
+        <%if user_signed_in? %>
           <div class="dropdown user-container">
             <div class="dropbtn user-picture
             <%= 'profile-selected' if current_page?(user_path(current_user.id)) %>">
@@ -195,23 +184,6 @@
             </div>
           </div>
         <%else%>
-          <%= link_to discussions_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav">Discussions</button>
-            </li>
-          <% end %>
-          <%= link_to map_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav
-              <%= 'btn-nav-selected' if current_page?(map_path) %>">Map</button>
-            </li>
-          <% end %>
-          <%= link_to resource_topics_path do %>
-            <li class="nav-item">
-              <button class="btn btn-transparent btn-nav resources-nav
-              <%= 'btn-nav-selected' if current_page?(resource_topics_path) %>">Resources</button>
-            </li>
-          <% end %>
           <li class="nav-item">
             <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
           </li>
