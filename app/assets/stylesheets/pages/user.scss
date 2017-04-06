@@ -59,6 +59,12 @@
 
 .profile-section-titles {
   padding-bottom: 15px;
+
+}
+
+.bio-description {
+  padding-bottom: 10px;
+  font-size: 14px;
 }
 
 .favorite-discussions-container {
@@ -125,11 +131,17 @@
 .user-photo {
   margin: 10px;
   cursor: pointer;
+  border-width: 2px;
+  border-style: solid;
+  border-color: white;
+
 
   &.selected {
-    outline-style: solid;
-    outline-width: 5px;
-    outline-color: $blue-light;
+    border-color: $blue-light;
+    box-shadow:
+      inset 0 0 5px #0cc, /* Inset shadow */
+      0 0 5px #0cc, /* Outset shadow */
+      inset -999px 0 0 #fff; /* The background color */
   }
 }
 

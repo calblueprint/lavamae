@@ -5,6 +5,8 @@
 class UserPhotoUpload extends React.Component {
 constructor(props) {
     super(props);
+    this._openModal = this._openModal.bind(this);
+    this._closeModal = this._closeModal.bind(this);
     this._cancelEdit = this._cancelEdit.bind(this);
     this._successfulSave = this._successfulSave.bind(this);
     this._enableForm = this._enableForm.bind(this);
@@ -20,12 +22,21 @@ constructor(props) {
     }
   }
 
+  _openModal() {
+    this.setState({ showModal: true });
+  }
+
+  _closeModal() {
+    this.setState({ showModal: false });
+  }
+
   _cancelEdit(e) {
     e.preventDefault();
     this.setState({ show_form: false });
   }
 
   _enableForm() {
+    this._openModal()
     this.setState({ show_form: true });
   }
 
@@ -49,18 +60,24 @@ constructor(props) {
   _successfulSave() {
     window.location = `/users/${this.props.user.id}`;
     this.setState({ show_form: false });
+    this._closeModal();
   }
 
   _saveForm(e) {
     e.preventDefault();
-    const imageFields = {
-      user: {
-        images_attributes: [{photo_data: this.state.photo,
-                              title: this.state.title,
-                              description: this.state.description}],
+    if (this.state.photo) {
+      const imageFields = {
+        user: {
+          images_attributes: [{photo_data: this.state.photo,
+                                title: this.state.title,
+                                description: this.state.description}],
+        }
       }
+      APIRequester.put(`/images/${this.props.user.id}`, imageFields, this._successfulSave);
+    } else {
+      toastr.options.positionClass = 'toast-bottom-right';
+      toastr.error("Please select an image.");
     }
-    APIRequester.put(`/images/${this.props.user.id}`, imageFields, this._successfulSave);
   }
 
   renderForm () {
@@ -73,23 +90,32 @@ constructor(props) {
     }
     return (
       <div>
-        <div className="input-field">
-          <label className="file-label" htmlFor="file-input">Choose a Photo</label>
-          <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
-            <div className="imgPreview">
-              {$imagePreview}
+        <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
+          <Modal.Header>
+              <Modal.Title>Upload a Photo</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="input-field">
+              <label className="file-label" htmlFor="file-input">Choose a Photo</label>
+              <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+                <div className="imgPreview">
+                  {$imagePreview}
+                </div>
             </div>
-        </div>
-        <div className="input-field">
-          <label htmlFor="title-input">Title</label>
-          <input id="title-input" type="text" name="title" onChange={this._handleTextChange} />
-        </div>
-        <div className="input-field">
-          <label htmlFor="description-input">Description</label>
-          <input id="description-input" type="text" name="description" onChange={this._handleTextChange} />
-        </div>
-        <button className="btn btn-blue btn-sm save" onClick={this._saveForm}>Save</button>
-        <button className="btn btn-sm btn-outline" onClick={this._cancelEdit}>Cancel</button>
+            <div className="input-field">
+              <label htmlFor="title-input">Title</label>
+              <input id="title-input" type="text" name="title" onChange={this._handleTextChange} />
+            </div>
+            <div className="input-field">
+              <label htmlFor="description-input">Description</label>
+              <input id="description-input" type="text" name="description" onChange={this._handleTextChange} />
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <button className="btn btn-blue btn-sm save" onClick={this._saveForm}>Save</button>
+            <button className="btn btn-sm btn-outline" onClick={this._cancelEdit}>Cancel</button>
+          </Modal.Footer>
+        </Modal>
       </div>
     )
   }

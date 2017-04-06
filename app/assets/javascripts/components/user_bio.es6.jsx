@@ -58,15 +58,15 @@ class UserBio extends React.Component {
     let userBio = this.state.bio;
     if (this.props.user.id == this.props.current_user.id) {
       if (userBio) {
-        $display = (<button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>);
+        $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Edit</button>);
       } else {
         $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Add Bio</button>);
       }
     }
     return (
       <div>
-        {$display}
-      <p className="discussion-description wordwrap">{this.state.bio}</p>
+      <p className="bio-description wordwrap">{this.state.bio}</p>
+      {$display}
       </div>
     )
   }

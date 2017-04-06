@@ -87,15 +87,27 @@
         <h5 class="profile-section-titles">
           <%= "Bio" %><br>
         </h5>
-          <%= react_component('UserBio', user: @user, current_user: current_user) %>
+          <% if current_user.id != @user.id && !@user.bio %>
+            <%= "This user has not yet uploaded a personal bio." %>
+          <% else %>
+            <%= react_component('UserBio', user: @user, current_user: current_user) %>
+          <%end %>
       </div>
+      <br><br>
       <div>
         <h5 class="profile-section-titles">
           <%= "Photo Gallery" %><br>
         </h5>
-          <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
+          <% if current_user.id != @user.id && !@user.images %>
+            <%= "This user has not yet uploaded a photo gallery." %>
+          <% else %>
+            <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
+          <%end %>
           <%if current_user && current_user.id == @user.id %>
-            <%= react_component('UserPhotoDelete', user: @user, images: @user.images) %>
+            <% if @user.images != [] %>
+              <%= react_component('UserPhotoDelete', user: @user, images: @user.images) %>
+              <%= react_component('UserPhotoEdit', user: @user, images: @user.images) %>
+            <% end %>
             <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
           <% end %>
       </div>

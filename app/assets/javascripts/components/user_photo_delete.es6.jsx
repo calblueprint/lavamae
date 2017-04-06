@@ -10,7 +10,6 @@ constructor(props) {
     this._cancelEdit = this._cancelEdit.bind(this);
     this._selectImage = this._selectImage.bind(this);
     this._renderImages = this._renderImages.bind(this);
-    // this._renderImage = this._renderImage.bind(this);
     this._saveForm = this._saveForm.bind(this);
     this._successfulSave = this._successfulSave.bind(this);
     this.state = {
