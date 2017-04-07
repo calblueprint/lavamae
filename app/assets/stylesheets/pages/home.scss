@@ -6,6 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-x: hidden;
 
   .landing-text {
     max-width: 500px;
@@ -88,5 +89,26 @@
 @media screen and (max-width:630px) {
   .third:not(:last-child){
     padding-bottom: 20px;
+  }
+
+  .landing-text {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .site-guide {
+    height: auto;
+  }
+
+  .thirds-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 15px;
+  }
+
+  .third {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
   }
 }

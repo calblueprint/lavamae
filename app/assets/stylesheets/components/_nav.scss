@@ -31,10 +31,13 @@
   box-shadow: 0 0 0 5px $white-40;
 }
 
+.display-mobile {
+  display: none;
+}
+
 //smartphones, iPhone, portrait 480x320 phones
 .hamburger {
   margin-left: auto;
-  padding-right: 10px;
   display: none;
   cursor: pointer;
 }
@@ -43,24 +46,31 @@
   .nav-items-container {
     position: absolute;
     right: -1000px;
-    top: $nav-height;
+    top: $mobile-nav-height;
     text-align: right;
     width: 100vw;
     display: block;
-    background: $blue-light-80;
+    background: $black-80;
     transition: 500ms;
     height: 100vh;
-    z-index: 100;
 
     .nav-item {
       width: 100vw;
       border-bottom: 1px solid $white-20;
+
+      &:active {
+        background: $black-80;
+      }
     }
   }
 
   .hamburger {
     display: inherit;
     float: right;
+  }
+
+  .nav-items-container-active {
+    right: 0;
   }
 }
 
@@ -69,6 +79,17 @@
 }
 
 @media screen and (max-width:630px) {
+  .nav {
+    min-height: $mobile-nav-height;
+    z-index: 100;
+
+    .logo {
+      height: 30px;
+      width: 21px;
+
+    }
+  }
+
   .nav-items-container {
     &.responsive {
       right: 0;
@@ -81,6 +102,22 @@
         margin-right: 20px;
       }
     }
+  }
+
+  .right-item-container {
+    margin-left: inherit;
+  }
+
+  .display-mobile {
+    display: inline-block !important;
+
+    .user-container {
+      padding-right: 15px;
+    }
+  }
+
+  .hide-mobile {
+    display: none;
   }
 }
 

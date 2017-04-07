@@ -3,8 +3,8 @@
   current_page?(root_path)||current_page?(about_path)||current_page?(map_path)||current_page?(discussions_path) ? 'container-lg' : 'container'
   %>">
     <a href="/" class="logo"></a>
-    <i class="hamburger fa fa-bars fa-2x" onclick="mobileMenu()"></i>
-    <ul class="left-item-container" id="topNav">
+    <i class="hamburger fa fa-bars fa-lg" onclick="mobileMenu()"></i>
+    <ul class="nav-items-container" id="topNav">
       <%= link_to discussions_path do %>
       <li class="nav-item">
         <button class="btn btn-transparent btn-nav
@@ -29,35 +29,55 @@
         <%= 'btn-nav-selected' if current_page?(about_path)%>">About</button>
       </li>
       <% end %>
-    </ul>
-    <ul class="right-item-container">
-      <%if user_signed_in? %>
+      <div class="display-mobile">
+        <%if user_signed_in? %>
+          <%= link_to user_path(current_user.id) do %>
+          <li class="nav-item">
+            <button class="btn btn-transparent btn-nav
+            <%= 'btn-nav-selected' if current_page?(user_path(current_user.id))%>">Profile</button>
+          </li>
+          <% end %>
+          <li class="nav-item">
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-nav", :method => :delete %>
+          </li>
+        <%else%>
+          <li class="nav-item">
+            <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
+          </li>
+          <li class="nav-item">
+            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
+          </li>
+        <%end%>
+      </ul>
+      <ul class="nav-items-container right-item-container hide-mobile" id="topNav">
+        <%if user_signed_in? %>
         <div class="dropdown user-container">
           <div class="dropbtn user-picture <%= 'profile-selected' if current_page?(user_path(current_user.id)) %>">
             <%= link_to user_path(current_user.id) do %>
-              <% if current_user.profile_pic? %>
-                <%= image_tag current_user.profile_pic.url(:thumb) %>
-              <% else %>
-                <%= image_tag("default.png") %>
-              <% end %>
+            <% if current_user.profile_pic? %>
+            <%= image_tag current_user.profile_pic.url(:thumb) %>
+            <% else %>
+            <%= image_tag("default.png") %>
+            <% end %>
             <% end %>
           </div>
           <i class="fa fa-caret-down fa-lg margin-l"></i>
           <div class="dropdown-content">
             <%= link_to user_path(current_user.id) do %>
-              Profile
+            Profile
             <% end %>
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
           </div>
         </div>
-      <%else%>
+        <%else%>
         <li class="nav-item">
           <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
         </li>
         <li class="nav-item">
           <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
         </li>
-      <%end%>
+        <%end%>
+      </div>
     </ul>
   </div>
 </div>
@@ -65,11 +85,7 @@
 <!-- HAMBURGER MENU JS -->
 <script>
 function mobileMenu() {
-  var x = document.getElementById("topNav");
-  if (x.className === "nav-items-container") {
-      x.className += " responsive";
-  } else {
-      x.className = "nav-items-container";
-  }
+  $('.nav-items-container').toggleClass('nav-items-container-active');
+  $('.nav-items-container').toggleClass('right-item-container');
 }
 </script>
