@@ -94,43 +94,31 @@
         <h5 class="profile-section-titles">
           <%= "Bio" %><br>
         </h5>
-          <% if current_user && @user.bio%>
+          <% if current_user && (@user.bio || current_user.id == @user.id)%>
             <%= react_component('UserBio', user: @user, current_user: current_user) %>
-            <br><br>
-          <% elsif current_user && current_user.id == @user.id%>
-            <%= react_component('UserBio', user: @user, current_user: current_user) %>
-            <br><br>
+            <br>
           <% elsif @user.bio %>
             <%= react_component('UserBio', user: @user) %>
-            <br>
           <%else %>
             <%= "This user has not yet uploaded a personal bio." %>
-            <br>
           <% end %>
       </div>
+      <br>
       <div>
         <h5 class="profile-section-titles">
           <%= "Photo Gallery" %><br>
         </h5>
-          <% if current_user %>
-            <% if current_user.id != @user.id && !@user.images %>
-              <%= "This user has not yet uploaded a photo gallery." %>
-            <% else %>
-              <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
-            <%end %>
-            <%if current_user.id == @user.id %>
-              <% if @user.images != [] %>
-                <%= react_component('UserPhotoDelete', user: @user, images: @user.images) %>
-                <%= react_component('UserPhotoEdit', user: @user, images: @user.images) %>
-              <% end %>
-            <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
-            <% end %>
+          <% if @user.images[0] || current_user == @user %>
+            <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
           <% else %>
-            <% if !@user.images %>
-              <%= "This user has not yet uploaded a photo gallery." %>
-            <% else %>
-              <%= react_component('UserPhotoGallery', user: @user, images: @user.images) %>
-            <%end %>
+            <%= "This user has not yet uploaded a photo gallery." %>
+          <% end %>
+          <%if current_user && current_user.id == @user.id %>
+            <% if @user.images != [] %>
+              <%= react_component('UserPhotoDelete', user: @user, images: @user.images) %>
+              <%= react_component('UserPhotoEdit', user: @user, images: @user.images) %>
+            <% end %>
+          <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
           <% end %>
       </div>
       <%if current_user && current_user.id == @user.id && @user.is_admin %>
