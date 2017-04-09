@@ -181,11 +181,11 @@
         <div class="dropdown user-container">
           <div class="dropbtn user-picture <%= 'profile-selected' if current_page?(user_path(current_user.id)) %>">
             <%= link_to user_path(current_user.id) do %>
-            <% if current_user.profile_pic? %>
-            <%= image_tag current_user.profile_pic.url(:thumb) %>
-            <% else %>
-            <%= image_tag("default.png") %>
-            <% end %>
+              <% if current_user.profile_pic? %>
+                <%= image_tag current_user.profile_pic.url(:thumb) %>
+              <% else %>
+                <%= image_tag("default.png") %>
+              <% end %>
             <% end %>
           <%= link_to discussions_path do %>
             <li class="nav-item">
@@ -233,6 +233,11 @@
           <div class="dropdown-content">
             <%= link_to user_path(current_user.id) do %>
             Profile
+            <% end %>
+            <% if current_user.is_admin%> 
+              <%= link_to admin_dashboard_path do %> 
+                Admin Dashboard
+              <% end %>
             <% end %>
             <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
           </div>
