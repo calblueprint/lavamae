@@ -1,5 +1,5 @@
 /**
-  * @prop pending_users - list of users with map_approval_state set to "pending"
+  * @prop pending_users - list of users with admin_approval_state set to "pending"/0
   * @prop user_id - user id for the current user
   */
 
