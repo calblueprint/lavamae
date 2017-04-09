@@ -32,9 +32,7 @@ class UserBio extends React.Component {
     e.preventDefault();
     this.setState({ bio: $("#user_bio").val() }, () => {
                       const userFields = {
-                        user: {
-                          bio: this.state.bio
-                        }
+                        bio: this.state.bio
                       };
                       APIRequester.put(`/users/${this.props.user.id}`, userFields, this._successfulSave);
                     });
@@ -44,7 +42,7 @@ class UserBio extends React.Component {
     return (
       <div>
         <div className="input-field">
-          <textarea name = "bio" id="user_bio" defaultValue={this.state.bio}></textarea>
+          <textarea name = "user_bio" id="user_bio" defaultValue={this.state.bio}></textarea>
         </div>
         <br></br>
         <button className="btn btn-blue btn-sm save" onClick={this._saveForm}>Save</button>

@@ -94,21 +94,20 @@
         <h5 class="profile-section-titles">
           <%= "Bio" %><br>
         </h5>
-          <% if current_user %>
-            <% if current_user.id != @user.id && !@user.bio %>
-              <%= "This user has not yet uploaded a personal bio." %>
-            <% else %>
-              <%= react_component('UserBio', user: @user, current_user: current_user) %>
-            <%end %>
-          <%else%>
-            <% if !@user.bio %>
-              <%= "This user has not yet uploaded a personal bio." %>
-            <% else %>
-              <%= react_component('UserBio', user: @user) %>
-            <%end %>
+          <% if current_user && @user.bio%>
+            <%= react_component('UserBio', user: @user, current_user: current_user) %>
+            <br><br>
+          <% elsif current_user && current_user.id == @user.id%>
+            <%= react_component('UserBio', user: @user, current_user: current_user) %>
+            <br><br>
+          <% elsif @user.bio %>
+            <%= react_component('UserBio', user: @user) %>
+            <br>
+          <%else %>
+            <%= "This user has not yet uploaded a personal bio." %>
+            <br>
           <% end %>
       </div>
-      <br><br>
       <div>
         <h5 class="profile-section-titles">
           <%= "Photo Gallery" %><br>
