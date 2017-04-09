@@ -25,6 +25,14 @@
       border-radius: 50%;
       margin-right: 16px;
     }
+
+    .badge {
+      width: 25px;
+      height: auto;
+      position: absolute;
+      right: -10px;
+      bottom: 0;
+    }
   }
 
   .name-date {

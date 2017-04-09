@@ -19,14 +19,19 @@ class VolunteerMatching extends React.Component {
     return this.state.volunteers.map((volunteer) => {
       if (volunteer.volunteer == true ) {
         return (
-          <div key = {volunteer.id}>
-          <a href={volunteer.id}>
-            <p>
-              { volunteer.first_name } { volunteer.last_name }
-            </p>
-            <p>I want to volunteer</p>
-          </a>
-        </div>
+          <div key = {volunteer.id} className="user-container">
+            <a href={volunteer.id}>
+              <div className="user-picture">
+                <img src={volunteer.user_image} />
+                <img className="badge" src="/assets/volunteer-badge.png" />
+              </div>
+              <div className="name-date">
+                <div class="user-name">
+                  { volunteer.first_name } { volunteer.last_name }
+                </div>
+              </div>
+            </a>
+          </div>
         )
       } else if (volunteer.seeking_volunteer == true) {
         return (
