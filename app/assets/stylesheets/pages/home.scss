@@ -1,8 +1,8 @@
-.landing, .about {
+.landing, .site-guide {
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%);
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
-  height: 100vh;
+  height: 95vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,115 +31,60 @@
   }
 }
 
-.filler {
-  height: 100vh;
-  background: $blue-light;
-}
+.map-home {
+  top: 0 !important;
+  height: 95vh;
 
-.about {
-  background: linear-gradient(150deg, $blue-80 0%, $blue-light-60 40%, $blue-light-40 80%),
-  image_url("about-hero.jpg");
-}
-
-.site-map-container {
-  padding-bottom: 80px;
-  flex-wrap: wrap;
-  justify-content: center;
-
-  :not(:last-child) {
-    margin-right: 15px;
+  .mapboxgl-ctrl-geocoder {
+    display: none;
   }
 }
 
+.filler {
+  height: 95vh;
+  background: $bg-color;
+}
+
+.site-guide {
+  background: $bg-color;
+  flex-wrap: wrap;
+}
+
+.thirds-container {
+  align-items: flex-start;
+  display: flex;
+}
+
 .third {
-  max-width: 300px;
+  max-width: 350px;
+  min-height: 354px;
   text-align: center;
+  justify-content: center;
+  flex-direction: column;
   flex-grow: 1;
+  transition: 300ms;
+  cursor: pointer;
+  padding: 20px 20px;
 
   p {
     color: $blue-light;
   }
 
-  .third-hero {
-    max-width: 300px;
-    margin-top: 15px;
-    margin-bottom: 15px;
-    cursor: pointer;
-    transition: 300ms;
+  &:hover {
+    background: $blue-light-10;
 
-    &:hover {
+    img {
       box-shadow: 0 2px 8px $black-20;
     }
   }
+
+  .third-hero {
+    max-width: 250px;
+    margin-top: 15px;
+    margin-bottom: 15px;;
+  }
 }
 
-// VERTICAL NAV
-#cd-vertical-nav {
-	position: fixed;
-	right: 40px;
-	@include center(y); // see partials > _mixins.scss
-	z-index: 4;
-
-	li {
-		text-align: right;
-	}
-
-	a {
-		display: inline-block;
-		@include clearfix;
-
-		/* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
-		@include backface-visibility(hidden);
-
-		span {
-			float: right;
-			display: inline-block;
-			@include transform(scale(.6));
-		}
-
-		&:hover span {
-			@include transform(scale(1));
-		}
-
-		&:hover .cd-label {
-			opacity: 1;
-		}
-
-		&.is-selected .cd-dot {
-			background-color: white;
-		}
-	}
-
-	.cd-dot {
-		position: relative;
-		/* we set a top value in order to align the dot with the label. If you change label's font, you may need to change this top value*/
-		top: 8px;
-		height: 12px;
-		width: 12px;
-		border-radius: 50%;
-		background-color: white;
-		-webkit-transition: -webkit-transform 0.2s, background-color 0.5s;
-		-moz-transition: -moz-transform 0.2s, background-color 0.5s;
-		transition: transform 0.2s, background-color 0.5s;
-		@include transform-origin(50% 50%);
-	}
-
-	.cd-label {
-		position: relative;
-		margin-right: 10px;
-		padding: .4em .5em;
-		color: white;
-		font-size: 14px;
-
-		-webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
-		-moz-transition: -moz-transform 0.2s, opacity 0.2s;
-		transition: transform 0.2s, opacity 0.2s;
-		opacity: 0;
-		@include transform-origin(100% 50%);
-	}
-}
-
-//Responsive
 @media screen and (max-width:630px) {
   .third:not(:last-child){
     padding-bottom: 20px;

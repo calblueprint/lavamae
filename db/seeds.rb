@@ -30,7 +30,9 @@ def make_users
       email: "user#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password",
-      map_approval_state: 0
+      map_approval_state: 0,
+      volunteer: true,
+      seeking_volunteer: false,
     )
     user.id = n
     user.location_id = n
@@ -39,7 +41,7 @@ def make_users
 end
 
 def make_admins
-  11.upto(15) do |n|
+  11.upto(30) do |n|
     admin = User.create(
       first_name: FFaker::Name.first_name,
       last_name: FFaker::Name.last_name,
@@ -49,10 +51,19 @@ def make_admins
       website: "lavamae.org",
       email: "admin#{n}@lavamae.org",
       password: "password",
-      password_confirmation: "password"
+      password_confirmation: "password",
+      volunteer: true,
+      seeking_volunteer: true,
     )
     admin.id = n
+    admin.location_id = n % 10 + 1
     admin.save
+  end
+end
+
+def make_tags
+  ["starting up", "funding", "volunteering", "partnering", "learn more"].each do |t|
+    AdminTag.create(name: t)
   end
 end
 
@@ -61,7 +72,7 @@ def make_discussions
     discussion = Discussion.create(
       content: "lavabae++",
       title: "Discussion #{n}",
-      tag_list: ["Volunteering", "Starting up"],
+      tag_list: ["volunteering", "starting up"],
       user_id: n % 5 + 1
     )
     discussion.score = 0
@@ -90,7 +101,7 @@ end
 def make_modules
   1.upto(10) do |n|
     resource_topic = ResourceTopic.create(
-      name: "Module #{n}",
+      name: "Toolkit #{n}",
       created_at: Time.now.to_datetime,
       description: "Lava Mae Toolkit",
       attachment: "attachment.png"
@@ -103,6 +114,7 @@ end
 make_locations
 make_users
 make_admins
+make_tags
 make_discussions
 make_responses
 make_modules

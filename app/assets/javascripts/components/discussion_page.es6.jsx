@@ -11,6 +11,7 @@
  * @prop upvotes - discussion upvotes
  * @prop tag_filter - tag filter param
  * @prop search_param - search param
+ * @prop all_tags - all tags
  */
 
 class DiscussionPage extends React.Component {
@@ -49,6 +50,7 @@ class DiscussionPage extends React.Component {
               discussion_username = {this.props.discussion_username}
               discussion_userimage = {this.props.discussion_userimage}
               date_handler = {this._generateTimeStamp}
+              all_tags = {this.props.all_tags}
             />
           </div>
           <DiscussionResponses
@@ -74,6 +76,7 @@ class DiscussionPage extends React.Component {
           date_handler = {this._generateTimeStamp}
           tag_filter = {this.props.tag_filter}
           search_param = {this.props.search_param}
+          all_tags = {this.props.all_tags}
         />
         {this.renderDiscussion()}
       </div>
@@ -93,5 +96,6 @@ DiscussionPage.propTypes = {
   responses: React.PropTypes.array,
   upvotes: React.PropTypes.array,
   tag_filter: React.PropTypes.array,
-  search_param: React.PropTypes.string
+  search_param: React.PropTypes.string,
+  all_tags: React.PropTypes.array.isRequired
 };

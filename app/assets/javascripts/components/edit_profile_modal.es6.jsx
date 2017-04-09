@@ -12,6 +12,8 @@
 * @props website - user's website
 * @props on_map - true if user appears on map
 * @props profile_pic - path of user's profile picture
+* @props volunteer - true if user wants to be a volunteer
+* @props seeking_volunteer - true if user is seeking volunteers
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -26,7 +28,9 @@ class EditProfileModal extends React.Component {
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
-    this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
+    this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
+    this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
+    this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._attemptSave = this._attemptSave.bind(this);
@@ -46,6 +50,8 @@ class EditProfileModal extends React.Component {
       location: this.props.location,
       website: this.props.website,
       on_map: this.props.on_map,
+      volunteer: this.props.volunteer,
+      seeking_volunteer: this.props.seeking_volunteer,
     };
   }
 
@@ -75,8 +81,16 @@ class EditProfileModal extends React.Component {
     this.setState({ country: e.target.value });
   }
 
-  _handleCheckboxChange(e) {
+  _handleMapCheckboxChange(e) {
     this.setState({ on_map: e.target.checked });
+  }
+
+  _handleVolunteerCheckboxChange(e) {
+    this.setState({ volunteer: e.target.checked });
+  }
+
+  _handleSeekingVolunteerCheckboxChange(e) {
+    this.setState({ seeking_volunteer: e.target.checked });
   }
 
   _getLongitudeAndLatitudeAndSignUp(loc) {
@@ -104,16 +118,17 @@ class EditProfileModal extends React.Component {
 
   _startSignUpProcess(e) {
     let loc = document.getElementById("my-edit-address").value;
-    if (this.state.on_map) {
+    if (this.state.on_map || this.state.volunteer || this.state.seeking_volunteer) {
       if (loc.length == 0) {
-        this._error("Please enter a location if you want to be on the map.");
+        this._error("Please enter a location.");
       } else {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
     } else if (loc.length != 0) {
       this._getLongitudeAndLatitudeAndSignUp(loc);
     } else {
-      this._attemptSave();
+      this.setState({ location: "" },
+                    this._attemptSave );
     }
   }
 
@@ -128,6 +143,8 @@ class EditProfileModal extends React.Component {
       secondary_email: this.state.secondary_email,
       tertiary_name: this.state.tertiary_name,
       tertiary_email: this.state.tertiary_email,
+      volunteer: this.state.volunteer,
+      seeking_volunteer: this.state.seeking_volunteer,
     };
 
     if (this.state.organization) {
@@ -136,11 +153,13 @@ class EditProfileModal extends React.Component {
     if (this.state.website) {
       userFields.website = this.state.website;
     }
-
+    console.log(this.state.location)
     var locId = null;
     if (response) {
       locId = response.id;
       userFields["location_id"] = locId;
+    } else if (this.state.location == "") {
+      userFields["location_id"] = null;
     }
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
   }
@@ -199,60 +218,82 @@ class EditProfileModal extends React.Component {
               <div className="input-field">
                 <label htmlFor="first_name">First Name</label>
                 <input id="first-name-input" type="first_name" name="first_name" onChange={this._handleChange}
-                       placeholder="Baby" defaultValue={this.props.first_name} />
+                       placeholder="John" defaultValue={this.props.first_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="last_name">Last Name</label>
                 <input id="last-name-input" type="last_name" name="last_name" onChange={this._handleChange}
-                       placeholder="Panda" defaultValue={this.props.last_name} />
+                       placeholder="Doe" defaultValue={this.props.last_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="email">Email Address</label>
                 <input id="email-input" type="email" name="email" onChange={this._handleChange}
-                       placeholder="panda@lavamae.org" defaultValue={this.props.email} />
+                       placeholder="lavamae@gmail.com" defaultValue={this.props.email} />
               </div>
               <div className="input-field">
                 <label htmlFor="secondary_name">Secondary Contact Name</label>
                 <input id="secondary-name-input" type="secondary_name" name="secondary_name" onChange={this._handleChange}
-                       placeholder="Baby" defaultValue={this.props.secondary_name} />
+                       placeholder="Jane Doe" defaultValue={this.props.secondary_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="email">Secondary Email Address</label>
                 <input id="secondary-email-input" type="secondary_email" name="secondary_email" onChange={this._handleChange}
-                       placeholder="panda@lavamae.org" defaultValue={this.props.secondary_email} />
+                       placeholder="jane@gmail.com" defaultValue={this.props.secondary_email} />
               </div>
               <div className="input-field">
                 <label htmlFor="tertiary_name">Tertiary Contact Name</label>
                 <input id="tertiary-name-input" type="tertiary_name" name="tertiary_name" onChange={this._handleChange}
-                       placeholder="Baby" defaultValue={this.props.tertiary_name} />
+                       placeholder="John Smith" defaultValue={this.props.tertiary_name} />
               </div>
               <div className="input-field">
                 <label htmlFor="email">Tertiary Email Address</label>
                 <input id="tertiary-email-input" type="tertiary_email" name="tertiary_email" onChange={this._handleChange}
-                       placeholder="panda@lavamae.org" defaultValue={this.props.tertiary_email} />
+                       placeholder="john@gmail.com" defaultValue={this.props.tertiary_email} />
               </div>
               <div className="input-field">
                 <label htmlFor="organization">Organization</label>
                 <input id="organization-input" type="organization" name="organization" onChange={this._handleChange}
-                       placeholder="Lava Bae" defaultValue={this.props.organization} />
+                       placeholder="Lava Mae" defaultValue={this.props.organization} />
               </div>
               <div className="input-field">
                 <label htmlFor="organization">Website</label>
                 <input id="website-input" type="website" name="website" onChange={this._handleChange}
-                       placeholder="lavabae.org" defaultValue={this.props.website} />
+                       placeholder="lavamae.org" defaultValue={this.props.website} />
               </div>
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-edit-address" name="location" type="text" placeholder="Berkeley, CA, United States" defaultValue={this.state.location} />
+                  <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
                 </div>
               </div>
+              <div>Map Pin</div>
               <div className="input-field">
                 <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.on_map}
-                    onChange={this._handleCheckboxChange}
+                    onChange={this._handleMapCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div >I want to...</div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Volunteer
+                  <input type="checkbox"
+                    name="volunteer"
+                    checked={this.state.volunteer}
+                    onChange={this._handleVolunteerCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Look for volunteers
+                  <input type="checkbox"
+                    name="seeking_volunteer"
+                    checked={this.state.seeking_volunteer}
+                    onChange={this._handleSeekingVolunteerCheckboxChange}
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>
@@ -279,17 +320,19 @@ class EditProfileModal extends React.Component {
 }
 
 EditProfileModal.propTypes = {
-  user_id         : React.PropTypes.number.isRequired,
-  first_name      : React.PropTypes.string.isRequired,
-  last_name       : React.PropTypes.string.isRequired,
-  email           : React.PropTypes.string.isRequired,
-  secondary_name  : React.PropTypes.string,
-  secondary_email : React.PropTypes.string,
-  tertiary_name   : React.PropTypes.string,
-  tertiary_email  : React.PropTypes.string,
-  organization    : React.PropTypes.string,
-  location        : React.PropTypes.string,
-  website         : React.PropTypes.string,
-  on_map          : React.PropTypes.bool,
-  profile_pic     : React.PropTypes.object.isRequired,
+  user_id           : React.PropTypes.number.isRequired,
+  first_name        : React.PropTypes.string.isRequired,
+  last_name         : React.PropTypes.string.isRequired,
+  email             : React.PropTypes.string.isRequired,
+  secondary_name    : React.PropTypes.string,
+  secondary_email   : React.PropTypes.string,
+  tertiary_name     : React.PropTypes.string,
+  tertiary_email    : React.PropTypes.string,
+  organization      : React.PropTypes.string,
+  location          : React.PropTypes.string,
+  website           : React.PropTypes.string,
+  on_map            : React.PropTypes.bool,
+  profile_pic       : React.PropTypes.object.isRequired,
+  volunteer         : React.PropTypes.bool,
+  seeking_volunteer : React.PropTypes.bool,
 };

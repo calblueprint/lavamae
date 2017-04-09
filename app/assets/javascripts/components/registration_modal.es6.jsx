@@ -7,13 +7,17 @@ class RegistrationModal extends React.Component {
     this._toLogin = this._toLogin.bind(this);
     this._attemptRegistration = this._attemptRegistration.bind(this);
     this._renderInput = this._renderInput.bind(this);
-    this._handleCheckboxChange = this._handleCheckboxChange.bind(this);
+    this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
+    this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
+    this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
       map_checked: false,
+      volunteer_checked: false,
+      seeking_volunteer_checked: false,
       profile_pic: "",
       imagePreviewUrl: "",
       location: "",
@@ -40,6 +44,7 @@ class RegistrationModal extends React.Component {
     }
     const signupFields = {
       user: {
+        is_admin: false,
         first_name: this.state.first_name,
         last_name: this.state.last_name,
         organization: this.state.organization,
@@ -54,24 +59,38 @@ class RegistrationModal extends React.Component {
         secondary_email: this.state.secondary_email,
         tertiary_name: this.state.tertiary_name,
         tertiary_email: this.state.tertiary_email,
+        volunteer: this.state.volunteer_checked,
+        seeking_volunteer: this.state.seeking_volunteer_checked,
       }
     };
 
     APIRequester.post("/sign_up", signupFields, (msg) => {});
   }
 
-  _renderInput(name, label, type, placeholder) {
+  _renderInput(name, label, type, placeholder, required=false) {
+    let $requiredField;
+    if (required) {
+      $requiredField = (<label className="required-field">*</label>);
+    }
     return (
       <div>
-        <label htmlFor={name}>{label}</label>
+        <label htmlFor={name}>{label} {$requiredField}</label>
         <input onChange={this._handleChange} name={name}
           type={type} placeholder={placeholder} />
       </div>
     );
   }
 
-  _handleCheckboxChange(e) {
+  _handleMapCheckboxChange(e) {
     this.setState({ map_checked: e.target.checked });
+  }
+
+  _handleVolunteerCheckboxChange(e) {
+    this.setState({ volunteer_checked: e.target.checked });
+  }
+
+  _handleSeekingVolunteerCheckboxChange(e) {
+    this.setState({ seeking_volunteer_checked: e.target.checked });
   }
 
   _handleSelect(e) {
@@ -116,9 +135,15 @@ class RegistrationModal extends React.Component {
 
   _startSignUpProcess(e) {
     let loc = document.getElementById("my-address").value;
-    if (this.state.on_map) {
+    if (this.state.map_checked) {
       if (loc.length == 0) {
         this._error("Please enter a location if you want to be on the map.");
+      } else {
+        this._getLongitudeAndLatitudeAndSignUp(loc);
+      }
+    } else if (this.state.volunteer_checked || this.state.seeking_volunteer_checked) {
+      if (loc.length == 0) {
+        this._error("Please enter a location if you want to volunteer/find volunteers in your area.");
       } else {
         this._getLongitudeAndLatitudeAndSignUp(loc);
       }
@@ -143,30 +168,52 @@ class RegistrationModal extends React.Component {
           <div className="signup-row">
           <h3>Create an Account</h3>
             <form>
-              <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "Baby") }</div>
-              <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Panda") }</div>
-              <div className="input-field">{ this._renderInput("email", "Email", "text", "panda@lavabae.org") }</div>
-              <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Baby Panda") }</div>
-              <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "panda2@lavabae.org") }</div>
-              <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "Baby Panda") }</div>
-              <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "panda3@lavabae.org") }</div>
-              <div className="input-field">{ this._renderInput("password", "Password", "password", "") }</div>
-              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "") }</div>
-              <div className="input-field">{ this._renderInput("organization", "Organization", "text", "lavabae++") }</div>
+              <label className="required-field">* Required</label>
+              <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "John", required=true) }</div>
+              <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Doe", required=true) }</div>
+              <div className="input-field">{ this._renderInput("email", "Email", "text", "lavamae@gmail.com", required=true) }</div>
+              <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Jane Doe") }</div>
+              <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "jane@gmail.com") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "John Smith") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "john@gmail.com") }</div>
+              <div className="input-field">{ this._renderInput("password", "Password", "password", "", required=true) }</div>
+              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "", required=true) }</div>
+              <div className="input-field">{ this._renderInput("organization", "Organization", "text", "Lava Mae") }</div>
               <div className="input-field">{ this._renderInput("website", "Website", "text", "lavabae.org") }</div>
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
-                  <input id="my-address" name="location" type="text" placeholder="Berkeley, CA, United States" />
+                  <input id="my-address" name="location" type="text" />
                 </div>
               </div>
-
+              <div>Map Pin</div>
               <div className="input-field">
                 <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.map_checked}
-                    onChange={this._handleCheckboxChange}
+                    onChange={this._handleMapCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div >I want to...</div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Volunteer
+                  <input type="checkbox"
+                    name="volunteer"
+                    checked={this.state.volunteer_checked}
+                    onChange={this._handleVolunteerCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Look for volunteers
+                  <input type="checkbox"
+                    name="seeking_volunteer"
+                    checked={this.state.seeking_volunteer_checked}
+                    onChange={this._handleSeekingVolunteerCheckboxChange}
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>
