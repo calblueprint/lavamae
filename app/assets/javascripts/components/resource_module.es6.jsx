@@ -60,29 +60,37 @@ class ResourceModule extends React.Component {
   }
 
   _renderPreviewButton() {
-    let previewButton = (
-      <div className="btn btn-sm btn-action module-download" onClick = {this._handlePreview}>
-        <i className="fa fa-download fa-lg"></i>
-        <span>Preview</span>
-      </div>
-    );
+    let previewButton;
+    if (this.props.signed_in) {
+      previewButton = (
+        <div className="btn btn-sm btn-action module-download" onClick = {this._handlePreview}>
+          <i className="fa fa-download fa-lg"></i>
+          <span>Preview</span>
+        </div>
+      );
+    } else {
+      previewButton = (
+        <LoginModal
+          style = "btn btn-sm btn-action module-download"
+          from_module = {true}
+        />
+      )
+    }
     return previewButton;
   }
 
   _renderActionItems() {
     let actionItems;
-    if (this.props.signed_in) {
-      actionItems = (
-        <div>
-          <hr></hr>
-          <div className="module-item-actions">
-            { this._renderAdminEditModal() }
-            { this._renderAdminDeleteModal() }
-            { this._renderPreviewButton() }
-          </div>
+    actionItems = (
+      <div>
+        <hr></hr>
+        <div className="module-item-actions">
+          { this._renderAdminEditModal() }
+          { this._renderAdminDeleteModal() }
+          { this._renderPreviewButton() }
         </div>
-      );
-    }
+      </div>
+    );
     return actionItems;
   }
 

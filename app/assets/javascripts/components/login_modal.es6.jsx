@@ -1,5 +1,6 @@
 /**
 * @props style - button style
+* @prop from_module - whether login is being rendered from module
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -87,9 +88,18 @@ class LoginModal extends React.Component {
   }
 
   _renderLoginModal() {
+    let $display = null
+    if (this.props.from_module) {
+      $display = (<div className={this.state.btnStyle} onClick={this._openModal}>
+          <i className="fa fa-download fa-lg"></i>
+          <span>Preview</span>
+          </div>)
+    } else {
+      $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>)
+    }
     return (
       <div>
-        <button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>
+        {$display}
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Log In</Modal.Title>
