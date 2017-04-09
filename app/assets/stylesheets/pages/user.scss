@@ -24,10 +24,18 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  max-width: 320px;
 }
 
 .user-flex {
   display: flex;
+}
+
+.user-name {
+  text-align: center;
+  img {
+    max-width: 30px;
+  }
 }
 
 .user-info {
@@ -36,11 +44,17 @@
   align-items: center;
 }
 
-.user-profile-fields {
-  color: $blue-dark;
-  font-weight: bold;
-  padding-right: 15px;
-  text-align: right;
+.fields {
+  th {
+    vertical-align: top;
+    color: $blue-light;
+    font-weight: bold;
+    padding-right: 15px;
+    text-align: right;
+  }
+  td {
+
+  }
 }
 
 .user-profile-answers {

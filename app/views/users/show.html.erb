@@ -8,67 +8,76 @@
           <%= image_tag("default.png") %>
         <% end %>
       </div>
-      <div>
-        <%= @user.first_name %>
-        <%= @user.last_name %>
-        <% if @user.seeking_volunteer %>
-        <p>Seeking Volunteers</p>
-        <% end %>
-        <% if @user.volunteer %>
-        <p>Volunteer</p>
-        <% end %>
-      </div>
-      <div class="user-info user-flex">
-        <div class="user-profile-fields">
-          Email<br>
-          <% if (@user.secondary_name && @user.secondary_name != "") || (@user.secondary_email && @user.secondary_email != "") %>
-          Secondary<br>
+      <div class="user-name">
+        <h4><%= @user.first_name %> <%= @user.last_name %></h4>
+        <div class="tooltip">
+          <% if @user.seeking_volunteer %>
+            <%= image_tag("calling-badge.png") %>
           <% end %>
-          <% if @user.secondary_name && @user.secondary_name != "" && @user.secondary_email && @user.secondary_email != "" %>
-          <br>
+          <span class="tooltiptext">
+            Seeking volunteers
+          </span>
+        </div>
+        <div class="tooltip">
+          <% if @user.volunteer %>
+            <%= image_tag("volunteer-badge.png") %>
+          <% end %>
+          <span class="tooltiptext">
+            Volunteer
+          </span>
+        </div>
+      </div>
+      <div class="user-info">
+        <table class="fields">
+          <tr>
+            <th>Email</th>
+            <td><%= @user.email %></td>
+          </tr>
+          <% if (@user.secondary_name && @user.secondary_name != "") || (@user.secondary_email && @user.secondary_email != "") %>
+            <tr>
+              <th>Secondary</th>
+              <td><%= @user.secondary_name %><br />
+              <%= @user.secondary_email %></td>
+            </tr>
           <% end %>
           <% if (@user.tertiary_name && @user.tertiary_name != "") || (@user.tertiary_email && @user.tertiary_email != "") %>
-          Tertiary<br>
+            <tr>
+              <th>Tertiary</th>
+              <td><%= @user.tertiary_name %><br />
+              <%= @user.tertiary_email %></td>
+            </tr>
           <% end %>
-          <% if @user.tertiary_name && @user.tertiary_name != "" && @user.tertiary_email && @user.tertiary_email != "" %>
-          <br>
-          <% end %>
-          Organization<br>
-          Website<br>
-          Location<br>
-        </div>
-        <div class="vertical-line">
-          <div class="user-profile-answers">
-            <%= @user.email %><br>
-            <% if @user.secondary_name && @user.secondary_name != "" %>
-              <%= @user.secondary_name %><br>
-            <% end %>
-            <% if @user.secondary_email && @user.secondary_email != "" %>
-              <%= @user.secondary_email %><br>
-            <% end %>
-            <% if @user.tertiary_name && @user.tertiary_name != "" %>
-              <%= @user.tertiary_name %><br>
-            <% end %>
-            <% if @user.tertiary_email && @user.tertiary_email != ""%>
-              <%= @user.tertiary_email %><br>
-            <% end %>
-            <% if @user.organization %>
-              <%= @user.organization %><br>
-            <% else %>
-              <%= "Not Available" %><br>
-            <% end %>
-            <% if @user.website %>
-              <%= @user.website %><br>
-            <% else %>
-              <%= "Not Available" %><br>
-            <% end %>
-            <% if @location %>
-              <%= @location.place %><br>
-            <% else %>
-              <%= "Not Available" %><br>
-            <% end %>
-          </div>
-        </div>
+          <tr>
+            <th>Organization</th>
+            <td>
+              <% if @user.organization != "" %>
+                <%= @user.organization %>
+              <% else %>
+                <%= "Not Available" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>Website</th>
+            <td>
+              <% if @user.website != "" %>
+                <%= @user.website %>
+              <% else %>
+                <%= "Not Available" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <th>Location</th>
+            <td>
+              <% if @location %>
+                <%= @location.place %>
+              <% else %>
+                <%= "Not Available" %>
+              <% end %>
+            </td>
+          </tr>
+        </table>
       </div>
       <%if current_user && current_user.id == @user.id %>
         <div class="user-flex">

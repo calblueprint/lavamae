@@ -138,6 +138,8 @@ class EditProfileModal extends React.Component {
       last_name: this.state.last_name,
       email: this.state.email,
       on_map: this.state.map_checked,
+      website: this.state.website,
+      organization: this.state.organization,
       profile_pic: this.state.profile_pic,
       secondary_name: this.state.secondary_name,
       secondary_email: this.state.secondary_email,
@@ -147,12 +149,6 @@ class EditProfileModal extends React.Component {
       seeking_volunteer: this.state.seeking_volunteer,
     };
 
-    if (this.state.organization) {
-      userFields.organization = this.state.organization;
-    }
-    if (this.state.website) {
-      userFields.website = this.state.website;
-    }
     var locId = null;
     if (response) {
       locId = response.id;
@@ -265,8 +261,8 @@ class EditProfileModal extends React.Component {
                   <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
                 </div>
               </div>
-              <div>Map Pin</div>
               <div className="input-field">
+                <label htmlFor="pin">Map Pin</label>
                 <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
@@ -276,9 +272,9 @@ class EditProfileModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
-              <div >I want to...</div>
               <div className="input-field">
-                <label className="control control--checkbox"> Volunteer
+                <label htmlFor="volunteer">I want to...</label>
+                <label className="control control--checkbox">Volunteer
                   <input type="checkbox"
                     name="volunteer"
                     checked={this.state.volunteer}
@@ -288,7 +284,7 @@ class EditProfileModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label className="control control--checkbox"> Look for volunteers
+                <label className="control control--checkbox">Look for volunteers
                   <input type="checkbox"
                     name="seeking_volunteer"
                     checked={this.state.seeking_volunteer}
