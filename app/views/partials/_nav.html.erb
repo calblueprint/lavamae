@@ -37,6 +37,11 @@
               <%= link_to user_path(current_user.id) do %>
                 Profile
               <% end %>
+              <% if current_user.is_admin%> 
+                <%= link_to admin_dashboard_path do %> 
+                  Admin Dashboard
+                <% end %>
+              <% end %>
               <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
             </div>
           </div>
@@ -118,6 +123,11 @@
               <%= link_to user_path(current_user.id) do %>
                 Profile
               <% end %>
+              <% if current_user.is_admin%> 
+                <%= link_to admin_dashboard_path do %> 
+                  Admin Dashboard
+                <% end %>
+              <% end %>
               <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
             </div>
           </div>
@@ -190,6 +200,11 @@
             <div class="dropdown-content">
               <%= link_to user_path(current_user.id) do %>
                 Profile
+              <% end %>
+              <% if current_user.is_admin%> 
+                <%= link_to admin_dashboard_path do %> 
+                  Admin Dashboard
+                <% end %>
               <% end %>
               <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
             </div>
