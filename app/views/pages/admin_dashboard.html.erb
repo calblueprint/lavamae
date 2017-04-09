@@ -1,7 +1,16 @@
-<% if !current_user || !current_user.is_admin %>
-	<!-- You do not have access to this page. -->
-<% end %>
-
-<%if current_user &&  current_user.is_admin %>
-	<%= react_component('PendingAdminUsers', pending_users: @pending_admins, user_id: current_user.id) %>
-<% end %>
+<section>
+	<div class="container admin-container">
+		<% if !current_user || !current_user.is_admin %>
+			<!-- You do not have access to this page. -->
+		<% end %>
+		<%if current_user &&  current_user.is_admin %>
+			<h3 class="admin-header"> Admin Dashboard </h3>
+			<h5 class="pending-title">
+		        <%= "Users Pending Admin Approval" %>
+		    </h5>
+		    <div class="pending">
+				<%= react_component('PendingAdminUsers', pending_users: @pending_admins, user_id: current_user.id) %>
+			</div>
+		<% end %>
+	</div>
+</section>
