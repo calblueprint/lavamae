@@ -1,6 +1,6 @@
 <div class="response-container row">
   <div class="response-text">
-  	<% if current_user and current_user == response.user %>
+  	<% if current_user && (current_user == response.user || current_user.is_admin) %>
       <%= react_component "ResponseForm", {discussion: @discussion, response: response} %>
      <% else %>
       <%= response.content %>
@@ -21,4 +21,3 @@
     <%= react_component "Upvote", {discussion: @discussion, response: response, user: current_user, upvotes: response.upvotes} %>
   </div>
 </div>
-
