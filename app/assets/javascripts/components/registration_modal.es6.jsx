@@ -193,17 +193,7 @@ class RegistrationModal extends React.Component {
                   <input id="my-address" name="location" type="text" />
                 </div>
               </div>
-              <div>I want to...</div>
-              <div className="input-field">
-                <label className="control control--checkbox"> Request to be an Admin!
-                  <input type="checkbox"
-                    name="on_map"
-                    checked={this.state.admin_checked}
-                    onChange={this._handleAdminCheckboxChange}
-                    className="input-checkbox"/>
-                  <div className="control__indicator"></div>
-                </label>
-              </div>
+              <br />
               <div>Map Pin</div>
               <div className="input-field">
                 <label className="control control--checkbox"> Include me on the map!
