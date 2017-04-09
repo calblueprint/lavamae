@@ -5,4 +5,10 @@ class PagesController < ApplicationController
 
   def about
   end
+
+  def admin_dashboard
+    if current_user && current_user.is_admin
+      @pending_admins = User.where(admin_approval_state: 0, pending_admin: true)
+  	end	
+  end
 end
