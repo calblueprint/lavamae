@@ -118,11 +118,15 @@ class ResponseForm extends React.Component {
     if (!this.state.finish_upload) {
       return (<div></div>)
     }
+    var editButton = null;
+    if (!this.props.current_user.is_admin || this.state.currentUser.id == this.state.data.user_id) {
+      editButton = (<button className="btn btn-sm btn-action margin-l" onClick={this._enableForm}>Edit</button>);
+    }
     return (
       <div className="response-text">
         <p> {this.state.content} </p><br></br>
         <div className="action-container pull-left">
-          <button className="btn btn-sm btn-action margin-l" onClick={this._enableForm}>Edit</button>
+          {editButton}
           <button className='btn btn-sm btn-action btn-destroy' onClick={this._openModal}>Delete</button>
           <Upvote
             discussion = {this.props.discussion}
@@ -156,7 +160,7 @@ class ResponseForm extends React.Component {
     if (this.state.showForm) {
       renderedContent = this.renderForm();
     } else {
-      if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id) {
+      if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id || this.state.currentUser.is_admin) {
         renderedContent = this.renderContent();
       } else {
         renderedContent = this.renderGuestContent();
