@@ -56,7 +56,7 @@ class UserBio extends React.Component {
   renderContent() {
     let $display = null;
     let userBio = this.state.bio;
-    if (this.props.user.id == this.props.current_user.id) {
+    if (this.props.current_user && this.props.user.id == this.props.current_user.id) {
       if (userBio) {
         $display = (<button className="btn btn-sm btn-action pull-left" onClick={this._enableForm}>Edit</button>);
       } else {
