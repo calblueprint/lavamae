@@ -13,8 +13,7 @@ class ImagesController < ApplicationController
   end
 
   def update
-    # user = User.find(params[:user_id])
-    image = Image.find(params[:image_id])
+    image = Image.find(params[:id])
     if image.update(image_params)
       render_json_message(:ok, message: "Image successfully updated!")
     else
@@ -31,7 +30,7 @@ class ImagesController < ApplicationController
     delete_params[:photo_ids].map { |i| i.to_i }
     # Image.where(id: delete_params[:photo_ids]).destroy_all
     # render_json_message(:ok, message: "Photos successfully deleted!")
-    if Image.where(id: delete_params[:photo_ids]).destroy_alls
+    if Image.where(id: delete_params[:photo_ids]).destroy_all
       render_json_message(:ok, message: "Photos successfully deleted!")
     else
       render_json_message(:forbidden, errors: "Please select a valid photo.")
@@ -41,7 +40,7 @@ class ImagesController < ApplicationController
   private
 
   def image_params
-    params.require(:user).permit(:user_id, :photo_id, :photo, :title, :description)
+    params.require(:user).permit(:user_id, :id, :photo, :title, :description)
   end
 
   def delete_params

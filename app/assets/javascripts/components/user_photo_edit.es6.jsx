@@ -84,7 +84,7 @@ constructor(props) {
   }
 
   _renderImages() {
-    const allPhotos = this.props.images;
+    const allPhotos = this.props.images.sort((image1, image2) => image1.id - image2.id);
     let renderPhotos = allPhotos.map((image, i) => {
       var photoClass;
       if (this.state.images.includes(image)) {
@@ -104,13 +104,14 @@ constructor(props) {
     if (this.state.render_photo) {
       const imageFields = {
         user: {
-          images_attributes: [{photo_data: this.state.render_photo,
-                                title: this.state.title,
-                                description: this.state.description,
-                                id: this.state.id }],
-        }
+          photo: this.state.render_photo,
+          title: this.state.title,
+          description: this.state.description,
+          id: this.state.id,
+        },
+        user_id: this.props.user.id
       }
-      APIRequester.put(`/images/${this.props.user.id}`, imageFields, this._successfulSave);
+      APIRequester.put(`/images/${this.state.id}`, imageFields, this._successfulSave);
     } else {
       toastr.options.positionClass = 'toast-bottom-right';
       toastr.error("Please select an image.");

@@ -4,7 +4,6 @@
 class UserPhotoGallery extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.images)
     this._renderImages = this._renderImages.bind(this);
     this._renderCaption = this._renderCaption.bind(this);
     this._renderImage = this._renderImage.bind(this);
@@ -18,7 +17,8 @@ class UserPhotoGallery extends React.Component {
   }
 
   _renderImages() {
-    return this.props.images.map((image) => this._renderImage(image));
+    var sorted_images = this.props.images.sort((image1, image2) => image1.id - image2.id)
+    return sorted_images.map((image) => this._renderImage(image));
   }
 
   _renderCaption(title, description) {
