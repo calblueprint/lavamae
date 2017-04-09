@@ -68,12 +68,13 @@ constructor(props) {
     if (this.state.photo) {
       const imageFields = {
         user: {
-          images_attributes: [{photo_data: this.state.photo,
-                                title: this.state.title,
-                                description: this.state.description}],
+          photo: this.state.photo,
+          title: this.state.title,
+          description: this.state.description,
         }
+        , user_id: this.props.user.id
       }
-      APIRequester.put(`/images/${this.props.user.id}`, imageFields, this._successfulSave);
+      APIRequester.post(`/images`, imageFields, this._successfulSave);
     } else {
       toastr.options.positionClass = 'toast-bottom-right';
       toastr.error("Please select an image.");
@@ -145,3 +146,8 @@ constructor(props) {
     }
   }
 }
+
+UserPhotoUpload.propTypes = {
+  user: React.PropTypes.object,
+  images: React.PropTypes.array,
+};

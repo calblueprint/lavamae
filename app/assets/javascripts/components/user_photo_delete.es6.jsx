@@ -109,3 +109,7 @@ constructor(props) {
     )
   }
 }
+UserPhotoDelete.propTypes = {
+  user: React.PropTypes.object,
+  images: React.PropTypes.array,
+};

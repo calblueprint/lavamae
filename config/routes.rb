@@ -13,7 +13,6 @@ Rails.application.routes.draw do
 
   resources :users do
     put '/map_approval', to: 'users#map_approval_update'
-    put '/photo_update', to: 'users#photo_update'
   end
 
   resources :passwords, only: [:update]
@@ -21,7 +20,7 @@ Rails.application.routes.draw do
   post '/passwords/request_reset', to: 'passwords#request_reset'
   post '/passwords/reset', to: 'passwords#reset'
 
-  resources :images, only: [:update, :destroy]
+  resources :images, only: [:create, :update, :destroy]
 
   resources :discussions do
     resources :responses do

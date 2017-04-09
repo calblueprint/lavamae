@@ -4,6 +4,7 @@
 class UserPhotoGallery extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.images)
     this._renderImages = this._renderImages.bind(this);
     this._renderCaption = this._renderCaption.bind(this);
     this._renderImage = this._renderImage.bind(this);

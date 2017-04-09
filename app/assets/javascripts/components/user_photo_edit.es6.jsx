@@ -28,7 +28,6 @@ constructor(props) {
     }
   }
 
-
   _openModal() {
     this.setState({ showModal: true });
   }
@@ -195,4 +194,7 @@ constructor(props) {
   }
 }
 
-
+UserPhotoEdit.propTypes = {
+  user: React.PropTypes.object,
+  images: React.PropTypes.array,
+};

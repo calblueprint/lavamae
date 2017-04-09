@@ -1,36 +1,37 @@
 class ImagesController < ApplicationController
-  before_filter :convert_photo, only: [:update]
+  before_filter :convert_photo, only: [:create, :update]
+
+  def create
+    user = User.find(params[:user_id])
+    image = user.images.new(image_params)
+    image.user_id = current_user.id
+    if image.save
+      render_json_message(:ok, message: "Image successfully added!")
+    else
+      render_json_message(:forbidden, errors: user.errors.full_messages)
+    end
+  end
 
   def update
-    user = User.find(params[:id])
-    if user.update(update_params)
-      render_json_message(:ok, message: "Gallery successfully updated!")
+    # user = User.find(params[:user_id])
+    image = Image.find(params[:image_id])
+    if image.update(image_params)
+      render_json_message(:ok, message: "Image successfully updated!")
     else
       render_json_message(:forbidden, errors: user.errors.full_messages)
     end
   end
 
   def convert_photo
-    return if params[:user].blank? ||
-        params[:user][:images_attributes].blank?
-    images = params[:user][:images_attributes].map do |k, photo_object|
-
-      photo_file = FileUploadUtils.convert_base64(
-          photo_object[:photo_data])
-      return unless photo_file
-
-      photo_object[:photo] = photo_file
-      photo_object.delete(:photo_data)
-      photo_object
-    end
-    params[:user][:images_attributes] = images.compact
+    return if params[:user].blank?
+    params[:user][:photo] = FileUploadUtils.convert_base64(params[:user][:photo])
   end
 
   def destroy
     delete_params[:photo_ids].map { |i| i.to_i }
     # Image.where(id: delete_params[:photo_ids]).destroy_all
     # render_json_message(:ok, message: "Photos successfully deleted!")
-    if Image.where(id: delete_params[:photo_ids]).destroy_all
+    if Image.where(id: delete_params[:photo_ids]).destroy_alls
       render_json_message(:ok, message: "Photos successfully deleted!")
     else
       render_json_message(:forbidden, errors: "Please select a valid photo.")
@@ -39,8 +40,8 @@ class ImagesController < ApplicationController
 
   private
 
-  def update_params
-    params.require(:user).permit(:id, images_attributes:[:id, :photo, :title, :description])
+  def image_params
+    params.require(:user).permit(:user_id, :photo_id, :photo, :title, :description)
   end
 
   def delete_params

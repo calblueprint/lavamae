@@ -80,3 +80,7 @@ class UserBio extends React.Component {
     }
   }
 }
+UserBio.propTypes = {
+  user: React.PropTypes.object,
+  current_user: React.PropTypes.object,
+};
