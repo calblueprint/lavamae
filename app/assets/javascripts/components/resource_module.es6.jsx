@@ -65,7 +65,7 @@ class ResourceModule extends React.Component {
       previewButton = (
         <div className="btn btn-sm btn-action module-download" onClick = {this._handlePreview}>
           <i className="fa fa-download fa-lg"></i>
-          <span>Preview</span>
+          <span>Download</span>
         </div>
       );
     } else {
