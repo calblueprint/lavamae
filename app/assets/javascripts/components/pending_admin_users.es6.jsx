@@ -1,6 +1,7 @@
 /**
   * @prop pending_users - list of users with admin_approval_state set to "pending"/0
   * @prop user_id - user id for the current user
+  * @prop default_image - default profile image url
   */
 
 class PendingAdminUsers extends React.Component {
@@ -23,6 +24,7 @@ class PendingAdminUsers extends React.Component {
           key = {pending_user.id}
           admin_id = {this.state.admin_id}
           pending_user = {pending_user}
+          default_image = {this.props.default_image}
         />
       )
     });
@@ -41,6 +43,7 @@ class PendingAdminUsers extends React.Component {
 PendingAdminUsers.propTypes = {
   pending_users: React.PropTypes.array.isRequired,
   user_id: React.PropTypes.number.isRequired,
+  default_image: React.PropTypes.string.isRequired
 };
 
 /**
@@ -58,7 +61,7 @@ class ApproveAdmin extends React.Component {
     this._setProfilePic = this._setProfilePic.bind(this);
     this._fetchProfilePic = this._fetchProfilePic.bind(this);
     this.state = {
-      profilePic: null,
+      profilePic: this.props.default_image,
     };
   }
 
@@ -67,9 +70,9 @@ class ApproveAdmin extends React.Component {
   }
 
    _setProfilePic(data) {
-    if (data.profile_pic) {
+    if (data.profile_pic.thumb.url) {
       this.setState({ profilePic: data.profile_pic.thumb.url});
-    }
+    } 
   }
 
   _fetchProfilePic() {
@@ -136,4 +139,5 @@ class ApproveAdmin extends React.Component {
 ApproveAdmin.propTypes = {
   admin_id: React.PropTypes.number.isRequired,
   pending_user: React.PropTypes.object.isRequired,
+  default_image: React.PropTypes.string.isRequired
 };
