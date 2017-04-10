@@ -2,10 +2,11 @@
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%);
   background-repeat: no-repeat, no-repeat;
   background-size: cover, cover;
-  height: 95vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-x: hidden;
 
   .landing-text {
     max-width: 500px;
@@ -33,7 +34,7 @@
 
 .map-home {
   top: 0 !important;
-  height: 95vh;
+  height: 90vh;
 
   .mapboxgl-ctrl-geocoder {
     display: none;
@@ -41,7 +42,7 @@
 }
 
 .filler {
-  height: 95vh;
+  height: 90vh;
   background: $bg-color;
 }
 
@@ -88,5 +89,26 @@
 @media screen and (max-width:630px) {
   .third:not(:last-child){
     padding-bottom: 20px;
+  }
+
+  .landing-text {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  .site-guide {
+    height: auto;
+  }
+
+  .thirds-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 40px 15px;
+  }
+
+  .third {
+    padding-left: 0;
+    padding-right: 0;
+    margin: 0;
   }
 }
