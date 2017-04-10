@@ -227,7 +227,7 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label class>Profile Picture</label><br></br>
+                <label>Profile Picture</label><br></br>
                 <label className="file-label" htmlFor="file-input">Choose a File</label>
                 <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
                   <div className="imgPreview">
