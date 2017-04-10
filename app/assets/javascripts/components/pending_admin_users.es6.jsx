@@ -121,6 +121,7 @@ class ApproveAdmin extends React.Component {
           <a href={'/users/' + this.props.pending_user.id}>
           { this.props.pending_user.first_name } { this.props.pending_user.last_name }
           </a>
+        </p>
         <div className="approval-btns">
           <button className="btn btn-sm btn-blue" onClick={this._handleApprove}>
             <i className="fa fa-check"></i> Approve
