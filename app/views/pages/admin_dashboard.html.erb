@@ -9,7 +9,7 @@
 		        <%= "Users Pending Admin Approval" %>
 		    </h5>
 		    <div class="pending">
-				<%= react_component('PendingAdminUsers', pending_users: @pending_admins, user_id: current_user.id) %>
+				<%= react_component('PendingAdminUsers', pending_users: @pending_admins, user_id: current_user.id, default_image: @default_img) %>
 			</div>
 		<% end %>
 	</div>
