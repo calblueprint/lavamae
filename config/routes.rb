@@ -47,5 +47,9 @@ Rails.application.routes.draw do
     resources :responses do
       get '/upvotes', to: 'responses#get_upvotes'
     end
+    resources :users do
+      get '/profilepic', to: 'users#get_profile_pic'
+    end
   end
+
 end

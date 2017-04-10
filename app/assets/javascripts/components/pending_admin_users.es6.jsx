@@ -55,6 +55,25 @@ class ApproveAdmin extends React.Component {
     this._handleReject = this._handleReject.bind(this);
     this._successApproval = this._successApproval.bind(this);
     this._successReject = this._successReject.bind(this);
+    this._setProfilePic = this._setProfilePic.bind(this);
+    this._fetchProfilePic = this._fetchProfilePic.bind(this);
+    this.state = {
+      profilePic: null,
+    };
+  }
+
+  componentDidMount() {
+    this._fetchProfilePic();
+  }
+
+   _setProfilePic(data) {
+    if (data.profile_pic) {
+      this.setState({ profilePic: data.profile_pic.thumb.url});
+    }
+  }
+
+  _fetchProfilePic() {
+    APIRequester.get(`/api/users/${this.props.pending_user.id}/profilepic`, this._setProfilePic);
   }
 
   _successApproval(msg) {
@@ -88,8 +107,17 @@ class ApproveAdmin extends React.Component {
   render() {
     return (
       <div className="approval">
+        <div className="user-container">
+          <div className="user-picture">
+            <a href={'/users/' + this.props.pending_user.id}>
+              <img src={this.state.profilePic} />
+            </a>
+          </div>
+        </div>  
         <p className="approval-name">
+          <a href={'/users/' + this.props.pending_user.id}>
           { this.props.pending_user.first_name } { this.props.pending_user.last_name }
+          </a>
         </p>
         <div className="approval-btns">
           <button className="btn btn-sm btn-blue" onClick={this._handleApprove}>
