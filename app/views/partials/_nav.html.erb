@@ -64,7 +64,7 @@
           <i class="fa fa-caret-down fa-lg margin-l"></i>
           <div class="dropdown-content">
             <%= link_to user_path(current_user.id) do %>
-            Profile
+              Profile
             <% end %>
             <% if current_user.is_admin%> 
               <%= link_to admin_dashboard_path do %> 
