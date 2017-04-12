@@ -11,7 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20170319214642) do
+=======
+ActiveRecord::Schema.define(version: 20170412073450) do
+>>>>>>> removed map approval feature and reannotated models
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,7 +158,6 @@ ActiveRecord::Schema.define(version: 20170319214642) do
     t.string   "organization"
     t.integer  "num_actions"
     t.boolean  "is_admin"
-    t.boolean  "on_map"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -169,7 +172,6 @@ ActiveRecord::Schema.define(version: 20170319214642) do
     t.string   "email",                  default: "",    null: false
     t.string   "profile_pic"
     t.integer  "location_id"
-    t.integer  "map_approval_state",     default: 0
     t.string   "website"
     t.text     "bio"
     t.string   "secondary_name"
@@ -178,6 +180,8 @@ ActiveRecord::Schema.define(version: 20170319214642) do
     t.string   "tertiary_email"
     t.boolean  "volunteer",              default: false
     t.boolean  "seeking_volunteer",      default: false
+    t.integer  "admin_approval_state",   default: 0
+    t.boolean  "pending_admin"
   end
 
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
