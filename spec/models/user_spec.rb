@@ -22,8 +22,8 @@
 #  email                  :string           default(""), not null
 #  profile_pic            :string
 #  location_id            :integer
-#  bio                    :text
 #  website                :string
+#  bio                    :text
 #  secondary_name         :string
 #  secondary_email        :string
 #  tertiary_name          :string
