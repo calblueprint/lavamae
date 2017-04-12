@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409185051) do
+ActiveRecord::Schema.define(version: 20170409220229) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,10 +178,18 @@ ActiveRecord::Schema.define(version: 20170409185051) do
     t.string   "tertiary_email"
     t.boolean  "volunteer",              default: false
     t.boolean  "seeking_volunteer",      default: false
+<<<<<<< HEAD
     t.integer  "admin_approval_state",   default: 0
     t.boolean  "pending_admin"
+=======
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+>>>>>>> email validation
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
