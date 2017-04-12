@@ -11,10 +11,6 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :update]
 
-  resources :users do
-    put '/map_approval', to: 'users#map_approval_update'
-  end
-
   resources :passwords, only: [:update]
 
   post '/passwords/request_reset', to: 'passwords#request_reset'
