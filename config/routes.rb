@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
-  devise_for :users, skip: [:registrations, :passwords]
+  devise_for :users, skip: [:registrations, :passwords], controllers: { confirmations: 'confirmations' }
   devise_scope :user do
     get '/sign_up' => 'registrations#new'
     post '/sign_up' => 'registrations#create'
@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   resources :users do
     put '/map_approval', to: 'users#map_approval_update'
   end
+
+  get 'registrations/login', :as => 'registration_login'
 
   resources :passwords, only: [:update]
 
