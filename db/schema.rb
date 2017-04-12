@@ -179,7 +179,10 @@ ActiveRecord::Schema.define(version: 20170415185648) do
 <<<<<<< HEAD
     t.integer  "admin_approval_state",   default: 0
     t.boolean  "pending_admin"
+<<<<<<< HEAD
     t.boolean  "on_map"
+=======
+>>>>>>> email validation
 =======
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
