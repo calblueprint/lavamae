@@ -1,6 +1,6 @@
 class ConfirmationsController < Devise::ConfirmationsController
   private
   def after_confirmation_path_for(resource_name, resource)
-    registration_login_path
+    root_path(:modal => true)
   end
 end
