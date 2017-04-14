@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get '/sign_up' => 'registrations#new'
     post '/sign_up' => 'registrations#create'
     get '/users/password_reset' => 'registrations#password_reset', :as => 'edit_user_password'
+    get 'registrations/login', :as => 'registration_login'
   end
 
   resources :users, only: [:show, :update]
@@ -16,7 +17,6 @@ Rails.application.routes.draw do
     put '/admin_approval', to: 'users#admin_approval_update'
   end
 
-  get 'registrations/login', :as => 'registration_login'
 
   resources :passwords, only: [:update]
 
