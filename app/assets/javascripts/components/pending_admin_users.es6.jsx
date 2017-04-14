@@ -9,7 +9,7 @@ class PendingAdminUsers extends React.Component {
     super(props);
     this.state = {
       users: this.props.pending_users,
-      admin_id: this.props.user_id,
+      adminId: this.props.user_id,
     }
   }
 
@@ -22,7 +22,7 @@ class PendingAdminUsers extends React.Component {
       return (
         <ApproveAdmin
           key = {pending_user.id}
-          admin_id = {this.state.admin_id}
+          admin_id = {this.state.adminId}
           pending_user = {pending_user}
           default_image = {this.props.default_image}
         />
@@ -69,9 +69,9 @@ class ApproveAdmin extends React.Component {
     this._fetchProfilePic();
   }
 
-   _setProfilePic(data) {
+  _setProfilePic(data) {
     if (data.profile_pic.thumb.url) {
-      this.setState({ profilePic: data.profile_pic.thumb.url});
+      this.setState({ profilePic: data.profile_pic.thumb.url });
     } 
   }
 
