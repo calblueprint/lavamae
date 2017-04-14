@@ -144,7 +144,15 @@ class DiscussionIndex extends React.Component {
   }
 
   renderIndex() {
-    return this.state.discussions.map((disc, i) => {return this.renderShortened(disc, i)});
+    if (this.state.discussions.length == 0) {
+      return (
+        <h4 className="index-text">
+            You have no favorited discussions.
+        </h4>
+      )
+    } else {
+      return this.state.discussions.map((disc, i) => {return this.renderShortened(disc, i)});
+    }
   }
 
   render() {
