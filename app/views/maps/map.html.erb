@@ -5,7 +5,9 @@
 <div class="aux-map-tools">
   <p>Explore the network of Lava Mae around the world.
     Click on a point to see more information about a friend who's changing the world!</p>
-  <%= button_to "Join the Movement", root_path, :class => "btn btn-blue btn-join", :method  => :get %>
+    <% if !current_user %>
+      <%= react_component "LoginModal", { style: "btn btn-blue btn-join", from_map: true } %>
+    <% end %>
 </div>
 
 <script>

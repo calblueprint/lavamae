@@ -1,5 +1,7 @@
 /**
 * @props style - button style
+* @prop from_module - whether login is being rendered from module
+* @prop from_map - whether login is being rendered from map
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -87,9 +89,20 @@ class LoginModal extends React.Component {
   }
 
   _renderLoginModal() {
+    let $display = null
+    if (this.props.from_module) {
+      $display = (<div className={this.state.btnStyle} onClick={this._openModal}>
+                    <i className="fa fa-download fa-lg"></i>
+                    <span>Download</span>
+                  </div>)
+    } else if (this.props.from_map) {
+      $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Join the Movement</button>)
+    } else {
+      $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>)
+    }
     return (
       <div>
-        <button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>
+        {$display}
         <Modal className="modal" show={this.state.showModal} onHide={this._closeModal} >
           <Modal.Header>
             <Modal.Title>Log In</Modal.Title>
@@ -159,5 +172,7 @@ class LoginModal extends React.Component {
 }
 
 LoginModal.propTypes = {
-  style: React.PropTypes.string.isRequired
+  style: React.PropTypes.string.isRequired,
+  from_module: React.PropTypes.bool,
+  from_map: React.PropTypes.bool
 };
