@@ -9,7 +9,7 @@ class PagesController < ApplicationController
   def admin_dashboard
     if current_user && current_user.is_admin
       @pending_admins = User.where(admin_approval_state: 0, pending_admin: true)
-      @default_img = view_context.image_path("default.png")
+      @default_img = view_context.asset_path("default.png")
   	end	
   end
 end
