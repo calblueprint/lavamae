@@ -2,6 +2,7 @@
 * @props style - button style
 * @prop from_module - whether login is being rendered from module
 * @prop from_map - whether login is being rendered from map
+$ @prop from_confirmation - whether login is being rendered from confirmation email
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -22,7 +23,7 @@ class LoginModal extends React.Component {
     this._handleSignUp = this._handleSignUp.bind(this);
     this._renderLoginModal = this._renderLoginModal.bind(this);
     this.state = {
-      showModal: false,
+      showModal: this.props.from_confirmation || false,
       email: "",
       password: "",
       btnStyle: this.props.style,
@@ -65,7 +66,11 @@ class LoginModal extends React.Component {
     this._closeModal();
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Log-in successful!");
-    window.location = location.pathname;
+    if (this.props.from_confirmation) {
+      window.location = "/"
+    } else {
+      window.location = location.pathname;
+    }
   }
 
   _error(msg) {
@@ -95,7 +100,7 @@ class LoginModal extends React.Component {
                     <i className="fa fa-download fa-lg"></i>
                     <span>Download</span>
                   </div>)
-    } if (this.props.from_map) {
+    } else if (this.props.from_map) {
       $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Join the Movement</button>)
     } else {
       $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>)
@@ -161,7 +166,7 @@ class LoginModal extends React.Component {
           { this._renderForgotPasswordModal() }
         </div>
       );
-    } else {
+    }  else {
       return (
         <div>
           { this._renderLoginModal() }
