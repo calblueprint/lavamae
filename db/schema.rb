@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319064521) do
+ActiveRecord::Schema.define(version: 20170319214642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,15 @@ ActiveRecord::Schema.define(version: 20170319064521) do
 
   add_index "discussions_users_upvote", ["upvote_discussion"], name: "index_discussions_users_upvote_on_upvote_discussion", using: :btree
   add_index "discussions_users_upvote", ["upvote_user"], name: "index_discussions_users_upvote_on_upvote_user", using: :btree
+
+  create_table "images", force: :cascade do |t|
+    t.string   "photo"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "description"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string   "place"
@@ -162,6 +171,7 @@ ActiveRecord::Schema.define(version: 20170319064521) do
     t.integer  "location_id"
     t.integer  "map_approval_state",     default: 0
     t.string   "website"
+    t.text     "bio"
     t.string   "secondary_name"
     t.string   "secondary_email"
     t.string   "tertiary_name"

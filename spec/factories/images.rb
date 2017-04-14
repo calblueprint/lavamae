@@ -1,15 +1,16 @@
 # == Schema Information
 #
-# Table name: locations
+# Table name: images
 #
 #  id         :integer          not null, primary key
-#  place      :string
-#  lat        :decimal(10, 6)
-#  lng        :decimal(10, 6)
+#  photo      :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  user_id    :integer
 #
 
-class Location < ActiveRecord::Base
-  has_many :users
+FactoryGirl.define do
+  factory :image do
+
+  end
 end

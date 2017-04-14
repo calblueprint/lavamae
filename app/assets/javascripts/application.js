@@ -20,4 +20,5 @@
 //= require moment-timezone
 //= require components
 //= require toastr
+//= require lightgallery
 //= require_tree .

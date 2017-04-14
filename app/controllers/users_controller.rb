@@ -46,10 +46,10 @@ class UsersController < ApplicationController
 
   def update_params
     params.permit(:id, :first_name, :last_name, :email, :secondary_name, :secondary_email, :tertiary_name, :tertiary_email,
-                      :organization, :location_id, :website, :on_map, :volunteer, :seeking_volunteer);
+                      :organization, :location_id, :website, :on_map, :volunteer, :seeking_volunteer, :bio);
   end
 
   def map_approval_params
-    params.permit(:map_approval_state);
+    params.permit(:map_approval_state)
   end
 end

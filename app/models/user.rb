@@ -21,8 +21,11 @@
 #  current_sign_in_ip     :inet
 #  last_sign_in_ip        :inet
 #  email                  :string           default(""), not null
-#  city                   :string
-#  country                :string
+#  profile_pic            :string
+#  location_id            :integer
+#  map_approval_state     :integer          default(0)
+#  website                :string
+#  bio                    :text
 #
 
 class User < ActiveRecord::Base
@@ -38,7 +41,8 @@ class User < ActiveRecord::Base
   belongs_to :location
   enum map_approval_state: { pending: 0, approved: 1, rejected: 2}
   has_many :upvotable, :dependent => :destroy
-
+  has_many :images, :dependent => :destroy
+  accepts_nested_attributes_for :images
 
   def full_name
   	return first_name + " " + last_name

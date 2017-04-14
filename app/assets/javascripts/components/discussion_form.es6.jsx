@@ -111,7 +111,7 @@ class DiscussionForm extends React.Component {
         tagClass = "discussion-tag";
       }
       return <button key={i} type="button" className={tagClass} name={tag} onClick={this._selectTag}>{tag}</button>;
-      });
+    });
     return tagButtons;
   }
 
