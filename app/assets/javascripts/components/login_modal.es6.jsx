@@ -95,7 +95,7 @@ class LoginModal extends React.Component {
                     <i className="fa fa-download fa-lg"></i>
                     <span>Download</span>
                   </div>)
-    } if (this.props.from_map) {
+    } else if (this.props.from_map) {
       $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Join the Movement</button>)
     } else {
       $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>)
