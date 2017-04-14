@@ -26,11 +26,13 @@ def make_users
       organization: "Lava Mae",
       is_admin: false,
       on_map: true,
+      pending_admin: true,
       website: "lavamae.org",
       email: "user#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password",
       map_approval_state: 0,
+      admin_approval_state: 0,
       volunteer: true,
       seeking_volunteer: false,
     )
