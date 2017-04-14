@@ -155,7 +155,6 @@ class EditProfileModal extends React.Component {
     if (this.state.website) {
       userFields.website = this.state.website;
     }
-
     var locId = null;
     if (response) {
       locId = response.id;
