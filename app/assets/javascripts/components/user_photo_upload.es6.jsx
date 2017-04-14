@@ -16,7 +16,6 @@ constructor(props) {
     this.state = {
       images: [],
       photo: "",
-      filePreviewUrl: "",
       title: "",
       description: ""
     }
@@ -66,6 +65,9 @@ constructor(props) {
   _saveForm(e) {
     e.preventDefault();
     if (this.state.photo) {
+      $("#save").hide();
+      $("#close").hide();
+      $("#loading").show();
       const imageFields = {
         user: {
           photo: this.state.photo,
@@ -97,13 +99,6 @@ constructor(props) {
           </Modal.Header>
           <Modal.Body>
             <div className="input-field">
-              <label className="file-label" htmlFor="file-input">Choose a Photo</label>
-              <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
-                <div className="imgPreview">
-                  {$imagePreview}
-                </div>
-            </div>
-            <div className="input-field">
               <label htmlFor="title-input">Title</label>
               <input id="title-input" type="text" name="title" onChange={this._handleTextChange} />
             </div>
@@ -111,10 +106,20 @@ constructor(props) {
               <label htmlFor="description-input">Description</label>
               <input id="description-input" type="text" name="description" onChange={this._handleTextChange} />
             </div>
+            <div className="input-field">
+              <label className="file-label" htmlFor="file-input">Choose a Photo</label>
+              <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
+                <div className="imgPreview">
+                  {$imagePreview}
+                </div>
+            </div>
           </Modal.Body>
           <Modal.Footer>
-            <button className="btn btn-blue btn-sm save" onClick={this._saveForm}>Save</button>
-            <button className="btn btn-sm btn-outline" onClick={this._cancelEdit}>Cancel</button>
+            <button id="close" className="btn btn-outline modal-btn" onClick={this._cancelEdit}>Close</button>
+            <button id="save" className="btn btn-blue save modal-btn" onClick={this._saveForm}>Save</button>
+            <div id="loading" className="loading" style={{display: "none"}}>
+              <img src="/assets/lavamae-bus.gif" />
+            </div>
           </Modal.Footer>
         </Modal>
       </div>

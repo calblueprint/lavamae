@@ -27,13 +27,15 @@ class ImagesController < ApplicationController
   end
 
   def destroy
-    delete_params[:photo_ids].map { |i| i.to_i }
-    # Image.where(id: delete_params[:photo_ids]).destroy_all
-    # render_json_message(:ok, message: "Photos successfully deleted!")
-    if Image.where(id: delete_params[:photo_ids]).destroy_all
-      render_json_message(:ok, message: "Photos successfully deleted!")
+    photos = delete_params[:photo_ids]
+    if current_user.id == Image.find(photos[0]).user_id
+      if Image.where(id: photos).destroy_all
+        render_json_message(:ok, message: "Photos successfully deleted!")
+      else
+        render_json_message(:forbidden, errors: "Please select a valid photo.")
+      end
     else
-      render_json_message(:forbidden, errors: "Please select a valid photo.")
+      render_json_message(:forbidden, errors: "You can only delete your own photos.")
     end
   end
 

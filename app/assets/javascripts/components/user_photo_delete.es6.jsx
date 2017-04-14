@@ -61,6 +61,9 @@ constructor(props) {
     var selectedImages = document.getElementsByClassName('user-photo selected');
     var imageList = [];
     if (selectedImages[0] != null) {
+      $("#delete").hide();
+      $("#close").hide();
+      $('#loading').show();
       for (var i = 0; i < selectedImages.length; i++) {
           imageList.push(selectedImages[i].id);
       }
@@ -100,8 +103,11 @@ constructor(props) {
               { this._renderImages() }
             </Modal.Body>
             <Modal.Footer>
-              <button className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
-              <button className="btn btn-blue modal-btn" type="submit">Delete</button>
+              <button id="close" className="btn btn-outline modal-btn" type="button" onClick={this._closeModal}>Close</button>
+              <button id="delete" className="btn btn-blue modal-btn" type="submit">Delete</button>
+              <div id="loading" className="loading" style={{display: "none"}}>
+                <img src="/assets/lavamae-bus.gif" />
+              </div>
             </Modal.Footer>
           </form>
         </Modal>
