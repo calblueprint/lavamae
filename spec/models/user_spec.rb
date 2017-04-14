@@ -23,8 +23,11 @@
 #  profile_pic            :string
 #  location_id            :integer
 #  website                :string
+<<<<<<< HEAD
 #  bio                    :text
 #  website                :string
+=======
+>>>>>>> add19fec5a0b8798d767c5445c699b7422e7e200
 #  secondary_name         :string
 #  secondary_email        :string
 #  tertiary_name          :string
