@@ -149,6 +149,13 @@ class EditProfileModal extends React.Component {
       seeking_volunteer: this.state.seeking_volunteer,
     };
 
+    if (this.state.organization) {
+      userFields.organization = this.state.organization;
+    }
+    if (this.state.website) {
+      userFields.website = this.state.website;
+    }
+
     var locId = null;
     if (response) {
       locId = response.id;
