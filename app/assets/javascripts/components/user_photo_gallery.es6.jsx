@@ -18,7 +18,7 @@ class UserPhotoGallery extends React.Component {
 
   _renderImages() {
     var sorted_images = this.props.images.sort((image1, image2) => image1.id - image2.id)
-    return sorted_images.map((image) => this._renderImage(image));
+    return sorted_images.map((image, i) => this._renderImage(image, i));
   }
 
   _renderCaption(title, description) {
@@ -26,9 +26,9 @@ class UserPhotoGallery extends React.Component {
 
   }
 
-  _renderImage(image) {
+  _renderImage(image, i) {
     return (
-      <a href={image.photo.url} data-sub-html={this._renderCaption(image.title, image.description)}>
+      <a href={image.photo.url} key={i} data-sub-html={this._renderCaption(image.title, image.description)}>
           <img src={image.photo.thumb.url} id={image.id}/>
       </a>
     );
