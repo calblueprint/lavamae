@@ -3,6 +3,12 @@
     <a href="/" class="logo"></a>
     <i class="hamburger fa fa-bars fa-lg" onclick="mobileMenu()"></i>
     <ul class="nav-items-container" id="topNav">
+      <%= link_to resource_topics_path do %>
+      <li class="nav-item">
+        <button class="btn btn-transparent btn-nav
+        <%= 'btn-nav-selected' if current_page?(resource_topics_path)%>">Start Your Service</button>
+      </li>
+      <% end %>
       <%= link_to discussions_path do %>
       <li class="nav-item">
         <button class="btn btn-transparent btn-nav
@@ -12,19 +18,13 @@
       <%= link_to map_path do %>
       <li class="nav-item">
         <button class="btn btn-transparent btn-nav
-        <%= 'btn-nav-selected' if current_page?(map_path)%>">Map</button>
-      </li>
-      <% end %>
-      <%= link_to resource_topics_path do %>
-      <li class="nav-item">
-        <button class="btn btn-transparent btn-nav
-        <%= 'btn-nav-selected' if current_page?(resource_topics_path)%>">Resources</button>
+        <%= 'btn-nav-selected' if current_page?(map_path)%>">Our Network</button>
       </li>
       <% end %>
       <%= link_to about_path do %>
       <li class="nav-item">
         <button class="btn btn-transparent btn-nav
-        <%= 'btn-nav-selected' if current_page?(about_path)%>">About</button>
+        <%= 'btn-nav-selected' if current_page?(about_path)%>">About Lava Mae</button>
       </li>
       <% end %>
       <div class="display-mobile">
