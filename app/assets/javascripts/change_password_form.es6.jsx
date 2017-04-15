@@ -41,7 +41,7 @@ class ChangePasswordForm extends React.Component {
 
         return (
             <div>
-              <h1>Change Password</h1>
+              <h3>Change Password</h3>
               {old_password}
               <fieldset>
                   <label>New password</label>
