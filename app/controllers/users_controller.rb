@@ -9,20 +9,18 @@ class UsersController < ApplicationController
     end
     @favorite_discussions = @user.favorite_discussions
     @volunteers = User.where("volunteer = ? OR seeking_volunteer = ?", true, true).where(location_id: @location).where.not(id: @user.id)
-    if @user.is_admin
-      @pending_map_users = User.where(map_approval_state: 0, on_map: true)
-    else
-      @pending_map_users = []
-    end
   end
 
-  # batch update user's map_approval_state based on admin decision
-  def map_approval_update
-    @admin = User.find(params[:admin_id])
-    @user = User.find(params[:user_id])
+  def admin_approval_update
+    @admin = User.find_by(id: params[:admin_id])
+    @user = User.find_by(id: params[:user_id])
     if @admin.is_admin
-      if @user.update(map_approval_params)
-        render_json_message(:ok)
+      if @user.update(admin_approval_params)
+        @user.pending_admin = false
+        @user.is_admin = params[:admin_approval_state].to_i % 2 == 1
+        if @user.save
+          render_json_message(:ok)
+        end
       else
         render_json_message(:forbidden, message: "User not updated.")
       end
@@ -47,10 +45,11 @@ class UsersController < ApplicationController
 
   def update_params
     params.permit(:id, :first_name, :last_name, :email, :secondary_name, :secondary_email, :tertiary_name, :tertiary_email,
-                      :organization, :location_id, :website, :on_map, :volunteer, :seeking_volunteer, :bio, :admin_map_approval);
+                      :organization, :location_id, :website, :on_map, :volunteer, :seeking_volunteer, :bio, :profile_pic, :admin_map_approval);
   end
 
-  def map_approval_params
-    params.permit(:map_approval_state)
+  def admin_approval_params
+    params.permit(:admin_approval_state)
   end
+
 end

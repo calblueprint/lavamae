@@ -1,5 +1,6 @@
 class AdminTagsController < ApplicationController
 
+  # Destroys existing tag set and creates new set of discussion tags
   def save
   	AdminTag.destroy_all
   	params[:tags].each do |t|

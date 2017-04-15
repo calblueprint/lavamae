@@ -24,10 +24,20 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  max-width: 320px;
 }
 
 .user-flex {
   display: flex;
+}
+
+.user-name {
+  text-align: center;
+}
+
+.badge {
+  max-width: 30px;
+  vertical-align: middle;
 }
 
 .user-info {
@@ -36,11 +46,14 @@
   align-items: center;
 }
 
-.user-profile-fields {
-  color: $blue-dark;
-  font-weight: bold;
-  padding-right: 15px;
-  text-align: right;
+.fields {
+  th {
+    vertical-align: top;
+    color: $blue-light;
+    font-weight: bold;
+    padding-right: 15px;
+    text-align: right;
+  }
 }
 
 .user-profile-answers {
@@ -153,7 +166,7 @@
 
   .user-card {
     margin: 0;
-    width: 100vw;
+    max-width: 100vw;
   }
 
   .profile-section-titles {

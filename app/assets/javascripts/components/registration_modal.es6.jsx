@@ -8,6 +8,7 @@ class RegistrationModal extends React.Component {
     this._attemptRegistration = this._attemptRegistration.bind(this);
     this._renderInput = this._renderInput.bind(this);
     this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
+    this._handleAdminCheckboxChange = this._handleAdminCheckboxChange.bind(this);
     this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
     this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
@@ -15,6 +16,7 @@ class RegistrationModal extends React.Component {
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
+      admin_checked: false,
       map_checked: false,
       volunteer_checked: false,
       seeking_volunteer_checked: false,
@@ -34,7 +36,7 @@ class RegistrationModal extends React.Component {
   }
 
   _toLogin() {
-    window.location = "/users/sign_in";
+    window.location = "/about";
   }
 
   _attemptRegistration(response = null) {
@@ -50,6 +52,7 @@ class RegistrationModal extends React.Component {
         organization: this.state.organization,
         location_id: locId,
         on_map: this.state.map_checked,
+        pending_admin: this.state.admin_checked,
         email: this.state.email,
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
@@ -83,6 +86,10 @@ class RegistrationModal extends React.Component {
 
   _handleMapCheckboxChange(e) {
     this.setState({ map_checked: e.target.checked });
+  }
+
+  _handleAdminCheckboxChange(e) {
+    this.setState({ admin_checked: e.target.checked });
   }
 
   _handleVolunteerCheckboxChange(e) {
@@ -186,9 +193,9 @@ class RegistrationModal extends React.Component {
                   <input id="my-address" name="location" type="text" />
                 </div>
               </div>
-              <div>Map Pin</div>
               <div className="input-field">
-                <label className="control control--checkbox"> Include me on the map!
+                <label htmlFor="pin">Map Pin</label>
+                <label className="control control--checkbox">Include me on the map!
                   <input type="checkbox"
                     name="on_map"
                     checked={this.state.map_checked}
@@ -197,9 +204,9 @@ class RegistrationModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
-              <div >I want to...</div>
               <div className="input-field">
-                <label className="control control--checkbox"> Volunteer
+                <label htmlFor="volunteer">I want to...</label>
+                <label className="control control--checkbox">Volunteer
                   <input type="checkbox"
                     name="volunteer"
                     checked={this.state.volunteer_checked}
@@ -219,12 +226,23 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label class>Profile Picture</label><br></br>
+                <label>Profile Picture</label><br></br>
                 <label className="file-label" htmlFor="file-input">Choose a File</label>
                 <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />
                   <div className="imgPreview">
                     {$imagePreview}
                   </div>
+              </div>
+              <div>I want to...</div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Request to be an Admin
+                  <input type="checkbox"
+                    name="on_map"
+                    checked={this.state.admin_checked}
+                    onChange={this._handleAdminCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
               </div>
               <button className="btn btn-blue" name="submit" type="button"
                 onClick={this._startSignUpProcess}>Create Account</button>

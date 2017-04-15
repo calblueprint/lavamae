@@ -49,7 +49,7 @@ class EditProfileModal extends React.Component {
       organization: this.props.organization,
       location: this.props.location,
       website: this.props.website,
-      on_map: this.props.on_map,
+      map_checked: this.props.on_map,
       volunteer: this.props.volunteer,
       seeking_volunteer: this.props.seeking_volunteer,
     };
@@ -82,7 +82,7 @@ class EditProfileModal extends React.Component {
   }
 
   _handleMapCheckboxChange(e) {
-    this.setState({ on_map: e.target.checked });
+    this.setState({ map_checked: e.target.checked });
   }
 
   _handleVolunteerCheckboxChange(e) {
@@ -137,7 +137,9 @@ class EditProfileModal extends React.Component {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
-      on_map: this.state.on_map,
+      on_map: this.state.map_checked,
+      website: this.state.website,
+      organization: this.state.organization,
       profile_pic: this.state.profile_pic,
       secondary_name: this.state.secondary_name,
       secondary_email: this.state.secondary_email,
@@ -161,6 +163,9 @@ class EditProfileModal extends React.Component {
       userFields["location_id"] = null;
     }
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
+    if (this.props.email != this.state.email) {
+      APIRequester.delete("/users/sign_out")
+    }
   }
 
   componentDidUpdate() {
@@ -265,20 +270,20 @@ class EditProfileModal extends React.Component {
                   <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
                 </div>
               </div>
-              <div>Map Pin</div>
               <div className="input-field">
+                <label htmlFor="pin">Map Pin</label>
                 <label className="control control--checkbox"> Include me on the map!
                   <input type="checkbox"
                     name="on_map"
-                    checked={this.state.on_map}
+                    checked={this.state.map_checked}
                     onChange={this._handleMapCheckboxChange}
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>
               </div>
-              <div >I want to...</div>
               <div className="input-field">
-                <label className="control control--checkbox"> Volunteer
+                <label htmlFor="volunteer">I want to...</label>
+                <label className="control control--checkbox">Volunteer
                   <input type="checkbox"
                     name="volunteer"
                     checked={this.state.volunteer}
@@ -288,7 +293,7 @@ class EditProfileModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label className="control control--checkbox"> Look for volunteers
+                <label className="control control--checkbox">Look for volunteers
                   <input type="checkbox"
                     name="seeking_volunteer"
                     checked={this.state.seeking_volunteer}
