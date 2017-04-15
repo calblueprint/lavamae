@@ -161,6 +161,9 @@ class EditProfileModal extends React.Component {
       userFields["location_id"] = null;
     }
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
+    if (this.props.email != this.state.email) {
+      APIRequester.delete("/users/sign_out")
+    }
   }
 
   componentDidUpdate() {
