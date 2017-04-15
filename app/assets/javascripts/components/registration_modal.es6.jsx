@@ -171,7 +171,7 @@ class RegistrationModal extends React.Component {
     }
     return (
       <section className="signup">
-        <div className="container signup-container">
+        <div className="signup-container">
           <div className="signup-row">
           <h3>Create a Profile</h3>
             <form>
@@ -179,12 +179,12 @@ class RegistrationModal extends React.Component {
               <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "John", required=true) }</div>
               <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Doe", required=true) }</div>
               <div className="input-field">{ this._renderInput("email", "Email", "text", "lavamae@gmail.com", required=true) }</div>
+              <div className="input-field">{ this._renderInput("password", "Password (min. 8 characters)", "password", "", required=true) }</div>
+              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "", required=true) }</div>
               <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Jane Doe") }</div>
               <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "jane@gmail.com") }</div>
               <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "John Smith") }</div>
               <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "john@gmail.com") }</div>
-              <div className="input-field">{ this._renderInput("password", "Password", "password", "", required=true) }</div>
-              <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "", required=true) }</div>
               <div className="input-field">{ this._renderInput("organization", "Organization", "text", "Lava Mae") }</div>
               <div className="input-field">{ this._renderInput("website", "Website", "text", "lavabae.org") }</div>
               <div className="input-field">
