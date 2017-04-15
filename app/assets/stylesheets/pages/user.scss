@@ -33,9 +33,11 @@
 
 .user-name {
   text-align: center;
-  img {
-    max-width: 30px;
-  }
+}
+
+.badge {
+  max-width: 30px;
+  vertical-align: middle;
 }
 
 .user-info {
@@ -51,9 +53,6 @@
     font-weight: bold;
     padding-right: 15px;
     text-align: right;
-  }
-  td {
-
   }
 }
 
@@ -167,7 +166,7 @@
 
   .user-card {
     margin: 0;
-    width: 100vw;
+    max-width: 100vw;
   }
 
   .profile-section-titles {

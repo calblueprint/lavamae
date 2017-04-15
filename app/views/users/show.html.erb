@@ -12,7 +12,7 @@
         <h4><%= @user.first_name %> <%= @user.last_name %></h4>
         <div class="tooltip">
           <% if @user.seeking_volunteer %>
-            <%= image_tag("calling-badge.png") %>
+            <%= image_tag("calling-badge.png", class: 'badge') %>
           <% end %>
           <span class="tooltiptext">
             Seeking volunteers
@@ -20,7 +20,7 @@
         </div>
         <div class="tooltip">
           <% if @user.volunteer %>
-            <%= image_tag("volunteer-badge.png") %>
+            <%= image_tag("volunteer-badge.png", class: 'badge') %>
           <% end %>
           <span class="tooltiptext">
             Volunteer
