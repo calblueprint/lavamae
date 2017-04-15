@@ -16,8 +16,8 @@ class RegistrationModal extends React.Component {
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
-      map_checked: false,
       admin_checked: false,
+      map_checked: false,
       volunteer_checked: false,
       seeking_volunteer_checked: false,
       profile_pic: "",

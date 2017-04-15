@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :update]
 
   resources :users do
-    put '/map_approval', to: 'users#map_approval_update'
     put '/admin_approval', to: 'users#admin_approval_update'
   end
 

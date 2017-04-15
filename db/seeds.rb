@@ -31,7 +31,6 @@ def make_users
       email: "user#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password",
-      map_approval_state: 0,
       admin_approval_state: 0,
       volunteer: true,
       seeking_volunteer: false,
