@@ -148,7 +148,7 @@
         <h5 class="profile-section-titles">
           <%= "Volunteer Matching in Your Area" %><br>
         </h5>
-        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id) %>
+        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id, default_image: @default_img) %>
       </div>
       <% end %>
     </div>

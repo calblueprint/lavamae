@@ -1,15 +1,33 @@
 /**
   * @prop volunteers - list of all volunteers/volunteer seekers in same location
   * @prop user_id - user id for the current user
+  * @prop default_image - default profile image url
   */
 
 class VolunteerMatching extends React.Component {
   constructor(props) {
     super(props);
+    this._setProfilePic = this._setProfilePic.bind(this);
+    this._fetchProfilePic = this._fetchProfilePic.bind(this);
     this.state = {
       volunteers: this.props.volunteers,
       user_id: this.props.user_id,
+      profilePic: this.props.default_image,
     }
+  }
+
+  componentDidMount() {
+    this._fetchProfilePic();
+  }
+
+  _setProfilePic(data) {
+    if (data.profile_pic.thumb.url) {
+      this.setState({ profilePic: data.profile_pic.thumb.url });
+    }
+  }
+
+  _fetchProfilePic() {
+    APIRequester.get(`/api/users/${this.props.pending_user.id}/profilepic`, this._setProfilePic);
   }
 
   _renderUsers() {
@@ -66,4 +84,5 @@ class VolunteerMatching extends React.Component {
 VolunteerMatching.propTypes = {
   volunteers: React.PropTypes.array.isRequired,
   user_id: React.PropTypes.number.isRequired,
+  default_image: React.PropTypes.string.isRequired
 };
