@@ -2,12 +2,12 @@
 * @props style - button style
 * @prop from_module - whether login is being rendered from module
 * @prop from_map - whether login is being rendered from map
+* @prop from_discussion - whether login is being rendered from create discussion
 */
 
 var Modal = ReactBootstrap.Modal;
 
 class LoginModal extends React.Component {
-
   constructor(props) {
     super(props);
     this._openModal = this._openModal.bind(this);
@@ -97,6 +97,8 @@ class LoginModal extends React.Component {
                   </div>)
     } else if (this.props.from_map) {
       $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Join the Movement</button>)
+    } else if (this.props.from_discussion) {
+      $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Create Discussion</button>)
     } else {
       $display = (<button className={this.state.btnStyle} onClick={this._openModal}>Log In</button>)
     }
