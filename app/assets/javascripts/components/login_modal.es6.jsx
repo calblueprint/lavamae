@@ -2,7 +2,7 @@
 * @props style - button style
 * @prop from_module - whether login is being rendered from module
 * @prop from_map - whether login is being rendered from map
-$ @prop from_confirmation - whether login is being rendered from confirmation email
+* @prop from_confirmation - whether login is being rendered from confirmation email
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -64,6 +64,7 @@ class LoginModal extends React.Component {
 
   _successLogin(msg) {
     this._closeModal();
+    this.props.from_confirmation = false;
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Log-in successful!");
     if (this.props.from_confirmation) {
