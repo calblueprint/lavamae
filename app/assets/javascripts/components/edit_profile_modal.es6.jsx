@@ -10,6 +10,7 @@
 * @props organization - user's current orgnization
 * @props location - location city, state, country string
 * @props website - user's website
+* @props on_map - true if user appears on map
 * @props profile_pic - path of user's profile picture
 * @props volunteer - true if user wants to be a volunteer
 * @props seeking_volunteer - true if user is seeking volunteers
@@ -27,6 +28,7 @@ class EditProfileModal extends React.Component {
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
+    this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
     this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
     this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
@@ -47,6 +49,7 @@ class EditProfileModal extends React.Component {
       organization: this.props.organization,
       location: this.props.location,
       website: this.props.website,
+      on_map: this.props.on_map,
       volunteer: this.props.volunteer,
       seeking_volunteer: this.props.seeking_volunteer,
     };
@@ -76,6 +79,10 @@ class EditProfileModal extends React.Component {
 
   _handleSelect(e) {
     this.setState({ country: e.target.value });
+  }
+
+  _handleMapCheckboxChange(e) {
+    this.setState({ map_checked: e.target.checked });
   }
 
   _handleVolunteerCheckboxChange(e) {
@@ -111,7 +118,7 @@ class EditProfileModal extends React.Component {
 
   _startSignUpProcess(e) {
     let loc = document.getElementById("my-edit-address").value;
-    if ( this.state.volunteer || this.state.seeking_volunteer) {
+    if (this.state.on_map || this.state.volunteer || this.state.seeking_volunteer) {
       if (loc.length == 0) {
         this._error("Please enter a location.");
       } else {
@@ -130,6 +137,7 @@ class EditProfileModal extends React.Component {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
+      on_map: this.state.on_map,
       profile_pic: this.state.profile_pic,
       secondary_name: this.state.secondary_name,
       secondary_email: this.state.secondary_email,
@@ -258,6 +266,17 @@ class EditProfileModal extends React.Component {
                   <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
                 </div>
               </div>
+              <div>Map Pin</div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Include me on the map!
+                  <input type="checkbox"
+                    name="on_map"
+                    checked={this.state.map_checked}
+                    onChange={this._handleMapCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
               <div >I want to...</div>
               <div className="input-field">
                 <label className="control control--checkbox"> Volunteer
@@ -312,6 +331,7 @@ EditProfileModal.propTypes = {
   organization      : React.PropTypes.string,
   location          : React.PropTypes.string,
   website           : React.PropTypes.string,
+  on_map            : React.PropTypes.bool,
   profile_pic       : React.PropTypes.object.isRequired,
   volunteer         : React.PropTypes.bool,
   seeking_volunteer : React.PropTypes.bool,

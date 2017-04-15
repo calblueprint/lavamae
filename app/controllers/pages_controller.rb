@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
   def home
-    @users_on_map = User.where.not(location_id: nil)
+    @users_on_map = User.where(on_map: true).where.not(location_id: nil)
   end
 
   def about
