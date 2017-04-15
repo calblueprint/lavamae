@@ -36,7 +36,7 @@ class RegistrationModal extends React.Component {
   }
 
   _toLogin() {
-    window.location = "/about";
+    window.location = "/?modal=true";
   }
 
   _attemptRegistration(response = null) {
