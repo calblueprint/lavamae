@@ -1,5 +1,4 @@
 /**
- * @prop user - user
  * @prop all_tags - list of all tags
 **/
 class DiscussionCreateModal extends React.Component {
@@ -116,6 +115,5 @@ constructor(props) {
 }
 
 DiscussionCreateModal.propTypes = {
-  user: React.PropTypes.object.isRequired,
   all_tags: React.PropTypes.array,
 };
