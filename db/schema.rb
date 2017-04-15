@@ -176,11 +176,16 @@ ActiveRecord::Schema.define(version: 20170415185648) do
     t.string   "tertiary_email"
     t.boolean  "volunteer",              default: false
     t.boolean  "seeking_volunteer",      default: false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
     t.integer  "admin_approval_state",   default: 0
     t.boolean  "pending_admin"
     t.boolean  "on_map"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
