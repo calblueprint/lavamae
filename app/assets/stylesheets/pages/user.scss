@@ -40,6 +40,10 @@
   vertical-align: middle;
 }
 
+.calling-badge {
+  margin-right: 5px;
+}
+
 .user-info {
   margin-top: 15px;
   margin-bottom: 15px;
@@ -115,7 +119,6 @@
 
 .profile-right {
   flex-grow: 1;
-  overflow: hidden;
 }
 
 .approval {
@@ -156,6 +159,11 @@
       0 0 5px #0cc, /* Outset shadow */
       inset -999px 0 0 #fff; /* The background color */
   }
+}
+
+.volunteer-container {
+  padding-bottom: 10px;
+  overflow: visible !important;
 }
 
 @media screen and (max-width:630px) {
