@@ -13,7 +13,8 @@
 <script>
 
   function deletePin(id) {
-    APIRequester.put(`/users/${id}`, {admin_map_approval: false}, success(id));
+    APIRequester.put(`/users/${id}`, {admin_map_approval: false}, (msg) => {});
+    window.location = location.pathname;
   };
 
   function success(x) {return;};
