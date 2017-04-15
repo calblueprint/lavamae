@@ -16,6 +16,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user.is_admin
+      @user = User.find(params[:id])
+      @user.destroy
+      redirect_to admin_dashboard_path( status: 303 )
+    end
+  end
+
   # batch update user's map_approval_state based on admin decision
   def map_approval_update
     @admin = User.find(params[:admin_id])

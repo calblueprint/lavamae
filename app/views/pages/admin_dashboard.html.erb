@@ -11,6 +11,12 @@
 		    <div class="pending">
 				<%= react_component('PendingAdminUsers', pending_users: @pending_admins, user_id: current_user.id, default_image: @default_img) %>
 			</div>
+			<h5 class="pending-title">
+		        <%= "All Users" %>
+		    </h5>
+		    <div class="pending">
+				<%= react_component('DeleteUsers', users: @users, user_id: current_user.id, default_image: @default_img) %>
+			</div>
 		<% end %>
 	</div>
 </section>
