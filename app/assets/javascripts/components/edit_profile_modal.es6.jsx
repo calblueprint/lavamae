@@ -49,7 +49,7 @@ class EditProfileModal extends React.Component {
       organization: this.props.organization,
       location: this.props.location,
       website: this.props.website,
-      on_map: this.props.on_map,
+      map_checked: this.props.on_map,
       volunteer: this.props.volunteer,
       seeking_volunteer: this.props.seeking_volunteer,
     };
@@ -137,7 +137,7 @@ class EditProfileModal extends React.Component {
       first_name: this.state.first_name,
       last_name: this.state.last_name,
       email: this.state.email,
-      on_map: this.state.on_map,
+      on_map: this.state.map_checked,
       profile_pic: this.state.profile_pic,
       secondary_name: this.state.secondary_name,
       secondary_email: this.state.secondary_email,
@@ -153,7 +153,6 @@ class EditProfileModal extends React.Component {
     if (this.state.website) {
       userFields.website = this.state.website;
     }
-    console.log(this.state.location)
     var locId = null;
     if (response) {
       locId = response.id;
