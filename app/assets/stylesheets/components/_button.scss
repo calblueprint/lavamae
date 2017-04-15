@@ -82,6 +82,12 @@
 
 .btn-nav {
   font-size: 12px;
+  background: transparent;
+  border: 1px solid transparent;
+
+  &:hover {
+    color: $blue-nav-hover;
+  }
 }
 
 .btn-nav-selected {
@@ -91,6 +97,12 @@
 
 .btn-login {
   border: 1px solid white;
+  background: transparent;
+
+  &:hover {
+    color: $blue-nav-hover;
+    border-color: $blue-nav-hover;
+  }
 
   &:focus {
     border: 1px solid white;
@@ -102,6 +114,11 @@
   color: $blue-light;
   margin-left: 10px;
   border: 1px solid white;
+
+  &:hover {
+    background: $blue-nav-hover;
+    border-color: $blue-nav-hover;
+  }
 
   &:focus {
     border: 1px solid white;
