@@ -8,17 +8,23 @@ body {
   line-height: 1.5;
 }
 
+// Used for all Main Page Headers
 h1 {
   font-size: 24px;
   font-weight: 700;
   letter-spacing: 1px;
   color: $blue-light;
   text-transform: uppercase;
+  line-height: 2em;
 }
 
+// Used for all Page Subheaders
 h2 {
-  font-size: 32px;
-  font-weight: 400;
+  color: $blue-dark;
+  font-size: 14px;
+  font-weight: 500;
+  max-width: 70%;
+  line-height: 1.5em;
 }
 
 h3 {
@@ -73,4 +79,10 @@ a,
 }
 .change-icon:hover > .fa + .fa {
   display: inherit;
+}
+
+@media screen and (max-width:630px) {
+  h2 {
+    max-width: 100%;
+  }
 }
