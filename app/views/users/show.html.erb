@@ -50,7 +50,7 @@
           <tr>
             <th>Organization</th>
             <td>
-              <% if @user.organization != "" %>
+              <% if @user.organization && @user.organization != "" %>
                 <%= @user.organization %>
               <% else %>
                 <%= "Not Available" %>
@@ -60,7 +60,7 @@
           <tr>
             <th>Website</th>
             <td>
-              <% if @user.website != "" %>
+              <% if @user.website && @user.website != "" %>
                 <%= @user.website %>
               <% else %>
                 <%= "Not Available" %>
