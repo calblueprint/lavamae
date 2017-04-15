@@ -8,7 +8,6 @@
 #  organization           :string
 #  num_actions            :integer
 #  is_admin               :boolean
-#  on_map                 :boolean
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  encrypted_password     :string           default(""), not null
@@ -23,9 +22,16 @@
 #  email                  :string           default(""), not null
 #  profile_pic            :string
 #  location_id            :integer
-#  map_approval_state     :integer          default(0)
 #  website                :string
 #  bio                    :text
+#  secondary_name         :string
+#  secondary_email        :string
+#  tertiary_name          :string
+#  tertiary_email         :string
+#  volunteer              :boolean          default(FALSE)
+#  seeking_volunteer      :boolean          default(FALSE)
+#  admin_approval_state   :integer          default(0)
+#  pending_admin          :boolean
 #
 
 class User < ActiveRecord::Base
@@ -39,7 +45,6 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :favorite_discussions, :class_name => "Discussion"
   has_many :responses
   belongs_to :location
-  enum map_approval_state: { pending: 0, approved: 1, rejected: 2}
   has_many :upvotable, :dependent => :destroy
   has_many :images, :dependent => :destroy
   accepts_nested_attributes_for :images

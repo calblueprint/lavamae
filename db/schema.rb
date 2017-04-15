@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170409185051) do
+ActiveRecord::Schema.define(version: 20170412073450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -154,7 +154,6 @@ ActiveRecord::Schema.define(version: 20170409185051) do
     t.string   "organization"
     t.integer  "num_actions"
     t.boolean  "is_admin"
-    t.boolean  "on_map"
     t.datetime "created_at",                             null: false
     t.datetime "updated_at",                             null: false
     t.string   "encrypted_password",     default: "",    null: false
@@ -169,7 +168,6 @@ ActiveRecord::Schema.define(version: 20170409185051) do
     t.string   "email",                  default: "",    null: false
     t.string   "profile_pic"
     t.integer  "location_id"
-    t.integer  "map_approval_state",     default: 0
     t.string   "website"
     t.text     "bio"
     t.string   "secondary_name"
