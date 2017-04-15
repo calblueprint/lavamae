@@ -10,7 +10,7 @@ class RegistrationsController < Devise::RegistrationsController
       # sign_in(resource_name, resource)
       email = sign_up_params[:email]
       user = User.find_by_email(email)
-      if !user.nil? && user.send_confirmation_instructions
+      if !user.nil?
         render_json_message(:ok, message: 'Account Pending; please check your email to confirm your account!', to: root_path)
       else
         render_json_message(:internal_server_error, errors: ["An unknown error occurred."])
