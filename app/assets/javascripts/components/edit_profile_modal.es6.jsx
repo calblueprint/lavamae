@@ -149,6 +149,12 @@ class EditProfileModal extends React.Component {
       seeking_volunteer: this.state.seeking_volunteer,
     };
 
+    if (this.state.organization) {
+      userFields.organization = this.state.organization;
+    }
+    if (this.state.website) {
+      userFields.website = this.state.website;
+    }
     var locId = null;
     if (response) {
       locId = response.id;
@@ -157,6 +163,9 @@ class EditProfileModal extends React.Component {
       userFields["location_id"] = null;
     }
     APIRequester.put(`/users/${this.props.user_id}`, userFields, this._success);
+    if (this.props.email != this.state.email) {
+      APIRequester.delete("/users/sign_out")
+    }
   }
 
   componentDidUpdate() {
