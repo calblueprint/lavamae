@@ -12,6 +12,14 @@ class UsersController < ApplicationController
     @volunteers = User.where("volunteer = ? OR seeking_volunteer = ?", true, true).where(location_id: @location).where.not(id: @user.id)
   end
 
+  def destroy
+    if current_user.is_admin
+      @user = User.find(params[:id])
+      @user.destroy
+      redirect_to admin_dashboard_path( status: 303 )
+    end
+  end
+
   def admin_approval_update
     @admin = User.find_by(id: params[:admin_id])
     @user = User.find_by(id: params[:user_id])

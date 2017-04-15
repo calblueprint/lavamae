@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     get '/users/password_reset' => 'registrations#password_reset', :as => 'edit_user_password'
   end
 
-  resources :users, only: [:show, :update]
+  resources :users, only: [:show, :update, :destroy]
 
   resources :users do
     put '/admin_approval', to: 'users#admin_approval_update'
@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   delete '/favorite_discussion/:id', to: 'discussions#unfavorite'
   get '/about', to: 'pages#about'
   get '/admin_dashboard', to: 'pages#admin_dashboard'
+  delete '/admin_dashboard', to: 'pages#admin_dashboard'
   get '/static_discussion', to: 'static_pages#discussion'
   get '/static_map', to: 'static_pages#map'
   put '/admin_tags/save', to: 'admin_tags#save'
