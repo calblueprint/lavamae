@@ -12,6 +12,12 @@
 
 <script>
 
+  function deletePin(id) {
+    APIRequester.put(`/users/${id}`, {admin_map_approval: false}, success(id));
+  };
+
+  function success(x) {return;};
+
   mapboxgl.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
 
   var map = new mapboxgl.Map({
@@ -55,7 +61,7 @@
             '<% end %>' +
           '</div>' +
           '<% if current_user && current_user.is_admin? %>' +
-          '<%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>' +
+          '<button onclick="deletePin(<%= user.id %>)">Delete</button>' +
           '<% end %>' +
         '</div>'
       );
