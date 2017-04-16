@@ -96,20 +96,28 @@ class DiscussionIndex extends React.Component {
     let header = null;
     if (this.state.currentUser) {
       header = (
-        <div>
+        <div className="favorite-create-discussions">
           <a href={this._generateLink(this.state.discussion, this.state.search, this.state.showFavorites)}>
             <button className={favoritesSelected}>
               <i className="fa fa-star-o fa-lg"></i>
               <span> Favorites </span>
             </button>
           </a>
-          <a href={'/discussions/new'}>
-            <button className="btn btn-blue pull-right">
-              Create Discussion
-            </button>
-          </a>
+          <DiscussionCreateModal
+            user = {this.props.user}
+            all_tags = {this.props.all_tags}
+          />
         </div>
       );
+    } else {
+      header = (
+        <div className="favorite-create-discussions">
+          <LoginModal
+            style = {'btn btn-blue pull-left'}
+            from_discussion = {true}
+          />
+        </div>
+      )
     }
     return header;
   }
