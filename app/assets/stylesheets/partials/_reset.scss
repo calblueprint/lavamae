@@ -81,11 +81,17 @@ section {
 }
 
 @media (min-width: 1200px) {
-    .container, .container-lg {
-      max-width: 960px;
-    }
+  .container, .container-lg {
+    max-width: 1080px;
+  }
 
-    .container-lg{
-      max-width: 100%;
-    }
+  .container-lg{
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width:630px) {
+  section {
+    padding-top: $mobile-nav-height;
+  }
 }

@@ -100,7 +100,7 @@ def make_responses
 end
 
 def make_modules
-  1.upto(10) do |n|
+  1.upto(4) do |n|
     resource_topic = ResourceTopic.create(
       name: "Toolkit #{n}",
       created_at: Time.now.to_datetime,

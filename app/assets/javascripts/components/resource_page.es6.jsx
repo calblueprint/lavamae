@@ -76,9 +76,16 @@ class ResourcePage extends React.Component {
       <section className="modules-section">
         <div className="container modules-container">
           <div className="modules-header">
-            <h3>Resources</h3>
+            <h1>Start Your Service</h1>
+            <h2>
+              Lava Mae has created a toolkit for you to reference and guide you
+              in your journey on starting a mobile hygiene service.  Please
+              check back, since we’ll be adding more documents on other Lava Mae
+              programs, such as how to start a Pop-up Care Village in your
+              community, coming soon!
+            </h2>
             { this._renderModuleUploadModal() }
-          </div>
+        </div>
           { this._renderStyledModules() }
         </div>
       </section>

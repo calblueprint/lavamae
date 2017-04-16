@@ -45,7 +45,7 @@ class UsersController < ApplicationController
 
   def update_params
     params.permit(:id, :first_name, :last_name, :email, :secondary_name, :secondary_email, :tertiary_name, :tertiary_email,
-                      :organization, :location_id, :website, :on_map, :volunteer, :seeking_volunteer, :bio, :profile_pic, :admin_map_approval)
+                      :organization, :location_id, :website, :on_map, :volunteer, :seeking_volunteer, :bio, :profile_pic, :admin_map_approval, :pending_admin)
   end
 
   def admin_approval_params

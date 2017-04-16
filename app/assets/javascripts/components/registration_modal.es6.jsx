@@ -36,7 +36,7 @@ class RegistrationModal extends React.Component {
   }
 
   _toLogin() {
-    window.location = "/about";
+    window.location = "/?modal=true";
   }
 
   _attemptRegistration(response = null) {
@@ -171,19 +171,15 @@ class RegistrationModal extends React.Component {
     }
     return (
       <section className="signup">
-        <div className="container signup-container">
+        <div className="signup-container">
           <div className="signup-row">
-          <h3>Create a Profile</h3>
+          <h1>Create a Profile</h1>
             <form>
               <label className="required-field">* Required</label>
               <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "John", required=true) }</div>
               <div className="input-field">{ this._renderInput("last_name", "Last Name", "text", "Doe", required=true) }</div>
               <div className="input-field">{ this._renderInput("email", "Email", "text", "lavamae@gmail.com", required=true) }</div>
-              <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Jane Doe") }</div>
-              <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "jane@gmail.com") }</div>
-              <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "John Smith") }</div>
-              <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "john@gmail.com") }</div>
-              <div className="input-field">{ this._renderInput("password", "Password", "password", "", required=true) }</div>
+              <div className="input-field">{ this._renderInput("password", "Password (min. 8 characters)", "password", "", required=true) }</div>
               <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "", required=true) }</div>
               <div className="input-field">{ this._renderInput("organization", "Organization", "text", "Lava Mae") }</div>
               <div className="input-field">{ this._renderInput("website", "Website", "text", "lavabae.org") }</div>
@@ -193,8 +189,11 @@ class RegistrationModal extends React.Component {
                   <input id="my-address" name="location" type="text" />
                 </div>
               </div>
+              <div className="input-field">{ this._renderInput("secondary_name", "Name of Secondary Contact", "text", "Jane Doe") }</div>
+              <div className="input-field">{ this._renderInput("secondary_email", "Email of Secondary Contact", "text", "jane@gmail.com") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_name", "Name of Tertiary Contact", "text", "John Smith") }</div>
+              <div className="input-field">{ this._renderInput("tertiary_email", "Email of Tertiary Contact", "text", "john@gmail.com") }</div>
               <div className="input-field">
-                <label htmlFor="pin">Map Pin</label>
                 <label className="control control--checkbox">Include me on the map!
                   <input type="checkbox"
                     name="on_map"
@@ -205,8 +204,7 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label htmlFor="volunteer">I want to...</label>
-                <label className="control control--checkbox">Volunteer
+                <label className="control control--checkbox">I want to volunteer.
                   <input type="checkbox"
                     name="volunteer"
                     checked={this.state.volunteer_checked}
@@ -216,11 +214,21 @@ class RegistrationModal extends React.Component {
                 </label>
               </div>
               <div className="input-field">
-                <label className="control control--checkbox"> Look for volunteers
+                <label className="control control--checkbox"> I am looking for volunteers.
                   <input type="checkbox"
                     name="seeking_volunteer"
                     checked={this.state.seeking_volunteer_checked}
                     onChange={this._handleSeekingVolunteerCheckboxChange}
+                    className="input-checkbox"/>
+                  <div className="control__indicator"></div>
+                </label>
+              </div>
+              <div className="input-field">
+                <label className="control control--checkbox"> Request to be an Admin
+                  <input type="checkbox"
+                    name="on_map"
+                    checked={this.state.admin_checked}
+                    onChange={this._handleAdminCheckboxChange}
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>
@@ -232,17 +240,6 @@ class RegistrationModal extends React.Component {
                   <div className="imgPreview">
                     {$imagePreview}
                   </div>
-              </div>
-              <div>I want to...</div>
-              <div className="input-field">
-                <label className="control control--checkbox"> Request to be an Admin
-                  <input type="checkbox"
-                    name="on_map"
-                    checked={this.state.admin_checked}
-                    onChange={this._handleAdminCheckboxChange}
-                    className="input-checkbox"/>
-                  <div className="control__indicator"></div>
-                </label>
               </div>
               <button className="btn btn-blue" name="submit" type="button"
                 onClick={this._startSignUpProcess}>Create Account</button>
