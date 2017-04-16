@@ -173,7 +173,7 @@ class RegistrationModal extends React.Component {
       <section className="signup">
         <div className="signup-container">
           <div className="signup-row">
-          <h3>Create a Profile</h3>
+          <h1>Create a Profile</h1>
             <form>
               <label className="required-field">* Required</label>
               <div className="input-field">{ this._renderInput("first_name", "First Name", "text", "John", required=true) }</div>
