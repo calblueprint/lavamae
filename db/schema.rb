@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20170415185648) do
-=======
 ActiveRecord::Schema.define(version: 20170415192320) do
->>>>>>> created remove pin modal for delete button on each user pin on map
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -179,18 +175,15 @@ ActiveRecord::Schema.define(version: 20170415192320) do
     t.string   "tertiary_email"
     t.boolean  "volunteer",              default: false
     t.boolean  "seeking_volunteer",      default: false
-<<<<<<< HEAD
+    t.text     "bio"
+    t.boolean  "admin_map_approval",     default: true
+    t.integer  "admin_approval_state",   default: 0
+    t.boolean  "pending_admin"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
-    t.integer  "admin_approval_state",   default: 0
-    t.boolean  "pending_admin"
     t.boolean  "on_map"
-=======
-    t.text     "bio"
-    t.boolean  "admin_map_approval",     default: true
->>>>>>> created remove pin modal for delete button on each user pin on map
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
