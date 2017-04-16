@@ -236,7 +236,7 @@ class EditProfileModal extends React.Component {
       </div>);
     } else {
       mapPin = (
-        <div>An admin has removed you from the map, sorry for the inconvenience!</div>
+        <div>An admin has removed you from the map. Sorry for the inconvenience!</div>
       );
     }
     if (!this.props.is_admin) {

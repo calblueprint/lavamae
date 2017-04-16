@@ -29,7 +29,6 @@ class DiscussionForm extends React.Component {
       content: this.props.discussion.content,
       tags: this.props.tags,
       showModal: false,
-      currentUser: this.props.current_user,
       data: this.props.discussion,
     };
   }
@@ -178,7 +177,7 @@ class DiscussionForm extends React.Component {
 
   renderContent() {
     var editButton = null;
-    if (!this.props.current_user.is_admin || this.state.currentUser.id == this.state.data.user_id) {
+    if (!this.props.current_user.is_admin || this.props.current_user.id == this.state.data.user_id) {
       editButton = (<button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>);
     }
     return (
@@ -237,7 +236,7 @@ class DiscussionForm extends React.Component {
     if (this.state.showForm) {
       return this.renderForm();
     } else {
-      if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id || this.state.currentUser.is_admin) {
+      if (this.props.current_user && this.props.current_user.id == this.state.data.user_id || this.props.current_user.is_admin) {
         return this.renderContent();
       } else {
         return this.renderGuestContent();
