@@ -14,6 +14,7 @@
 * @props profile_pic - path of user's profile picture
 * @props volunteer - true if user wants to be a volunteer
 * @props seeking_volunteer - true if user is seeking volunteers
+* @props admin_map_approval - true if user is allowed to be on map
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -210,6 +211,26 @@ class EditProfileModal extends React.Component {
     } else {
       $imagePreview = (<div className="previewText">Please select an image for preview</div>);
     }
+    var mapPin = null;
+    if (this.props.admin_map_approval) {
+      mapPin = (
+      <div className="input-field">
+      <label htmlFor="pin">Map Pin</label>
+      <label className="control control--checkbox"> Include me on the map!
+        <input type="checkbox"
+          name="on_map"
+          checked={this.state.map_checked}
+          onChange={this._handleMapCheckboxChange}
+          className="input-checkbox"/>
+        <div className="control__indicator"></div>
+      </label>
+      </div>);
+    } else {
+      mapPin = (
+        <div>An admin has removed you from the map, sorry for the inconvenience!</div>
+      );
+    }
+
     return (
       <div>
         <button className="btn btn-sm btn-blue" onClick={this._openModal}>Edit</button>
@@ -270,17 +291,7 @@ class EditProfileModal extends React.Component {
                   <input id="my-edit-address" name="location" type="text" defaultValue={this.state.location} />
                 </div>
               </div>
-              <div className="input-field">
-                <label htmlFor="pin">Map Pin</label>
-                <label className="control control--checkbox"> Include me on the map!
-                  <input type="checkbox"
-                    name="on_map"
-                    checked={this.state.map_checked}
-                    onChange={this._handleMapCheckboxChange}
-                    className="input-checkbox"/>
-                  <div className="control__indicator"></div>
-                </label>
-              </div>
+              {mapPin}
               <div className="input-field">
                 <label htmlFor="volunteer">I want to...</label>
                 <label className="control control--checkbox">Volunteer
