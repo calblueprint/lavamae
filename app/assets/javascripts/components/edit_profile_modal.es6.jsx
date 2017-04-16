@@ -23,7 +23,6 @@ var Modal = ReactBootstrap.Modal;
 class EditProfileModal extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.admin_checked)
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
     this._handleChange = this._handleChange.bind(this);
