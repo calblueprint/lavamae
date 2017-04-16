@@ -350,4 +350,5 @@ EditProfileModal.propTypes = {
   profile_pic       : React.PropTypes.object.isRequired,
   volunteer         : React.PropTypes.bool,
   seeking_volunteer : React.PropTypes.bool,
+  admin_map_approval: React.PropTypes.bool,
 };
