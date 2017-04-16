@@ -184,7 +184,6 @@ ActiveRecord::Schema.define(version: 20170415192320) do
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email"
     t.boolean  "on_map"
-  end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
   add_index "users", ["location_id"], name: "index_users_on_location_id", using: :btree
