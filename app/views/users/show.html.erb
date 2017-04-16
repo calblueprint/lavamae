@@ -50,7 +50,7 @@
           <tr>
             <th>Organization</th>
             <td>
-              <% if @user.organization != "" %>
+              <% if @user.organization && @user.organization != "" %>
                 <%= @user.organization %>
               <% else %>
                 <%= "Not Available" %>
@@ -60,7 +60,7 @@
           <tr>
             <th>Website</th>
             <td>
-              <% if @user.website != "" %>
+              <% if @user.website && @user.website != "" %>
                 <%= @user.website %>
               <% else %>
                 <%= "Not Available" %>
@@ -141,11 +141,11 @@
       </div>
       <% end %>
       <%if current_user && current_user.id == @user.id  && (@user.volunteer || @user.seeking_volunteer)%>
-      <div>
+      <div class="volunteer-container">
         <h5 class="profile-section-titles">
           <%= "Volunteer Matching in Your Area" %><br>
         </h5>
-        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id) %>
+        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id, default_image: @default_img) %>
       </div>
       <% end %>
     </div>
