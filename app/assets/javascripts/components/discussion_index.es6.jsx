@@ -12,12 +12,15 @@
  */
 
 class DiscussionIndex extends React.Component {
-
   constructor(props) {
     super(props);
+    console.log(this.props.discussions[0])
     this._generateLink = this._generateLink.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
+    this._copyToFiltered = this._copyToFiltered.bind(this);
+    this._onSearchChange = this._onSearchChange.bind(this);
+    this._loadDiscussions = this._loadDiscussions.bind(this);
     this.state = {
       showFavorites: this.props.show_favorites != null,
       favoriteDiscussions: this.props.favorite_discussions,
@@ -27,7 +30,8 @@ class DiscussionIndex extends React.Component {
       tagFilter: this.props.tag_filter,
       allTags: this.props.all_tags,
       showModal: false,
-      tags: []
+      tags: [],
+      filteredDisc: this.props.discussions,
     };
   }
 
@@ -37,6 +41,47 @@ class DiscussionIndex extends React.Component {
 
   _closeModal() {
     this.setState({ showModal: false });
+  }
+
+  _componentDidMount() {
+    this._copyToFiltered(this.props.discussions);
+  }
+
+  _copyToFiltered(discussions) {
+    filteredDisc = [];
+    for (var i = 0; i < discussions.length; i++) {
+      filteredDisc.push(discussions[i]);
+    }
+    this.setState({ filteredDisc: filteredDisc});
+  }
+
+  _onSearchChange(event) {
+    var input = $(event.target).val();
+    this.state.search = input;
+    this._loadDiscussions();
+  }
+
+  _loadDiscussions() {
+    if (this.state.search == "") {
+      this._copyToFiltered(this.state.discussions);
+      return;
+    }
+    filtered = [];
+    for (var i = 0; i < this.state.discussions.length; i++) {
+      discussion = this.state.discussions[i];
+      var reg = new RegExp(this.state.search, "i");
+      if (reg.test(discussion.title) || reg.test(discussion.content)) {
+        filtered.push(discussion);
+      }
+      for (var i = 0; i < this.state.discussions.length; i++) {
+        discussion = this.state.discussions[i];
+        var reg = new RegExp(this.state.search, "i");
+        if (reg.test(discussion.title) || reg.test(discussion.content)) {
+          filtered.push(discussion);
+        }
+      }
+    }
+    this._copyToFiltered(filtered);
   }
 
   _generateLink(disc, search, fav, filter) {
@@ -53,9 +98,9 @@ class DiscussionIndex extends React.Component {
     let filterParam = "";
     if (this.state.tagFilter) {
       for (var i = 0; i < this.state.tagFilter.length; i++) {
-          if (filter != this.state.tagFilter[i]) {
-            filterParam += "&filter[]=" + this.state.tagFilter[i];
-          }
+        if (filter != this.state.tagFilter[i]) {
+          filterParam += "&filter[]=" + this.state.tagFilter[i];
+        }
       }
     }
 
@@ -159,8 +204,14 @@ class DiscussionIndex extends React.Component {
             No discussions have matched your query.
         </h4>
       )
+    } else if (this.state.filteredDisc.length == 0) {
+      return (
+        <h4 className="index-text">
+            There are no discussions with your search input.
+        </h4>
+      )
     } else {
-      return this.state.discussions.map((disc, i) => {return this.renderShortened(disc, i)});
+      return this.state.filteredDisc.map((disc, i) => {return this.renderShortened(disc, i)});
     }
   }
 
@@ -175,6 +226,14 @@ class DiscussionIndex extends React.Component {
     return (
       <div>
         <div className="discussion-header">
+
+            <div className="discussion-search">
+              <input type="text" name="search" className="discussion-search-input"
+                onChange={(e) => this._onSearchChange(e)}
+                placeholder="Search discussion threads..." />
+            </div>
+
+
           <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
           <div className="discussion-tag-container" id="tags">
             <i className="fa fa-tags fa-lg"></i>
