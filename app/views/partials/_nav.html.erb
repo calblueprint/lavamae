@@ -42,7 +42,7 @@
           </li>
         <%else%>
           <li class="nav-item">
-            <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
+            <%= react_component('LoginModal', style: "btn btn-transparent btn-login", from_confirmation: params[:modal]) %>
           </li>
           <li class="nav-item">
             <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
@@ -66,8 +66,8 @@
             <%= link_to user_path(current_user.id) do %>
               Profile
             <% end %>
-            <% if current_user.is_admin%> 
-              <%= link_to admin_dashboard_path do %> 
+            <% if current_user.is_admin%>
+              <%= link_to admin_dashboard_path do %>
                 Admin Dashboard
               <% end %>
             <% end %>

@@ -22,7 +22,7 @@ class LoginModal extends React.Component {
     this._handleSignUp = this._handleSignUp.bind(this);
     this._renderLoginModal = this._renderLoginModal.bind(this);
     this.state = {
-      showModal: false,
+      showModal: this.props.from_confirmation || false,
       email: "",
       password: "",
       btnStyle: this.props.style,
@@ -63,9 +63,14 @@ class LoginModal extends React.Component {
 
   _successLogin(msg) {
     this._closeModal();
+    this.props.from_confirmation = false;
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.success("Log-in successful!");
-    window.location = location.pathname;
+    if (this.props.from_confirmation) {
+      window.location = "/"
+    } else {
+      window.location = location.pathname;
+    }
   }
 
   _error(msg) {
@@ -163,7 +168,7 @@ class LoginModal extends React.Component {
           { this._renderForgotPasswordModal() }
         </div>
       );
-    } else {
+    }  else {
       return (
         <div>
           { this._renderLoginModal() }

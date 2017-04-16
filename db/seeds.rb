@@ -19,7 +19,7 @@ def make_locations
 end
 
 def make_users
-  1.upto(10) do |n|
+  1.upto(3) do |n|
     user = User.create(
       first_name: FFaker::Name.first_name,
       last_name: FFaker::Name.last_name,
@@ -31,7 +31,6 @@ def make_users
       email: "user#{n}@lavamae.org",
       password: "password",
       password_confirmation: "password",
-      map_approval_state: 0,
       admin_approval_state: 0,
       volunteer: true,
       seeking_volunteer: false,
@@ -43,7 +42,7 @@ def make_users
 end
 
 def make_admins
-  11.upto(30) do |n|
+  11.upto(12) do |n|
     admin = User.create(
       first_name: FFaker::Name.first_name,
       last_name: FFaker::Name.last_name,
@@ -75,7 +74,7 @@ def make_discussions
       content: "lavabae++",
       title: "Discussion #{n}",
       tag_list: ["volunteering", "starting up"],
-      user_id: n % 5 + 1
+      user_id: n % 2 + 1
     )
     discussion.score = 0
     discussion.upvotes = []
@@ -89,7 +88,7 @@ def make_responses
     response = Response.create(
       content: "Response!",
       discussion_id: Discussion.find((n / 3.0).ceil).id,
-      user_id: n % 5 + 2
+      user_id: n % 2 + 1
     )
     response.score = 0
     response.upvotes = []
