@@ -1,10 +1,10 @@
 .about {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  min-height: 100vh;
+  padding-top: $nav-height;
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%),
   image_url("about-hero.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
   text-align: center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -12,7 +12,9 @@
   background-size: cover;
 
   .about-text {
-    max-width: 500px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .about-title, .about-body {
