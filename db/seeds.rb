@@ -112,10 +112,10 @@ def make_modules
   end
 end
 
-make_locations
-make_users
-make_admins
-make_tags
-make_discussions
-make_responses
-make_modules
+# make_locations
+# make_users
+# make_admins
+# make_tags
+# make_discussions
+# make_responses
+# make_modules
