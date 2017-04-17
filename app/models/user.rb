@@ -41,11 +41,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   validates :first_name, :last_name, presence: true
   mount_base64_uploader :profile_pic, AvatarUploader
-  has_many :discussions
+  has_many :discussions, :dependent => :destroy
   has_and_belongs_to_many :favorite_discussions, :class_name => "Discussion"
-  has_many :responses
+  has_many :responses, :dependent => :destroy
   belongs_to :location
-  has_many :upvotable, :dependent => :destroy
+  has_many :upvotes, :dependent => :destroy
   has_many :images, :dependent => :destroy
   accepts_nested_attributes_for :images
 

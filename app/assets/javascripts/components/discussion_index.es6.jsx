@@ -155,7 +155,7 @@ class DiscussionIndex extends React.Component {
     if (this.state.discussions.length == 0) {
       return (
         <h4 className="index-text">
-            You have no favorited discussions.
+            No discussions have matched your query.
         </h4>
       )
     } else {
