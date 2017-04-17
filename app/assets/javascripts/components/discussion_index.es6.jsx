@@ -19,7 +19,6 @@ class DiscussionIndex extends React.Component {
     this._closeModal = this._closeModal.bind(this);
     this.state = {
       showFavorites: this.props.show_favorites != null,
-      currentUser: this.props.current_user,
       favoriteDiscussions: this.props.favorite_discussions,
       discussion: this.props.discussion,
       discussions: this.props.discussions,
@@ -94,7 +93,7 @@ class DiscussionIndex extends React.Component {
       favoritesSelected = "discussion-favorite";
     }
     let header = null;
-    if (this.state.currentUser) {
+    if (this.props.current_user) {
       header = (
         <div className="favorite-create-discussions">
           <a href={this._generateLink(this.state.discussion, this.state.search, this.state.showFavorites)}>
@@ -124,7 +123,7 @@ class DiscussionIndex extends React.Component {
 
   renderShortened(disc, key) {
     let star = null;
-    if (this.state.currentUser) {
+    if (this.props.current_user) {
       star = (
           <DiscussionFavorite
             favorite_discussions= {this.props.favorite_discussions}

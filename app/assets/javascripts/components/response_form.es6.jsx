@@ -19,7 +19,6 @@ class ResponseForm extends React.Component {
     this._setUpvotes = this._setUpvotes.bind(this);
     this.state = {
       showForm: false,
-      currentUser: this.props.current_user,
       content: this.props.response.content,
       showModal: false,
       data: this.props.response,
@@ -119,7 +118,7 @@ class ResponseForm extends React.Component {
       return (<div></div>)
     }
     var editButton = null;
-    if (!this.props.current_user.is_admin || this.state.currentUser.id == this.state.data.user_id) {
+    if (!this.props.current_user.is_admin || this.props.current_user.id == this.state.data.user_id) {
       editButton = (<button className="btn btn-sm btn-action margin-l" onClick={this._enableForm}>Edit</button>);
     }
     return (
@@ -160,7 +159,7 @@ class ResponseForm extends React.Component {
     if (this.state.showForm) {
       renderedContent = this.renderForm();
     } else {
-      if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id || this.state.currentUser.is_admin) {
+      if (this.props.current_user && (this.props.current_user.id == this.state.data.user_id || this.props.current_user.is_admin)) {
         renderedContent = this.renderContent();
       } else {
         renderedContent = this.renderGuestContent();

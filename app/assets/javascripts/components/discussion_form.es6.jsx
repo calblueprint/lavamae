@@ -236,7 +236,7 @@ class DiscussionForm extends React.Component {
     if (this.state.showForm) {
       return this.renderForm();
     } else {
-      if (this.props.current_user && this.props.current_user.id == this.state.data.user_id || this.props.current_user.is_admin) {
+      if (this.props.current_user && (this.props.current_user.id == this.state.data.user_id || this.props.current_user.is_admin)) {
         return this.renderContent();
       } else {
         return this.renderGuestContent();

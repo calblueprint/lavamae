@@ -12,7 +12,6 @@ class DiscussionResponses extends React.Component {
     this._successfulSave = this._successfulSave.bind(this);
     this._saveResponse = this._saveResponse.bind(this);
     this.state = {
-      currentUser: this.props.current_user,
       discussion: this.props.discussion,
       responses: this.props.responses,
     };
@@ -70,7 +69,7 @@ class DiscussionResponses extends React.Component {
 
   renderResponseForm() {
     let form = null;
-    if (this.state.currentUser) {
+    if (this.props.current_user) {
       form = (
         <div>
           <h5 className="response-form-header">Post a Response</h5>

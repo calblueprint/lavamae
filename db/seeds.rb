@@ -74,7 +74,7 @@ def make_discussions
       content: "lavabae++",
       title: "Discussion #{n}",
       tag_list: ["volunteering", "starting up"],
-      user_id: n % 2 + 1
+      user_id: n % 3 + 1
     )
     discussion.score = 0
     discussion.upvotes = []
@@ -88,7 +88,7 @@ def make_responses
     response = Response.create(
       content: "Response!",
       discussion_id: Discussion.find((n / 3.0).ceil).id,
-      user_id: n % 2 + 1
+      user_id: n % 3 + 1
     )
     response.score = 0
     response.upvotes = []
