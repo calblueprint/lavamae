@@ -24,7 +24,7 @@ class PasswordsController < ApplicationController
     email = request_reset_params[:email]
     user = User.find_by_email(email)
     if !user.nil? && user.send_reset_password_instructions
-      render_json_message(:ok)
+      render_json_message(:ok, message: "Reset password instructions sent!")
       return
     end
     render_json_message(:internal_server_error, errors: ["An unknown error occurred."])
