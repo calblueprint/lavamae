@@ -47,8 +47,9 @@ DeleteUsers.propTypes = {
 };
 
 /**
-  * @prop admin_id - id of admin approving or rejecting the pending user
-  * @prop pending_user - user whose admin_approval_state is set to "pending"
+  * @prop admin_id - id of admin deleting users
+  * @prop user - user to delete
+  * @prop default_image - default profile image url
   */
 
 class DeleteUser extends React.Component {
@@ -70,7 +71,7 @@ class DeleteUser extends React.Component {
   _setProfilePic(data) {
     if (data.profile_pic.thumb.url) {
       this.setState({ profilePic: data.profile_pic.thumb.url });
-    } 
+    }
   }
 
   _fetchProfilePic() {
@@ -96,7 +97,7 @@ class DeleteUser extends React.Component {
               <img src={this.state.profilePic} />
             </a>
           </div>
-        </div>  
+        </div>
         <p className="approval-name">
           <a href={'/users/' + this.props.user.id}>
           { this.props.user.first_name } { this.props.user.last_name }

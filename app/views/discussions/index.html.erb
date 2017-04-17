@@ -6,7 +6,7 @@
 	<% end %>
 <% end %>
 
-<% if @discussion.user.profile_pic? %>
+<% if @discussion && @discussion.user.profile_pic? %>
   <% @userimage = asset_path(@discussion.user.profile_pic.url(:thumb)) %>
 <% else %>
   <% @userimage = asset_path('default.png') %>
