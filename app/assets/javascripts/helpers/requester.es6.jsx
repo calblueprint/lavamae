@@ -70,6 +70,7 @@ class Requester {
   }
 
   put(endpoint, data, success, extraFields = {}) {
+    console.log('here');
     this._attemptAjax(endpoint, 'PUT', data, extraFields, success,
         this._postErrorHandler);
   }

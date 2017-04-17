@@ -11,6 +11,14 @@
 </div>
 
 <script>
+
+  function deletePin(id) {
+    APIRequester.put(`/users/${id}`, {admin_map_approval: false}, (msg) => {});
+    window.location = location.pathname;
+  };
+
+  function success(x) {return;};
+
   mapboxgl.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
 
   var map = new mapboxgl.Map({
@@ -40,6 +48,7 @@
        'left': [popupMargin, 0],
        'right': [-popupMargin, 0]
        };
+
       var popup = new mapboxgl.Popup({offset:popupOffsets}).setHTML(
         '<div class="popup-preview">' +
           '<div class="organization"><%= user.organization %></div>' +
@@ -52,9 +61,12 @@
             '<% else %><%= image_tag(("default.png"), class: "user-image") %>' +
             '<% end %>' +
           '</div>' +
+          '<% if current_user && current_user.is_admin? %>' +
+          '<button onclick="deletePin(<%= user.id %>)">Delete</button>' +
+          '<% end %>' +
         '</div>'
       );
-      // TODO: Make markers circle around same point. This is quick fix.
+
       var lng = <%= location.lng %>;
       var lat = <%= location.lat %>;
       if (points.has(<%= location.id %>)) {

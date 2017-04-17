@@ -14,6 +14,7 @@
 * @props profile_pic - path of user's profile picture
 * @props volunteer - true if user wants to be a volunteer
 * @props seeking_volunteer - true if user is seeking volunteers
+* @props admin_map_approval - true if user is allowed to be on map
 * @props admin_checked - true if user wants to be an admin
 * @props is_admin - true is user is an admin
 */
@@ -219,6 +220,25 @@ class EditProfileModal extends React.Component {
     } else {
       $imagePreview = (<div className="previewText">Please select an image for preview</div>);
     }
+    var mapPin = null;
+    if (this.props.admin_map_approval) {
+      mapPin = (
+      <div className="input-field">
+      <label htmlFor="pin">Map Pin</label>
+      <label className="control control--checkbox"> Include me on the map!
+        <input type="checkbox"
+          name="on_map"
+          checked={this.state.map_checked}
+          onChange={this._handleMapCheckboxChange}
+          className="input-checkbox"/>
+        <div className="control__indicator"></div>
+      </label>
+      </div>);
+    } else {
+      mapPin = (
+        <div>An admin has removed you from the map. Sorry for the inconvenience!</div>
+      );
+    }
     if (!this.props.is_admin) {
       $adminCheckbox = (<div className="input-field">
                           <label className="control control--checkbox"> Request to be an Admin
@@ -232,6 +252,7 @@ class EditProfileModal extends React.Component {
                         </div>
                       )
     }
+
     return (
       <div>
         <button className="btn btn-sm btn-blue" onClick={this._openModal}>Edit</button>
@@ -292,16 +313,7 @@ class EditProfileModal extends React.Component {
                        placeholder="john@gmail.com" defaultValue={this.props.tertiary_email} />
               </div>
               </div>
-              <div className="input-field">
-                <label className="control control--checkbox"> I want to be on the map!
-                  <input type="checkbox"
-                    name="on_map"
-                    checked={this.state.map_checked}
-                    onChange={this._handleMapCheckboxChange}
-                    className="input-checkbox"/>
-                  <div className="control__indicator"></div>
-                </label>
-              </div>
+              {mapPin}
               <div className="input-field">
                 <label className="control control--checkbox">I want to volunteer.
                   <input type="checkbox"
@@ -360,6 +372,7 @@ EditProfileModal.propTypes = {
   profile_pic       : React.PropTypes.object.isRequired,
   volunteer         : React.PropTypes.bool,
   seeking_volunteer : React.PropTypes.bool,
+  admin_map_approval: React.PropTypes.bool,
   pending_admin     : React.PropTypes.bool,
   is_admin          : React.PropTypes.bool,
 };

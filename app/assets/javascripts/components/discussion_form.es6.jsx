@@ -29,7 +29,6 @@ class DiscussionForm extends React.Component {
       content: this.props.discussion.content,
       tags: this.props.tags,
       showModal: false,
-      currentUser: this.props.current_user,
       data: this.props.discussion,
     };
   }
@@ -177,6 +176,10 @@ class DiscussionForm extends React.Component {
   }
 
   renderContent() {
+    var editButton = null;
+    if (!this.props.current_user.is_admin || this.props.current_user.id == this.state.data.user_id) {
+      editButton = (<button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>);
+    }
     return (
       <div>
         <button className='btn btn-sm btn-action btn-destroy pull-right' onClick={this._openModal}>Delete</button>
@@ -196,7 +199,7 @@ class DiscussionForm extends React.Component {
             </Modal.Footer>
           </form>
         </Modal>
-        <button className="btn btn-sm btn-action pull-right" onClick={this._enableForm}>Edit</button>
+        {editButton}
         <h2 className="discussion-title">{this.state.title}</h2>
         <p className="discussion-description wordwrap">{this.state.content}</p>
         <div className="user-action row">
@@ -233,7 +236,7 @@ class DiscussionForm extends React.Component {
     if (this.state.showForm) {
       return this.renderForm();
     } else {
-      if (this.state.currentUser && this.state.currentUser.id == this.state.data.user_id) {
+      if (this.props.current_user && this.props.current_user.id == this.state.data.user_id || this.props.current_user.is_admin) {
         return this.renderContent();
       } else {
         return this.renderGuestContent();
