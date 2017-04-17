@@ -131,6 +131,14 @@
           <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
           <% end %>
       </div>
+      <%if current_user && current_user.id == @user.id  && (@user.volunteer || @user.seeking_volunteer)%>
+      <div class="volunteer-container">
+        <h5 class="profile-section-titles">
+          <%= "Volunteer Matching in Your Area" %><br>
+        </h5>
+        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id, default_image: @default_img) %>
+      </div>
+      <% end %>
       <% if @favorite_discussions.count > 0 %>
       <div>
         <h5 class="profile-section-titles">
@@ -141,14 +149,6 @@
             <%= render 'discussions/shortened', {discussion: discussion} %>
           <% end %>
         </div>
-      </div>
-      <% end %>
-      <%if current_user && current_user.id == @user.id  && (@user.volunteer || @user.seeking_volunteer)%>
-      <div class="volunteer-container">
-        <h5 class="profile-section-titles">
-          <%= "Volunteer Matching in Your Area" %><br>
-        </h5>
-        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id, default_image: @default_img) %>
       </div>
       <% end %>
     </div>
