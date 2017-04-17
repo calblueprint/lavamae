@@ -15,7 +15,6 @@
 class DiscussionIndex extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.all_responses)
     this._generateLink = this._generateLink.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
@@ -86,12 +85,7 @@ class DiscussionIndex extends React.Component {
     this._copyToFiltered(filteredDisc.concat(filteredResp));
   }
 
-  _generateLink(disc, search, fav, filter) {
-    let searchParam = "";
-    if (this.state.search != null) {
-      searchParam = "&search=" + this.state.search;
-    }
-
+  _generateLink(disc, fav, filter) {
     let favParam = "";
     if (!fav) {
       favParam = "&fav=true";
@@ -111,7 +105,7 @@ class DiscussionIndex extends React.Component {
       discussionParam = "discussion_id=" + disc.id;
     }
 
-    let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam + filterParam;
+    let discussionRoute = '/discussions?' + discussionParam + favParam + filterParam;
     return discussionRoute
   }
 
@@ -121,10 +115,10 @@ class DiscussionIndex extends React.Component {
       var buttonLink;
       if (this.props.tag_filter && this.props.tag_filter.includes(filter)) {
         tagClass = "discussion-tag checked";
-        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites, filter);
+        buttonLink = this._generateLink(this.state.discussion, !this.state.showFavorites, filter);
       } else {
         tagClass = "discussion-tag";
-        buttonLink = this._generateLink(this.state.discussion, this.state.search, !this.state.showFavorites, filter) + "&filter[]=" + filter;
+        buttonLink = this._generateLink(this.state.discussion, !this.state.showFavorites, filter) + "&filter[]=" + filter;
       }
       return (
         <a href={buttonLink} key={i}>
@@ -144,7 +138,7 @@ class DiscussionIndex extends React.Component {
     if (this.props.current_user) {
       header = (
         <div className="favorite-create-discussions">
-          <a href={this._generateLink(this.state.discussion, this.state.search, this.state.showFavorites)}>
+          <a href={this._generateLink(this.state.discussion, this.state.showFavorites)}>
             <button className={favoritesSelected}>
               <i className="fa fa-star-o fa-lg"></i>
               <span> Favorites </span>
@@ -181,7 +175,7 @@ class DiscussionIndex extends React.Component {
         )
     }
     return (
-      <a href={this._generateLink(disc, this.state.search, !this.state.showFavorites)} key={disc.id}>
+      <a href={this._generateLink(disc, !this.state.showFavorites)} key={disc.id}>
         <div tabIndex="4" className={"discussion-item row " +
           (this.state.discussion.id == disc.id ? "selected-discussion" : "")}>
           <h4 className="discussion-item-title">
@@ -209,7 +203,7 @@ class DiscussionIndex extends React.Component {
     } else if (this.state.filtered.length == 0) {
       return (
         <h4 className="index-text">
-            There are no discussions with your search input.
+          There are no discussions with your search input.
         </h4>
       )
     } else {
@@ -224,7 +218,6 @@ class DiscussionIndex extends React.Component {
                       <i className="fa fa-edit fa-lg"></i> Manage Tags
                     </button>);
     }
-
     return (
       <div>
         <div className="discussion-search">
@@ -232,7 +225,6 @@ class DiscussionIndex extends React.Component {
             onChange={(e) => this._onSearchChange(e)} defaultValue={this.state.search}
             placeholder="Search discussion threads..." />
         </div>
-
         <div className="discussion-header">
           <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
           <div className="discussion-tag-container" id="tags">
@@ -245,12 +237,10 @@ class DiscussionIndex extends React.Component {
                 close_modal_handler = {this._closeModal}
               />
             </Modal>
-
           </div>
             {this.renderDiscussionHeader()}
         </div>
         <div className="discussion-item-container" id="discussions">
-
           {this.renderIndex()}
         </div>
       </div>
@@ -269,4 +259,5 @@ DiscussionIndex.propTypes = {
   search_param: React.PropTypes.string,
   all_tags: React.PropTypes.array.isRequired,
   loading_bus: React.PropTypes.string.isRequired,
+  all_responses: React.PropTypes.array
 };
