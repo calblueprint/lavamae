@@ -9,12 +9,13 @@
  * @prop search_param - search param
  * @prop all_tags - all tags
  * @props loading_bus - loading lavamae bus url
+ * @prop  all_responses - all responses
  */
 
 class DiscussionIndex extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.discussions[0])
+    console.log(this.props.all_responses)
     this._generateLink = this._generateLink.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
@@ -31,7 +32,7 @@ class DiscussionIndex extends React.Component {
       allTags: this.props.all_tags,
       showModal: false,
       tags: [],
-      filteredDisc: this.props.discussions,
+      filtered: this.props.discussions,
     };
   }
 
@@ -48,11 +49,11 @@ class DiscussionIndex extends React.Component {
   }
 
   _copyToFiltered(discussions) {
-    filteredDisc = [];
+    filtered = [];
     for (var i = 0; i < discussions.length; i++) {
-      filteredDisc.push(discussions[i]);
+      filtered.push(discussions[i]);
     }
-    this.setState({ filteredDisc: filteredDisc});
+    this.setState({ filtered: filtered});
   }
 
   _onSearchChange(event) {
@@ -66,22 +67,23 @@ class DiscussionIndex extends React.Component {
       this._copyToFiltered(this.state.discussions);
       return;
     }
-    filtered = [];
+    filteredDisc = [];
     for (var i = 0; i < this.state.discussions.length; i++) {
       discussion = this.state.discussions[i];
       var reg = new RegExp(this.state.search, "i");
       if (reg.test(discussion.title) || reg.test(discussion.content)) {
-        filtered.push(discussion);
-      }
-      for (var i = 0; i < this.state.discussions.length; i++) {
-        discussion = this.state.discussions[i];
-        var reg = new RegExp(this.state.search, "i");
-        if (reg.test(discussion.title) || reg.test(discussion.content)) {
-          filtered.push(discussion);
-        }
+        filteredDisc.push(discussion);
       }
     }
-    this._copyToFiltered(filtered);
+    filteredResp = [];
+    for (var i = 0; i < this.props.all_responses.length; i++) {
+      response = this.props.all_responses[i];
+      var reg = new RegExp(this.state.search, "i");
+      if (reg.test(response.content)) {
+        filteredResp.push(this.state.discussions.find((x) => x.id == response.discussion_id));
+      }
+    }
+    this._copyToFiltered(filteredDisc.concat(filteredResp));
   }
 
   _generateLink(disc, search, fav, filter) {
@@ -204,14 +206,14 @@ class DiscussionIndex extends React.Component {
             No discussions have matched your query.
         </h4>
       )
-    } else if (this.state.filteredDisc.length == 0) {
+    } else if (this.state.filtered.length == 0) {
       return (
         <h4 className="index-text">
             There are no discussions with your search input.
         </h4>
       )
     } else {
-      return this.state.filteredDisc.map((disc, i) => {return this.renderShortened(disc, i)});
+      return this.state.filtered.map((disc, i) => {return this.renderShortened(disc, i)});
     }
   }
 
@@ -225,15 +227,13 @@ class DiscussionIndex extends React.Component {
 
     return (
       <div>
+        <div className="discussion-search">
+          <input type="text" name="search" className="discussion-search-input"
+            onChange={(e) => this._onSearchChange(e)} defaultValue={this.state.search}
+            placeholder="Search discussion threads..." />
+        </div>
+
         <div className="discussion-header">
-
-            <div className="discussion-search">
-              <input type="text" name="search" className="discussion-search-input"
-                onChange={(e) => this._onSearchChange(e)}
-                placeholder="Search discussion threads..." />
-            </div>
-
-
           <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
           <div className="discussion-tag-container" id="tags">
             <i className="fa fa-tags fa-lg"></i>
@@ -250,6 +250,7 @@ class DiscussionIndex extends React.Component {
             {this.renderDiscussionHeader()}
         </div>
         <div className="discussion-item-container" id="discussions">
+
           {this.renderIndex()}
         </div>
       </div>

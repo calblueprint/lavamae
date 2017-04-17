@@ -14,6 +14,7 @@
  * @prop all_tags - all tags
  * @props loading_bus - loading lavamae bus url
  * @prop default_image - default profile image url
+ * @prop  all_responses - all responses
  */
 
 class DiscussionPage extends React.Component {
@@ -81,6 +82,7 @@ class DiscussionPage extends React.Component {
           search_param={this.props.search_param}
           all_tags={this.props.all_tags}
           loading_bus={this.props.loading_bus}
+          all_responses = {this.props.all_responses}
         />
         {this.renderDiscussion()}
       </div>
@@ -104,4 +106,5 @@ DiscussionPage.propTypes = {
   all_tags: React.PropTypes.array.isRequired,
   loading_bus: React.PropTypes.string.isRequired,
   default_image: React.PropTypes.string.isRequired,
+  all_responses: React.PropTypes.array
 };

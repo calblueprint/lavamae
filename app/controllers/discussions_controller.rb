@@ -30,6 +30,7 @@ class DiscussionsController < ApplicationController
       @discussion_username = @discussion.user.full_name
       @discussion_date = @discussion.created_at
       @upvotes = @discussion.upvotes
+      @all_responses = Response.all.sort_by{|r| r.created_at}.reverse
     end
   end
 
