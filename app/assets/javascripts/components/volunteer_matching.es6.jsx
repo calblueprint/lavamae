@@ -27,12 +27,14 @@ class VolunteerMatching extends React.Component {
   }
 
   _fetchProfilePic() {
-    APIRequester.get(`/api/users/${this.props.pending_user.id}/profilepic`, this._setProfilePic);
+    APIRequester.get(`/api/users/${this.props.user_id}/profilepic`, this._setProfilePic);
   }
 
   _renderUsers() {
-    if (!this.state.volunteers) {
-      return
+    if (!this.state.volunteers || this.state.volunteers.length == 0) {
+      return (
+        <div>No current volunteers or organizations in your area.</div>
+      );
     }
     return this.state.volunteers.map((volunteer) => {
       if (volunteer.volunteer == true && volunteer.seeking_volunteer == true) {

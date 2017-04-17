@@ -182,7 +182,7 @@ class RegistrationModal extends React.Component {
               <div className="input-field">{ this._renderInput("password", "Password (min. 8 characters)", "password", "", required=true) }</div>
               <div className="input-field">{ this._renderInput("password_confirmation", "Confirm Password", "password", "", required=true) }</div>
               <div className="input-field">{ this._renderInput("organization", "Organization", "text", "Lava Mae") }</div>
-              <div className="input-field">{ this._renderInput("website", "Website", "text", "lavabae.org") }</div>
+              <div className="input-field">{ this._renderInput("website", "Website", "text", "lavamae.org") }</div>
               <div className="input-field">
                 <div>
                   <label htmlFor="location">Location</label>
