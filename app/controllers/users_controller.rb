@@ -37,7 +37,6 @@ class UsersController < ApplicationController
   end
 
   def update
-    puts('HERE')
     user = User.find(params[:id])
     if user.update(update_params)
       render_json_message(:ok, message: "Account info successfully updated!")

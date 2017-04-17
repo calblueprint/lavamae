@@ -40,12 +40,26 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # Default Devise Mailer
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-  config.action_mailer.delivery_method = :letter_opener
+  # config.action_mailer.delivery_method = :letter_opener
 
   # Amazon S3 non-expiring links
   config.fog_public = true
+
+  config.action_mailer.default_url_options = { :host => 'localhost', :port => 3000}
+  # config.action_mailer.delivery_method = :smtp
+
+  ActionMailer::Base.delivery_method = :smtp
+  ActionMailer::Base.smtp_settings = {
+    :address        => 'smtp.sendgrid.net',
+    :port           => '587',
+    :authentication => :plain,
+    :user_name      => ENV['SENDGRID_USERNAME'],
+    :password       => ENV['SENDGRID_PASSWORD'],
+    :domain         => 'heroku.com',
+  }
+
 
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {

@@ -11,6 +11,6 @@ class PagesController < ApplicationController
       @users = User.all
       @pending_admins = User.where(admin_approval_state: 0, pending_admin: true)
       @default_img = view_context.asset_path("default.png")
-  	end	
+  	end
   end
 end
