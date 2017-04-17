@@ -224,7 +224,6 @@ class EditProfileModal extends React.Component {
     if (this.props.admin_map_approval) {
       mapPin = (
       <div className="input-field">
-      <label htmlFor="pin">Map Pin</label>
       <label className="control control--checkbox"> Include me on the map!
         <input type="checkbox"
           name="on_map"
