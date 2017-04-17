@@ -72,7 +72,7 @@ class ApproveAdmin extends React.Component {
   _setProfilePic(data) {
     if (data.profile_pic.thumb.url) {
       this.setState({ profilePic: data.profile_pic.thumb.url });
-    } 
+    }
   }
 
   _fetchProfilePic() {
@@ -116,7 +116,7 @@ class ApproveAdmin extends React.Component {
               <img src={this.state.profilePic} />
             </a>
           </div>
-        </div>  
+        </div>
         <p className="approval-name">
           <a href={'/users/' + this.props.pending_user.id}>
           { this.props.pending_user.first_name } { this.props.pending_user.last_name }

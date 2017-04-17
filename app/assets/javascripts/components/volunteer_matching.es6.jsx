@@ -12,22 +12,26 @@ class VolunteerMatching extends React.Component {
     this.state = {
       volunteers: this.props.volunteers,
       user_id: this.props.user_id,
-      profilePic: this.props.default_image,
+      defaultImage: this.props.default_image,
+      profilePictures: {},
     }
   }
 
-  componentDidMount() {
-    this._fetchProfilePic();
-  }
-
-  _setProfilePic(data) {
+  _setProfilePic(data, id) {
+    returnObj = {};
     if (data.profile_pic.thumb.url) {
-      this.setState({ profilePic: data.profile_pic.thumb.url });
+      returnObj[id] = data.profile_pic.thumb.url;
+      // this.setState({ profilePictures[id]: data.profile_pic.thumb.url });
+    } else {
+      returnObj[id] = this.state.defaultImage;
+      // this.setState({ profilePictures[id]: this.state.defaultImage });
     }
+    this.setState(returnObj);
   }
 
-  _fetchProfilePic() {
-    APIRequester.get(`/api/users/${this.props.user_id}/profilepic`, this._setProfilePic);
+  _fetchProfilePic(id) {
+    extraParams = true;
+    APIRequester.get(`/api/users/${id}/profilepic`, this._setProfilePic, (reject) => {}, extraParams, id);
   }
 
   _renderUsers() {
@@ -37,12 +41,16 @@ class VolunteerMatching extends React.Component {
       );
     }
     return this.state.volunteers.map((volunteer) => {
+      if (!this.state[volunteer.id]) {
+        this._fetchProfilePic(volunteer.id);
+      }
+      profPic = this.state[volunteer.id];
       if (volunteer.volunteer == true && volunteer.seeking_volunteer == true) {
         return (
           <div key = {volunteer.id} className="user-container volunteer-container">
             <a href={volunteer.id}>
               <div className="user-picture">
-                <img src={this.state.profilePic} />
+                <img src={profPic} />
               </div>
               <div className="name-date">
                 <div className="user-name">
@@ -69,7 +77,7 @@ class VolunteerMatching extends React.Component {
           <div key = {volunteer.id} className="user-container volunteer-container">
             <a href={volunteer.id}>
               <div className="user-picture">
-                <img src={this.state.profilePic} />
+                <img src={profPic} />
               </div>
               <div className="name-date">
                 <div className="user-name">
@@ -90,7 +98,7 @@ class VolunteerMatching extends React.Component {
           <div key = {volunteer.id} className="user-container volunteer-container">
             <a href={volunteer.id}>
               <div className="user-picture">
-                <img src={this.state.profilePic} />
+                <img src={profPic} />
               </div>
               <div className="name-date">
                 <div className="user-name">

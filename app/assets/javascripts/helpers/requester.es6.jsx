@@ -50,18 +50,22 @@ class Requester {
         this._postErrorHandler);
   }
 
-  get(route, resolve, reject) {
-    const request = this.initialize('GET', route)
+  get(route, resolve, reject, extraParams = false, params = {}) {
+    const request = this.initialize('GET', route);
     request.onreadystatechange = () => {
       if (request.readyState === XMLHttpRequest.DONE) {
         if (request.status === 200 && resolve) {
-          resolve(JSON.parse(request.response))
+          if (extraParams) {
+            resolve(JSON.parse(request.response), params);
+          } else {
+            resolve(JSON.parse(request.response));
+          }
         } else if (reject) {
-          reject(JSON.parse(request.response))
+          reject(JSON.parse(request.response));
         }
       }
     }
-    request.send()
+    request.send();
   }
 
   getJSON(endpoint, success, data = {}) {
@@ -70,7 +74,6 @@ class Requester {
   }
 
   put(endpoint, data, success, extraFields = {}) {
-    console.log('here');
     this._attemptAjax(endpoint, 'PUT', data, extraFields, success,
         this._postErrorHandler);
   }
