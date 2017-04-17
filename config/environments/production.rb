@@ -81,7 +81,7 @@ Rails.application.configure do
   # Amazon S3 non-expiring links
   config.fog_public = true
 
-  config.action_mailer.default_url_options = { :host => 'lavamae-staging.herokuapp.com'}
+  config.action_mailer.default_url_options = { :host => 'lavamae.herokuapp.com'}
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
     :address        => 'smtp.sendgrid.net',
