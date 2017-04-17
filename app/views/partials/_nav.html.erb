@@ -1,58 +1,63 @@
 <div class="nav">
-  <div class="<%=
-  current_page?(root_path)||current_page?(about_path)||current_page?(admin_dashboard_path)||current_page?(map_path)||current_page?(discussions_path) ? 'container-lg' : 'container'
-  %>">
+  <div class="container-lg">
     <a href="/" class="logo"></a>
     <i class="hamburger fa fa-bars fa-lg" onclick="mobileMenu()"></i>
     <ul class="nav-items-container" id="topNav">
+      <%= link_to resource_topics_path do %>
+      <li class="nav-item">
+        <button class="btn btn-nav
+        <%= 'btn-nav-selected' if current_page?(resource_topics_path)%>">Start Your Service</button>
+      </li>
+      <% end %>
       <%= link_to discussions_path do %>
       <li class="nav-item">
-        <button class="btn btn-transparent btn-nav
+        <button class="btn btn-nav
         <%= 'btn-nav-selected' if current_page?(discussions_path)%>">Discussions</button>
       </li>
       <% end %>
       <%= link_to map_path do %>
       <li class="nav-item">
-        <button class="btn btn-transparent btn-nav
-        <%= 'btn-nav-selected' if current_page?(map_path)%>">Map</button>
-      </li>
-      <% end %>
-      <%= link_to resource_topics_path do %>
-      <li class="nav-item">
-        <button class="btn btn-transparent btn-nav
-        <%= 'btn-nav-selected' if current_page?(resource_topics_path)%>">Resources</button>
+        <button class="btn btn-nav
+        <%= 'btn-nav-selected' if current_page?(map_path)%>">Our Network</button>
       </li>
       <% end %>
       <%= link_to about_path do %>
       <li class="nav-item">
-        <button class="btn btn-transparent btn-nav
-        <%= 'btn-nav-selected' if current_page?(about_path)%>">About</button>
+        <button class="btn btn-nav
+        <%= 'btn-nav-selected' if current_page?(about_path)%>">About Lava Mae</button>
       </li>
       <% end %>
       <div class="display-mobile">
         <%if user_signed_in? %>
           <%= link_to user_path(current_user.id) do %>
           <li class="nav-item">
-            <button class="btn btn-transparent btn-nav
-            <%= 'btn-nav-selected' if current_page?(user_path(current_user.id))%>">Profile</button>
+            <button class="btn btn-nav
+            <%= 'btn-nav-selected' if current_page?(user_path(current_user.id)) %>">Profile</button>
           </li>
+          <% if current_user.is_admin%>
+            <%= link_to admin_dashboard_path do %>
+            <li class="nav-item">
+              <button class="btn btn-nav
+              <%= 'btn-nav-selected' if current_page?(admin_dashboard_path) %>">Admin Dashboard</button>
+            <% end %>
+          <% end %>
           <% end %>
           <li class="nav-item">
-            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-transparent btn-nav", :method => :delete %>
+            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-nav", :method => :delete %>
           </li>
         <%else%>
           <li class="nav-item">
-            <%= react_component('LoginModal', style: "btn btn-transparent btn-login", from_confirmation: params[:modal]) %>
+            <%= react_component('LoginModal', style: "btn btn-login", from_confirmation: params[:modal]) %>
           </li>
           <li class="nav-item">
-            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
+            <%= button_to "Sign Up", sign_up_path, :class => "btn btn-signup", :method => :get %>
           </li>
         <%end%>
       </ul>
       <ul class="nav-items-container right-item-container hide-mobile" id="topNav">
         <%if user_signed_in? %>
         <div class="dropdown user-container">
-          <div class="dropbtn user-picture <%= 'profile-selected' if current_page?(user_path(current_user.id)) %>">
+          <div class="dropbtn user-picture <%= 'profile-selected' if current_page?(user_path(current_user.id)) || current_page?(admin_dashboard_path) %>">
             <%= link_to user_path(current_user.id) do %>
               <% if current_user.profile_pic? %>
                 <%= image_tag current_user.profile_pic.url(:thumb) %>
@@ -71,15 +76,15 @@
                 Admin Dashboard
               <% end %>
             <% end %>
-            <%= button_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
+            <%= link_to "Logout", destroy_user_session_path, :class => "btn btn-action", :method => :delete %>
           </div>
         </div>
         <%else%>
         <li class="nav-item">
-          <%= react_component('LoginModal', style: "btn btn-transparent btn-login") %>
+          <%= react_component('LoginModal', style: "btn btn-login") %>
         </li>
         <li class="nav-item">
-          <%= button_to "Sign Up", sign_up_path, :class => "btn btn-transparent btn-signup", :method => :get %>
+          <%= button_to "Sign Up", sign_up_path, :class => "btn btn-signup", :method => :get %>
         </li>
         <%end%>
       </div>
