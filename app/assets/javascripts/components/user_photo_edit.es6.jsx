@@ -169,7 +169,7 @@ constructor(props) {
               </div>
               <div className="input-field">
                 <div className="imgPreview">
-                  <img className="profile-preview" src={this.state.renderPhoto} />
+                  <img className="image-preview" src={this.state.renderPhoto} />
                 </div>
                 <label className="file-label" htmlFor="file-input">Choose a Photo</label>
                 <input className="inputfile" id="file-input" type="file" name="file" onChange={this._handleFileChange} />

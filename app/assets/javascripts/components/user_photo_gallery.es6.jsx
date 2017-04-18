@@ -29,14 +29,15 @@ class UserPhotoGallery extends React.Component {
   _renderImage(image, i) {
     return (
       <a href={image.photo.url} key={i} data-sub-html={this._renderCaption(image.title, image.description)}>
-          <img src={image.photo.thumb.url} id={image.id}/>
+          <div className="photo-overlay"></div>
+          <img src={image.photo.thumb.url} id={image.id} className="photo" />
       </a>
     );
   }
 
   render() {
     return (
-      <div id="lightgallery">
+      <div id="lightgallery" className="user-photo-gallery">
        { this._renderImages() }
       </div>
     )
