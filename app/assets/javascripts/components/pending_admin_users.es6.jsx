@@ -14,8 +14,10 @@ class PendingAdminUsers extends React.Component {
   }
 
   _renderUsers() {
-    if (!this.state.users) {
-      return
+    if (!this.state.users || this.state.users.length == 0) {
+      return (
+        <div>No pending admin requests.</div>
+      );
     }
 
     return this.state.users.map((pending_user) => {
