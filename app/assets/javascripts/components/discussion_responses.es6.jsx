@@ -3,6 +3,7 @@
  * @prop current_user - current user
  * @prop responses - discussion responses
  * @prop date_handler - handler to render timestamp
+ * @prop default_image - default profile image url
  */
 
 class DiscussionResponses extends React.Component {
@@ -11,10 +12,27 @@ class DiscussionResponses extends React.Component {
     super(props);
     this._successfulSave = this._successfulSave.bind(this);
     this._saveResponse = this._saveResponse.bind(this);
+    this._setProfilePic = this._setProfilePic.bind(this);
+    this._fetchProfilePic = this._fetchProfilePic.bind(this);
     this.state = {
       discussion: this.props.discussion,
       responses: this.props.responses,
     };
+  }
+
+  _setProfilePic(data, id) {
+    returnObj = {};
+    if (data.profile_pic.thumb.url) {
+      returnObj[id] = data.profile_pic.thumb.url;
+    } else {
+      returnObj[id] = this.props.default_image;
+    }
+    this.setState(returnObj);
+  }
+
+  _fetchProfilePic(id) {
+    extraParams = true;
+    APIRequester.get(`/api/users/${id}/profilepic`, this._setProfilePic, (reject) => {}, extraParams, id);
   }
 
   _successfulSave() {
@@ -31,6 +49,10 @@ class DiscussionResponses extends React.Component {
 
   renderResponses() {
     let responsesIndex = this.state.responses.map((response, i) => {
+      if (!this.state[response.user_id]) {
+        this._fetchProfilePic(response.user_id);
+      }
+      profPic = this.state[response.user_id];
       return (
         <div key={response.id}>
           <div className="response-container row">
@@ -48,7 +70,7 @@ class DiscussionResponses extends React.Component {
               </div>
               <div className="user-picture">
                 <a href={"users/" + response.user_id}>
-                  <img src={response.user_image} />
+                  <img src={profPic} />
                 </a>
               </div>
             </div>
@@ -111,5 +133,6 @@ DiscussionResponses.propTypes = {
   discussion: React.PropTypes.object.isRequired,
   current_user: React.PropTypes.object,
   responses: React.PropTypes.array,
-  date_handler: React.PropTypes.func
+  date_handler: React.PropTypes.func,
+  default_image: React.PropTypes.string.isRequired,
 };
