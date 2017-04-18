@@ -88,7 +88,7 @@ constructor(props) {
     let imagePreviewUrl = this.state.imagePreviewUrl;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img className="profile-preview" src={imagePreviewUrl} />);
+      $imagePreview = (<img className="image-preview upload" src={imagePreviewUrl} />);
     } else {
       $imagePreview = (<div className="previewText">Please select an image for preview</div>);
     }

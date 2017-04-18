@@ -166,8 +166,8 @@ ActiveRecord::Schema.define(version: 20170415192320) do
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
     t.string   "email",                  default: "",    null: false
-    t.string   "profile_pic"
     t.integer  "location_id"
+    t.string   "profile_pic"
     t.string   "website"
     t.text     "bio"
     t.string   "secondary_name"

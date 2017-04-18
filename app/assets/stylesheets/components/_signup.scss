@@ -17,8 +17,11 @@
 }
 
 .profile-preview {
-  max-height: 250px;
-  padding: 15px 0;
+  width: 90px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin: 15px 0;
 }
 
 .previewText {
