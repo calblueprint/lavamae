@@ -12,7 +12,6 @@ class VolunteerMatching extends React.Component {
     this.state = {
       volunteers: this.props.volunteers,
       user_id: this.props.user_id,
-      defaultImage: this.props.default_image,
       profilePictures: {},
     }
   }
@@ -21,10 +20,8 @@ class VolunteerMatching extends React.Component {
     returnObj = {};
     if (data.profile_pic.thumb.url) {
       returnObj[id] = data.profile_pic.thumb.url;
-      // this.setState({ profilePictures[id]: data.profile_pic.thumb.url });
     } else {
-      returnObj[id] = this.state.defaultImage;
-      // this.setState({ profilePictures[id]: this.state.defaultImage });
+      returnObj[id] = this.props.default_image;
     }
     this.setState(returnObj);
   }
