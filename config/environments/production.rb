@@ -92,7 +92,7 @@ Rails.application.configure do
   #   :password       => ENV['SENDGRID_PASSWORD'],
   #   :domain         => 'heroku.com',
 
-  SendGrid for Production Heroku
+  # SendGrid for Production Heroku
   config.action_mailer.default_url_options = { :host => 'lavamae.herokuapp.com'}
   ActionMailer::Base.delivery_method = :smtp
   ActionMailer::Base.smtp_settings = {
