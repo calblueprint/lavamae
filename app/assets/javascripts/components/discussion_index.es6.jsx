@@ -8,6 +8,7 @@
  * @prop tag_filter - tag filter param
  * @prop search_param - search param
  * @prop all_tags - all tags
+ * @props loading_bus - loading lavamae bus url
  */
 
 class DiscussionIndex extends React.Component {
@@ -103,8 +104,9 @@ class DiscussionIndex extends React.Component {
             </button>
           </a>
           <DiscussionCreateModal
-            user = {this.props.user}
-            all_tags = {this.props.all_tags}
+            user={this.props.user}
+            all_tags={this.props.all_tags}
+            loading_bus={this.props.loading_bus}
           />
         </div>
       );
@@ -205,5 +207,6 @@ DiscussionIndex.propTypes = {
   date_handler: React.PropTypes.func,
   tag_filter: React.PropTypes.array,
   search_param: React.PropTypes.string,
-  all_tags: React.PropTypes.array.isRequired
+  all_tags: React.PropTypes.array.isRequired,
+  loading_bus: React.PropTypes.string.isRequired,
 };

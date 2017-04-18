@@ -125,10 +125,10 @@
           <% end %>
           <%if current_user && current_user.id == @user.id %>
             <% if @user.images != [] %>
-              <%= react_component('UserPhotoDelete', user: @user, images: @user.images) %>
-              <%= react_component('UserPhotoEdit', user: @user, images: @user.images) %>
+              <%= react_component('UserPhotoDelete', user: @user, images: @user.images, loading_bus: @loading_bus) %>
+              <%= react_component('UserPhotoEdit', user: @user, images: @user.images, loading_bus: @loading_bus) %>
             <% end %>
-          <%= react_component('UserPhotoUpload', user: @user, images: @user.images) %>
+          <%= react_component('UserPhotoUpload', user: @user, images: @user.images, loading_bus: @loading_bus) %>
           <% end %>
       </div>
       <%if current_user && current_user.id == @user.id  && (@user.volunteer || @user.seeking_volunteer)%>

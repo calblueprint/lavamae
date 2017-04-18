@@ -1,5 +1,6 @@
 /**
  * @prop all_tags - list of all tags
+ * @props loading_bus - loading lavamae bus url
 **/
 class DiscussionCreateModal extends React.Component {
 constructor(props) {
@@ -105,7 +106,7 @@ constructor(props) {
               <button id="close" className="btn btn-outline modal-btn" type="button" onClick={this._closeModal}>Close</button>
               <button id="save" className="btn btn-blue modal-btn" type="button" onClick={this._saveForm}>Save</button>
               <div id="loading" className="loading" style={{display: "none"}}>
-                <img src="/assets/lavamae-bus.gif" />
+                <img src={this.props.loading_bus} />
               </div>
             </Modal.Footer>
         </Modal>
@@ -116,4 +117,5 @@ constructor(props) {
 
 DiscussionCreateModal.propTypes = {
   all_tags: React.PropTypes.array,
+  loading_bus: React.PropTypes.string.isRequired,
 };

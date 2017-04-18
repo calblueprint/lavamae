@@ -1,6 +1,7 @@
 /**
  * @prop user - user
  * @prop images - photo gallery for user
+ * @props loading_bus - loading lavamae bus url
 **/
 class UserPhotoEdit extends React.Component {
 constructor(props) {
@@ -179,7 +180,7 @@ constructor(props) {
               <button id="back" className="btn btn-outline modal-btn" type="button" onClick={this._disableEdit}>Back</button>
               <button id="save" className="btn btn-blue modal-btn" type="button" onClick={this._saveForm}>Save</button>
               <div id="loading" className="loading" style={{display: "none"}}>
-                <img src="/assets/lavamae-bus.gif" />
+                <img src={this.props.loading_bus} />
               </div>
             </Modal.Footer>
         </Modal>
@@ -203,4 +204,5 @@ constructor(props) {
 UserPhotoEdit.propTypes = {
   user: React.PropTypes.object,
   images: React.PropTypes.array,
+  loading_bus: React.PropTypes.string.isRequired,
 };

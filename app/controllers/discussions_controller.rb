@@ -5,6 +5,7 @@ class DiscussionsController < ApplicationController
   def index
     @discussions = Discussion.all
     @all_tags = AdminTag.pluck(:name)
+    @loading_bus = view_context.asset_path("lavamae-bus.gif")
 
     if current_user
       @favorite_discussions = current_user.favorite_discussions

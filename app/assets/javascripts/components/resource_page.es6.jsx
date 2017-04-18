@@ -1,6 +1,7 @@
 /**
   * @props signed_in - true if there a user signed in
   * @props is_admin - true if current user is an admin
+  * @props loading_bus - loading lavamae bus url
   */
 
 class ResourcePage extends React.Component {
@@ -49,7 +50,7 @@ class ResourcePage extends React.Component {
     if (this.state.isLoading) {
       return (
         <div className="loading">
-          <img src="/assets/lavamae-bus.gif" />
+          <img src={this.props.loading_bus} />
         </div>
       );
     } else {
@@ -65,7 +66,10 @@ class ResourcePage extends React.Component {
     let moduleUploadModal;
     if (this.props.is_admin) {
       moduleUploadModal = (
-        <ModuleUploadModal style = { "btn-btn-blue" } />
+        <ModuleUploadModal
+          style={"btn-btn-blue"}
+          loading_bus={this.props.loading_bus}
+        />
       );
     }
     return moduleUploadModal;
@@ -96,4 +100,5 @@ class ResourcePage extends React.Component {
 ResourcePage.propTypes = {
   signed_in: React.PropTypes.bool.isRequired,
   is_admin: React.PropTypes.bool.isRequired,
+  loading_bus: React.PropTypes.string.isRequired,
 };

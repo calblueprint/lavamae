@@ -1,6 +1,7 @@
 /**
  * @prop user - user
  * @prop images - photo gallery for user
+ * @props loading_bus - loading lavamae bus url
 **/
 class UserPhotoDelete extends React.Component {
 constructor(props) {
@@ -106,7 +107,7 @@ constructor(props) {
               <button id="close" className="btn btn-outline modal-btn" type="button" onClick={this._closeModal}>Close</button>
               <button id="delete" className="btn btn-blue modal-btn" type="submit">Delete</button>
               <div id="loading" className="loading" style={{display: "none"}}>
-                <img src="/assets/lavamae-bus.gif" />
+                <img src={this.props.loading_bus} />
               </div>
             </Modal.Footer>
           </form>
@@ -118,4 +119,5 @@ constructor(props) {
 UserPhotoDelete.propTypes = {
   user: React.PropTypes.object,
   images: React.PropTypes.array,
+  loading_bus: React.PropTypes.string.isRequired,
 };

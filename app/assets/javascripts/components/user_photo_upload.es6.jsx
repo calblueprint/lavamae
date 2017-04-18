@@ -1,6 +1,7 @@
 /**
  * @prop user - user
  * @prop images - photo gallery for user
+ * @props loading_bus - loading lavamae bus url
 **/
 class UserPhotoUpload extends React.Component {
 constructor(props) {
@@ -118,7 +119,7 @@ constructor(props) {
             <button id="close" className="btn btn-outline modal-btn" onClick={this._cancelEdit}>Close</button>
             <button id="save" className="btn btn-blue save modal-btn" onClick={this._saveForm}>Save</button>
             <div id="loading" className="loading" style={{display: "none"}}>
-              <img src="/assets/lavamae-bus.gif" />
+              <img src={this.props.loading_bus} />
             </div>
           </Modal.Footer>
         </Modal>
@@ -155,4 +156,5 @@ constructor(props) {
 UserPhotoUpload.propTypes = {
   user: React.PropTypes.object,
   images: React.PropTypes.array,
+  loading_bus: React.PropTypes.string.isRequired,
 };

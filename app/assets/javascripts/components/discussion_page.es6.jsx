@@ -12,10 +12,11 @@
  * @prop tag_filter - tag filter param
  * @prop search_param - search param
  * @prop all_tags - all tags
+ * @props loading_bus - loading lavamae bus url
  */
 
 class DiscussionPage extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this._generateTimeStamp = this._generateTimeStamp.bind(this);
@@ -68,15 +69,16 @@ class DiscussionPage extends React.Component {
     return (
       <div className="discussion-container">
         <DiscussionIndex
-          discussions = {this.props.discussions}
-          discussion = {this.props.discussion}
-          current_user = {this.props.current_user}
-          favorite_discussions = {this.props.favorite_discussions}
-          show_favorites = {this.props.show_favorites}
-          date_handler = {this._generateTimeStamp}
-          tag_filter = {this.props.tag_filter}
-          search_param = {this.props.search_param}
-          all_tags = {this.props.all_tags}
+          discussions={this.props.discussions}
+          discussion={this.props.discussion}
+          current_user={this.props.current_user}
+          favorite_discussions={this.props.favorite_discussions}
+          show_favorites={this.props.show_favorites}
+          date_handler={this._generateTimeStamp}
+          tag_filter={this.props.tag_filter}
+          search_param={this.props.search_param}
+          all_tags={this.props.all_tags}
+          loading_bus={this.props.loading_bus}
         />
         {this.renderDiscussion()}
       </div>
@@ -97,5 +99,6 @@ DiscussionPage.propTypes = {
   upvotes: React.PropTypes.array,
   tag_filter: React.PropTypes.array,
   search_param: React.PropTypes.string,
-  all_tags: React.PropTypes.array.isRequired
+  all_tags: React.PropTypes.array.isRequired,
+  loading_bus: React.PropTypes.string.isRequired,
 };

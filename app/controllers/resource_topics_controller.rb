@@ -1,5 +1,6 @@
 class ResourceTopicsController < ApplicationController
   def index
+    @loading_bus = view_context.asset_path("lavamae-bus.gif")
   end
 
   def new

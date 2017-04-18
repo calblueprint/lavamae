@@ -1,5 +1,5 @@
 <% if current_user %>
-  <%= react_component 'ResourcePage', {signed_in: true, is_admin: current_user.is_admin} %>
+  <%= react_component 'ResourcePage', {signed_in: true, is_admin: current_user.is_admin, loading_bus: @loading_bus} %>
 <% else %>
-  <%= react_component 'ResourcePage', {signed_in: false, is_admin: false} %>
+  <%= react_component 'ResourcePage', {signed_in: false, is_admin: false, loading_bus: @loading_bus} %>
 <% end %>

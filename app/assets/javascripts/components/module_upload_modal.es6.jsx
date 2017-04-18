@@ -1,3 +1,7 @@
+/**
+  * @props loading_bus - loading lavamae bus url
+  */
+
 class ModuleUploadModal extends React.Component {
   constructor(props) {
     super(props);
@@ -110,7 +114,7 @@ class ModuleUploadModal extends React.Component {
             <button id="close" className="btn btn-outline" type="button" onClick={this._closeModal}>Close</button>
             <button id="upload" className="btn btn-blue modal-btn" type="button" onClick={this._handleUpload}>Upload</button>
             <div id="loading" className="loading" style={{display: "none"}}>
-              <img src="/assets/lavamae-bus.gif" />
+              <img src={this.props.loading_bus} />
             </div>
           </Modal.Footer>
         </Modal>
@@ -118,3 +122,7 @@ class ModuleUploadModal extends React.Component {
     );
   }
 }
+
+ModuleUploadModal.propTypes = {
+  loading_bus: React.PropTypes.string.isRequired,
+};

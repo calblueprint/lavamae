@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @default_img = view_context.asset_path("default.png")
+    @loading_bus = view_context.asset_path("lavamae-bus.gif")
     @location = nil
     if @user.location_id
       @location = Location.find(@user.location_id)
