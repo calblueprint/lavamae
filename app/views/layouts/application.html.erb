@@ -9,7 +9,9 @@
     <%= favicon_link_tag 'favicon.ico' %>
     <%= javascript_include_tag src="https://maps.googleapis.com/maps/api/js?key=#{ENV['GOOGLE_API_KEY']}&v=3.exp&libraries=places" %>
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.js'></script>
+    <script src='https://cdn.jsdelivr.net/lightgallery/1.3.9/js/lightgallery.min.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v0.28.0/mapbox-gl.css' rel='stylesheet' />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/lightgallery/1.3.9/css/lightgallery.min.css" />
 </head>
 <body>
 <%= render 'flash' %>
