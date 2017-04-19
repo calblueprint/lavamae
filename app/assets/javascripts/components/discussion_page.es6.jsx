@@ -94,6 +94,7 @@ class DiscussionPage extends React.Component {
 
 DiscussionPage.propTypes = {
   discussion: React.PropTypes.object,
+  unfiltered_discussions: React.PropTypes.array.isRequired,
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,

@@ -16,8 +16,6 @@
 class DiscussionIndex extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this.props.unfiltered_discussions)
-    console.log(this.props.discussions)
     this._generateLink = this._generateLink.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
@@ -82,13 +80,12 @@ class DiscussionIndex extends React.Component {
       }
     })
     filteredResp = [];
-    for (var i = 0; i < this.props.all_responses.length; i++) {
-      response = this.props.all_responses[i];
+    this.props.all_responses.map((response) => {
       var reg = new RegExp(this.state.search, "i");
       if (reg.test(response.content)) {
         filteredResp.push(this.props.unfiltered_discussions.find((x) => x.id == response.discussion_id));
       }
-    }
+    })
     this._copyToFiltered(filteredDisc.concat(filteredResp));
   }
 
@@ -262,6 +259,7 @@ class DiscussionIndex extends React.Component {
 
 DiscussionIndex.propTypes = {
   discussion: React.PropTypes.object,
+  unfiltered_discussions: React.PropTypes.array.isRequired,
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,
