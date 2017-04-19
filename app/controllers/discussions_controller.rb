@@ -3,7 +3,7 @@ class DiscussionsController < ApplicationController
   before_action :get_discussion, only: [:edit, :update, :destroy, :favorite, :unfavorite]
 
   def index
-    @discussions = Discussion.all
+    @discussions_all = Discussion.all.order('discussions.created_at DESC')
     @all_tags = AdminTag.pluck(:name)
     @loading_bus = view_context.asset_path("lavamae-bus.gif")
     @default_img = view_context.asset_path("default.png")
@@ -15,7 +15,7 @@ class DiscussionsController < ApplicationController
       end
     end
 
-  	@discussions = @discussions.search(params[:search]).order('discussions.created_at DESC')
+  	@discussions = @discussions_all.search(params[:search]).order('discussions.created_at DESC')
     @discussions = @discussions.filter(params[:filter]) if params[:filter].present?
 
     if params[:discussion_id]

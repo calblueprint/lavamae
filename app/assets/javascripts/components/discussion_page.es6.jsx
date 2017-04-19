@@ -1,5 +1,6 @@
 /**
  * @prop discussions - discussion index
+ * @prop unfiltered_discussions - all discussions in database
  * @prop discussion - discussion
  * @prop current_user - current user
  * @prop favorite_discussions - favorite user discussions
@@ -73,6 +74,7 @@ class DiscussionPage extends React.Component {
       <div className="discussion-container">
         <DiscussionIndex
           discussions={this.props.discussions}
+          unfiltered_discussions = {this.props.unfiltered_discussions}
           discussion={this.props.discussion}
           current_user={this.props.current_user}
           favorite_discussions={this.props.favorite_discussions}

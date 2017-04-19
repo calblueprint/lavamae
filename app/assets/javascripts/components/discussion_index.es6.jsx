@@ -1,5 +1,6 @@
 /**
  * @prop discussions - discussion index
+ * @prop unfiltered_discussions - all discussions in database
  * @prop discussion - discussion
  * @prop current_user - current user
  * @prop favorite_discussions - favorite user discussions
@@ -9,12 +10,14 @@
  * @prop search_param - search param
  * @prop all_tags - all tags
  * @props loading_bus - loading lavamae bus url
- * @prop  all_responses - all responses
+ * @prop all_responses - all responses
  */
 
 class DiscussionIndex extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this.props.unfiltered_discussions)
+    console.log(this.props.discussions)
     this._generateLink = this._generateLink.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
@@ -55,37 +58,46 @@ class DiscussionIndex extends React.Component {
     this.setState({ filtered: filtered});
   }
 
-  _onSearchChange(event) {
-    var input = $(event.target).val();
-    this.state.search = input;
-    this._loadDiscussions();
+  _onSearchChange(e) {
+    if (e.keyCode == 8) {
+      this.state.search = this.state.search.slice(0, -1);
+      this._loadDiscussions();
+    } else {
+      var input = $(e.target).val();
+      this.state.search = input;
+      this._loadDiscussions();
+    }
   }
 
   _loadDiscussions() {
     if (this.state.search == "") {
-      this._copyToFiltered(this.state.discussions);
+      this._copyToFiltered(this.props.unfiltered_discussions);
       return;
     }
     filteredDisc = [];
-    for (var i = 0; i < this.state.discussions.length; i++) {
-      discussion = this.state.discussions[i];
+    this.props.unfiltered_discussions.map((discussion) => {
       var reg = new RegExp(this.state.search, "i");
       if (reg.test(discussion.title) || reg.test(discussion.content)) {
         filteredDisc.push(discussion);
       }
-    }
+    })
     filteredResp = [];
     for (var i = 0; i < this.props.all_responses.length; i++) {
       response = this.props.all_responses[i];
       var reg = new RegExp(this.state.search, "i");
       if (reg.test(response.content)) {
-        filteredResp.push(this.state.discussions.find((x) => x.id == response.discussion_id));
+        filteredResp.push(this.props.unfiltered_discussions.find((x) => x.id == response.discussion_id));
       }
     }
     this._copyToFiltered(filteredDisc.concat(filteredResp));
   }
 
   _generateLink(disc, fav, filter) {
+    let searchParam = "";
+    if (this.state.search != null) {
+      searchParam = "&search=" + this.state.search;
+    }
+
     let favParam = "";
     if (!fav) {
       favParam = "&fav=true";
@@ -105,7 +117,7 @@ class DiscussionIndex extends React.Component {
       discussionParam = "discussion_id=" + disc.id;
     }
 
-    let discussionRoute = '/discussions?' + discussionParam + favParam + filterParam;
+    let discussionRoute = '/discussions?' + discussionParam + searchParam + favParam + filterParam;
     return discussionRoute
   }
 
@@ -222,8 +234,8 @@ class DiscussionIndex extends React.Component {
       <div>
         <div className="discussion-search">
           <input type="text" name="search" className="discussion-search-input"
-            onChange={(e) => this._onSearchChange(e)} defaultValue={this.state.search}
-            placeholder="Search discussion threads..." />
+            onKeyDown={(e) => this._onSearchChange(e)}
+            defaultValue={this.state.search} placeholder="Search discussion threads..." />
         </div>
         <div className="discussion-header">
           <i className="discussions-menu fa fa-comments fa-lg" onclick="discussionsMenu()"></i>
