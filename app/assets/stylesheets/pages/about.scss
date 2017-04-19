@@ -6,6 +6,10 @@
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%),
   image_url("about-hero.jpg");
   text-align: center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 
   .about-text {
     max-width: 500px;
