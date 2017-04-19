@@ -3,10 +3,6 @@ class ResourceTopicsController < ApplicationController
     @loading_bus = view_context.asset_path("lavamae-bus.gif")
   end
 
-  def new
-    @resource_topic = ResourceTopic.new
-  end
-
   def create
     @resource_topic = ResourceTopic.new(resource_topic_params)
 
@@ -15,11 +11,8 @@ class ResourceTopicsController < ApplicationController
       redirect_to resource_topics_path
     else
       flash.now[:error] = @resource_topic.errors.full_messages.first
-      render "new"
+      redirect_to resource_topics_path
     end
-  end
-
-  def edit
   end
 
   def update
