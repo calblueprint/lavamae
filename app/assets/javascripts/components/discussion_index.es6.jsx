@@ -231,7 +231,7 @@ class DiscussionIndex extends React.Component {
       <div>
         <div className="discussion-search">
           <input type="text" name="search" className="discussion-search-input"
-            onKeyDown={(e) => this._onSearchChange(e)}
+            onKeyUp={(e) => this._onSearchChange(e)}
             defaultValue={this.state.search} placeholder="Search discussion threads..." />
         </div>
         <div className="discussion-header">
