@@ -64,12 +64,16 @@ section {
   align-items: center;
 }
 
-.container-lg{
+.container {
+  width: 90vw;
+}
+
+.container-lg {
+  width: 100vw;
   margin-right: auto;
   margin-left: auto;
   padding-left: 15px;
   padding-right: 15px;
-
 }
 
 .margin-l {
@@ -81,12 +85,8 @@ section {
 }
 
 @media (min-width: 1200px) {
-  .container, .container-lg {
-    max-width: 1080px;
-  }
-
-  .container-lg{
-    max-width: 100%;
+  .container-lg {
+    width: 90vw;
   }
 }
 
