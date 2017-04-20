@@ -200,12 +200,10 @@
 }
 
 @media screen and (max-width:630px) {
-  .aux-map-tools {
-    top: auto;
-    bottom: 0;
-    margin-bottom: 15px;
-    p {
-      display: none;
-    }
+  #map, .map-header {
+    top: $mobile-nav-height;
+  }
+  .map-header {
+    width: 100% !important;
   }
 }
