@@ -9,9 +9,11 @@
       Lava Mae Reach
     </h3>
     <h4 class="landing-body">
-      Lava Mae Reach is a tool for anyone to learn more about how Lava Mae works,
-      how it's revolutionizing access to basic sanitation, and even how to start Lava Mae
-      projects in untapped areas.
+      Lava Mae Reach is a community based site focused on helping you provide
+      mobile hygiene services to your community. Connecting, inspiring and
+      educating communities is at the heart of our organization, and this is
+      your place to learn and connect with one another.  We’re excited to work
+      with you to get more showers on the streets, so let’s get started!
     </h4>
     <button class="btn btn-blue" id="explore">Explore</button>
   </div>
@@ -22,37 +24,40 @@
 </div>
 
 <div class="site-guide">
+  <h1>Explore</h1>
   <div class="thirds-container">
-    <%= link_to discussions_path do %>
       <div class="third">
-        <h1>Discussions</h1>
-        <%= image_tag("discussion-hero.png", :class => "third-hero") %>
+        <%= image_tag("tool-kit.png", :class => "third-hero") %>
+        <h1>Start Your Service</h1>
         <p>
-          Connect with others around the globe through discussion threads. Ask
-          discussions, answer discussions, and meet others.
+          Read and download our mobile hygiene toolkit to learn how to start your own service.
         </p>
+        <%= link_to resource_topics_path do %>
+          <button class="btn btn-blue">View Toolkit</button>
+        <% end %>
       </div>
-    <% end %>
-    <%= link_to resource_topics_path do %>
+
       <div class="third">
-        <h1>Resources</h1>
-        <%= image_tag("resources-hero.png", :class => "third-hero") %>
+        <%= image_tag("discussions.png", :class => "third-hero") %>
+        <h1>Discuss With Others</h1>
         <p>
-          Read through our toolkits to learn more about how to start a project
-          like Lava Mae and best strategies.
+          Get advice, discuss issues or ask questions and help each other find solutions.
         </p>
+        <%= link_to discussions_path do %>
+          <button class="btn btn-blue">View Discussions</button>
+        <% end %>
       </div>
-    <% end %>
-    <%= link_to map_path do %>
       <div class="third">
-        <h1>Our Network</h1>
-        <%= image_tag("map-hero.png", :class => "third-hero") %>
+        <%= image_tag("network.png", :class => "third-hero") %>
+        <h1>Connect</h1>
         <p>
-          Discover Lava Mae projects all around the world and read stories about
-          other individuals and organizations revolutionizing global sanitation.
+          Discover and connect with individuals and organizations like you who
+          are revolutionizing global sanitation in their community.
         </p>
+        <%= link_to map_path do %>
+          <button class="btn btn-blue">View Our Network</button>
+        <% end %>
       </div>
-    <% end %>
   </div>
 </div>
 
