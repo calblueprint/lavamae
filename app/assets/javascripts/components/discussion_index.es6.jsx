@@ -153,11 +153,6 @@ class DiscussionIndex extends React.Component {
               <span> Favorites </span>
             </button>
           </a>
-          <DiscussionCreateModal
-            user={this.props.user}
-            all_tags={this.props.all_tags}
-            loading_bus={this.props.loading_bus}
-          />
         </div>
       );
     } else {
@@ -229,12 +224,19 @@ class DiscussionIndex extends React.Component {
     }
     return (
       <div>
-        <h1>Discussions</h1>
-        <h2>
-          Browse conversations, or ask your own question.  Our hope is that you
-          can learn from each other’s experiences in starting up a service as
-          well as be a support to one another within the Lava Mae Reach community.
-        </h2>
+        <div className="discussions-page-header">
+          <h1>Discussions</h1>
+          <h2>
+            Browse conversations, or ask your own question.  Our hope is that you
+            can learn from each other’s experiences in starting up a service as
+            well as be a support to one another within the Lava Mae Reach community.
+          </h2>
+          <DiscussionCreateModal
+            user={this.props.user}
+            all_tags={this.props.all_tags}
+            loading_bus={this.props.loading_bus}
+            />
+        </div>
         <div className="discussion-search">
           <input type="text" name="search" className="discussion-search-input"
             onKeyUp={(e) => this._onSearchChange(e)}
