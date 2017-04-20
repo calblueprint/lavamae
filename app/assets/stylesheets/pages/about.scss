@@ -1,26 +1,69 @@
-.about {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.about-page {
+  min-height: 100vh;
+  padding-top: $nav-height;
+  padding-bottom: 120px;
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%),
   image_url("about-hero.jpg");
-  text-align: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
+  background-repeat: no-repeat;
   background-size: cover;
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 
-  .about-text {
-    max-width: 500px;
+  .about, .beliefs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .about {
+    padding: 120px 0;
+  }
+
+  .beliefs {
+    padding: 10px 0 10px 30px;
+    max-width: 480px;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+  }
+
+  .belief-item {
+    font-size: 18px;
+    text-align: left;
+    position: relative;
+    padding: 20px 0 20px 20px;
+
+    .belief-number {
+      font-size: 60px;
+      font-weight: 700;
+      position: absolute;
+      top: 10px;
+      left: -30px;
+    }
   }
 
   .about-title, .about-body {
-    color: white;
     padding-top: 5px;
+    flex: 0 1 100%;
+    color: white;
   }
 
   .about-body {
     padding-bottom: 10px;
+    max-width: 640px;
+  }
+}
+
+@media screen and (max-width:630px) {
+  .about-page {
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
