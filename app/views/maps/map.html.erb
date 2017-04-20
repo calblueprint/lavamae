@@ -3,11 +3,15 @@
 
 <div id='map'></div>
 <div class="aux-map-tools">
-  <p>Explore the network of Lava Mae around the world.
-    Click on a point to see more information about a friend who's changing the world!</p>
-    <% if !current_user %>
+  <div class="map-header">
+    <h1>Our Network</h1>
+    <h2>Welcome to the Lava Mae Reach global community! Find people around the world
+      who are working to provide hygiene services in their community.
+      Don’t be shy, tell us who you are and be a part of the Lava Mae Reach movement.</h2>
+      <% if !current_user %>
       <%= react_component "LoginModal", { style: "btn btn-blue btn-join", from_map: true } %>
-    <% end %>
+      <% end %>
+  </div>
 </div>
 
 <script>

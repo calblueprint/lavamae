@@ -75,16 +75,31 @@
 }
 
 .aux-map-tools {
-  position: absolute;
-  top: $nav-height;
-  margin-left: 15px;
-  margin-top: 15px;
+  .map-header {
+    position: absolute;
+    width: 50%;
+    top: $nav-height;
+    margin-left: 15px;
+    margin-top: 15px;
+    background-color: $white-60;
+    padding: 0 15px 15px 15px;
 
-  p {
-    font-weight: 500;
-    max-width: 350px;
-    margin-bottom: 15px;
+    h2 {
+      max-width: 100%;
+    }
+
+    p {
+      color: $blue-dark;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.5em;
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
   }
+
 
   .button_to {
     .btn-join {
