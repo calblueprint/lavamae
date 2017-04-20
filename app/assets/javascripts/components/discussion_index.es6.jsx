@@ -224,7 +224,7 @@ class DiscussionIndex extends React.Component {
     }
     return (
       <div>
-        <div className="discussions-page-header">
+        <div className="discussions-page-header">        
           <h1>Discussions</h1>
           <h2>
             Browse conversations, or ask your own question.  Our hope is that you

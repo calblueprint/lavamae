@@ -8,6 +8,7 @@
   align-items: flex-end;
   flex-wrap: wrap;
   justify-content: space-between;
+  padding-top: 10px;
 
   h1 {
     width: 100%;
@@ -20,11 +21,8 @@
 
 .discussion-header {
   display: flex;
-  // position: fixed;
-  top: 67px;
   align-items: center;
   color: $blue-light;
-
   padding: 10px 0 10px 10px;
   height: 60px;
   box-sizing: border-box;
@@ -69,7 +67,8 @@
 }
 
 .discussion-container {
-  position: relative;
+  position: absolute;
+  top: 0;
   background-color: $bg-color;
   padding-top: $nav-height;
   padding-left: 15px;
