@@ -9,13 +9,16 @@ class DiscussionsController < ApplicationController
     @default_img = view_context.asset_path("default.png")
 
     if current_user
-      @favorite_discussions = current_user.favorite_discussions
       if !params[:fav].blank?
-        @discussions = @favorite_discussions
+        @discussions = current_user.favorite_discussions
+      else
+        @discussions = @discussions_all
       end
+    else
+      @discussions = @discussions_all
     end
 
-  	@discussions = @discussions_all.search(params[:search]).order('discussions.created_at DESC')
+  	@discussions = @discussions.search(params[:search]).order('discussions.created_at DESC')
     @discussions = @discussions.filter(params[:filter]) if params[:filter].present?
 
     if params[:discussion_id]
