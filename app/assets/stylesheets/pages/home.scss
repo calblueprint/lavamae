@@ -53,17 +53,19 @@
 
   h1 {
     font-size: 30px;
-    color: $grey;
+    padding-bottom: 10px;
   }
 }
 
 .thirds-container {
-  align-items: flex-start;
   display: flex;
+  align-items: flex-start;
+  padding-bottom: 20px;
 
   h1 {
     font-size: 18px;
     color: $blue-light;
+    padding: 0;
   }
 }
 
@@ -80,7 +82,7 @@
   padding: 20px 20px;
 
   p {
-    color: $blue-light;
+    color: $black;
     padding-bottom: 10px;
   }
 
