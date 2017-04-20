@@ -1,4 +1,4 @@
-.about {
+.about-page {
   min-height: 100vh;
   padding-top: $nav-height;
   background: linear-gradient(150deg, $black-80 0%, $black-60 40%, $black-40 80%),
@@ -6,23 +6,37 @@
   background-repeat: no-repeat;
   background-size: cover;
   text-align: center;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 
-  .about-text {
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
+  .about, .beliefs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about {
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+
+  .beliefs {
+    padding-top: 50px;
+    padding-bottom: 100px;
   }
 
   .about-title, .about-body {
     color: white;
     padding-top: 5px;
+    flex: 0 1 100%;
   }
 
   .about-body {
     padding-bottom: 10px;
+    max-width: 640px;
+    text-align: left;
   }
 }
