@@ -136,17 +136,17 @@ class DiscussionIndex extends React.Component {
       )});
   }
 
-  renderDiscussionHeader() {
-    let favoritesSelected = "";
+  renderFavoriteBtn() {
+    let favoritesSelected = null;
     if (this.state.showFavorites) {
       favoritesSelected = "discussion-favorite selected";
     } else {
       favoritesSelected = "discussion-favorite";
     }
-    let header = null;
+    let favoriteBtn = null;
     if (this.props.current_user) {
-      header = (
-        <div className="favorite-create-discussions">
+      favoriteBtn = (
+        <div className="">
           <a href={this._generateLink(this.state.discussion, this.state.showFavorites)}>
             <button className={favoritesSelected}>
               <i className="fa fa-star-o fa-lg"></i>
@@ -155,17 +155,31 @@ class DiscussionIndex extends React.Component {
           </a>
         </div>
       );
+    }
+    return favoriteBtn;
+  }
+
+  renderCreateBtn() {
+    let createBtn = null;
+    if (this.props.current_user) {
+      createBtn = (
+        <DiscussionCreateModal
+          user={this.props.user}
+          all_tags={this.props.all_tags}
+          loading_bus={this.props.loading_bus}
+        />
+      );
     } else {
-      header = (
-        <div className="favorite-create-discussions">
-          <LoginModal
-            style = {'btn btn-blue pull-left'}
-            from_discussion = {true}
-          />
-        </div>
+      createBtn = (
+        <div className="create-discussion">
+        <LoginModal
+          style = {'btn btn-blue'}
+          from_discussion = {true}
+        />
+      </div>
       )
     }
-    return header;
+    return createBtn;
   }
 
   renderShortened(disc, key) {
@@ -233,6 +247,7 @@ class DiscussionIndex extends React.Component {
           </h2>
         </div>
         <div className="discussion-search">
+          <i className="fa fa-search fa-lg"></i>
           <input type="text" name="search" className="discussion-search-input"
             onKeyUp={(e) => this._onSearchChange(e)}
             defaultValue={this.state.search} placeholder="Search discussion threads..." />
@@ -250,7 +265,8 @@ class DiscussionIndex extends React.Component {
               />
             </Modal>
           </div>
-            {this.renderDiscussionHeader()}
+            {this.renderFavoriteBtn()}
+            {this.renderCreateBtn()}
         </div>
         <div className="discussion-item-container" id="discussions">
           {this.renderIndex()}

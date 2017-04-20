@@ -81,7 +81,7 @@ constructor(props) {
 
   render() {
     return (
-      <div>
+      <div className="create-discussion">
         <button className='btn btn-blue' onClick={this._openModal}>Create Discussion</button>
         <Modal className="modal" show={this.state.showModal}>
           <Modal.Header>
