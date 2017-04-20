@@ -1,5 +1,6 @@
 /**
  * @prop discussions - discussion index
+ * @prop unfiltered_discussions - all discussions in database
  * @prop discussion - discussion
  * @prop current_user - current user
  * @prop favorite_discussions - favorite user discussions
@@ -14,6 +15,7 @@
  * @prop all_tags - all tags
  * @props loading_bus - loading lavamae bus url
  * @prop default_image - default profile image url
+ * @prop  all_responses - all responses
  */
 
 class DiscussionPage extends React.Component {
@@ -72,6 +74,7 @@ class DiscussionPage extends React.Component {
       <div className="discussion-container">
         <DiscussionIndex
           discussions={this.props.discussions}
+          unfiltered_discussions = {this.props.unfiltered_discussions}
           discussion={this.props.discussion}
           current_user={this.props.current_user}
           favorite_discussions={this.props.favorite_discussions}
@@ -81,6 +84,7 @@ class DiscussionPage extends React.Component {
           search_param={this.props.search_param}
           all_tags={this.props.all_tags}
           loading_bus={this.props.loading_bus}
+          all_responses = {this.props.all_responses}
         />
         {this.renderDiscussion()}
       </div>
@@ -90,6 +94,7 @@ class DiscussionPage extends React.Component {
 
 DiscussionPage.propTypes = {
   discussion: React.PropTypes.object,
+  unfiltered_discussions: React.PropTypes.array.isRequired,
   discussions: React.PropTypes.array.isRequired,
   current_user: React.PropTypes.object,
   favorite_discussions: React.PropTypes.array,
@@ -104,4 +109,5 @@ DiscussionPage.propTypes = {
   all_tags: React.PropTypes.array.isRequired,
   loading_bus: React.PropTypes.string.isRequired,
   default_image: React.PropTypes.string.isRequired,
+  all_responses: React.PropTypes.array
 };
