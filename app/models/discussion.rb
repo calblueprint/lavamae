@@ -23,11 +23,10 @@ class Discussion < ActiveRecord::Base
 
   def self.search(search)
     if search
-      res = Discussion.joins(:responses)
-        .where('title LIKE ? or discussions.content LIKE ?
-          or responses.content LIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
+      Discussion.includes(:responses)
+        .where('lower(discussions.title) LIKE ? or lower(discussions.content) LIKE ?
+          or lower(responses.content) LIKE ?', "%#{search.downcase}%", "%#{search.downcase}%", "%#{search.downcase}%")
         .references(:responses)
-        res
     else
       self.all
     end
