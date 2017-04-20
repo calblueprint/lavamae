@@ -71,22 +71,24 @@ class DiscussionPage extends React.Component {
 
   render() {
     return (
-      <div className="discussion-container">
-        <DiscussionIndex
-          discussions={this.props.discussions}
-          unfiltered_discussions = {this.props.unfiltered_discussions}
-          discussion={this.props.discussion}
-          current_user={this.props.current_user}
-          favorite_discussions={this.props.favorite_discussions}
-          show_favorites={this.props.show_favorites}
-          date_handler={this._generateTimeStamp}
-          tag_filter={this.props.tag_filter}
-          search_param={this.props.search_param}
-          all_tags={this.props.all_tags}
-          loading_bus={this.props.loading_bus}
-          all_responses = {this.props.all_responses}
-        />
-        {this.renderDiscussion()}
+      <div className="section-placeholder">
+        <div className="discussion-container">
+          <DiscussionIndex
+            discussions={this.props.discussions}
+            unfiltered_discussions = {this.props.unfiltered_discussions}
+            discussion={this.props.discussion}
+            current_user={this.props.current_user}
+            favorite_discussions={this.props.favorite_discussions}
+            show_favorites={this.props.show_favorites}
+            date_handler={this._generateTimeStamp}
+            tag_filter={this.props.tag_filter}
+            search_param={this.props.search_param}
+            all_tags={this.props.all_tags}
+            loading_bus={this.props.loading_bus}
+            all_responses = {this.props.all_responses}
+          />
+          {this.renderDiscussion()}
+        </div>
       </div>
     );
   }
