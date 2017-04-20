@@ -1,3 +1,4 @@
+// BLACKS AND WHITES
 $black                          : #30404D;
 $black-80                       : rgba($black, 0.80);
 $black-60                       : rgba($black, 0.60);
@@ -13,6 +14,7 @@ $white-20                       : rgba(white, 0.20);
 $grey                           : #96A6B3;
 $bg-color                       : #F3F3F3;
 
+// MAIN BLUE
 $blue-light                     : #16ACE6;
 $blue-light-80                  : rgba($blue-light, 0.80);
 $blue-light-60                  : rgba($blue-light, 0.60);
@@ -20,24 +22,27 @@ $blue-light-40                  : rgba($blue-light, 0.40);
 $blue-light-20                  : rgba($blue-light, 0.20);
 $blue-light-10                  : rgba($blue-light, 0.10);
 
+// SECONDARY BLUES
+$blue-dark                      : #0093CD;
+$blue-sky                       : #E8F6FE;
+$blue-nav-hover                 : #DDF3FE;
 $blue                           : #0C7AFD;
 $blue-80                        : rgba($blue, 0.80);
 $blue-60                        : rgba($blue, 0.60);
 $blue-40                        : rgba($blue, 0.40);
 $blue-20                        : rgba($blue, 0.20);
 
-$blue-dark                      : #0093CD;
-$blue-sky                       : #E8F6FE;
-$blue-nav-hover                 : #DDF3FE;
-
+// RED FOR DELETE
 $red                            : #FF5850;
 $red-80                        : rgba($red, 0.80);
 $red-60                        : rgba($red, 0.60);
 $red-40                        : rgba($red, 0.40);
 $red-20                        : rgba($red, 0.20);
 
+// FONT
 $font-stack                     : 'Hind', 'Helvetica', sans-serif;
 
+// NAV
 $nav-left-width                 : 60px;
 $nav-height                     : 67px;
 $mobile-nav-height              : 50px;
