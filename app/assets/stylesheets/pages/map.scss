@@ -37,6 +37,7 @@
   .mapboxgl-popup-content {
     padding: 10px;
     font-family: $font-stack!important;
+
     .organization {
       font-weight: bold;
       font-size: 17px;
@@ -48,11 +49,10 @@
       display: flex;
       flex-direction: row;
       height: $image-height;
+      margin-bottom: 5px;
 
       .name {
-        line-height: $image-height;
         font-size: 14px;
-        margin-right: 10px;
       }
 
       .user-image {
@@ -61,6 +61,13 @@
         border-radius: $image-height/2;
         background-size: cover;
         background-color: $black-20;
+        vertical-align: middle;
+        margin-right: 5px;
+      }
+
+      button {
+        margin:0 auto;
+        display:block;
       }
     }
   }
@@ -75,16 +82,32 @@
 }
 
 .aux-map-tools {
-  position: absolute;
-  top: $nav-height;
-  margin-left: 15px;
-  margin-top: 15px;
+  .map-header {
+    position: absolute;
+    width: 50%;
+    top: $nav-height;
+    margin-left: 15px;
+    margin-top: 15px;
+    background-color: $white-60;
+    padding: 0 15px 15px 15px;
 
-  p {
-    font-weight: 500;
-    max-width: 350px;
-    margin-bottom: 15px;
+    h2 {
+      max-width: 100%;
+      color: $black;
+    }
+
+    p {
+      color: $blue-dark;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.5em;
+    }
+
+    .btn {
+      margin-top: 10px;
+    }
   }
+
 
   .button_to {
     .btn-join {
@@ -185,12 +208,10 @@
 }
 
 @media screen and (max-width:630px) {
-  .aux-map-tools {
-    top: auto;
-    bottom: 0;
-    margin-bottom: 15px;
-    p {
-      display: none;
-    }
+  #map, .map-header {
+    top: $mobile-nav-height;
+  }
+  .map-header {
+    width: 100% !important;
   }
 }
