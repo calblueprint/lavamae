@@ -57,16 +57,16 @@
         '<div class="popup-preview">' +
           '<div class="organization"><%= user.organization %></div>' +
           '<div class="user-container">' +
-            '<%= link_to user_path(id: user.id) do %> ' +
-            '<div class="name"><%= user.first_name %> <%= user.last_name %></div>' +
-            '<% end %>' +
             '<% if user.profile_pic? %> ' +
             '<%= image_tag(user.profile_pic.url(:thumb), class: "user-image") %>' +
             '<% else %><%= image_tag(("default.png"), class: "user-image") %>' +
             '<% end %>' +
+            '<%= link_to user_path(id: user.id) do %> ' +
+            '<div class="name"> <%= user.first_name %> <%= user.last_name %></div>' +
+            '<% end %>' +
           '</div>' +
           '<% if current_user && current_user.is_admin? %>' +
-          '<button onclick="deletePin(<%= user.id %>)">Delete</button>' +
+          '<button class="btn btn-sm btn-action btn-destroy" onclick="deletePin(<%= user.id %>)">Delete</button>' +
           '<% end %>' +
         '</div>'
       );
