@@ -104,7 +104,6 @@ class ResourceModule extends React.Component {
             </h5>
             <div className="module-item-description">
               {this.props.resource_topic.description}
-              <p>Last Updated: {this.props.resource_topic.updated_at.slice(0, 10)}</p>
             </div>
             { this._renderActionItems() }
           </div>
