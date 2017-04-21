@@ -42,16 +42,18 @@ constructor(props) {
   }
 
   _renderImages() {
-    const allPhotos = this.props.images;
+    const allPhotos = this.props.images.sort((image1, image2) => image1.id - image2.id);
     let renderPhotos = allPhotos.map((image, i) => {
       var photoClass;
       if (this.state.images.includes(image)) {
-        photoClass = "user-photo";
+        photoClass = "photo";
       } else {
-        photoClass = "user-photo selected";
+        photoClass = "photo selected";
       }
       return (
-        <img key={i} onClick={this._selectImage} className="user-photo" src={image.photo.thumb.url} id={image.id}/>
+        <a>
+          <img key={i} onClick={this._selectImage} className="photo" src={image.photo.thumb.url} id={image.id}/>
+        </a>
       );
     });
     return renderPhotos;
@@ -59,7 +61,7 @@ constructor(props) {
 
   _saveForm(e) {
     e.preventDefault();
-    var selectedImages = document.getElementsByClassName('user-photo selected');
+    var selectedImages = document.getElementsByClassName('photo selected');
     var imageList = [];
     if (selectedImages[0] != null) {
       $("#delete").hide();
@@ -101,7 +103,9 @@ constructor(props) {
               <div className="input-field">
                 Select the images you would like to delete.
               </div>
+              <div className="user-photo-gallery">
               { this._renderImages() }
+              </div>
             </Modal.Body>
             <Modal.Footer>
               <button id="close" className="btn btn-outline modal-btn" type="button" onClick={this._closeModal}>Close</button>

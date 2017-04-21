@@ -89,14 +89,14 @@
   display: flex;
   justify-content: start;
   flex-wrap: wrap;
-  
+
   a {
     position: relative;
     display: inline-block;
-    width: 125px;
-    height: 125px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    width: 127px;
+    height: 127px;
+    margin-right: 8px;
+    margin-bottom: 8px;
 
     .photo-overlay {
       position: absolute;
@@ -111,7 +111,13 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border: 2px solid white;
+
+      &.selected {
+        border-color: $blue-light;
+      }
     }
+
   }
 }
 
@@ -198,23 +204,6 @@ body:not(.lg-from-hash) .lg-outer.lg-start-zoom .lg-item.lg-complete .lg-object 
 
 .approval:last-child {
   margin-bottom: 15px;
-}
-
-.user-photo {
-  margin: 10px;
-  cursor: pointer;
-  border-width: 2px;
-  border-style: solid;
-  border-color: white;
-
-
-  &.selected {
-    border-color: $blue-light;
-    box-shadow:
-      inset 0 0 5px #0cc, /* Inset shadow */
-      0 0 5px #0cc, /* Outset shadow */
-      inset -999px 0 0 #fff; /* The background color */
-  }
 }
 
 .volunteer-container {
