@@ -5,6 +5,8 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @default_img = view_context.asset_path("default.png")
     @loading_bus = view_context.asset_path("lavamae-bus.gif")
+    @calling_badge = view_context.asset_path("calling-badge.png")
+    @volunteer_badge = view_context.asset_path("volunteer-badge.png")
     @location = nil
     if @user.location_id
       @location = Location.find(@user.location_id)
