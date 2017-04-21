@@ -8,7 +8,6 @@ class RegistrationModal extends React.Component {
     this._attemptRegistration = this._attemptRegistration.bind(this);
     this._renderInput = this._renderInput.bind(this);
     this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
-    this._handleAdminCheckboxChange = this._handleAdminCheckboxChange.bind(this);
     this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
     this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
     this._handleSelect = this._handleSelect.bind(this);
@@ -16,7 +15,6 @@ class RegistrationModal extends React.Component {
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
     this.state = {
-      admin_checked: false,
       map_checked: false,
       volunteer_checked: false,
       seeking_volunteer_checked: false,
@@ -52,7 +50,6 @@ class RegistrationModal extends React.Component {
         organization: this.state.organization,
         location_id: locId,
         on_map: this.state.map_checked,
-        pending_admin: this.state.admin_checked,
         email: this.state.email,
         password: this.state.password,
         password_confirmation: this.state.password_confirmation,
@@ -86,10 +83,6 @@ class RegistrationModal extends React.Component {
 
   _handleMapCheckboxChange(e) {
     this.setState({ map_checked: e.target.checked });
-  }
-
-  _handleAdminCheckboxChange(e) {
-    this.setState({ admin_checked: e.target.checked });
   }
 
   _handleVolunteerCheckboxChange(e) {
@@ -219,16 +212,6 @@ class RegistrationModal extends React.Component {
                     name="seeking_volunteer"
                     checked={this.state.seeking_volunteer_checked}
                     onChange={this._handleSeekingVolunteerCheckboxChange}
-                    className="input-checkbox"/>
-                  <div className="control__indicator"></div>
-                </label>
-              </div>
-              <div className="input-field">
-                <label className="control control--checkbox"> Request to be an Admin
-                  <input type="checkbox"
-                    name="on_map"
-                    checked={this.state.admin_checked}
-                    onChange={this._handleAdminCheckboxChange}
                     className="input-checkbox"/>
                   <div className="control__indicator"></div>
                 </label>

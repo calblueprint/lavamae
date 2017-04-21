@@ -1,21 +1,15 @@
-<section>
+<section class="admin-section">
 	<div class="container admin-container">
 		<% if !current_user || !current_user.is_admin %>
 			<!-- You do not have access to this page. -->
 		<% end %>
 		<%if current_user &&  current_user.is_admin %>
 			<h1 class="admin-header">Admin Dashboard</h1>
-			<h5 class="pending-title">
-		        <%= "Users Pending Admin Approval" %>
-		    </h5>
-		    <div class="pending">
-				<%= react_component('PendingAdminUsers', pending_users: @pending_admins, user_id: current_user.id, default_image: @default_img) %>
-			</div>
-			<h5 class="pending-title">
+			<h5 class="admin-title">
 		        <%= "All Users" %>
 		    </h5>
-		    <div class="pending">
-				<%= react_component('DeleteUsers', users: @users, user_id: current_user.id, default_image: @default_img) %>
+		    <div class="user-control">
+				<%= react_component('AdminUserControls', users: @users, user_id: current_user.id, default_image: @default_img) %>
 			</div>
 		<% end %>
 	</div>

@@ -4,7 +4,7 @@
   * @prop default_image - default profile image url
   */
 
-class DeleteUsers extends React.Component {
+class AdminUserControls extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,14 +19,16 @@ class DeleteUsers extends React.Component {
     }
 
     return this.state.users.map((user) => {
-      return (
-        <DeleteUser
-          key = {user.id}
-          admin_id = {this.state.adminId}
-          user = {user}
-          default_image = {this.props.default_image}
-        />
-      )
+      if (user.id != this.state.adminId) {
+        return (
+          <UserControl
+            key = {user.id}
+            admin_id = {this.state.adminId}
+            user = {user}
+            default_image = {this.props.default_image}
+          />
+        )
+      }
     });
   }
 
@@ -37,10 +39,9 @@ class DeleteUsers extends React.Component {
       </div>
     );
   }
-
 }
 
-DeleteUsers.propTypes = {
+AdminUserControls.propTypes = {
   users: React.PropTypes.array.isRequired,
   user_id: React.PropTypes.number.isRequired,
   default_image: React.PropTypes.string.isRequired
@@ -52,9 +53,13 @@ DeleteUsers.propTypes = {
   * @prop default_image - default profile image url
   */
 
-class DeleteUser extends React.Component {
+class UserControl extends React.Component {
   constructor(props) {
     super(props);
+    this._handleApprove = this._handleApprove.bind(this);
+    this._handleReject = this._handleReject.bind(this);
+    this._successApproval = this._successApproval.bind(this);
+    this._successReject = this._successReject.bind(this);
     this._handleDelete = this._handleDelete.bind(this);
     this._successDelete = this._successDelete.bind(this);
     this._setProfilePic = this._setProfilePic.bind(this);
@@ -84,11 +89,52 @@ class DeleteUser extends React.Component {
     window.location = location.pathname;
   }
 
+  _successApproval(msg) {
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.success("Admin approved!");
+    window.location = location.pathname;
+  }
+
+  _successReject(msg) {
+    toastr.options.positionClass = 'toast-bottom-right';
+    toastr.success("User admin status revoked.");
+    window.location = location.pathname;
+  }
+
+  _handleApprove() {
+    approvalFields = {
+      admin_approval_state: 1,
+      admin_id: this.props.admin_id
+    }
+    APIRequester.put(`/users/${this.props.user.id}/admin_approval`, approvalFields, this._successApproval);
+  }
+
+  _handleReject() {
+    rejectionFields = {
+      admin_approval_state: 2,
+      admin_id: this.props.admin_id
+    }
+    APIRequester.put(`/users/${this.props.user.id}/admin_approval`, rejectionFields, this._successReject);
+  }
+
   _handleDelete() {
     APIRequester.delete(`/users/${this.props.user.id}`, {}, this._successDelete);
   }
 
   render() {
+    if (this.props.user.is_admin) {
+    var button = (
+      <button className="btn btn-sm btn-outline" onClick={this._handleReject}>
+        <i className="fa fa-close"></i> Revoke Admin
+      </button>
+      )
+    } else {
+      var button = (
+        <button className="btn btn-sm btn-blue" onClick={this._handleApprove}>
+            <i className="fa fa-check"></i> Make Admin
+          </button>
+        )
+    }
     return (
       <div className="approval">
         <div className="user-container">
@@ -109,6 +155,7 @@ class DeleteUser extends React.Component {
           </a>
         </p>
         <div className="approval-btns">
+          {button}
           <button className="btn btn-sm btn-outline" onClick={this._handleDelete}>
             <i className="fa fa-close"></i> Delete
           </button>
@@ -116,10 +163,9 @@ class DeleteUser extends React.Component {
       </div>
     );
   }
-
 }
 
-DeleteUser.propTypes = {
+UserControl.propTypes = {
   admin_id: React.PropTypes.number.isRequired,
   user: React.PropTypes.object.isRequired,
   default_image: React.PropTypes.string.isRequired

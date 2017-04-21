@@ -15,8 +15,6 @@
 * @props volunteer - true if user wants to be a volunteer
 * @props seeking_volunteer - true if user is seeking volunteers
 * @props admin_map_approval - true if user is allowed to be on map
-* @props admin_checked - true if user wants to be an admin
-* @props is_admin - true is user is an admin
 */
 
 var Modal = ReactBootstrap.Modal;
@@ -33,7 +31,6 @@ class EditProfileModal extends React.Component {
     this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
     this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
     this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
-    this._handleAdminCheckboxChange = this._handleAdminCheckboxChange.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._attemptSave = this._attemptSave.bind(this);
@@ -55,7 +52,6 @@ class EditProfileModal extends React.Component {
       map_checked: this.props.on_map,
       volunteer: this.props.volunteer,
       seeking_volunteer: this.props.seeking_volunteer,
-      pending_admin: this.props.admin_checked,
     };
   }
 
@@ -95,10 +91,6 @@ class EditProfileModal extends React.Component {
 
   _handleSeekingVolunteerCheckboxChange(e) {
     this.setState({ seeking_volunteer: e.target.checked });
-  }
-
-  _handleAdminCheckboxChange(e) {
-    this.setState({ admin_checked: e.target.checked });
   }
 
   _getLongitudeAndLatitudeAndSignUp(loc) {
@@ -155,7 +147,6 @@ class EditProfileModal extends React.Component {
       tertiary_email: this.state.tertiary_email,
       volunteer: this.state.volunteer,
       seeking_volunteer: this.state.seeking_volunteer,
-      pending_admin: this.state.admin_checked,
     };
 
     if (this.state.organization) {
@@ -214,7 +205,6 @@ class EditProfileModal extends React.Component {
   render () {
     let imagePreviewUrl = this.state.imagePreviewUrl;
     let $imagePreview = null;
-    let $adminCheckbox = null;
     if (imagePreviewUrl) {
       $imagePreview = (<img className="profile-preview" src={imagePreviewUrl} />);
     } else {
@@ -237,19 +227,6 @@ class EditProfileModal extends React.Component {
       mapPin = (
         <div>An admin has removed you from the map. Sorry for the inconvenience!</div>
       );
-    }
-    if (!this.props.is_admin) {
-      $adminCheckbox = (<div className="input-field">
-                          <label className="control control--checkbox"> Request to be an Admin
-                            <input type="checkbox"
-                              name="admin_checked"
-                              checked={this.state.pending_admin}
-                              onChange={this._handleAdminCheckboxChange}
-                              className="input-checkbox"/>
-                            <div className="control__indicator"></div>
-                          </label>
-                        </div>
-                      )
     }
 
     return (
@@ -333,7 +310,6 @@ class EditProfileModal extends React.Component {
                   <div className="control__indicator"></div>
                 </label>
               </div>
-              {$adminCheckbox}
               <div className="input-field">
                 <label htmlFor="profile-picture">Profile Picture</label>
                 <br/>
@@ -372,6 +348,4 @@ EditProfileModal.propTypes = {
   volunteer         : React.PropTypes.bool,
   seeking_volunteer : React.PropTypes.bool,
   admin_map_approval: React.PropTypes.bool,
-  pending_admin     : React.PropTypes.bool,
-  is_admin          : React.PropTypes.bool,
 };
