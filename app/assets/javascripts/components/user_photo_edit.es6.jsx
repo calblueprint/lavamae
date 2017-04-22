@@ -92,8 +92,8 @@ constructor(props) {
         photoClass = "photo selected";
       }
       return (
-          <a>
-            <img key={i} onClick={this._selectImage} className="photo" src={image.photo.thumb.url} id={image.id}/>
+          <a key={i}>
+            <img onClick={this._selectImage} className="photo" src={image.photo.thumb.url} id={image.id}/>
           </a>
       );
     });
@@ -142,7 +142,7 @@ constructor(props) {
                 Select the image you would like to edit.
               </div>
               <div className="user-photo-gallery">
-              { this._renderImages() }
+                { this._renderImages() }
               </div>
             </Modal.Body>
             <Modal.Footer>
