@@ -136,7 +136,7 @@
         <h5 class="profile-section-titles">
           <%= "Volunteer Matching in Your Area" %><br>
         </h5>
-        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id, default_image: @default_img) %>
+        <%= react_component('VolunteerMatching', volunteers: @volunteers, user_id: @user.id, default_image: @default_img, calling_badge: @calling_badge, volunteer_badge: @volunteer_badge) %>
       </div>
       <% end %>
       <% if @favorite_discussions.count > 0 %>

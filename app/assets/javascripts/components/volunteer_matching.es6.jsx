@@ -2,6 +2,8 @@
   * @prop volunteers - list of all volunteers/volunteer seekers in same location
   * @prop user_id - user id for the current user
   * @prop default_image - default profile image url
+  * @prop calling_badge - calling badge image url
+  * @prop volunteer_badge - volunteer badge image url
   */
 
 class VolunteerMatching extends React.Component {
@@ -42,76 +44,45 @@ class VolunteerMatching extends React.Component {
         this._fetchProfilePic(volunteer.id);
       }
       profPic = this.state[volunteer.id];
-      if (volunteer.volunteer == true && volunteer.seeking_volunteer == true) {
-        return (
-          <div key = {volunteer.id} className="user-container volunteer-container">
-            <a href={volunteer.id}>
-              <div className="user-picture">
-                <img src={profPic} />
-              </div>
-              <div className="name-date">
-                <div className="user-name">
-                  { volunteer.first_name } { volunteer.last_name }
-                </div>
-              </div>
-              <div className="tooltip">
-                <img className="badge calling-badge" src="/assets/calling-badge.png"></img>
-                <span className="tooltiptext">
-                  Seeking Volunteers
-                </span>
-              </div>
-              <div className="tooltip">
-                <img className="badge" src="/assets/volunteer-badge.png"></img>
-                <span className="tooltiptext">
-                  Volunteer
-                </span>
-              </div>
-            </a>
+      var volunteerBadge = null;
+      var callingBadge = null;
+      if (volunteer.volunteer) {
+        volunteerBadge = (
+          <div className="tooltip">
+            <img className="badge" src={this.props.volunteer_badge}></img>
+            <span className="tooltiptext">
+              Volunteer
+            </span>
           </div>
-        )
-      } else if (volunteer.volunteer == true ) {
-        return (
-          <div key = {volunteer.id} className="user-container volunteer-container">
-            <a href={volunteer.id}>
-              <div className="user-picture">
-                <img src={profPic} />
-              </div>
-              <div className="name-date">
-                <div className="user-name">
-                  { volunteer.first_name } { volunteer.last_name }
-                </div>
-              </div>
-              <div className="tooltip">
-                <img className="badge" src="/assets/volunteer-badge.png"></img>
-                <span className="tooltiptext">
-                  Volunteer
-                </span>
-              </div>
-            </a>
-          </div>
-        )
-      } else if (volunteer.seeking_volunteer == true) {
-        return (
-          <div key = {volunteer.id} className="user-container volunteer-container">
-            <a href={volunteer.id}>
-              <div className="user-picture">
-                <img src={profPic} />
-              </div>
-              <div className="name-date">
-                <div className="user-name">
-                  { volunteer.first_name } { volunteer.last_name }
-                </div>
-              </div>
-              <div className="tooltip">
-                <img className="badge" src="/assets/calling-badge.png"></img>
-                <span className="tooltiptext">
-                  Seeking Volunteers
-                </span>
-              </div>
-            </a>
-          </div>
-        )
+        );
       }
+      if (volunteer.seeking_volunteer) {
+        callingBadge = (
+          <div className="tooltip">
+            <img className="badge calling-badge" src={this.props.calling_badge}></img>
+            <span className="tooltiptext">
+              Seeking Volunteers
+            </span>
+          </div>
+        );
+      }
+      return (
+          <div key = {volunteer.id} className="user-container volunteer-container">
+            <a href={volunteer.id}>
+              <div className="user-picture">
+                <img src={profPic} />
+              </div>
+              <div className="name-date">
+                <div className="user-name">
+                  { volunteer.first_name } { volunteer.last_name }
+                </div>
+              </div>
+              {callingBadge}
+              {volunteerBadge}
+            </a>
+          </div>
+      )
+      
     });
   }
 
@@ -128,5 +99,7 @@ class VolunteerMatching extends React.Component {
 VolunteerMatching.propTypes = {
   volunteers: React.PropTypes.array.isRequired,
   user_id: React.PropTypes.number.isRequired,
-  default_image: React.PropTypes.string.isRequired
+  default_image: React.PropTypes.string.isRequired,
+  calling_badge: React.PropTypes.string.isRequired,
+  volunteer_badge: React.PropTypes.string.isRequired
 };
