@@ -1,6 +1,6 @@
 /**
  * @prop discussions - discussion index
- * @prop unfiltered_discussions - all discussions in database
+ * @prop unfiltered_discussions - all discussions w/ tags and favorites applied, but no search
  * @prop discussion - discussion
  * @prop current_user - current user
  * @prop favorite_discussions - favorite user discussions
