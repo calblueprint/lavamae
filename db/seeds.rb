@@ -26,7 +26,6 @@ def make_users
       organization: "Lava Mae",
       is_admin: false,
       on_map: true,
-      pending_admin: true,
       website: "lavamae.org",
       email: "user#{n}@lavamae.org",
       password: "password",
