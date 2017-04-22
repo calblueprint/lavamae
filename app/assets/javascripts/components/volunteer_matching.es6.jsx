@@ -77,8 +77,8 @@ class VolunteerMatching extends React.Component {
                   { volunteer.first_name } { volunteer.last_name }
                 </div>
               </div>
-              {volunteerBadge}
               {callingBadge}
+              {volunteerBadge}
             </a>
           </div>
       )
