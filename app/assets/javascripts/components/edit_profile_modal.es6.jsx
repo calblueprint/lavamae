@@ -27,7 +27,6 @@ class EditProfileModal extends React.Component {
     this._handleChange = this._handleChange.bind(this);
     this._success = this._success.bind(this);
     this._error = this._error.bind(this);
-    this._handleSelect = this._handleSelect.bind(this);
     this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
     this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
     this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
@@ -75,10 +74,6 @@ class EditProfileModal extends React.Component {
   _error(msg) {
     toastr.options.positionClass = 'toast-bottom-right';
     toastr.error(msg);
-  }
-
-  _handleSelect(e) {
-    this.setState({ country: e.target.value });
   }
 
   _handleMapCheckboxChange(e) {
