@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   resources :images, only: [:create, :update, :destroy]
 
-  resources :discussions do
+  resources :discussions, only: [:index, :create, :new, :show, :update, :destroy] do
     resources :responses do
       post '/upvote', to: 'responses#upvote'
     end
