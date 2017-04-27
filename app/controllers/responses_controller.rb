@@ -22,14 +22,6 @@ class ResponsesController < ApplicationController
     end
   end
 
-  def new
-
-  end
-
-  def edit
-
-  end
-
   def update
     @response.update(response_params)
     respond_to do |format|
