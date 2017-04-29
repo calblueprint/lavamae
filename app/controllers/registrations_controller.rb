@@ -28,9 +28,6 @@ class RegistrationsController < Devise::RegistrationsController
     @token = params[:reset_password_token]
   end
 
-  def login
-  end
-
   protected
 
   def configure_permitted_parameters
