@@ -13,7 +13,6 @@ class ResponseForm extends React.Component {
     this._saveForm = this._saveForm.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
-    this._handleDelete = this._handleDelete.bind(this);
     this._successfulDelete = this._successfulDelete.bind(this);
     this._fetchUpvotes = this._fetchUpvotes.bind(this);
     this._setUpvotes = this._setUpvotes.bind(this);
@@ -28,7 +27,7 @@ class ResponseForm extends React.Component {
   }
 
   componentDidMount() {
-      this._fetchUpvotes();
+    this._fetchUpvotes();
   }
 
   _fetchUpvotes() {
@@ -45,11 +44,6 @@ class ResponseForm extends React.Component {
 
   _closeModal() {
     this.setState({ showModal: false });
-  }
-
-
-  _handleDelete(e) {
-    this.setState({data: null})
   }
 
   _successfulDelete(msg) {

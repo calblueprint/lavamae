@@ -18,7 +18,6 @@ class DiscussionForm extends React.Component {
     this._saveForm = this._saveForm.bind(this);
     this._openModal = this._openModal.bind(this);
     this._closeModal = this._closeModal.bind(this);
-    this._handleDelete = this._handleDelete.bind(this);
     this._success = this._success.bind(this);
     this._renderTags = this._renderTags.bind(this);
     this._renderFormTags = this._renderFormTags.bind(this);
@@ -41,10 +40,6 @@ class DiscussionForm extends React.Component {
     this.setState({ showModal: false });
   }
 
-
-  _handleDelete(e) {
-    this.setState({data: null})
-  }
 
   _success(msg) {
     this._closeModal();
