@@ -15,8 +15,8 @@ social good enacted in our community. Each semester, teams of 4-5 students work
 closely with a non-profit to bring technological solutions to the problems they
 face every day.
 
-## Getting Started
-Check out developer guide [here](docs/README.md)
+## Getting Started and Documentation
+Check out the developer guide and codebase documentation [here](docs/README.md).
 
 ## MIT License
 Copyright 2017 Cal Blueprint
