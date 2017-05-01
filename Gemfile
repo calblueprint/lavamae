@@ -61,6 +61,7 @@ group :development, :test do
   gem "guard-livereload"
   gem 'rspec-rails'
   gem 'rubocop'
+  gem 'pry'
 end
 
 group :development do

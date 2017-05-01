@@ -508,6 +508,7 @@ DEPENDENCIES
   nokogiri
   pg
   pg_search (= 1.0.5)
+  pry
   quiet_assets
   rails (= 4.2.1)
   rails-assets-moment!
