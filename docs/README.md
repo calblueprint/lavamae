@@ -445,14 +445,25 @@ Renders the `DiscussionPage` React component which handles and renders the list 
 #### **`map.html.erb`** (Millman)
 
 ### Pages
-#### **`about.html.erb`** (Grace)
+#### **`about.html.erb`**
+Renders the static "About Lava Mae" page. Displays a blurb about what Lava Mae does, lists the 3 core beliefs of Lava Mae, and links to the main website (www.lavamae.org) for more information.
+
 #### **`admin_dashboard.html.erb`**
 Renders the `AdminUserControls` React component. Displays a list of all users along with their name and associated email. This page allows admins to grant or revoke admin status to a user account, as well as delete a user account.
 
-#### **`home.html.erb`** (Grace)
+#### **`home.html.erb`**
+Renders the static landing/home page. The first section displays a short blurb about the purpose of the app, with the background as the map of users that renders real-time (same as map on **`map.html.erb`**). However, this map is not interactive.
+
+Note: To push the content below the first section down, a `<div class="filler"></div>` was needed. This class has the same height as the map (90vh).
+
+The call-to-action button in the first section ("Explore") scrolls the page down to the next section, which describes the different parts of the app. The scrolling action is a JavaScript click function with a `scrollTop` animation.
 
 ### Partials
-#### **`_nav.html.erb`** (Grace)
+#### **`_nav.html.erb`**
+Renders the global navigation menu on every page. Global parts of the website like "Start Your Service" and "Discussions" are placed on the left side, while user-related parts like "Profile", "Login" and "Sign Up" are on the right.
+
+The mobile version condenses all menu items into a hamburger menu on the right. An `onClick` function called `mobileMenu` is used on this hamburger menu to toggle on a CSS class that animates the menu items into view from the right side.
+
 
 ### Registrations
 #### **`new.html.erb`** (Millman)
@@ -485,11 +496,157 @@ Displays all the tags and allows them to be clickable. Clicking on them triggers
 
 `_saveForm()`
 Sends all the necessary discussion information to the `Discussions` controller and updates the Discussions page with the new Discussion.
-#### **`discussion_page.es6.jsx`** (Nhi)
-#### **`discussion_form.es6.jsx`** (Nhi)
-#### **`discussion_index.es6.jsx`** (Nhi)
-#### **`discussion_responses.es6.jsx`** (Nhi)
+
+#### **`discussion_page.es6.jsx`**
+#### Props
+`@prop discussions` - discussion index
+`@prop unfiltered_discussions` - all discussions with tags and favorites applied, but no search
+`@prop discussion` - discussion
+`@prop current_user` - current user
+`@prop favorite_discussions` - favorite user discussions
+`@prop tags` - tag list
+`@prop show_favorites` - display favorites flag
+`@prop discussion_username` - full name of discussion creator
+`@prop discussion_userimage` - discussion user profile image
+`@prop responses` - discussion responses
+`@prop upvotes` - discussion upvotes
+`@prop tag_filter` - tag filter param
+`@prop search_param` - search param
+`@prop all_tags` - all tags
+`@props loading_bus` - loading lavamae bus url
+`@prop default_image` - default profile image url
+`@prop  all_responses` - all responses
+
+#### Methods
+`_generateTimeStamp(obj)`
+Handler method for converting and formatting discussion time stamps.
+
+`renderDiscussion()`
+Displays the selected discussion and its responses by rendering the `DiscussionForm` and `DiscussionResponses` React components.
+
+#### **`discussion_form.es6.jsx`**
+#### Props
+`@prop discussion` - discussion
+`@prop tags` - tag list
+`@prop current_user` - current user
+`@prop discussion_username` - full name of discussion creator
+`@prop discussion_userimage` - discussion user profile image
+`@prop upvotes` - discussion upvotes
+`@prop date_handler` - handler to render timestamp
+`@prop all_tags` - all tags
+#### Methods
+`_openModal()`
+Handler method to display a modal for deleting a discussion when the delete button is clicked.
+
+`_closeModal()`
+Handler method to close the discussion deletion modal if the cancel button is clicked.
+
+`_success(msg)`
+Uses the API Requester to delete the discussion from the database and displays a user message if the discussion was successfully deleted.
+
+`_cancelEdit(e)`
+Handler method to cancel the inline edit module. If cancelled, no temporary edits are saved.
+
+`_enableForm()`
+Handler method to enable the inline edit module for the discussion.
+
+`_successfulSave()`
+Closes the inline edit module if the user edits were successfully saved.
+
+`_saveForm(e)`
+Uses the API Requester to save the inline edits for the discussion.
+
+`_selectTag(e)`
+Used to toggle the `checked` css class for discussion tags.
+
+`_renderTags()`
+Renders the associated tags for the selected discussion.
+
+`_renderFormTags()`
+Renders discussion tags for the inline edit module.
+
+`renderForm()`
+Renders the inline edit module.
+
+`renderGuestContent()`
+Renders the selected discussion without edit and delete options for users who do not own the discussion post.
+
+`renderContent()`
+Renders the selected discussion with edit and delete options for the discussion post owner.
+
+#### **`discussion_index.es6.jsx`** (Nhi/Lois)
+#### Props
+`@prop discussions` - discussion index
+`@prop unfiltered_discussions` - all discussions w/ tags and favorites applied, but no search
+`@prop discussion` - discussion
+`@prop current_user` - current user
+`@prop favorite_discussions` - favorite user discussions
+`@prop show_favorites` - display favorites flag
+`@prop date_handler` - handler to render timestamp
+`@prop tag_filter` - tag filter param
+`@prop search_param` - search param
+`@prop all_tags` - all tags
+`@props loading_bus` - loading lavamae bus url
+`@prop all_responses` - all responses
+
+#### Methods
+`_openModal()`
+Handler method to display a modal to manage tags if an admin clicks on the "Manage Tags" button.
+
+`_closeModal()`
+Handler method to close the tag manager modal.
+
+`_componentDidMount()`
+Calls `this._copyToFiltered(discussions)` before calling other methods when this React component is rendered.
+
+`_copyToFiltered(discussions)`
+`_onSearchChange(e)`
+`_loadDiscussions()`
+`_generateLink(disc, fav, filter)`
+`renderFilters()`
+`renderFavoriteBtn()`
+`renderCreateBtn()`
+`renderShortened(disc, key)`
+`renderIndex()`
+
+#### **`discussion_responses.es6.jsx`**
+#### Props
+`@prop discussion` - discussion
+`@prop current_user` - current user
+`@prop responses` - discussion responses
+`@prop date_handler` - handler to render timestamp
+`@prop default_image` - default profile image url
+
+#### Methods
+`_setProfilePic(data, id)`
+Sets the profile picture associated with each response if one was successfully fetched via the API Requester. Otherwise, the default profile picture is displayed for this user.
+
+`_fetchProfilePic(id)`
+Uses the API Requester to grab the user account's profile picture from the database in order to render it on the page.
+
+`_saveResponse(e)`
+Uses the API Requester to save the inline edits of the response.
+
+`renderResponses()`
+Renders all responses of the associated discussion.
+
+`renderResponseForm()`
+If a user is logged in, displays the page component for users to post responses.
+
 #### **`discussion_favorite.es6.jsx`** (Nhi)
+#### Props
+`@prop discussion` - discussion
+`@prop favorite_discussions` - favorite user discussions
+
+#### Methods
+`_successfulFavorite()`
+
+`_successfulUnfavorite()`
+
+`_starDiscussion(e)`
+
+`renderStarred(disc)`
+
 
 #### **`edit_profile_modal.es6.jsx`**
 #### Props
@@ -1015,6 +1172,8 @@ Ex:
 Use this file to declare any variables, such as color, font stacks and sizes.
 
 This file holds all color variables (`$blue-light`, `$white-20`).
+
+
 
 
 
