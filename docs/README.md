@@ -232,6 +232,17 @@ MapBox API
 Google Maps Geocoder API
 LightGallery
 
+## Email Workflow
+We added SendGrid, an Add-On for Heroku, to the application as our email service.
+SendGrid configuration settings in `environment/development.rb` and `environment/production.rb`.
+We set some Devise flags in the User model for `user.rb` that sends out emails through the service specified (in our case, SendGrid).
+```
+devise :database_authenticatable, :registerable, :confirmable, :recoverable, :rememberable, :trackable, :validatable
+```
+For email, the ones we care about are:
+- `:confirmable` sends out an email from the Registrations Controller when `create` is called.
+- `:recoverable` sends out an email from the Passwords Controller when `request_reset` is called. Because we overwrote Devise's default Passwords controller, we have to manually call `user.send_reset_password_instructions` which causes an email to be sent out with a link that contains a token so a user can reset their password without knowing their old password.
+- `:reconfirmable` was also manually added in a migration as a column to the Users table. When a user changes their email, they will have to re-confirm their account with their new email.
 
 # Project Codebase
 ## Helpers
@@ -442,7 +453,8 @@ Renders the `DiscussionPage` React component which handles and renders the list 
 `script` tags for 3rd Party APIs used in the project: MapBox, GoogleMaps Geocoder, LightGallery.
 
 ### Maps
-#### **`map.html.erb`** (Millman)
+#### **`map.html.erb`**
+Displays a map of public users with a location. Uses MapBox API to display the clickable points on the map using their `Marker` and `Popup` classes. Admins can delete pins on the map.
 
 ### Pages
 #### **`about.html.erb`**
@@ -466,7 +478,8 @@ The mobile version condenses all menu items into a hamburger menu on the right. 
 
 
 ### Registrations
-#### **`new.html.erb`** (Millman)
+#### **`new.html.erb`**
+Renders the RegistrationModal React component and initializes Geocoding for the map.
 
 #### **`password_reset.html.erb`**
 Renders the `ChangePasswordForm` React Component. This view is rendered when the user has gone through the 'Forgot Password' flow and they have clicked the link emailed to them. The view passes the `reset_token` into the react component, so that the form won't require the user to enter their old password to reset their password.
