@@ -1,18 +1,3 @@
-<script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.js'></script>
-<link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v2.0.1/mapbox-gl-geocoder.css' type='text/css' />
-
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-56164319-2', 'auto');
-  ga('send', 'pageview');
-</script>
-
-<div class="map-home" id='map'></div>
-
 <div class="landing">
   <div class="landing-text">
     <h3 class="landing-title">
@@ -78,70 +63,4 @@ $("#explore").click(function(){
     scrollTop: $(".site-guide").offset().top},
   'slow');
 });
-
-// MAPBOX
-mapboxgl.accessToken = '<%= ENV['MAPBOX_KEY'] %>';
-
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/light-v9',
-  zoom: 1,
-  minZoom: 1,
-});
-
-map.addControl(new MapboxGeocoder({
-  accessToken: mapboxgl.accessToken
-}));
-
-var markerHeight = 20;
-var popupMargin = markerHeight/2 + 5;
-map.on('load', function() {
-  var points = new Set();
-  <% @users_on_map.each do |user| %>
-    <% location = user.location %>
-    var popupOffsets = {
-     'top': [0, popupMargin],
-     'top-left': [0, popupMargin],
-     'top-right': [0, popupMargin],
-     'bottom': [0, -popupMargin],
-     'bottom-left': [0, -popupMargin],
-     'bottom-right': [0, -popupMargin],
-     'left': [popupMargin, 0],
-     'right': [-popupMargin, 0]
-     };
-    var popup = new mapboxgl.Popup({offset:popupOffsets}).setHTML(
-      '<div class="popup-preview">' +
-        '<div class="organization"><%= user.organization %></div>' +
-        '<div class="user-container">' +
-          '<%= link_to user_path(id: user.id) do %> ' +
-          '<div class="name"><%= user.first_name %> <%= user.last_name %></div>' +
-          '<% end %>' +
-          '<% if user.profile_pic? %> ' +
-          '<%= image_tag(user.profile_pic.url(:thumb), class: "user-image") %>' +
-          '<% else %><%= image_tag(("default.png"), class: "user-image") %>' +
-          '<% end %>' +
-        '</div>' +
-      '</div>'
-    );
-    // TODO: Make markers circle around same point. This is quick fix.
-    var lng = <%= location.lng %>;
-    var lat = <%= location.lat %>;
-    if (points.has(<%= location.id %>)) {
-      let lng_r = Math.random() * (0.02) - 0.01;
-      let lat_r = Math.random() * (0.02) - 0.01;
-      lng += lng_r;
-      lat += lat_r;
-    } else {
-      points.add(<%= location.id %>);
-    }
-    var marker = new mapboxgl.Marker(null, {offset:[-markerHeight/2, -markerHeight/2]})
-      .setLngLat([lng, lat])
-      .setPopup(popup)
-      .addTo(map);
-    marker.onMapClick = function() {
-      marker.togglePopup();
-    };
-  <% end %>
-});
-
 </script>
