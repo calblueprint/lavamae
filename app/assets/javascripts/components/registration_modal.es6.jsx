@@ -10,7 +10,6 @@ class RegistrationModal extends React.Component {
     this._handleMapCheckboxChange = this._handleMapCheckboxChange.bind(this);
     this._handleVolunteerCheckboxChange = this._handleVolunteerCheckboxChange.bind(this);
     this._handleSeekingVolunteerCheckboxChange = this._handleSeekingVolunteerCheckboxChange.bind(this);
-    this._handleSelect = this._handleSelect.bind(this);
     this._getLongitudeAndLatitudeAndSignUp = this._getLongitudeAndLatitudeAndSignUp.bind(this);
     this._startSignUpProcess = this._startSignUpProcess.bind(this);
     this._handleFileChange = this._handleFileChange.bind(this);
@@ -91,10 +90,6 @@ class RegistrationModal extends React.Component {
 
   _handleSeekingVolunteerCheckboxChange(e) {
     this.setState({ seeking_volunteer_checked: e.target.checked });
-  }
-
-  _handleSelect(e) {
-    this.setState({ country: e.target.value });
   }
 
   _handleFileChange(e) {
