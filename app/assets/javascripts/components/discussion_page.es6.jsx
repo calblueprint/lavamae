@@ -28,11 +28,6 @@ class DiscussionPage extends React.Component {
     };
   }
 
-  /* TODO: Live index updating after discussion edit*/
-  _indexUpdate(obj) {
-    return;
-  }
-
   _generateTimeStamp(obj) {
     if (moment(obj.created_at) > moment().startOf('day')) {
       return moment(obj.created_at).fromNow();

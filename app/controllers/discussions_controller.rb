@@ -56,10 +56,6 @@ class DiscussionsController < ApplicationController
     @all_tags = AdminTag.pluck(:name)
   end
 
-  def edit
-
-  end
-
   def update
   	@discussion.update(discussion_params)
     if params[:discussion].key? :tag_list
@@ -116,6 +112,4 @@ class DiscussionsController < ApplicationController
   		@discussion = Discussion.find(params[:id])
   	end
 
-    def save_params
-    end
 end
