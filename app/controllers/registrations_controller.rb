@@ -10,7 +10,8 @@ class RegistrationsController < Devise::RegistrationsController
       email = sign_up_params[:email]
       user = User.find_by_email(email)
       if !user.nil?
-        render_json_message(:ok, message: 'Check your email to confirm your account!', to: root_path)
+        flash[:success] = "Check your email to confirm your account!";
+        render_json_message(:ok, to: root_path)
       else
         render_json_message(:internal_server_error, errors: ["An unknown error occurred."])
       end
